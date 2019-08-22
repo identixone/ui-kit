@@ -1,0 +1,71 @@
+.noUi-handle:before,
+.noUi-handle:after {
+  display: none;
+}
+
+.noUi-handle {
+  outline: none;
+  border: none;
+  background: #a1a1a1;
+  border-radius: 22px;
+  box-shadow: 0 2px 8px 0px #aaa;
+}
+
+.noUi-horizontal {
+  height: 8px;
+}
+
+.noUi-horizontal .noUi-handle {
+  left: -11px;
+  top: -7px;
+  width: 22px;
+  height: 22px;
+}
+
+.noUi-tooltip {
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+}
+
+.noUi-horizontal .noUi-tooltip {
+  transform: translate(-50%, 0);
+  left: 50%;
+  bottom: 120%;
+  padding: 0;
+}
+
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+  right: -11px;
+}
+
+.noUi-connects {
+  border-radius: 3px;
+}
+
+.noUi-connect {
+  background: #27a1ca;
+}
+
+.noUi-target {
+  padding: 0 10px;
+  background: #ddd;
+  border-radius: 2px;
+  box-shadow: none;
+  border: none;
+}
+.noUi-base:before,
+.noUi-base:after {
+  width: 11px;
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: block;
+}
+.noUi-base:before {
+  left: -11px;
+}
+.noUi-base:after {
+  left: 100%;
+}
