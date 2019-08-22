@@ -85,4 +85,6 @@ Button.defaultProps = {
   isHardOutline: true,
 };
 
+export { Button };
+
 export default Button;

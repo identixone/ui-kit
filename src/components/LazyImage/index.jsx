@@ -43,4 +43,4 @@ class LazyImage extends Component {
   }
 }
 
-export default LazyImage;
+export { LazyImage };

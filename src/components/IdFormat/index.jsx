@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const getShortId = id => id.split("-")[4];
 
-function IdFormat({ id, defaultValue }) {
+export function IdFormat({ id, defaultValue }) {
   return id ? getShortId(id) : defaultValue;
 }
 
@@ -15,5 +15,3 @@ IdFormat.defaultProps = {
   id: "",
   defaultValue: "-",
 };
-
-export default IdFormat;

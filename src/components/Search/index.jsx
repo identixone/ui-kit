@@ -4,7 +4,7 @@ import SearchInput from "../SearchInput";
 import StyledSearchInput from "../SearchInput/StyledSearchInput";
 import SearchInputIcon from "../SearchInput/SearchInputIcon";
 
-const Search = styled(SearchInput).attrs({
+export const Search = styled(SearchInput).attrs({
   iconSize: 33,
 })`
   height: 63px;
@@ -29,5 +29,3 @@ const Search = styled(SearchInput).attrs({
     color: #fff;
   }
 `;
-
-export default Search;

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import StyledNotice from "./StyledNotice";
 import StyledNoticeContainer from "./StyledNoticeContainer";
 
-export default function Notice({ children, className, ...restProps }) {
+function Notice({ children, className, ...restProps }) {
   return (
     <StyledNoticeContainer className={className}>
       <StyledNotice data-testid={restProps["data-testid"]}>
@@ -19,3 +19,5 @@ Notice.propTypes = {
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };
+
+export { Notice };
