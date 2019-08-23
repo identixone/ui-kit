@@ -14,6 +14,11 @@ const PageCardTitle = styled.h1`
   font-size: 14px;
   font-weight: 700;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 
 export default PageCardTitle;

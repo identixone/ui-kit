@@ -3,10 +3,10 @@ import React from "react";
 import { GloalStyles } from "../src/components";
 
 const ProviderWrapper = ({ children }) => (
-  <React.Fragment>
+  <div style={{ padding: "0 15px" }}>
     <GloalStyles />
     {children}
-  </React.Fragment>
+  </div>
 );
 
 export const withProvider = story => (
