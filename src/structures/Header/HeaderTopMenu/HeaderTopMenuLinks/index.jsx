@@ -1,5 +1,6 @@
+import { StyledHeaderTopMenuLinks } from "./StyledHeaderTopMenuLinks";
 import { HeaderTopMenuLinksLink } from "./HeaderTopMenuLinksLink";
 
-HeaderTopMenuLinks.Link = HeaderTopMenuLinksLink;
+StyledHeaderTopMenuLinks.Link = HeaderTopMenuLinksLink;
 
 export default StyledHeaderTopMenuLinks;
