@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import Button from "../../../../../Button";
-import colors from "../../../../../../assets/common/themes/colors";
+import Button from "../../../.../Button";
+import colors from "../../../../../../themes/colors";
 
 const FormMultiSelectTagsItemCross = styled(Button).attrs({
   buttonTheme: "reset",

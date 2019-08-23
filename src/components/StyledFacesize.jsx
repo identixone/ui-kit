@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colors from "../../ui/assets/common/themes/colors";
+import colors from "../themes/colors";
 
 const StyledFacesize = styled.div`
   position: absolute;

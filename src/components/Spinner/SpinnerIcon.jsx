@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Asterisk } from "../../../ui/assets/icons";
+import { Asterisk } from "../../assets/icons";
 
 const SpinnerIcon = styled(Asterisk)`
   margin-bottom: 4px;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colors from "../../../ui/assets/common/themes/colors.js";
+import colors from "../../themes/colors";
 
 const LoginFormInput = styled.input`
   font-size: 16px;

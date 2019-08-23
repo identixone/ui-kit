@@ -29,7 +29,7 @@ import StyledFacesize from "./../../components/StyledFacesize.jsx";
 import StyledCardAsideButtonDelete from "./StyledCardAsideButtonDelete";
 import StyledCardAsideButtonLink from "./StyledCardAsideButtonLink";
 
-import colors from "../../../ui/assets/common/themes/colors.js";
+import colors from "../../themes/colors";
 
 function PersonCard({ person, deletePersonEntries }) {
   const {

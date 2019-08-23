@@ -15,7 +15,7 @@ import StyledEntriesDatetimeFilterRow from "./StyledEntriesDatetimeFilterRow.jsx
 import StyledDateTimeForm from "./StyledDateTimeForm.jsx";
 import StyledEntriesDatetime from "./StyledEntriesDatetime.jsx";
 import StyledEntriesDatetimeContainer from "./StyledEntriesDatetimeContainer.jsx";
-import { CalendarAlt } from "../../../ui/assets/icons";
+import { CalendarAlt } from "../../../assets/icons";
 import ButtonToggleCalendar from "../../../ui/components/ButtonToggleCalendar/index.jsx";
 
 const resetValues = {

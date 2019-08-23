@@ -1,6 +1,38 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import { StyledHeaderTopMenuLinks } from "./StyledHeaderTopMenuLinks";
 import { HeaderTopMenuLinksLink } from "./HeaderTopMenuLinksLink";
 
-StyledHeaderTopMenuLinks.Link = HeaderTopMenuLinksLink;
+HeaderTopMenuLinks.Link = HeaderTopMenuLinksLink;
 
-export default StyledHeaderTopMenuLinks;
+function Link(props) {
+  const { id, title, to } = props;
+
+  return (
+    <HeaderTopMenuLinks.Link to={to} key={id}>
+      {title}
+    </HeaderTopMenuLinks.Link>
+  );
+}
+
+Link.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  title: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
+
+function HeaderTopMenuLinks({ links, children }) {
+  return (
+    <StyledHeaderTopMenuLinks>
+      {Array.isArray(links) && links.length ? links.map(Link) : children}
+    </StyledHeaderTopMenuLinks>
+  );
+}
+
+HeaderTopMenuLinks.propTypes = {
+  links: PropTypes.array,
+  children: PropTypes.oneOfType(PropTypes.array, PropTypes.node),
+};
+
+export default HeaderTopMenuLinks;

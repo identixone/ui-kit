@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import StyledSquareDark from "./StyledSquareDark";
 
-import { Plus } from "../../../ui/assets/icons";
+import { Plus } from "../../../assets/icons";
 
 import PageFiltersListNotice from "./PageFiltersListNotice";
 

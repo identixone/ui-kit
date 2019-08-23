@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import StyledAdditionalButton from "./StyledAdditionalButton";
-import colors from "../../../ui/assets/common/themes/colors.js";
+import colors from "../../themes/colors";
 
 export default function AdditionalButton({
   onClick,

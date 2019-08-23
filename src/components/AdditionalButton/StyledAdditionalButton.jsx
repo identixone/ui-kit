@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import Button from "../Button";
-import colors from "../../assets/common/themes/colors";
+import colors from "../../themes/colors";
 
 const StyledAdditionalButton = styled(Button)`
   display: none;

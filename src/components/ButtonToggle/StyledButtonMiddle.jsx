@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Button from "./../Button";
+import Button from "../Button";
 import theme from "styled-theming";
-import colors from "./../../assets/common/themes/colors";
+import colors from "../../themes/colors";
 
 const boxBackgroundColor = theme("mode", {
   blue: colors.middleBlue,

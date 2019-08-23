@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import colors from "../../../ui/assets/common/themes/colors.js";
-
 import Button from "../Button";
+
+import colors from "../../themes/colors";
 
 const DeleteSureButton = styled(Button).attrs({ buttonTheme: "reset" })`
   background-color: ${colors.blueWhite};

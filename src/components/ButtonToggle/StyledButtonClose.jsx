@@ -3,7 +3,7 @@ import theme from "styled-theming";
 
 import Button from "../Button";
 
-import colors from "./../../assets/common/themes/colors";
+import colors from "../../themes/colors";
 
 const boxBackgroundColor = theme("mode", {
   blue: colors.simpleBlue,

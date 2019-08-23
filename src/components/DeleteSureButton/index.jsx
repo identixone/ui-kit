@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import StyledDeleteSureButton from "./StyledDeleteSureButton";
-import colors from "../../../ui/assets/common/themes/colors.js";
+import colors from "../../themes/colors";
 
 import DeleteSure from "../DeleteSure";
 

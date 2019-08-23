@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
-const StyledGloalStyle = createGlobalStyle`
+import "../resources/styles/fonts.css";
+
+export const GloalStyles = createGlobalStyle`
   html {
     height: 100%;
   }
@@ -17,5 +19,3 @@ const StyledGloalStyle = createGlobalStyle`
     height: 100%;
   }
 `;
-
-export default StyledGloalStyle;

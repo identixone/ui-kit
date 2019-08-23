@@ -6,3 +6,4 @@ export { Segment } from "./Segment";
 export { Spinner } from "./Spinner";
 export { IdFormat } from "./IdFormat";
 export { LazyImage } from "./LazyImage";
+export { GloalStyles } from "./GloalStyles";

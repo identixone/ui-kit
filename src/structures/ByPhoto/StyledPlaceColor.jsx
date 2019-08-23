@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import StyledPlaceRound from "./StyledPlaceRound.jsx";
-import { entryTypeColor } from "../../assets/common/themes/entryTypeColor.js";
+import { entryTypeColor } from "../../themes/entryTypeColor";
 
 const StyledPlaceColor = styled(StyledPlaceRound)`
   background-color: ${entryTypeColor};
