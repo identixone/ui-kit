@@ -32,7 +32,7 @@ function HeaderAppMenu({ links, children }) {
 
 HeaderAppMenu.propTypes = {
   links: PropTypes.array,
-  children: PropTypes.oneOfType(PropTypes.array, PropTypes.node),
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
 };
 
 export default HeaderAppMenu;
