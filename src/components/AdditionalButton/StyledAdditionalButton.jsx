@@ -15,8 +15,6 @@ const StyledAdditionalButton = styled(Button)`
   border-radius: 0 0 0 5px;
   text-align: center;
   margin-bottom: 6px;
-  cursor: pointer;
-  transition: all 0.1s linear;
   padding: 0px 22px;
 
   &:hover {

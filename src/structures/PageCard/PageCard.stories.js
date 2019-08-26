@@ -10,7 +10,7 @@ storiesOf("Page card", module).add("default", () => {
   const withButtons = boolean("With buttons", true);
   const title = text("Title", "ID: 42");
   const titleColor = select(
-    "Title colors",
+    "Title color",
     {
       Red: colors.brownSimple,
       Blue: colors.navyBlue,

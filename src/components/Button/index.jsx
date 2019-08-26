@@ -14,8 +14,6 @@ function Button({
   fit,
   className,
   isRounded,
-  dataFilter,
-  dataValue,
   ...restProps
 }) {
   return (
@@ -29,8 +27,6 @@ function Button({
       fit={fit}
       isRounded={isRounded}
       className={className}
-      data-filter={dataFilter}
-      data-value={dataValue}
       {...restProps}
     >
       {children}
@@ -45,7 +41,6 @@ Button.propTypes = {
   onMouseLeave: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   isDisabled: PropTypes.bool,
-  isActive: PropTypes.bool,
   isRounded: PropTypes.bool,
   type: PropTypes.oneOf(["button", "submit"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
@@ -65,10 +60,6 @@ Button.propTypes = {
     "lighter",
     "disabled",
   ]),
-
-  // Специальный проп для кнопок, которые выступают в качестве фильтра
-  dataFilter: PropTypes.string,
-  dataValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   // Проперти добавлено для того, чтобы в FF не показывать аутлайн (работает только через !important)
   // Но при желании его можно поставить в false, чтобы установать свой аутлайн
