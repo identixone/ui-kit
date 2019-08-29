@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const isCopyAvailible =
   document.queryCommandSupported && document.queryCommandSupported("copy");
 
-class CopyItem extends React.Component {
+export class CopyItem extends React.Component {
   static propTypes = {
     render: PropTypes.func.isRequired,
   };
@@ -52,5 +52,3 @@ class CopyItem extends React.Component {
     });
   }
 }
-
-export default CopyItem;

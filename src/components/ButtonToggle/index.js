@@ -1,16 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import StyledButtonToggle from "./StyledButtonToggle.jsx";
-import StyledButtonToggleContainer from "./StyledButtonToggleContainer.jsx";
-import ButtonClose from "./StyledButtonClose.jsx";
-import ButtonMiddle from "./StyledButtonMiddle.jsx";
-import ButtonToggleWrapper from "../ButtonToggleWrapper/index.jsx";
 import { ThemeProvider } from "styled-components";
+
+import StyledButtonToggle from "./StyledButtonToggle";
+import StyledButtonToggleContainer from "./StyledButtonToggleContainer";
+import ButtonClose from "./StyledButtonClose";
+import ButtonMiddle from "./StyledButtonMiddle";
+import { ButtonToggleWrapper } from "../ButtonToggleWrapper";
 
 import { Times } from "../../assets/icons";
 
-class ButtonToggle extends Component {
+export class ButtonToggle extends React.Component {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -56,5 +57,3 @@ class ButtonToggle extends Component {
     );
   }
 }
-
-export default ButtonToggle;

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import StyledPhotoContainter from "./StyledPhotoContainter";
 import StyledPhotoBased from "./StyledPhotoBased";
 import StyledPhotoTitle from "./StyledPhotoTitle";
 import StyledVerticalTitle from "./StyledVerticalTitle";
-import StyledFacesizeUp from "./../StyledFacesizeUp";
+import StyledFacesize from "./StyledFacesize";
+
 import noimage from "../../assets/images/noimage.png";
 
-export default class PhotoBased extends Component {
+export class PhotoBased extends Component {
   static propTypes = {
     facesize: PropTypes.string,
     conf: PropTypes.string,
@@ -47,9 +49,9 @@ export default class PhotoBased extends Component {
         blur={blurredEntries && conf === "junk" && junksi == false}
       >
         {isVisible && (
-          <StyledFacesizeUp title="face area in pixels">
+          <StyledFacesize title="face area in pixels">
             {facesize}
-          </StyledFacesizeUp>
+          </StyledFacesize>
         )}
         {isVisible && (
           <StyledPhotoTitle type={this.props.type}>

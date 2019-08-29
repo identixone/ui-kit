@@ -5,7 +5,7 @@ import SearchInputWrapper from "./SearchInputWrapper";
 import SearchInputIcon from "./SearchInputIcon";
 import StyledSearchInput from "./StyledSearchInput";
 
-function SearchInput({
+export function SearchInput({
   value,
   onChange,
   inputPlaceholder,
@@ -41,5 +41,3 @@ SearchInput.propTypes = {
 SearchInput.defaultProps = {
   iconSize: 16,
 };
-
-export default SearchInput;

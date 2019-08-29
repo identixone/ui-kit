@@ -21,7 +21,7 @@ LinkWithOmittedProps.propTypes = {
   fit: PropTypes.string,
 };
 
-const ButtonLink = styled(StyledButton).attrs(() => ({
+export const ButtonLink = styled(StyledButton).attrs(() => ({
   as: LinkWithOmittedProps,
 }))`
   text-decoration: none;
@@ -34,5 +34,3 @@ ButtonLink.defaultProps = {
   buttonTheme: "light",
   fit: "rect",
 };
-
-export default ButtonLink;

@@ -1,5 +1,5 @@
-import theme from "styled-theming";
-import colors from "./../../assets/common/themes/colors";
+import theme from "./styled-theming";
+import colors from "../../themes/colors";
 
 const boxBackgroundColor = theme("mode", {
   new: colors.navyBlue,

@@ -7,7 +7,7 @@ const FlashContext = React.createContext({
   isFlashing: false,
 });
 
-export default class Flash extends Component {
+export class Flash extends Component {
   static propTypes = {
     render: PropTypes.func.isRequired,
     flashTime: PropTypes.number,

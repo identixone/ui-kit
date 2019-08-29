@@ -17,5 +17,9 @@ DynamicList.propTypes = {
   innerRef: PropTypes.object,
 };
 
-export { default as DynamicListItem } from "./DynamicListItem";
-export default DynamicList;
+export { DynamicList };
+export {
+  DynamicListItem,
+  DynamicListItemTitle,
+  DynamicListItemAdditional,
+} from "./DynamicListItem";

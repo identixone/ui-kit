@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colors from "@idx/ui/assets/common/themes/colors";
+import colors from "../../themes/colors";
 
 const LazyImageContainer = styled.div`
   background-color: ${({ isImageLoaded }) =>

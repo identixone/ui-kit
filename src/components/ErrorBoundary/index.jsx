@@ -5,7 +5,7 @@ import * as Sentry from "@sentry/browser";
 
 const { DEBUG } = process.env;
 
-export default class ErrorBoundary extends React.Component {
+export class ErrorBoundary extends React.Component {
   static propTypes = {
     ErrorComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
