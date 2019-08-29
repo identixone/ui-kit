@@ -11,21 +11,29 @@ import {
 
 import StyledShownControlInfoContainer from "./StyledShownControlInfoContainer.jsx";
 import StyledShownControlInfoContainerInner from "./StyledShownControlInfoContainerInner.jsx";
-import withPaginationFlow from "../../structures/PaginationFlow";
+import { usePagination } from "../../hooks";
 
-function ShownControl(props) {
+export function ShownControl(props) {
+  const {
+    paginationState,
+    handlePaginationNext,
+    handlePaginationPrev,
+  } = usePagination(props);
+
   const {
     offset,
     count,
-    handlePaginationNext,
-    handlePaginationPrev,
-    isPrevPaginationButtonActive,
-    isNextPaginationButtonActive,
-    selectedPageNum,
+
     limit,
     totalCount,
     children,
   } = props;
+  const {
+    isPrevPaginationButtonActive,
+    isNextPaginationButtonActive,
+    selectedPageNum,
+  } = paginationState;
+
   const showTo = Number(offset) + Number(count);
   const isPrevButtonEnabled =
     isPrevPaginationButtonActive && selectedPageNum > 1;
@@ -39,7 +47,7 @@ function ShownControl(props) {
           width="36"
           disabled={!isPrevButtonEnabled}
           onClick={handlePaginationPrev}
-          buttonTheme={isPrevButtonEnabled ? "active" : "light-gray"}
+          buttonTheme={isPrevButtonEnabled ? "active" : "lightGray"}
           data-testid="shownControl-button-prev"
         >
           <KeyboardArrowLeft width="27" height="23" />
@@ -57,7 +65,7 @@ function ShownControl(props) {
         <StyledShownControlButtonArrow
           width="36"
           disabled={!isNextButtonEnabled}
-          buttonTheme={isNextButtonEnabled ? "active" : "light-gray"}
+          buttonTheme={isNextButtonEnabled ? "active" : "lightGray"}
           onClick={handlePaginationNext}
           data-testid="shownControl-button-next"
         >
@@ -87,5 +95,3 @@ ShownControl.defaultProps = {
   offset: 0,
   count: null,
 };
-
-export default withPaginationFlow(ShownControl);

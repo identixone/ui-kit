@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Flash from "../Flash";
-import CopyItem from "../CopyItem";
+import { Flash } from "../Flash";
+import { CopyItem } from "../CopyItem";
 import IdCopyIcon from "./IdCopyIcon";
 import StyledCopyContainer from "./StyledCopyContainer";
 
 const getShortId = id => id.split("-")[4];
 
-function IdCopy({ id, defaultValue }) {
+export function IdCopy({ id, defaultValue }) {
   return id ? (
     <Flash
       render={({ flash }) => {
@@ -51,5 +51,3 @@ IdCopy.defaultProps = {
   id: "",
   defaultValue: "-",
 };
-
-export default IdCopy;

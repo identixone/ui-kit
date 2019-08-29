@@ -1,4 +1,4 @@
-import theme from "styled-theming";
+import theme from "./styled-theming";
 import colors from "../../themes/colors";
 
 const boxBackgroundColor = theme("mode", {

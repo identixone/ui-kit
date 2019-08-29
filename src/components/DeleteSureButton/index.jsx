@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import StyledDeleteSureButton from "./StyledDeleteSureButton";
 import colors from "../../themes/colors";
 
-import DeleteSure from "../DeleteSure";
+import { DeleteSure } from "../DeleteSure";
 
-export default function DeleteSureButton({
+export function DeleteSureButton({
   onDelete,
   deleteColor,
   size,

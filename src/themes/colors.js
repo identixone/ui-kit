@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   whiteSimple: "#fff",
   whiteGray: "#f9f9f9",
   whiteGrayLight: "#f7f8f9",

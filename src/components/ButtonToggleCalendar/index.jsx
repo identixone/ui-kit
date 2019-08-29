@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledButtonToggle from "./StyledButtonToggle.jsx";
-import StyledButtonToggleContainer from "./StyledButtonToggleContainer.jsx";
 import { ThemeProvider } from "styled-components";
-import ButtonToggleWrapper from "../ButtonToggleWrapper/index.jsx";
-import StyledButtonClose from "./StyledButtonClose.jsx";
+
+import StyledButtonToggle from "./StyledButtonToggle";
+import StyledButtonToggleContainer from "./StyledButtonToggleContainer";
+import { ButtonToggleWrapper } from "../ButtonToggleWrapper";
+import StyledButtonClose from "./StyledButtonClose";
+
 import { Times } from "../../assets/icons";
 
-function ButtonToggleCalendar({
+export function ButtonToggleCalendar({
   icon,
   mode,
   onChange,
@@ -58,5 +60,3 @@ ButtonToggleCalendar.propTypes = {
 ButtonToggleCalendar.defaultProps = {
   isActive: false,
 };
-
-export default ButtonToggleCalendar;

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { uniq } from "lodash-es";
 
-export default class SelectableList extends React.Component {
+export class SelectableList extends React.Component {
   static propTypes = {
     options: PropTypes.array.isRequired,
     render: PropTypes.func,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import SearchInput from "../SearchInput";
+import { SearchInput } from "../SearchInput";
 import StyledSearchInput from "../SearchInput/StyledSearchInput";
 import SearchInputIcon from "../SearchInput/SearchInputIcon";
 

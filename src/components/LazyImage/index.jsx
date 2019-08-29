@@ -6,7 +6,7 @@ import LazyImageContainer from "./LazyImageContainer";
 
 import { noop } from "lodash-es";
 
-class LazyImage extends Component {
+export class LazyImage extends Component {
   static propTypes = {
     src: PropTypes.string.isRequired,
     className: PropTypes.string,
@@ -42,5 +42,3 @@ class LazyImage extends Component {
     );
   }
 }
-
-export { LazyImage };
