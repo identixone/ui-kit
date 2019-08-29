@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { text, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import PageCard from "./index.jsx";
+import { PageCard } from "./index.jsx";
 import colors from "../../themes/colors";
 
 storiesOf("Page card", module).add("default", () => {

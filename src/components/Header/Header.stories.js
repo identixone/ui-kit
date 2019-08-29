@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { text, object } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import Header, { HeaderTopMenu, HeaderAppMenu } from "./index.jsx";
+import { Header, HeaderTopMenu, HeaderAppMenu } from "./index.jsx";
 import { HeaderTopMenuLinks, HeaderTopMenuUser } from "./HeaderTopMenu";
 
 storiesOf("Header", module).add("default", () => {
