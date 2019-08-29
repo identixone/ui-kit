@@ -4,7 +4,7 @@ module.exports = {
   testEnvironment: "jest-environment-jsdom-global",
   moduleNameMapper: {
     "^lodash-es$": "lodash",
-    "\\.(css|sass|scss)$": "identity-obj-proxy",
+    "\\.(css)$": "identity-obj-proxy",
     "\\.(gif|ttf|eot|svg|png)$": path.resolve(__dirname, "./test/file-mock.js"),
   },
   setupFilesAfterEnv: [path.resolve(__dirname, "./test/tests-setup.js")],

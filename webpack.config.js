@@ -75,15 +75,6 @@ const config = {
       },
 
       {
-        test: /\.scss$/,
-        use: [
-          { loader: MiniCssExtractPlugin.loader },
-          { loader: "css-loader" },
-          { loader: "sass-loader" },
-        ],
-      },
-
-      {
         test: /\.(jpg|jpe?g|png|gif)$/,
         use: [
           {

@@ -17,39 +17,39 @@
   right: 10px;
   bottom: auto;
   position: fixed;
+}
 
-  &-fade-enter,
-  &-fade-appear {
-    opacity: 0;
-    animation-duration: 0.24s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: both;
+.ui-notification-fade-enter,
+.ui-notification-fade-appear {
+  opacity: 0;
+  animation-duration: 0.24s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
 
-    animation-play-state: paused;
-  }
+  animation-play-state: paused;
+}
 
-  &-fade-leave {
-    animation-duration: 0.24s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: both;
+.ui-notification-fade-leave {
+  animation-duration: 0.24s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
 
-    animation-duration: 0.2s;
-    animation-play-state: paused;
-  }
+  animation-duration: 0.2s;
+  animation-play-state: paused;
+}
 
-  &-fade-enter,
-  &-fade-enter-active,
-  &-fade-appear,
-  &-fade-appear-active {
-    animation-name: UiNotificationFadeIn;
-    animation-play-state: running;
-  }
+.ui-notification-fade-enter,
+.ui-notification-fade-enter-active,
+.ui-notification-fade-appear,
+.ui-notification-fade-appear-active {
+  animation-name: UiNotificationFadeIn;
+  animation-play-state: running;
+}
 
-  &-fade-leave,
-  &-fade-leave-active {
-    animation-name: UiNotificationFadeOut;
-    animation-play-state: running;
-  }
+.ui-notification-fade-leave,
+.ui-notification-fade-leave-active {
+  animation-name: UiNotificationFadeOut;
+  animation-play-state: running;
 }
 
 .ui-notification-notice {
