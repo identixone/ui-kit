@@ -14,10 +14,10 @@
     "test:debug": "better-npm-run test:debug",
     "test:coverage": "better-npm-run test:coverage",
     "format": "npm run prettier -- --write",
-    "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
-    "precommit": "lint-staged && npm run build",
     "storybook": "start-storybook",
-    "build-storybook": "build-storybook -c .storybook -o storybook-static"
+    "build-storybook": "build-storybook -c .storybook -o docs",
+    "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
+    "precommit": "lint-staged && npm run build && npm run build-storybook"
   },
   "betterScripts": {
     "test": {

@@ -8,15 +8,3 @@ cache:
 
 before_script:
   - npm run test
-  - npm run build-storybook
-
-# Deployment information
-deploy:
-  provider: pages # Tell Travis we want to deploy to Github Pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN # Will take the environment variable you created on step 5
-  local_dir: storybook-static # The folder that needs to be deployed
-  repo: identixone/ui-kit # Add your username/project_name here
-  target_branch: gh-pages # Tell Travis to deploy on the gh-pages branch
-  on:
-    branch: develop # Tell Travis to trigger a deploy only when we push to master
