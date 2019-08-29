@@ -15,8 +15,9 @@
     "test:coverage": "better-npm-run test:coverage",
     "format": "npm run prettier -- --write",
     "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
+    "precommit": "lint-staged && npm run build",
     "storybook": "start-storybook",
-    "precommit": "lint-staged && npm run build"
+    "build-storybook": "build-storybook -s public"
   },
   "betterScripts": {
     "test": {
