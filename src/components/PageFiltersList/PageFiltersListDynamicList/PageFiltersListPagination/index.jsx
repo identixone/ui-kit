@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { withPageFiltersListContext } from "../../PageFiltersListContext";
-import Pagination from "../../../Pagination";
+import { Pagination } from "../../../Pagination";
 
 import StyledPageFiltersListPagination from "./StyledPageFiltersListPagination";
 
