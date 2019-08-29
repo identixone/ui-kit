@@ -7,7 +7,6 @@ const resetTheme = css`
 const disabledTheme = css`
   color: #aaa;
   background-color: #f3f3f3;
-  cursor: default;
 `;
 
 const lightTheme = css`
@@ -16,18 +15,14 @@ const lightTheme = css`
 
   ${({ disabled }) => {
     return disabled
-      ? `
-        color: #aaa;
-        background-color: #f3f3f3;
-        cursor: default;
-    `
-      : `
-      &:hover {
-        background-color: #3b4b5a;
-        color: #fff;
-        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
-      }
-    `;
+      ? disabledTheme
+      : css`
+          &:hover {
+            background-color: #3b4b5a;
+            color: #fff;
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+          }
+        `;
   }}
 `;
 
@@ -44,19 +39,27 @@ const darkTheme = css`
   color: #fff;
   background-color: #3b4b5a;
 
-  &:hover {
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
-  }
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      &:hover {
+        box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+      }
+    `}
 `;
 
 const blueTheme = css`
   color: #fff;
   background-color: #167097;
 
-  &:hover {
-    background-color: #167097;
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
-  }
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      &:hover {
+        background-color: #167097;
+        box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+      }
+    `}
 `;
 
 const ghostTheme = css`

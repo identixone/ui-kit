@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import StyledPopupContainer from "../StyledPopupContainer.js";
+import { PopupContainer } from "../PopupContainer";
 
-const TooltipContainer = styled(StyledPopupContainer)`
+const TooltipContainer = styled(PopupContainer)`
   transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
 `;
 

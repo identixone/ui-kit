@@ -6,7 +6,7 @@
 node_modules/
 
 # Build
-build/
+# build/
 
 # ENV file
 .env

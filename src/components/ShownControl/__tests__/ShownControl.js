@@ -1,8 +1,8 @@
 import React from "react";
 import { fireEvent } from "@testing-library/react";
 
-import { render } from "../../../../../test/utils";
-import ShownControl from "../index.jsx";
+import { render } from "../../../../test/utils";
+import { ShownControl } from "../index.jsx";
 
 describe("ShownControl tests", () => {
   const handleChangePaginationMock = jest.fn();

@@ -6,7 +6,7 @@ import NotificationCloseButton from "./NotificationCloseButton";
 
 import { Times } from "../../assets/icons";
 
-import "./style.scss";
+import "./style.css";
 
 let notification = null;
 

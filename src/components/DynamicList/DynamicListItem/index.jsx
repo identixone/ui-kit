@@ -6,7 +6,7 @@ import StyledDynamicListItem from "./StyledDynamicListItem";
 import DynamicListItemTitle from "./DynamicListItemTitle";
 import DynamicListItemAdditional from "./DynamicListItemAdditional";
 
-export default function DynamicListItem({
+export function DynamicListItem({
   title,
   additional,
   isSelected,

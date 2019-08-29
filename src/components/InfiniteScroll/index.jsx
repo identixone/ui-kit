@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { throttle } from "lodash-es";
 
-export default class InfiniteScroll extends React.Component {
+export class InfiniteScroll extends React.Component {
   static propTypes = {
     onScrollToPoint: PropTypes.func.isRequired,
     isFetching: PropTypes.bool,

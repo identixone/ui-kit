@@ -17,7 +17,7 @@ const withStepperContext = WrappedComponent => {
   return WithStepperContext;
 };
 
-export default class Stepper extends React.Component {
+export class Stepper extends React.Component {
   static propTypes = {
     onStepChanges: PropTypes.func,
     onReset: PropTypes.func,

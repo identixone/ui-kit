@@ -24,7 +24,7 @@ module.exports = {
   settings: {
     "import/parser": "babel-eslint",
     "import/resolve": {
-      moduleDirectory: ["node_modules", "src"],
+      moduleDirectory: ["node_modules"],
     },
   },
   rules: {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default class DeleteSure extends React.Component {
+export class DeleteSure extends React.Component {
   static propTypes = {
     onDelete: PropTypes.func.isRequired,
     children: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { toggleInArray } from "../../utils/helpers";
+import { toggleInArray } from "../utils/helpers";
 
 export const TabsContext = React.createContext({
   activeTab: null,
