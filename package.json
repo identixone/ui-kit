@@ -4,7 +4,7 @@
   "description": "UI kit for Identix web apps",
   "author": "Dmitriy Balashov 👷🏿‍♂ <mockedcat@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
     "build": "better-npm-run build",
     "test": "better-npm-run test",
@@ -16,7 +16,7 @@
     "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook -c .storybook -o docs",
-    "precommit": "npm run build && lint-staged"
+    "precommit": "lint-staged"
   },
   "betterScripts": {
     "test": {
