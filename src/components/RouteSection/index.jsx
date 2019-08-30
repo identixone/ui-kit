@@ -76,4 +76,4 @@ export class RouteSectionComponent extends React.Component {
   }
 }
 
-export const RouteSection = withErrorPageBoundary(RouteSection);
+export const RouteSection = withErrorPageBoundary(RouteSectionComponent);

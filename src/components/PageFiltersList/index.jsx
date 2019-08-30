@@ -9,7 +9,7 @@ import PageFiltersListContentTop from "./PageFiltersListContentTop";
 import PageFiltersListActions from "./PageFiltersListActions";
 import PageFiltersListSearch from "./PageFiltersListSearch";
 
-import PageFiltersListButtonsButtons from "./PageFiltersListButtons";
+import PageFiltersListButtons from "./PageFiltersListButtons";
 import EmptyListNotice from "./EmptyListNotice";
 
 import List from "./List";
@@ -31,9 +31,9 @@ class PageFiltersListComponent extends React.Component {
     fetchList: PropTypes.func.isRequired,
     isListFetching: PropTypes.bool.isRequired,
     actions: PropTypes.node,
-    initialSearchQuery: PropTypes.string,
+    searchQuery: PropTypes.string,
     onSearch: PropTypes.func,
-    setSearchQueryInUrl: PropTypes.func.isRequired,
+    setSearchQuery: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -108,7 +108,7 @@ class PageFiltersListComponent extends React.Component {
     }
 
     if (prevState.isSearching && !this.state.isSearching) {
-      this.props.setSearchQueryInUrl(this.state.searchQuery);
+      this.props.setSearchQuery(this.state.searchQuery);
     }
 
     if (prevProps.isListFetching && !this.props.isListFetching) {
@@ -128,7 +128,7 @@ class PageFiltersListComponent extends React.Component {
   }
 
   state = {
-    searchQuery: this.props.initialSearchQuery,
+    searchQuery: this.props.searchQuery,
     isSearching: false,
     filters: {},
     pagination: {
@@ -165,9 +165,9 @@ class PageFiltersListComponent extends React.Component {
               <Content>
                 <PageFiltersListContentTop>
                   <PageFiltersListTitle>{title}</PageFiltersListTitle>
-                  <PageFiltersListButtonsButtons>
+                  <PageFiltersListButtons>
                     {buttons({ fetchList: this.fetchList })}
-                  </PageFiltersListButtonsButtons>
+                  </PageFiltersListButtons>
                 </PageFiltersListContentTop>
                 <PageFiltersListSearch data-testid="persons-lists-search" />
                 {actions && (
@@ -185,4 +185,6 @@ class PageFiltersListComponent extends React.Component {
   }
 }
 
-export const PageFiltersList = withListDirectoryList(PageFiltersListComponent);
+const PageFiltersList = withListDirectoryList(PageFiltersListComponent);
+
+export { PageFiltersList, PageFiltersListButtons };
