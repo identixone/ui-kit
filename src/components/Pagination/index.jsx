@@ -131,10 +131,10 @@ export function Pagination(props) {
             ) : (
               <StyledPageNum
                 key={item}
-                href="#"
                 onClick={handleSelectPagin}
                 data-index={item}
                 active={item == selectedPaginationNumber}
+                data-testid={`pagination-num-${item}`}
               >
                 {item}
               </StyledPageNum>
