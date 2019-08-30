@@ -6,6 +6,7 @@ const NAME = "localStorageFallback";
 const TTL = 365 * 24 * 60 * 60;
 const PATH = "/";
 const DOMAIN = null;
+
 export const SECURE = window.location.protocol.startsWith("https");
 
 try {

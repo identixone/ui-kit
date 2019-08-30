@@ -1,45 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import * as Sentry from "@sentry/browser";
-
-const { DEBUG } = process.env;
+import { noop } from "lodash-es";
 
 export class ErrorBoundary extends React.Component {
   static propTypes = {
     ErrorComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+    onError: PropTypes.func,
   };
 
-  state = { hasError: false, error: null, sentryEventId: null };
+  static defaultProps = {
+    onError: noop,
+  };
+
+  state = { error: null };
 
   componentDidCatch(error, info) {
     this.setState(
       {
-        hasError: true,
         error: {
           error,
           info,
         },
       },
-      () => {
-        if (!DEBUG) {
-          Sentry.withScope(scope => {
-            scope.setExtras(info);
-            const sentryEventId = Sentry.captureException(error);
-            this.setState({ sentryEventId });
-          });
-        } else {
-          console.log({ error, info });
-        }
-      }
+      this.props.onError
     );
   }
 
   render() {
     const { ErrorComponent, children } = this.props;
-    const { hasError, error } = this.state;
+    const { error } = this.state;
 
-    return hasError ? <ErrorComponent error={error} /> : children;
+    return error ? <ErrorComponent error={error} /> : children;
   }
 }

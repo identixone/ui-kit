@@ -7,52 +7,34 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "better-npm-run build",
-    "lint": "eslint src",
-    "prettier": "prettier \"**/*.+(js|jsx|json)\"",
     "test": "better-npm-run test",
     "test:watch": "better-npm-run test:watch",
-    "test:debug": "better-npm-run test:debug",
     "test:coverage": "better-npm-run test:coverage",
+    "lint": "eslint src",
+    "prettier": "prettier \"**/*.+(js|jsx|json)\"",
     "format": "npm run prettier -- --write",
+    "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook -c .storybook -o docs",
-    "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
-    "precommit": "npm run build && npm run build-storybook && lint-staged"
+    "precommit": "npm run build && lint-staged"
   },
   "betterScripts": {
     "test": {
       "command": "jest",
       "env": {
-        "NODE_ENV": "test",
-        "DEBUG": false
-      }
-    },
-    "test:precommit": {
-      "command": "jest --bail",
-      "env": {
-        "NODE_ENV": "test",
-        "DEBUG": false
+        "NODE_ENV": "test"
       }
     },
     "test:watch": {
       "command": "jest --watch",
       "env": {
-        "NODE_ENV": "test",
-        "DEBUG": false
+        "NODE_ENV": "test"
       }
     },
     "test:coverage": {
       "command": "jest --collectCoverage",
       "env": {
-        "NODE_ENV": "test",
-        "DEBUG": false
-      }
-    },
-    "test:debug": {
-      "command": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
-      "env": {
-        "NODE_ENV": "test",
-        "DEBUG": false
+        "NODE_ENV": "test"
       }
     },
     "build": {
@@ -64,13 +46,10 @@
   },
   "peerDependencies": {
     "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
-    "prop-types": ">=15.7.2"
+    "react-dom": ">=16.9.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
-    "@sentry/browser": "^5.6.2",
-    "@sentry/integrations": "^5.6.1",
     "browser-cookie-lite": "^1.0.4",
     "dayjs": "^1.8.15",
     "downshift": "^3.2.12",
@@ -81,7 +60,7 @@
     "moment": "^2.24.0",
     "nouislider": "^14.0.2",
     "nouislider-react": "^3.3.1",
-    "nprogress": "^0.2.0",
+    "prop-types": "^15.7.2",
     "rc-notification": "^3.3.1",
     "react-dropzone": "^10.1.7",
     "react-qr-svg": "^2.2.1",
@@ -91,7 +70,6 @@
     "styled-components": "^4.3.2",
     "styled-icons": "^8.3.0",
     "styled-theming": "^2.2.0",
-    "to-boolean": "^1.0.0",
     "uuid-validate": "0.0.3",
     "yup": "^0.27.0"
   },
@@ -105,7 +83,6 @@
     "@babel/polyfill": "7.4.4",
     "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "@sentry/webpack-plugin": "^1.8.0",
     "@storybook/addon-actions": "^5.1.11",
     "@storybook/addon-knobs": "^5.1.11",
     "@storybook/react": "^5.1.11",
@@ -146,8 +123,6 @@
     "url-loader": "^2.1.0",
     "webpack": "^4.39.2",
     "webpack-bundle-analyzer": "^3.4.1",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0",
-    "webpack-merge": "^4.2.1"
+    "webpack-cli": "^3.3.7"
   }
 }
