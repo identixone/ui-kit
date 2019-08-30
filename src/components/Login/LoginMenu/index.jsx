@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 import { LoginMenuItem } from "./LoginMenuItem";
 
-LoginMenu.Item = LoginMenuItem;
-
 export const LoginMenu = styled.nav`
   display: flex;
   align-items: center;
@@ -14,3 +12,5 @@ export const LoginMenu = styled.nav`
   top: 40px;
   right: 30px;
 `;
+
+LoginMenu.Item = LoginMenuItem;
