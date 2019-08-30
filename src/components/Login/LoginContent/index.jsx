@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LoginContent = styled.div`
+export const LoginContent = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
@@ -9,5 +9,3 @@ const LoginContent = styled.div`
   top: -47px;
   left: -25px;
 `;
-
-export default LoginContent;
