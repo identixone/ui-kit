@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const toBoolean = require("to-boolean");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
@@ -9,19 +8,12 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 // --------
 // environment variables
-const {
-  NODE_ENV,
-  ENV = NODE_ENV,
-  DEBUG = false,
-  npm_package_version: VERSION,
-} = process.env;
+const { NODE_ENV, npm_package_version: VERSION } = process.env;
 
 console.group("Build info");
 console.log(`Release version is ${VERSION}`);
 console.log(`Webpack version is ${webpack.version}`);
 console.log(`Webpack running in ${NODE_ENV} environment`);
-console.log(`Current project environment is ${ENV}`);
-console.log(`Debug mode is ${toBoolean(DEBUG) ? "ON" : "OFF"}`);
 console.groupEnd();
 
 // app paths
@@ -117,9 +109,7 @@ const config = {
     new webpack.DefinePlugin({
       "process.env": {
         VERSION: JSON.stringify(VERSION),
-        DEBUG: toBoolean(DEBUG),
         NODE_ENV: JSON.stringify(NODE_ENV),
-        ENV: JSON.stringify(ENV),
       },
     }),
 

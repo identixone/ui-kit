@@ -28,12 +28,16 @@ RedirectToError.propTypes = {
 };
 
 export const withErrorPageBoundary = Component => {
-  const WithErrorPageBoundary = props => {
+  const WithErrorPageBoundary = ({ onError, ...restProps }) => {
     return (
-      <ErrorBoundary ErrorComponent={RedirectToError}>
-        <Component {...props} />
+      <ErrorBoundary ErrorComponent={RedirectToError} onError={onError}>
+        <Component {...restProps} />
       </ErrorBoundary>
     );
+  };
+
+  WithErrorPageBoundary.propTypes = {
+    onError: PropTypes.func.isRequired,
   };
 
   return WithErrorPageBoundary;

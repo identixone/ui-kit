@@ -1,5 +1,6 @@
 import theme from "styled-theming";
-import colors from "./colors";
+
+import colors from "../../themes/colors";
 
 export const entryTypeColor = theme("mode", {
   new: colors.navyBlue,
