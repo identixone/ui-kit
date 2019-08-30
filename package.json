@@ -4,7 +4,8 @@
   "description": "UI kit for Identix web apps",
   "author": "Dmitriy Balashov 👷🏿‍♂ <mockedcat@gmail.com>",
   "license": "MIT",
-  "main": "src/index.js",
+  "browser": "./src/index.js",
+  "module": "./src/index.js",
   "scripts": {
     "build": "better-npm-run build",
     "test": "better-npm-run test",
