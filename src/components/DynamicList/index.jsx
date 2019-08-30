@@ -20,6 +20,7 @@ DynamicList.propTypes = {
 export { DynamicList };
 export {
   DynamicListItem,
+  DynamicListItemLink,
   DynamicListItemTitle,
   DynamicListItemAdditional,
 } from "./DynamicListItem";

@@ -15,6 +15,8 @@ import EmptyListNotice from "./EmptyListNotice";
 import List from "./List";
 import Content from "./Content";
 
+import PageFiltersListDynamicList from "./PageFiltersListDynamicList";
+
 import PageFiltersListContext from "./PageFiltersListContext";
 
 import { isEqual, debounce, noop } from "lodash-es";
@@ -187,4 +189,4 @@ class PageFiltersListComponent extends React.Component {
 
 const PageFiltersList = withListDirectoryList(PageFiltersListComponent);
 
-export { PageFiltersList, PageFiltersListButtons };
+export { PageFiltersList, PageFiltersListDynamicList, PageFiltersListButtons };
