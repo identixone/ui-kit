@@ -80,3 +80,4 @@ export class PageLoaderComponent extends Component {
 }
 
 export const PageLoader = withErrorPageBoundary(PageLoaderComponent);
+export const { RouteSection: PageLoaderRoute } = PageLoaderComponent;
