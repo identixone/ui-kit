@@ -48,7 +48,7 @@ export function ShownControl(props) {
           width="36"
           disabled={!isPrevButtonEnabled}
           onClick={handlePaginationPrev}
-          buttonTheme={isPrevButtonEnabled ? "active" : "lightGray"}
+          buttonTheme={isPrevButtonEnabled ? "active" : "light-gray"}
           data-testid="shownControl-button-prev"
         >
           <KeyboardArrowLeft width="27" height="23" />
@@ -66,7 +66,7 @@ export function ShownControl(props) {
         <StyledShownControlButtonArrow
           width="36"
           disabled={!isNextButtonEnabled}
-          buttonTheme={isNextButtonEnabled ? "active" : "lightGray"}
+          buttonTheme={isNextButtonEnabled ? "active" : "light-gray"}
           onClick={handlePaginationNext}
           data-testid="shownControl-button-next"
         >

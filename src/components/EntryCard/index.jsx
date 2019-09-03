@@ -63,7 +63,7 @@ function EntryCard(props) {
           </StyledEntryCardPhoto>
           <StyledEntryCardButtonsContainer>
             <StyledCloseButton
-              buttonTheme="lightGray"
+              buttonTheme="light-gray"
               to={`/entries/${mapFiltersToGetParams(filters)}`}
               size="large"
             >
