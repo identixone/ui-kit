@@ -20,4 +20,4 @@ Notice.propTypes = {
   "data-testid": PropTypes.string,
 };
 
-export { Notice };
+export { Notice, StyledNotice };
