@@ -27,6 +27,7 @@ export function ShownControl(props) {
     limit,
     totalCount,
     children,
+    className,
   } = props;
   const {
     isPrevPaginationButtonActive,
@@ -42,7 +43,7 @@ export function ShownControl(props) {
 
   return (
     Boolean(count) && (
-      <StyledShownControl>
+      <StyledShownControl className={className}>
         <StyledShownControlButtonArrow
           width="36"
           disabled={!isPrevButtonEnabled}
@@ -89,6 +90,7 @@ ShownControl.propTypes = {
   handlePaginationNext: PropTypes.func.isRequired,
   handlePaginationPrev: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  className: PropTypes.string,
 };
 
 ShownControl.defaultProps = {
