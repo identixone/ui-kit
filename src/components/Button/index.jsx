@@ -76,6 +76,6 @@ Button.defaultProps = {
   isHardOutline: true,
 };
 
-export { Button };
+export { Button, StyledButton };
 
 export default Button;

@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 
 import { toggleInArray } from "../utils/helpers";
 
-export const TabsContext = React.createContext({
+const TabsContext = React.createContext({
   activeTab: null,
   openTab: () => {},
   disabledTabs: [],
   toggleDisabled: () => {},
 });
 
-export const withTabsContext = WrappedComponent => {
+const withTabsContext = WrappedComponent => {
   const WithTabsContext = props => (
     <TabsContext.Consumer>
       {context => <WrappedComponent {...props} {...context} />}
@@ -65,7 +65,7 @@ TabPane.propTypes = {
   render: PropTypes.func,
 };
 
-export default class Tabs extends Component {
+class Tabs extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
     defaultActiveTab: PropTypes.string,
@@ -117,3 +117,5 @@ export default class Tabs extends Component {
     );
   }
 }
+
+export { Tabs, TabsContext, withTabsContext };
