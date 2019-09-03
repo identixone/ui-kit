@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import StyledDeleteSureButton from "./StyledDeleteSureButton";
-import colors from "../../themes/colors";
+import { colors } from "../../themes/colors";
 
 import { DeleteSure } from "../DeleteSure";
 
-export function DeleteSureButton({
+function DeleteSureButton({
   onDelete,
   deleteColor,
   size,
@@ -44,3 +44,5 @@ DeleteSureButton.propTypes = {
   deleteColor: PropTypes.string,
   className: PropTypes.string,
 };
+
+export { DeleteSureButton, StyledDeleteSureButton };

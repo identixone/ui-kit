@@ -11,6 +11,7 @@ export * from "./DeleteSure";
 export * from "./DeleteSureButton";
 export * from "./DynamicList";
 export * from "./Entry";
+export * from "./EntryCard";
 export * from "./ErrorBoundary";
 export * from "./ErrorPageBoundary";
 export * from "./Flash";
