@@ -17,6 +17,7 @@ export class FormRangeSlider extends Component {
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     onChange: PropTypes.func.isRequired,
     withClear: PropTypes.bool,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -30,14 +31,14 @@ export class FormRangeSlider extends Component {
   };
 
   render() {
-    const { from, to, width, onChange, withClear } = this.props;
+    const { from, to, width, onChange, withClear, className } = this.props;
     const { defaultProps } = FormRangeSlider;
 
     const isClearButtonHidden =
       defaultProps.from === from && defaultProps.to === to;
 
     return (
-      <StyledFormRangeSliderWrapper>
+      <StyledFormRangeSliderWrapper className={className}>
         <StyledFormRangeSlider
           width={width}
           start={[from, to]}

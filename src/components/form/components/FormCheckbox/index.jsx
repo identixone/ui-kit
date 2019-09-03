@@ -5,7 +5,7 @@ import StyledFormCheckbox from "./StyledFormCheckbox";
 
 import FormCheckboxFlag from "./FormCheckboxFlag";
 import FormCheckboxInput from "./FormCheckboxInput";
-import FormCheckboxMarker from "./FormCheckboxMarker";
+import { FormCheckboxMarker } from "./FormCheckboxMarker";
 
 export function FormCheckbox({
   onChange,

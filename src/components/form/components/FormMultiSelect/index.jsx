@@ -28,6 +28,7 @@ export class FormMultiSelect extends React.Component {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     menuRef: PropTypes.object,
     isLoading: PropTypes.bool,
+    className: PropTypes.string,
   };
 
   state = {
@@ -144,6 +145,7 @@ export class FormMultiSelect extends React.Component {
       menuRef,
       name,
       isLoading,
+      className,
     } = this.props;
     const { selected, inputValue, isOpen } = this.state;
 
@@ -167,7 +169,10 @@ export class FormMultiSelect extends React.Component {
           getRootProps,
         }) => {
           return (
-            <StyledFormMultiSelect {...getRootProps({ width, isLoading })}>
+            <StyledFormMultiSelect
+              {...getRootProps({ width, isLoading })}
+              className={className}
+            >
               <FormMultiSelectTags
                 ref={this.tagsRef}
                 data-testid={name}

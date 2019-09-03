@@ -17,6 +17,7 @@ export class FormInputToggle extends React.Component {
     initialOpen: PropTypes.bool,
     width: PropTypes.string,
     disabled: PropTypes.bool,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -73,6 +74,7 @@ export class FormInputToggle extends React.Component {
       type,
       width,
       disabled,
+      className,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -83,6 +85,7 @@ export class FormInputToggle extends React.Component {
         data-toggle={name}
         hasValue={value && value !== 0}
         disabled={disabled}
+        className={className}
       >
         {isOpen ? (
           <FormInput
