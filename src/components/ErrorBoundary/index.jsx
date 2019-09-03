@@ -24,7 +24,9 @@ export class ErrorBoundary extends React.Component {
           info,
         },
       },
-      this.props.onError
+      () => {
+        this.props.onError(this.state.error);
+      }
     );
   }
 
