@@ -8,6 +8,7 @@ const PageCardTitle = styled.h1`
   overflow: hidden;
   background-color: ${({ titleColor }) => titleColor};
   width: 120px;
+  box-sizing: border-box;
   line-height: 45px;
   border-radius: 0 5px 0 10px;
   text-align: center;
