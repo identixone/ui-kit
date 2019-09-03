@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import StyledFormFieldGroup from "./StyledFormFieldGroup";
 import FormFieldGroupTitle from "./FormFieldGroupTitle";
 
-export function FormFieldGroup({ title, children, className }) {
+function FormFieldGroup({ title, children, className }) {
   return (
     <StyledFormFieldGroup className={className}>
       {title && <FormFieldGroupTitle>{title}</FormFieldGroupTitle>}
@@ -18,3 +18,5 @@ FormFieldGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   className: PropTypes.string,
 };
+
+export { FormFieldGroup, StyledFormFieldGroup };

@@ -7,7 +7,7 @@ import FormCheckboxFlag from "./FormCheckboxFlag";
 import FormCheckboxInput from "./FormCheckboxInput";
 import { FormCheckboxMarker } from "./FormCheckboxMarker";
 
-export function FormCheckbox({
+function FormCheckbox({
   onChange,
   onBlur,
   name,
@@ -50,3 +50,5 @@ FormCheckbox.propTypes = {
 FormCheckbox.defaultProps = {
   type: "text",
 };
+
+export { FormCheckbox, StyledFormCheckbox, FormCheckboxMarker };

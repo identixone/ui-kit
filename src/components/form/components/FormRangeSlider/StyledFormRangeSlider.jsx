@@ -1,11 +1,7 @@
 import styled from "styled-components";
-import NoUIslider from "nouislider-react";
 
-import "nouislider/distribute/nouislider.css";
-import "./styles.css";
-
-const StyledFormRangeSlider = styled(NoUIslider)`
-  width: ${({ width }) => (width ? width + "px" : "100%")};
+export const StyledFormRangeSlider = styled.div`
+  display: flex;
+  margin-top: 4px;
+  align-items: center;
 `;
-
-export default StyledFormRangeSlider;

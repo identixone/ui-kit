@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import StyledFormInput from "../FormInput/StyledFormInput";
 
-const StyledInputToggle = styled.span`
+import { StyledFormInput } from "../FormInput";
+
+export const StyledFormInputToggle = styled.span`
   height: 24px;
   line-height: 24px;
   display: inline-block;
@@ -17,5 +18,3 @@ const StyledInputToggle = styled.span`
     left: -11px;
   }
 `;
-
-export default StyledInputToggle;

@@ -5,13 +5,7 @@ import { FormCheckboxGroupItem } from "./FormCheckboxGroupItem";
 
 import { SelectableList } from "../../../SelectableList";
 
-export function FormCheckboxGroup({
-  groupName,
-  render,
-  options,
-  value,
-  onChange,
-}) {
+function FormCheckboxGroup({ groupName, render, options, value, onChange }) {
   return (
     <SelectableList
       options={options}
@@ -49,3 +43,7 @@ FormCheckboxGroup.propTypes = {
   value: PropTypes.array,
   onChange: PropTypes.func.isRequired,
 };
+
+export { FormCheckboxGroup };
+
+export * from "./FormCheckboxGroupItem";

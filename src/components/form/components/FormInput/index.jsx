@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import StyledFormInput from "./StyledFormInput";
 
-export function FormInput({
+function FormInput({
   onChange,
   onBlur,
   name,
@@ -48,3 +48,5 @@ FormInput.propTypes = {
 FormInput.defaultProps = {
   type: "text",
 };
+
+export { FormInput, StyledFormInput };

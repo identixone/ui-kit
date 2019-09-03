@@ -17,7 +17,7 @@ import { searchInList } from "../../../../utils/helpers";
 
 const BACKSPACE_KEY_CODE = 8;
 
-export class FormMultiSelect extends React.Component {
+class FormMultiSelect extends React.Component {
   static propTypes = {
     name: PropTypes.string,
     placeholder: PropTypes.string,
@@ -242,3 +242,5 @@ export class FormMultiSelect extends React.Component {
     );
   }
 }
+
+export { FormMultiSelect, StyledFormMultiSelect };

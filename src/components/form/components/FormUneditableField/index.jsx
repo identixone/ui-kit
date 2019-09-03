@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledFormUneditableField from "./StyledFormUneditableField";
+import { StyledFormUneditableField } from "./StyledFormUneditableField";
 
-export function FormUneditableField({ name, value, className }) {
+function FormUneditableField({ name, value, className }) {
   return (
     <StyledFormUneditableField
       id={name}
@@ -21,3 +21,5 @@ FormUneditableField.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
 };
+
+export { FormUneditableField, StyledFormUneditableField };

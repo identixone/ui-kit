@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import StyledFormRangeSliderWrapper from "./StyledFormRangeSliderWrapper";
-import StyledFormRangeSlider from "./StyledFormRangeSlider";
+import { StyledFormRangeSlider } from "./StyledFormRangeSlider";
+import { StyledFormRangeSliderInner } from "./StyledFormRangeSliderInner";
 
 import FormRangeSliderResetButton from "./FormRangeSliderResetButton";
 
@@ -10,7 +10,7 @@ import { round } from "lodash";
 
 import { TimesCircle } from "../../../../assets/icons";
 
-export class FormRangeSlider extends Component {
+class FormRangeSlider extends Component {
   static propTypes = {
     from: PropTypes.number,
     to: PropTypes.number,
@@ -38,8 +38,8 @@ export class FormRangeSlider extends Component {
       defaultProps.from === from && defaultProps.to === to;
 
     return (
-      <StyledFormRangeSliderWrapper className={className}>
-        <StyledFormRangeSlider
+      <StyledFormRangeSlider className={className}>
+        <StyledFormRangeSliderInner
           width={width}
           start={[from, to]}
           step={1}
@@ -60,7 +60,7 @@ export class FormRangeSlider extends Component {
             <TimesCircle size="22" />
           </FormRangeSliderResetButton>
         )}
-      </StyledFormRangeSliderWrapper>
+      </StyledFormRangeSlider>
     );
   }
 }
@@ -75,3 +75,5 @@ function formatter(decimals) {
     },
   };
 }
+
+export { FormRangeSlider, StyledFormRangeSlider };

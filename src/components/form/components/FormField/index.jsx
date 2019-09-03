@@ -13,7 +13,7 @@ import FormFieldError from "./FormFieldError";
 
 import { InfoCircle } from "../../../../assets/icons";
 
-export function FormField(props) {
+function FormField(props) {
   const {
     label,
     render,
@@ -140,3 +140,5 @@ FormField.defaultProps = {
   isFast: true,
   showError: true,
 };
+
+export { FormField, StyledFormField };

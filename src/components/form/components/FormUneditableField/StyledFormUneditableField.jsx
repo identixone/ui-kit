@@ -10,8 +10,6 @@ export const FormUneditableFieldStyles = css`
   margin: 0;
 `;
 
-const StyledFormUneditableField = styled.p`
+export const StyledFormUneditableField = styled.p`
   ${FormUneditableFieldStyles}
 `;
-
-export default StyledFormUneditableField;

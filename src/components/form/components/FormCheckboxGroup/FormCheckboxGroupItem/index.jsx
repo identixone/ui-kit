@@ -4,18 +4,19 @@ import PropTypes from "prop-types";
 import { FormCheckbox } from "../../FormCheckbox";
 import { FormLabel, FormLabelTitle } from "../../FormLabel";
 
-import StyledFormCheckboxGroupItem from "./StyledFormCheckboxGroupItem";
+import { StyledFormCheckboxGroupItem } from "./StyledFormCheckboxGroupItem";
 
-export function FormCheckboxGroupItem({
+function FormCheckboxGroupItem({
   label,
   name,
   value,
   onChange,
   groupName,
+  className,
   ...props
 }) {
   return (
-    <StyledFormCheckboxGroupItem>
+    <StyledFormCheckboxGroupItem className={className}>
       <FormLabel htmlFor={name ? name : undefined}>
         <FormLabelTitle>{label}</FormLabelTitle>
         <FormCheckbox
@@ -36,4 +37,7 @@ FormCheckboxGroupItem.propTypes = {
   value: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   "data-testid": PropTypes.string,
+  className: PropTypes.string,
 };
+
+export { FormCheckboxGroupItem, StyledFormCheckboxGroupItem };
