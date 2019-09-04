@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledPersonsListPersonPreview from "./StyledPersonsListPersonPreview";
-import PersonsListPersonPreviewPhoto from "./PersonsListPersonPreviewPhoto";
-import PersonsListPersonPreviewSpinner from "./PersonsListPersonPreviewSpinner";
+import StyledPersonsListPersonDetail from "./StyledPersonsListPersonDetail";
+import PersonsListPersonDetailPhoto from "./PersonsListPersonDetailPhoto";
+import PersonsListPersonDetailSpinner from "./PersonsListPersonDetailSpinner";
 
 import { Segment } from "../../Segment";
 
@@ -35,15 +35,15 @@ class PersonsListPersonDetail extends React.Component {
     const { person, isLoading, isPersonNotExists } = this.props;
 
     return (
-      <StyledPersonsListPersonPreview
+      <StyledPersonsListPersonDetail
         isCentered={isLoading || !person.idxid}
         data-testid="persons-list-person-detail"
       >
         {isLoading ? (
-          <PersonsListPersonPreviewSpinner />
+          <PersonsListPersonDetailSpinner />
         ) : person.idxid ? (
           <>
-            <PersonsListPersonPreviewPhoto
+            <PersonsListPersonDetailPhoto
               src={person.initial_photo}
               onLoad={this.handlePhotoLoaded}
             />
@@ -60,7 +60,7 @@ class PersonsListPersonDetail extends React.Component {
               : "click a person to display"}
           </Segment.Title>
         )}
-      </StyledPersonsListPersonPreview>
+      </StyledPersonsListPersonDetail>
     );
   }
 }
