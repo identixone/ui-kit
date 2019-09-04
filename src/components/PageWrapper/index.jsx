@@ -1,20 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import StyledPageWrapper from "./StyledPageWrapper";
-import { Header } from "../Header";
-import { Footer } from "../Footer";
+const PageWrapper = styled.div`
+  box-sizing: border-box;
+  width: 1000px;
+  min-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 90px;
+  display: flex;
+  flex-direction: column;
+`;
 
-export function PageWrapper({ children }) {
-  return (
-    <StyledPageWrapper>
-      <Header />
-      {children}
-      <Footer />
-    </StyledPageWrapper>
-  );
-}
-
-PageWrapper.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
-};
+export { PageWrapper };
