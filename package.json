@@ -6,6 +6,7 @@
   "license": "MIT",
   "browser": "./src/index.js",
   "module": "./src/index.js",
+  "files": ["src/*", "!/**/__tests__"],
   "scripts": {
     "build": "better-npm-run build",
     "test": "better-npm-run test",
