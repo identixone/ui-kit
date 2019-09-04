@@ -12,7 +12,7 @@ import PersonsListPersonPhoto from "./PersonsListPersonPhoto";
 import { DeleteSure } from "../../DeleteSure";
 import { UserPlus, UserTimes, Exclamation } from "../../../assets/icons";
 
-import { get } from "lodash-get";
+import { get } from "lodash-es";
 
 class PersonsListPerson extends React.Component {
   static propTypes = {
