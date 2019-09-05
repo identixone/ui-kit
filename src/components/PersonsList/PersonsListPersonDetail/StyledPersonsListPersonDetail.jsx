@@ -4,17 +4,16 @@ import { Segment } from "../../Segment";
 import { fadeEnter, fadeExit } from "../../../assets/animations";
 
 const centeredStyles = css`
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px 15px;
 `;
 
 const StyledPersonsListPersonDetail = styled(Segment)`
-  margin-bottom: 30px;
   flex: 150px 0 0;
+  margin-bottom: 30px;
   min-height: 150px;
-  display: flex;
-  padding: 10px 15px;
-  align-items: center;
 
   ${({ isCentered }) => isCentered && centeredStyles}
 

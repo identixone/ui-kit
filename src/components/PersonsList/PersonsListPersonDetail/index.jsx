@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import StyledPersonsListPersonDetail from "./StyledPersonsListPersonDetail";
-import PersonsListPersonDetailPhoto from "./PersonsListPersonDetailPhoto";
 import PersonsListPersonDetailSpinner from "./PersonsListPersonDetailSpinner";
+
+import { EntryCard } from "../../EntryCard";
 
 import { Segment } from "../../Segment";
 
@@ -25,9 +26,7 @@ class PersonsListPersonDetail extends React.Component {
       prevProps.personIdxid !== this.props.personIdxid &&
       this.props.personIdxid
     ) {
-      this.setState({ isPhotoLoaded: false }, () => {
-        this.props.fetchPerson({ idxid: this.props.personIdxid });
-      });
+      this.props.fetchPerson({ idxid: this.props.personIdxid });
     }
   }
 
@@ -42,17 +41,7 @@ class PersonsListPersonDetail extends React.Component {
         {isLoading ? (
           <PersonsListPersonDetailSpinner />
         ) : person.idxid ? (
-          <>
-            <PersonsListPersonDetailPhoto
-              src={person.initial_photo}
-              onLoad={this.handlePhotoLoaded}
-            />
-            <div>
-              <h3>{person.idxid}</h3>
-              <p>age: {person.age}</p>
-              <p>sex: {person.sex}</p>
-            </div>
-          </>
+          <EntryCard person={person} />
         ) : (
           <Segment.Title>
             {isPersonNotExists

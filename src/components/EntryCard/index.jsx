@@ -5,6 +5,7 @@ import { IdCopy } from "../IdCopy";
 import { DeleteSureButton } from "../DeleteSureButton";
 import { Value } from "../Value";
 import { FaceSize } from "../FaceSize";
+import { LazyImage } from "../LazyImage";
 
 import StyledCloseButton from "./StyledCloseButton";
 import StyledEntryCard from "./StyledEntryCard";
@@ -15,8 +16,6 @@ import StyledColumnFirst from "./StyledColumnFirst";
 import StyledColumnSecond from "./StyledColumnSecond";
 import StyledEntryCardButtonsContainer from "./StyledEntryCardButtonsContainer";
 import StyledEntryCardPhoto from "./StyledEntryCardPhoto";
-import StyledEntryCardContainer from "./StyledEntryCardContainer";
-import StyledMainEntryCard from "./StyledMainEntryCard";
 
 import { colors } from "../../themes/colors";
 import noimageid from "../../assets/images/noimageid.png";
@@ -28,7 +27,7 @@ import {
 } from "../../utils/helpers";
 
 function EntryCard(props) {
-  const { person, filters } = props;
+  const { person, filters, actions, className } = props;
   const {
     age,
     idxid_created,
@@ -51,97 +50,97 @@ function EntryCard(props) {
   const sexName = (isNotEmpty(sex) && (sex === 0 ? "male" : "female")) || "-";
 
   return (
-    <StyledEntryCard>
-      <StyledMainEntryCard>
-        {reinit ? <StyledReinit>RE</StyledReinit> : ""}
-        <StyledEntryCardContainer>
-          <StyledEntryCardPhoto>
-            <FaceSize title="face area in pixels">
-              {formatFaceSize(initial_facesize)}
-            </FaceSize>
-            <img src={initial_photo || noimageid} alt="" />
-          </StyledEntryCardPhoto>
-          <StyledEntryCardButtonsContainer>
-            <StyledCloseButton
-              buttonTheme="light-gray"
-              to={`/entries/${mapFiltersToGetParams(filters)}`}
-              size="large"
-            >
-              close
-            </StyledCloseButton>
-            <DeleteSureButton
-              onDelete={handleDelete}
-              deleteColor={colors.brownSimple}
-            />
-          </StyledEntryCardButtonsContainer>
+    <StyledEntryCard className={className}>
+      {reinit ? <StyledReinit>RE</StyledReinit> : ""}
+      <StyledEntryCardPhoto>
+        <FaceSize title="face area in pixels">
+          {formatFaceSize(initial_facesize)}
+        </FaceSize>
+        <LazyImage src={initial_photo || noimageid} />
+      </StyledEntryCardPhoto>
 
-          <StyledColumnFirst>
-            <StyledLabel>
-              ID
-              <StyledData>
-                <IdCopy id={idxid} />
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              Age
-              <StyledData>
-                <Value>{age}</Value>
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              Sex
-              <StyledData>
-                <Value>{sexName}</Value>
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              Card created
-              <StyledData>
-                <Value>{timeFormat(idxid_created)}</Value>
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              Place of first entry
-              <StyledData>
-                <Value>{idxid_source && idxid_source.name}</Value>
-              </StyledData>
-            </StyledLabel>
-          </StyledColumnFirst>
+      {/* TODO: использовать слоты для actions */}
+      {actions && (
+        <StyledEntryCardButtonsContainer>
+          <StyledCloseButton
+            buttonTheme="light-gray"
+            to={`/entries/${mapFiltersToGetParams(filters)}`}
+            size="large"
+          >
+            close
+          </StyledCloseButton>
+          <DeleteSureButton
+            onDelete={handleDelete}
+            deleteColor={colors.brownSimple}
+          />
+        </StyledEntryCardButtonsContainer>
+      )}
 
-          <StyledColumnSecond>
-            <StyledLabel>
-              Total existing entries
-              <StyledData>
-                <Value>{total}</Value>
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              Exact entries
-              <StyledData>
-                <Value>{exact}</Value>
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              HA entries
-              <StyledData>
-                <Value>{ha}</Value>
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              Junk entries
-              <StyledData>
-                <Value>{junk}</Value>
-              </StyledData>
-            </StyledLabel>
-            <StyledLabel>
-              Found entries
-              <StyledData>
-                <Value>{total}</Value>
-              </StyledData>
-            </StyledLabel>
-          </StyledColumnSecond>
-        </StyledEntryCardContainer>
-      </StyledMainEntryCard>
+      <StyledColumnFirst>
+        <StyledLabel>
+          ID
+          <StyledData>
+            <IdCopy id={idxid} />
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          Age
+          <StyledData>
+            <Value>{age}</Value>
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          Sex
+          <StyledData>
+            <Value>{sexName}</Value>
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          Card created
+          <StyledData>
+            <Value>{timeFormat(idxid_created)}</Value>
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          Place of first entry
+          <StyledData>
+            <Value>{idxid_source && idxid_source.name}</Value>
+          </StyledData>
+        </StyledLabel>
+      </StyledColumnFirst>
+
+      <StyledColumnSecond>
+        <StyledLabel>
+          Total existing entries
+          <StyledData>
+            <Value>{total}</Value>
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          Exact entries
+          <StyledData>
+            <Value>{exact}</Value>
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          HA entries
+          <StyledData>
+            <Value>{ha}</Value>
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          Junk entries
+          <StyledData>
+            <Value>{junk}</Value>
+          </StyledData>
+        </StyledLabel>
+        <StyledLabel>
+          Found entries
+          <StyledData>
+            <Value>{total}</Value>
+          </StyledData>
+        </StyledLabel>
+      </StyledColumnSecond>
     </StyledEntryCard>
   );
 }
@@ -150,11 +149,14 @@ EntryCard.propTypes = {
   onDelete: PropTypes.func.isRequired,
   person: PropTypes.object.isRequired,
   filters: PropTypes.object.isRequired,
+  actions: PropTypes.bool.isRequired,
+  className: PropTypes.string,
 };
 
 EntryCard.defaultProps = {
   person: {},
   filters: {},
+  actions: false,
 };
 
 export { EntryCard, StyledEntryCard };
