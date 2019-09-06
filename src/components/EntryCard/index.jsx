@@ -75,7 +75,7 @@ function EntryCard(props) {
           >
             delete
           </StyledDeleteButton>
-          <StyledListsButton to={`/persons-lists/q=${person.idxid}`}>
+          <StyledListsButton to={`/persons-lists/?q=${person.idxid}`}>
             lists
           </StyledListsButton>
         </EntryAdditionalButtons>
