@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 
 import { Segment } from "../../Segment";
+
 import { fadeEnter, fadeExit } from "../../../assets/animations";
+import StyledColumnFirst from "../../EntryCard/StyledColumnFirst";
+import StyledColumn from "../../EntryCard/StyledColumn";
+import StyledEntryCardPhoto from "../../EntryCard/StyledEntryCardPhoto";
 
 const centeredStyles = css`
   display: flex;
@@ -16,6 +20,18 @@ const StyledPersonsListPersonDetail = styled(Segment)`
   min-height: 150px;
 
   ${({ isCentered }) => isCentered && centeredStyles}
+
+  ${StyledColumnFirst} {
+    margin-left: 190px;
+  }
+
+  ${StyledColumn} {
+    margin-right: 40px;
+  }
+
+  ${StyledEntryCardPhoto} {
+    border-width: 28px;
+  }
 
   .person-preview {
     ${fadeEnter(300)}

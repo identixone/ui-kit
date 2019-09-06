@@ -1,4 +1,5 @@
 export * from "./PersonsListPerson";
+export * from "./PersonsListActions";
 export * from "./PersonsListPersonDetail";
 export * from "./PersonsListNotice";
 export * from "./PersonsListSearch";
