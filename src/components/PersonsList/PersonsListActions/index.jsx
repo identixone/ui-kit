@@ -9,11 +9,13 @@ import { PersonsListActionsSelectButton } from "./PersonsListActionsSelectButton
 
 export function PersonsListActions({
   isAllSelected,
-  selectedCount,
+  selected,
   selectAll,
   deselectAll,
-  handleDeleteSelected,
+  onDeleteSelected,
 }) {
+  const selectedCount = selected.length;
+
   return (
     <StyledPersonsListActions>
       <div>
@@ -33,7 +35,7 @@ export function PersonsListActions({
             Select All
           </PersonsListActionsSelectButton>
         )}
-        <Button onClick={handleDeleteSelected} isDisabled={selectedCount === 0}>
+        <Button onClick={onDeleteSelected} isDisabled={selectedCount === 0}>
           Remove selected
         </Button>
       </div>
@@ -43,8 +45,8 @@ export function PersonsListActions({
 
 PersonsListActions.propTypes = {
   isAllSelected: PropTypes.bool.isRequired,
-  selectedCount: PropTypes.number.isRequired,
+  selected: PropTypes.array.isRequired,
   selectAll: PropTypes.func.isRequired,
   deselectAll: PropTypes.func.isRequired,
-  handleDeleteSelected: PropTypes.func.isRequired,
+  onDeleteSelected: PropTypes.func.isRequired,
 };
