@@ -19,8 +19,8 @@ import { PhotoBased } from "../../PhotoBased";
 import { IdCopy } from "../../IdCopy";
 import { IdFormat } from "../../IdFormat";
 
-import EntryAdditionalButtons from "../EntryAdditionalButtons";
-import EntryAdditionalButton from "../EntryAdditionalButtons/EntryAdditionalButton";
+import EntryAdditionalButtons from "../../EntryAdditionalButtons";
+import { EntryAdditionalButton } from "../../EntryAdditionalButtons/EntryAdditionalButton";
 
 const COLOR_CHANGE_RATE = 60; // seconds
 

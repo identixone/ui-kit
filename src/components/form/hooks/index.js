@@ -1,2 +1,2 @@
-export { useFormApiErrors } from "./use-form-api-errors";
-export { useResetToDefaultName } from "./use-reset-to-default-name";
+export * from "./use-form-api-errors";
+export * from "./use-reset-to-default-name";

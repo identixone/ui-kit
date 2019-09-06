@@ -1,17 +1,13 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { boolean } from "@storybook/addon-knobs";
 
 import { Footer } from "./index.jsx";
-import TextBold from "../../components/Text/TextBold";
-import TextThin from "../../components/Text/TextThin";
+import { TextBold } from "../../components/Text/TextBold";
+import { TextThin } from "../../components/Text/TextThin";
 
 storiesOf("Footer", module).add("default", () => {
-  const isDisclaimerShowing = boolean("Is disclaimer showing", true);
-
   return (
     <Footer
-      isDisclaimerShowing={isDisclaimerShowing}
       Disclamer={
         <React.Fragment>
           <p>

@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledFormSwitch from "./StyledFormSwitch";
+import { StyledFormSwitch } from "./StyledFormSwitch";
 import FormSwitchLabel from "./FormSwitchLabel";
 import FormSwitchCheckbox from "./FormSwitchCheckbox";
 
-export function FormSwitch({ onChange, name, value, size, theme }) {
+function FormSwitch({ onChange, name, value, size, theme, className }) {
   return (
-    <StyledFormSwitch size={size}>
+    <StyledFormSwitch size={size} className={className}>
       <FormSwitchCheckbox
         id={name}
         type="checkbox"
@@ -33,9 +33,12 @@ FormSwitch.propTypes = {
   name: PropTypes.string.isRequired,
   size: PropTypes.oneOf(["s", "m"]),
   theme: PropTypes.oneOf(["blue", "dark-gray"]),
+  className: PropTypes.string,
 };
 
 FormSwitch.defaultProps = {
   size: "m",
   theme: "blue",
 };
+
+export { FormSwitch, StyledFormSwitch };

@@ -5,10 +5,8 @@ const widths = {
   m: 40,
 };
 
-const StyledFormSwitch = styled.div`
+export const StyledFormSwitch = styled.div`
   position: relative;
   width: ${({ size }) => widths[size] + "px"};
   user-select: none;
 `;
-
-export default StyledFormSwitch;

@@ -17,9 +17,10 @@ DynamicList.propTypes = {
   innerRef: PropTypes.object,
 };
 
-export { DynamicList };
+export { DynamicList, StyledDynamicList };
 export {
   DynamicListItem,
+  DynamicListItemLink,
   DynamicListItemTitle,
   DynamicListItemAdditional,
 } from "./DynamicListItem";

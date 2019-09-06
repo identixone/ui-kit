@@ -6,6 +6,7 @@ const StyledShownControlButtonArrow = styled(Button)`
   padding: 0px;
   color: #fff;
   box-shadow: none;
+
   svg {
     display: block;
   }

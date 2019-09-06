@@ -15,7 +15,7 @@ import FormDropdownInput from "./FormDropdownInput";
 import { searchInList } from "../../../../utils/helpers";
 import { identity } from "lodash-es";
 
-export class FormDropdown extends Component {
+class FormDropdown extends Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.object,
@@ -301,3 +301,5 @@ export class FormDropdown extends Component {
     );
   }
 }
+
+export { FormDropdown, StyledFormDropdown };

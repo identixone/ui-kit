@@ -10,7 +10,7 @@ function Link(props) {
   const { id, title, to } = props;
 
   return (
-    <HeaderTopMenuLinks.Link to={to} key={id}>
+    <HeaderTopMenuLinks.Link href={to} key={id}>
       {title}
     </HeaderTopMenuLinks.Link>
   );

@@ -2,7 +2,7 @@ import React from "react";
 
 import { ListItemsContext } from "./ListItemsContext";
 
-const WithListItemContextProvider = Component => {
+export const WithListItemContextProvider = Component => {
   class WithCurrentItemComponent extends React.Component {
     state = {
       currentOpenItem: null,
@@ -28,5 +28,3 @@ const WithListItemContextProvider = Component => {
 
   return WithCurrentItemComponent;
 };
-
-export default WithListItemContextProvider;

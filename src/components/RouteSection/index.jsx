@@ -6,9 +6,7 @@ import RouteSectionOverlay from "./RouteSectionOverlay";
 import RouteSectionSpinner from "./RouteSectionSpinner";
 import RouteSectionHider from "./RouteSectionHider";
 
-import { withErrorPageBoundary } from "../ErrorPageBoundary";
-
-export class RouteSectionComponent extends React.Component {
+export class RouteSection extends React.Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]).isRequired,
     name: PropTypes.string,
@@ -75,5 +73,3 @@ export class RouteSectionComponent extends React.Component {
     );
   }
 }
-
-export const RouteSection = withErrorPageBoundary(RouteSection);

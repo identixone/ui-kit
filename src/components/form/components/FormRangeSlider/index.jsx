@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import StyledFormRangeSliderWrapper from "./StyledFormRangeSliderWrapper";
-import StyledFormRangeSlider from "./StyledFormRangeSlider";
+import { StyledFormRangeSlider } from "./StyledFormRangeSlider";
+import { StyledFormRangeSliderInner } from "./StyledFormRangeSliderInner";
 
 import FormRangeSliderResetButton from "./FormRangeSliderResetButton";
 
@@ -10,13 +10,14 @@ import { round } from "lodash";
 
 import { TimesCircle } from "../../../../assets/icons";
 
-export class FormRangeSlider extends Component {
+class FormRangeSlider extends Component {
   static propTypes = {
     from: PropTypes.number,
     to: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     onChange: PropTypes.func.isRequired,
     withClear: PropTypes.bool,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -30,15 +31,15 @@ export class FormRangeSlider extends Component {
   };
 
   render() {
-    const { from, to, width, onChange, withClear } = this.props;
+    const { from, to, width, onChange, withClear, className } = this.props;
     const { defaultProps } = FormRangeSlider;
 
     const isClearButtonHidden =
       defaultProps.from === from && defaultProps.to === to;
 
     return (
-      <StyledFormRangeSliderWrapper>
-        <StyledFormRangeSlider
+      <StyledFormRangeSlider className={className}>
+        <StyledFormRangeSliderInner
           width={width}
           start={[from, to]}
           step={1}
@@ -59,7 +60,7 @@ export class FormRangeSlider extends Component {
             <TimesCircle size="22" />
           </FormRangeSliderResetButton>
         )}
-      </StyledFormRangeSliderWrapper>
+      </StyledFormRangeSlider>
     );
   }
 }
@@ -74,3 +75,5 @@ function formatter(decimals) {
     },
   };
 }
+
+export { FormRangeSlider, StyledFormRangeSlider };

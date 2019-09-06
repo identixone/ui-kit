@@ -5,7 +5,7 @@ const StyledPagination = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  opacity: ${props => (props.isVisible ? "1" : "0")}
+  opacity: ${props => (props.isVisible ? "1" : "0")};
   visibility: ${props => (props.isVisible ? "visible" : "none")};
 `;
 

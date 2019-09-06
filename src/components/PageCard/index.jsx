@@ -8,7 +8,7 @@ import PageCardTitle from "./PageCardTitle";
 
 import { Sync, ArrowLeft } from "../../assets/icons";
 
-export class PageCard extends React.Component {
+class PageCard extends React.Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
     withButtons: PropTypes.bool,
@@ -66,3 +66,5 @@ export class PageCard extends React.Component {
     );
   }
 }
+
+export { PageCard, StyledPageCard };

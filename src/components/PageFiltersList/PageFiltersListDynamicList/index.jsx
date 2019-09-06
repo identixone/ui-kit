@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import DynamicList from "../../DynamicList";
+import { DynamicList } from "../../DynamicList";
 
 import PageFiltersListPagination from "./PageFiltersListPagination";
 import StyledPageFiltersListDynamicList from "./StyledPageFiltersListDynamicList";

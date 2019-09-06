@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Button from "../../Button";
 
-const PageFiltersListButtonsButton = styled(Button).attrs({
+export const PageFiltersListButtonsButton = styled(Button).attrs({
   buttonTheme: "ghost",
 })`
   width: 30px;
@@ -18,5 +18,3 @@ const PageFiltersListButtonsButton = styled(Button).attrs({
     margin-right: 26px;
   }
 `;
-
-export default PageFiltersListButtonsButton;

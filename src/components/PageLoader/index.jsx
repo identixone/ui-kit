@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 
 import { RouteSection } from "../RouteSection";
 
+import { withErrorPageBoundary } from "../ErrorPageBoundary";
+
 const PageLoaderContext = React.createContext({
   loadedPages: {},
   setFirstLoad: () => {},
 });
 
-export class PageLoader extends Component {
+export class PageLoaderComponent extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   };
@@ -76,3 +78,6 @@ export class PageLoader extends Component {
     );
   }
 }
+
+export const PageLoader = withErrorPageBoundary(PageLoaderComponent);
+export const { RouteSection: PageLoaderRoute } = PageLoaderComponent;

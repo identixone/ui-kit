@@ -5,6 +5,7 @@ import StyledDynamicListItem from "./StyledDynamicListItem";
 
 import DynamicListItemTitle from "./DynamicListItemTitle";
 import DynamicListItemAdditional from "./DynamicListItemAdditional";
+import DynamicListItemLink from "./DynamicListItemLink";
 
 export function DynamicListItem({
   title,
@@ -44,4 +45,4 @@ DynamicListItem.propTypes = {
   className: PropTypes.string,
 };
 
-export { DynamicListItemTitle, DynamicListItemAdditional };
+export { DynamicListItemTitle, DynamicListItemAdditional, DynamicListItemLink };

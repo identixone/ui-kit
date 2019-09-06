@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import StyledFormInput from "./StyledFormInput";
 
-export function FormInput({
+function FormInput({
   onChange,
   onBlur,
   name,
@@ -12,6 +12,7 @@ export function FormInput({
   type,
   innerRef,
   disabled,
+  className,
   ...restProps
 }) {
   return (
@@ -25,6 +26,7 @@ export function FormInput({
       value={value}
       ref={innerRef}
       disabled={disabled}
+      className={className}
       data-testid={restProps["data-testid"]}
     />
   );
@@ -40,8 +42,11 @@ FormInput.propTypes = {
   innerRef: PropTypes.object,
   disabled: PropTypes.bool,
   "data-testid": PropTypes.string,
+  className: PropTypes.string,
 };
 
 FormInput.defaultProps = {
   type: "text",
 };
+
+export { FormInput, StyledFormInput };

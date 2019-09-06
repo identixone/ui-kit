@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FormCheckboxMarker = styled.span`
+export const FormCheckboxMarker = styled.span`
   width: 22px;
   height: 22px;
   background-color: ${({ disabled }) => (disabled ? "#f3f3f3" : "#fff")};
@@ -18,5 +18,3 @@ const FormCheckboxMarker = styled.span`
     margin-right: 10px;
   }
 `;
-
-export default FormCheckboxMarker;
