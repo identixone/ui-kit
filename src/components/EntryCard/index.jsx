@@ -2,19 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { IdCopy } from "../IdCopy";
-import { DeleteSureButton } from "../DeleteSureButton";
 import { Value } from "../Value";
 import { FaceSize } from "../FaceSize";
 import { LazyImage } from "../LazyImage";
 
-import StyledCloseButton from "./StyledCloseButton";
+import { StyledCloseButton } from "./StyledCloseButton";
+import { StyledDeleteButton } from "./StyledDeleteButton";
+import { StyledListsButton } from "./StyledListsButton";
 import StyledEntryCard from "./StyledEntryCard";
 import StyledLabel from "./StyledLabel";
 import StyledData from "./StyledData";
 import StyledReinit from "./StyledReinit";
 import StyledColumnFirst from "./StyledColumnFirst";
 import StyledColumnSecond from "./StyledColumnSecond";
-import StyledEntryCardButtonsContainer from "./StyledEntryCardButtonsContainer";
 import StyledEntryCardPhoto from "./StyledEntryCardPhoto";
 
 import { colors } from "../../themes/colors";
@@ -25,6 +25,7 @@ import {
   isNotEmpty,
   mapFiltersToGetParams,
 } from "../../utils/helpers";
+import EntryAdditionalButtons from "../EntryAdditionalButtons/index";
 
 function EntryCard(props) {
   const { person, filters, actions, className } = props;
@@ -61,19 +62,23 @@ function EntryCard(props) {
 
       {/* TODO: использовать слоты для actions */}
       {actions && (
-        <StyledEntryCardButtonsContainer>
+        <EntryAdditionalButtons>
           <StyledCloseButton
             buttonTheme="light-gray"
             to={`/entries/${mapFiltersToGetParams(filters)}`}
-            size="large"
           >
             close
           </StyledCloseButton>
-          <DeleteSureButton
+          <StyledDeleteButton
             onDelete={handleDelete}
             deleteColor={colors.brownSimple}
-          />
-        </StyledEntryCardButtonsContainer>
+          >
+            delete
+          </StyledDeleteButton>
+          <StyledListsButton to={`/persons-lists/q=${person.idxid}`}>
+            lists
+          </StyledListsButton>
+        </EntryAdditionalButtons>
       )}
 
       <StyledColumnFirst>
