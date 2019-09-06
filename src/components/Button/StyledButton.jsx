@@ -5,7 +5,7 @@ import ButtonSizes from "./ButtonSizes";
 import ButtonFits from "./ButtonFits";
 
 const StyledButton = styled.button`
-  display: block;
+  display: inline-block;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   outline: ${({ isHardOutline }) =>
     isHardOutline ? "none !important" : "none"};

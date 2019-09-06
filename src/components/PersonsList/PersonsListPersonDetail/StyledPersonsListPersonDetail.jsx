@@ -5,7 +5,6 @@ import { Segment } from "../../Segment";
 import { fadeEnter, fadeExit } from "../../../assets/animations";
 import StyledColumnFirst from "../../EntryCard/StyledColumnFirst";
 import StyledColumn from "../../EntryCard/StyledColumn";
-import StyledEntryCardPhoto from "../../EntryCard/StyledEntryCardPhoto";
 
 const centeredStyles = css`
   display: flex;
@@ -27,10 +26,6 @@ const StyledPersonsListPersonDetail = styled(Segment)`
 
   ${StyledColumn} {
     margin-right: 40px;
-  }
-
-  ${StyledEntryCardPhoto} {
-    border-width: 28px;
   }
 
   .person-preview {

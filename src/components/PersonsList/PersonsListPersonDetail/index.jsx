@@ -41,7 +41,7 @@ class PersonsListPersonDetail extends React.Component {
         {isLoading ? (
           <PersonsListPersonDetailSpinner />
         ) : person.idxid ? (
-          <EntryCard person={person} />
+          <EntryCard person={person} showFoundEntries={false} />
         ) : (
           <Segment.Title>
             {isPersonNotExists

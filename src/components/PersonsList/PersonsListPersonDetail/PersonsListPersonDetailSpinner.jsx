@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Spinner } from "@identixone/ui-kit/src/components/Spinner";
+import { Spinner } from "../../Spinner";
 
 const PersonsListPersonDetailSpinner = styled(Spinner)`
   height: 100%;

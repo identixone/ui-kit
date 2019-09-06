@@ -28,7 +28,7 @@ import {
 import EntryAdditionalButtons from "../EntryAdditionalButtons/index";
 
 function EntryCard(props) {
-  const { person, filters, actions, className } = props;
+  const { person, filters, actions, className, showFoundEntries } = props;
   const {
     age,
     idxid_created,
@@ -139,12 +139,15 @@ function EntryCard(props) {
             <Value>{junk}</Value>
           </StyledData>
         </StyledLabel>
-        <StyledLabel>
-          Found entries
-          <StyledData>
-            <Value>{total}</Value>
-          </StyledData>
-        </StyledLabel>
+
+        {showFoundEntries && (
+          <StyledLabel>
+            Found entries
+            <StyledData>
+              <Value>{total}</Value>
+            </StyledData>
+          </StyledLabel>
+        )}
       </StyledColumnSecond>
     </StyledEntryCard>
   );
@@ -156,12 +159,14 @@ EntryCard.propTypes = {
   filters: PropTypes.object.isRequired,
   actions: PropTypes.bool.isRequired,
   className: PropTypes.string,
+  showFoundEntries: PropTypes.bool,
 };
 
 EntryCard.defaultProps = {
   person: {},
   filters: {},
   actions: false,
+  showFoundEntries: true,
 };
 
 export { EntryCard, StyledEntryCard };
