@@ -76,7 +76,7 @@ export class EntryIdItem extends Component {
         deleted={deleted}
       >
         <EntryAdditionalButtons>
-          {isReinitButtonShow && (
+          {Boolean(isReinitButtonShow) && (
             <EntryAdditionalButton
               testId="reinit-button"
               onClick={this.handleReinit}
