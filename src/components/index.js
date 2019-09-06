@@ -38,7 +38,7 @@ export * from "./SearchInput";
 export * from "./Segment";
 export * from "./SelectableList";
 export * from "./ShownControl";
-export * from "./Slider";
+// export * from "./Slider";
 export * from "./Spinner";
 export * from "./Text";
 export * from "./Tooltip";
