@@ -2,8 +2,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import { Footer } from "./index.jsx";
-import TextBold from "../../components/Text/TextBold";
-import TextThin from "../../components/Text/TextThin";
+import { TextBold } from "../../components/Text/TextBold";
+import { TextThin } from "../../components/Text/TextThin";
 
 storiesOf("Footer", module).add("default", () => {
   return (
