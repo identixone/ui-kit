@@ -19,8 +19,8 @@ import { Value } from "../../Value";
 import { config } from "../config.js";
 import { timeFormat, formatFaceSize } from "../../../utils/helpers";
 
-import EntryAdditionalButtons from "../EntryAdditionalButtons";
-import EntryAdditionalButton from "../EntryAdditionalButtons/EntryAdditionalButton";
+import EntryAdditionalButtons from "../../EntryAdditionalButtons";
+import { EntryAdditionalButton } from "../../EntryAdditionalButtons/EntryAdditionalButton";
 
 import noimage from "../../../assets/images/noimage.png";
 
@@ -76,15 +76,13 @@ export class EntryIdItem extends Component {
         deleted={deleted}
       >
         <EntryAdditionalButtons>
-          {isReinitButtonShow ? (
+          {isReinitButtonShow && (
             <EntryAdditionalButton
               testId="reinit-button"
               onClick={this.handleReinit}
             >
               reinit
             </EntryAdditionalButton>
-          ) : (
-            ""
           )}
           {!deleted && this.isCanBeDelete(conf) && (
             <EntryAdditionalButton

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import EntryAdditionalButton from "./EntryAdditionalButtons/EntryAdditionalButton";
+import { EntryAdditionalButton } from "../EntryAdditionalButtons/EntryAdditionalButton";
 
 const StyledEntry = styled.li`
   height: 121px;
