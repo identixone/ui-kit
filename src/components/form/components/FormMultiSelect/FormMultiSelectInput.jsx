@@ -5,7 +5,7 @@ const FormMultiSelectInput = styled.input`
   border: none;
   outline: none;
   display: inline-block;
-  width: 100px;
+  width: 150px;
   font-weight: 600;
   line-height: 30px;
   color: #444;
