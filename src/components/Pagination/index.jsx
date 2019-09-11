@@ -130,7 +130,7 @@ export function Pagination(props) {
               getThreePoint(index)
             ) : (
               <StyledPageNum
-                key={item}
+                key={`${item} + "_paginationList"`}
                 onClick={handleSelectPagin}
                 data-index={item}
                 active={item == selectedPaginationNumber}
