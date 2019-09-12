@@ -173,7 +173,7 @@ class PageFiltersListComponent extends React.Component {
                     {buttons({ fetchList: this.fetchList })}
                   </PageFiltersListButtons>
                 </PageFiltersListContentTop>
-                <PageFiltersListSearch inputPlaceholder={placeholder} data-testid="persons-lists-search" />
+                <PageFiltersListSearch placeholder={placeholder} data-testid="persons-lists-search" />
                 {actions && (
                   <PageFiltersListActions>{actions}</PageFiltersListActions>
                 )}

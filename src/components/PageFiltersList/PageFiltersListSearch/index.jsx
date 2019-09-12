@@ -33,7 +33,7 @@ export class PageFiltersListSearch extends React.Component {
         data-testid={this.props["data-testid"]}
         innerRef={this.inputRef}
         value={searchQuery}
-        placeholder={placeholder ? placeholder : undefined}
+        inputPlaceholder={placeholder ? placeholder : undefined}
         onChange={this.handleChange}
       />
     );
