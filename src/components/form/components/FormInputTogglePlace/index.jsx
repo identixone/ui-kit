@@ -81,7 +81,7 @@ class FormInputTogglePlace extends React.Component {
     const { isOpen } = this.state;
 
     return (
-      <StyledFormInputToggle
+      <StyledFormInputTogglePlace
         width={width}
         ref={this.togglerRef}
         data-toggle={name}
@@ -111,7 +111,7 @@ class FormInputTogglePlace extends React.Component {
             {value || valuePlaceholder}
           </InputToggleButton>
         )}
-      </StyledFormInputToggle>
+      </StyledFormInputTogglePlace>
     );
   }
 }
