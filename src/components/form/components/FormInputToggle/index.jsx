@@ -18,6 +18,7 @@ class FormInputToggle extends React.Component {
     width: PropTypes.string,
     disabled: PropTypes.bool,
     className: PropTypes.string,
+    valuePlaceholder: PropTypes.string,
   };
 
   static defaultProps = {
@@ -75,6 +76,7 @@ class FormInputToggle extends React.Component {
       width,
       disabled,
       className,
+      valuePlaceholder,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -106,7 +108,7 @@ class FormInputToggle extends React.Component {
             isDisabled={disabled}
             data-testid={name}
           >
-            {value}
+            {value || valuePlaceholder}
           </InputToggleButton>
         )}
       </StyledFormInputToggle>
