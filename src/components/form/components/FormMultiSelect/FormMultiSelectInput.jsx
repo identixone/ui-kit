@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const FormMultiSelectInput = styled.input`
   background-color: transparent;
+  width: 350px;
   border: none;
   outline: none;
   display: inline-block;
