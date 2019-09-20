@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 import { FormInput } from "../FormInput";
 
-import { StyledFormInputToggle } from "./StyledFormInputToggle";
+import { StyledFormInputTogglePlace } from "./StyledFormInputTogglePlace";
 import InputToggleButton from "./InputToggleButton";
 
-class FormInputToggle extends React.Component {
+class FormInputTogglePlace extends React.Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
@@ -81,7 +81,7 @@ class FormInputToggle extends React.Component {
     const { isOpen } = this.state;
 
     return (
-      <StyledFormInputToggle
+      <StyledFormInputTogglePlace
         width={width}
         ref={this.togglerRef}
         data-toggle={name}
@@ -89,7 +89,7 @@ class FormInputToggle extends React.Component {
         disabled={disabled}
         className={className}
       >
-        {isOpen ? (
+        {isOpen || value ? (
           <FormInput
             id={name}
             name={name}
@@ -111,9 +111,9 @@ class FormInputToggle extends React.Component {
             {value || valuePlaceholder}
           </InputToggleButton>
         )}
-      </StyledFormInputToggle>
+      </StyledFormInputTogglePlace>
     );
   }
 }
 
-export { FormInputToggle, StyledFormInputToggle };
+export { FormInputTogglePlace, StyledFormInputTogglePlace };

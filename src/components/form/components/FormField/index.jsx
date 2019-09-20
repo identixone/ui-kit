@@ -27,6 +27,8 @@ function FormField(props) {
     disabled,
     height,
     className,
+    placeholder,
+    valuePlaceholder,
   } = props;
 
   const FormikField = isFast ? FastField : Field;
@@ -52,13 +54,15 @@ function FormField(props) {
           hasError,
           onChange,
           disabled,
+          placeholder,
+          valuePlaceholder,
         };
 
         const getFormComponent = () => {
           return component ? (
             <FormComponent {...formComponentProps} />
           ) : (
-            render(formComponentProps)
+            render ? render(formComponentProps): ""
           );
         };
 
