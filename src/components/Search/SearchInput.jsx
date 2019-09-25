@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSearchInput = styled.input.attrs({
+export const SearchInput = styled.input.attrs({
   type: "search",
   spellCheck: "false",
   "data-testid": "search-input",
@@ -11,10 +11,14 @@ const StyledSearchInput = styled.input.attrs({
   width: 100%;
   background-color: inherit;
   margin-right: 8px;
+  font-size: 20px;
+  color: rgb(67, 67, 67);
+
+  &::placeholder {
+    color: rgba(67, 67, 67, 0.6);
+  }
 
   &::-webkit-search-cancel-button {
     display: none;
   }
 `;
-
-export default StyledSearchInput;

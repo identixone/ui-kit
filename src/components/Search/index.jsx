@@ -1,51 +1,53 @@
-import styled from "styled-components";
+import React from "react";
+import PropTypes from "prop-types";
 
-import { SearchInput } from "../SearchInput";
-import StyledSearchInput from "../SearchInput/StyledSearchInput";
-import SearchInputIcon from "../SearchInput/SearchInputIcon";
-import { SearchInputClearButtonIcon } from "../SearchInput/SearchInputClearButton/SearchInputClearButtonIcon";
+import { StyledSearch } from "./StyledSearch";
+import { SearchInput } from "./SearchInput";
+import { SearchIcon } from "./SearchIcon";
+import { SearchClearButton } from "./SearchClearButton";
 
-import { colors } from "../../themes";
+function Search({
+  value,
+  onChange,
+  placeholder,
+  innerRef,
+  className,
+  iconSize,
+  ...restProps
+}) {
+  return (
+    <StyledSearch className={className}>
+      <SearchIcon size={iconSize} />
+      <SearchInput
+        data-testid={restProps["data-testid"]}
+        ref={innerRef}
+        placeholder={placeholder ? placeholder : undefined}
+        onChange={onChange}
+        value={value}
+      />
+      {value && (
+        <SearchClearButton
+          onClick={() => {
+            onChange({ target: { value: "" } });
+          }}
+        />
+      )}
+    </StyledSearch>
+  );
+}
 
-export const Search = styled(SearchInput).attrs({
+Search.propTypes = {
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func,
+  innerRef: PropTypes.object,
+  iconSize: PropTypes.number,
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
+};
+
+Search.defaultProps = {
   iconSize: 23,
-})`
-  height: 60px;
-  border-radius: 8px;
-  background-color: ${colors.veryLightBlue};
-  position: relative;
+};
 
-  &:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    opacity: 0;
-    box-shadow: 0 0 30px 0 rgba(162, 182, 189, 0.25);
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  &:hover:after {
-    opacity: 1;
-  }
-
-  ${StyledSearchInput} {
-    font-size: 20px;
-    color: rgb(67, 67, 67);
-
-    &::placeholder {
-      color: rgba(67, 67, 67, 0.6);
-    }
-  }
-
-  ${SearchInputIcon} {
-    color: #3b4b5a;
-  }
-
-  ${SearchInputClearButtonIcon} {
-    color: #3b4b5a;
-  }
-`;
+export { Search, StyledSearch };

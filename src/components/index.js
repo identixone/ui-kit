@@ -34,7 +34,6 @@ export * from "./PhotoBased";
 export * from "./Popup";
 export * from "./RouteSection";
 export * from "./Search";
-export * from "./SearchInput";
 export * from "./Segment";
 export * from "./SelectableList";
 export * from "./ShownControl";
