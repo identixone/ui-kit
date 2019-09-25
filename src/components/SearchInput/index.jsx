@@ -4,11 +4,12 @@ import PropTypes from "prop-types";
 import SearchInputWrapper from "./SearchInputWrapper";
 import SearchInputIcon from "./SearchInputIcon";
 import StyledSearchInput from "./StyledSearchInput";
+import { SearchInputClearButton } from "./SearchInputClearButton";
 
 export function SearchInput({
   value,
   onChange,
-  inputPlaceholder,
+  placeholder,
   innerRef,
   className,
   iconSize,
@@ -20,17 +21,24 @@ export function SearchInput({
       <StyledSearchInput
         data-testid={restProps["data-testid"]}
         ref={innerRef}
-        placeholder={inputPlaceholder ? inputPlaceholder : undefined}
+        placeholder={placeholder ? placeholder : undefined}
         onChange={onChange}
         value={value}
       />
+      {value && (
+        <SearchInputClearButton
+          onClick={() => {
+            onChange({ target: { value: "" } });
+          }}
+        />
+      )}
     </SearchInputWrapper>
   );
 }
 
 SearchInput.propTypes = {
   value: PropTypes.string,
-  inputPlaceholder: PropTypes.string,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func,
   innerRef: PropTypes.object,
   iconSize: PropTypes.number,
