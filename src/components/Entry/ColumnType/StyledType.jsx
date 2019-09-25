@@ -19,7 +19,7 @@ const StyledType = styled.div`
   text-align: center;
   text-transform: lowercase;
   color: ${colors.whiteSimple};
-  background-color: ${colors.grayBlue};
+  background-color: ${colors.slate};
   background-color: ${boxBackgroundColor};
   padding-bottom: 3px;
   border-radius: 3px;

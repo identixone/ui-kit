@@ -4,7 +4,7 @@ import colors from "../../../themes/colors";
 
 export const LoginMenuItem = styled.a`
   text-decoration: none;
-  color: ${colors.grayBlue};
+  color: ${colors.slate};
   font-size: 15px;
   font-weight: 700;
   border-bottom: 1px solid transparent;

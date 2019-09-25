@@ -16,7 +16,7 @@ export const colors = {
   grayWhite: "#aaa",
   grayMiddle: "#6a6e71",
   grayLight: "#f3f3f3",
-  grayBlue: "#3b4b5a",
+  slate: "#3b4b5a",
   grayBlueLight: "#6b7d86",
   grayBlueLight2: "#e2e5e8",
   grayBlueMiddle: "#bec9ce",
