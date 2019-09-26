@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-import StyledPageNum from "./StyledPageNum.jsx";
+import StyledPagination from "./StyledPagination.jsx";
 import StyledPaginationPages from "./StyledPaginationPages.jsx";
+import { PaginationPageButton } from "./PaginationPageButton";
 import { PaginationControlButton } from "./PaginationControlButton";
 import ThreePoint from "./ThreePoint.jsx";
-import StyledPagination from "./StyledPagination.jsx";
 
 import { BoxRightArrow, BoxLeftArrow } from "../../assets/icons";
 
@@ -132,7 +132,7 @@ export function Pagination(props) {
             return isThreePoint ? (
               getThreePoint(index)
             ) : (
-              <StyledPageNum
+              <PaginationPageButton
                 key={`${item} + "_paginationList"`}
                 onClick={handleSelectPagin}
                 data-index={item}
@@ -140,7 +140,7 @@ export function Pagination(props) {
                 data-testid={`pagination-num-${item}`}
               >
                 {item}
-              </StyledPageNum>
+              </PaginationPageButton>
             );
           })}
         </StyledPaginationPages>
