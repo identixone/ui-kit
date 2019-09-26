@@ -1,5 +1,35 @@
 import { css } from "styled-components";
 
+import { colors } from "../../themes/colors";
+
+function getPseudoForShadow({ isRounded, fit, disabled }) {
+  return css`
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      border-radius: ${fit === "circle" ? "50%" : isRounded ? "3px" : "0px"};
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    &:hover:after {
+      ${!disabled &&
+        css`
+           {
+            opacity: 1;
+          }
+        `}
+    }
+  `;
+}
+
 const resetTheme = css`
   background-color: transparent;
 `;
@@ -10,8 +40,14 @@ const disabledTheme = css`
 `;
 
 const lightTheme = css`
-  color: #3b4b5a;
-  background-color: #f3f3f3;
+  color: ${colors.slate};
+  background-color: #e4e9eb;
+
+  ${getPseudoForShadow}
+
+  &:after {
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  }
 
   ${({ disabled }) => {
     return disabled
@@ -20,7 +56,6 @@ const lightTheme = css`
           &:hover {
             background-color: #3b4b5a;
             color: #fff;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
           }
         `;
   }}
@@ -30,6 +65,7 @@ const lighterTheme = css`
   color: #3b4b5a;
   background-color: #f3f3f3;
 `;
+
 const lighterGrayTheme = css`
   color: #3b4b5a;
   background-color: #9fa7ae;
@@ -39,25 +75,28 @@ const darkTheme = css`
   color: #fff;
   background-color: #3b4b5a;
 
-  ${({ disabled }) =>
-    !disabled &&
-    css`
-      &:hover {
-        box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
-      }
-    `}
+  ${getPseudoForShadow}
+
+  &:after {
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const blueTheme = css`
   color: #fff;
   background-color: #167097;
 
+  ${getPseudoForShadow}
+
+  &:after {
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  }
+
   ${({ disabled }) =>
     !disabled &&
     css`
       &:hover {
         background-color: #167097;
-        box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
       }
     `}
 `;

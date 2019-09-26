@@ -23,6 +23,7 @@ const StyledButton = styled.button`
   ${({ buttonTheme }) => ButtonThemes[buttonTheme]}
   ${({ size }) => ButtonSizes[size]}
   ${({ fit }) => ButtonFits[fit]}
+
 `;
 
 export default StyledButton;

@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 
 import StyledPageNum from "./StyledPageNum.jsx";
 import StyledPaginationPages from "./StyledPaginationPages.jsx";
-import StyledButtonControlArrow from "./StyledButtonControlArrow.jsx";
+import { PaginationControlButton } from "./PaginationControlButton";
 import ThreePoint from "./ThreePoint.jsx";
 import StyledPagination from "./StyledPagination.jsx";
+
+import { BoxRightArrow, BoxLeftArrow } from "../../assets/icons";
 
 const THREE_POINT = "...";
 const END_LIMIT_PADDINGNUM = 3;
@@ -21,6 +23,7 @@ export function Pagination(props) {
     simplePaginationLimit,
     totalCount,
     isVisible,
+    className,
   } = props;
   const {
     paginationState,
@@ -110,19 +113,19 @@ export function Pagination(props) {
     isNextPaginationButtonActive,
   } = paginationState;
   const selectedPaginationNumber = paginationState.selectedPageNum;
-  const isPaginationShow = paginationList.length > 1;
+  const isPaginationShow = paginationList.length > 1 && isVisible;
 
   return (
     isPaginationShow && (
-      <StyledPagination data-testid="pagination" isVisible={isVisible}>
-        <StyledButtonControlArrow
+      <StyledPagination data-testid="pagination" className={className}>
+        <PaginationControlButton
           data-testid="pagination-button-prev"
-          isVisible={isPrevPaginationButtonActive}
-          mode={"prev"}
           onClick={handlePaginationPrev}
+          hidden={!isPrevPaginationButtonActive}
         >
-          Previous
-        </StyledButtonControlArrow>
+          <BoxLeftArrow size="12" />
+        </PaginationControlButton>
+
         <StyledPaginationPages>
           {paginationList.map((item, index) => {
             const isThreePoint = item === THREE_POINT;
@@ -141,14 +144,14 @@ export function Pagination(props) {
             );
           })}
         </StyledPaginationPages>
-        <StyledButtonControlArrow
+
+        <PaginationControlButton
           data-testid="pagination-button-next"
-          isVisible={isNextPaginationButtonActive}
-          mode={"next"}
           onClick={handlePaginationNext}
+          hidden={!isNextPaginationButtonActive}
         >
-          Next
-        </StyledButtonControlArrow>
+          <BoxRightArrow size="11" />
+        </PaginationControlButton>
       </StyledPagination>
     )
   );
@@ -165,6 +168,7 @@ Pagination.propTypes = {
   isPrevPaginationButtonActive: PropTypes.bool,
   isNextPaginationButtonActive: PropTypes.bool,
   selectedPageNum: PropTypes.number,
+  className: PropTypes.string,
 };
 
 Pagination.defaultProps = {

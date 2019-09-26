@@ -12,7 +12,8 @@ const PageNum = styled.span`
   text-decoration: none;
   color: ${props => props.active && "#fff"};
   background: ${props => props.active && "#6b7d86"};
-  :hover {
+
+  &:hover {
     color: #fff;
     background: #6b7d86;
   }

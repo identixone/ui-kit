@@ -22,7 +22,13 @@ export {
   Clone,
   CalendarAlt,
   Qrcode,
+  Ban,
 } from "styled-icons/fa-solid";
+
+export {
+  RightArrow as BoxRightArrow,
+  LeftArrow as BoxLeftArrow,
+} from "styled-icons/boxicons-solid";
 
 export {
   TimesCircle,

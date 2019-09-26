@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-const PageNum = styled.div`
+export const StyledListLayoutNotice = styled.div`
   text-align: center;
 `;
-
-export default PageNum;
