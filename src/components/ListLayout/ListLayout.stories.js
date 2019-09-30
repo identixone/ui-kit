@@ -49,11 +49,29 @@ storiesOf("List Layout", module).add("full view", () => {
         content={
           <React.Fragment>
             <SelectableList options={options}>
-              {({ selected, handleCheckboxChange, options }) => (
+              {({
+                selected,
+                handleCheckboxChange,
+                options,
+                selectAll,
+                deselectAll,
+                isAllSelected,
+              }) => (
                 <ListLayoutList
                   items={options}
                   noItemsText="No items found"
                   totalCount={20}
+                  actions={
+                    <ListLayoutList.Actions
+                      onSelect={selectAll}
+                      onDeselect={deselectAll}
+                      isSelectAvailable={!isAllSelected}
+                      isDeselectAvailable={selected.length !== 0}
+                    >
+                      {selected.length !== 0 &&
+                        `Items selected: ${selected.length}`}
+                    </ListLayoutList.Actions>
+                  }
                   renderItem={item => (
                     <ListLayoutList.Item
                       selectable={true}

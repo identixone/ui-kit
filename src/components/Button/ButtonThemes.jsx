@@ -122,6 +122,26 @@ const warningTheme = css`
   background-color: #ac3d03;
 `;
 
+const outlineTheme = css`
+  color: ${colors.slate};
+  border: 1px solid ${colors.slate};
+
+  ${getPseudoForShadow}
+
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      &:hover {
+        color: #fff;
+        background-color: #3b4b5a;
+      }
+    `}
+
+  &:after {
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  }
+`;
+
 export default {
   light: lightTheme,
   dark: darkTheme,
@@ -134,4 +154,5 @@ export default {
   lighter: lighterTheme,
   disabled: disabledTheme,
   "light-gray": lighterGrayTheme,
+  outline: outlineTheme,
 };

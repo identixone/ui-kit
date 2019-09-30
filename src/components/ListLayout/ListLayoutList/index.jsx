@@ -6,14 +6,22 @@ import { StyledListLayoutList } from "./StyledListLayoutList";
 import { ListLayoutNotice } from "../ListLayoutNotice";
 import { ListLayoutListItem } from "./ListLayoutListItem";
 import { ListLayoutListPagination } from "./ListLayoutListPagination";
+import { ListLayoutListActions } from "./ListLayoutListActions";
 
 import { Ban } from "../../../assets/icons";
 
-function ListLayoutList({ items, renderItem, noItemsText, totalCount }) {
+function ListLayoutList({
+  items,
+  renderItem,
+  noItemsText,
+  totalCount,
+  actions,
+}) {
   return (
     <ListLayoutListWrapper centered={items.length === 0}>
       {items.length ? (
         <React.Fragment>
+          {actions && actions}
           <StyledListLayoutList>{items.map(renderItem)}</StyledListLayoutList>
           <ListLayoutListPagination totalCount={totalCount} />
         </React.Fragment>
@@ -31,6 +39,7 @@ ListLayoutList.propTypes = {
   renderItem: PropTypes.func.isRequired,
   noItemsText: PropTypes.string,
   totalCount: PropTypes.number,
+  actions: PropTypes.element,
 };
 
 ListLayoutList.defaultProps = {
@@ -40,5 +49,6 @@ ListLayoutList.defaultProps = {
 };
 
 ListLayoutList.Item = ListLayoutListItem;
+ListLayoutList.Actions = ListLayoutListActions;
 
 export { ListLayoutList, StyledListLayoutList, ListLayoutListItem };

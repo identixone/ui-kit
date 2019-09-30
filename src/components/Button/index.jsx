@@ -47,6 +47,7 @@ Button.propTypes = {
   fit: PropTypes.oneOf(["rect", "square", "circle"]),
   // Названо так, потому что конфликтует с props.theme из styled-theming
   buttonTheme: PropTypes.oneOf([
+    "outline",
     "light",
     "light-gray",
     "dark",
