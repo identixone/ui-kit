@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
+import { number } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import { useListFetch } from "../../hooks";
 
 import { ListLayout } from "./index.jsx";
 import { Search } from "../Search";
@@ -7,6 +11,10 @@ import { Button } from "../Button";
 import { Sync } from "../../assets/icons";
 import { ListLayoutList } from "./ListLayoutList";
 import { SelectableList } from "../SelectableList";
+
+import { PersonsListListPerson } from "../PersonsList/PersonsListListPerson/index";
+
+import { searchTypes } from "../PersonsList/PersonsListListPerson/PersonsListListPersonTypeSelect";
 
 storiesOf("List Layout", module).add("full view", () => {
   const options = [
@@ -19,11 +27,29 @@ storiesOf("List Layout", module).add("full view", () => {
     "Casey Jones-8bb10",
   ];
 
+  const optionsCount = number("List items count", 20);
+
   function ListLayoutConsumer() {
-    const [searchQuery, setSearchQuery] = useState("");
+    const {
+      pagination,
+      setPagination,
+
+      searchQuery,
+      setSearchQuery,
+
+      fetchListWithParams,
+    } = useListFetch({
+      fetchList: action("Fetch list"),
+    });
+
+    const [searchType, setSearchType] = useState(searchTypes[0]);
 
     function handleSearchChange({ target: { value } }) {
       setSearchQuery(value);
+    }
+
+    function handleUpdateClick() {
+      fetchListWithParams();
     }
 
     return (
@@ -34,7 +60,7 @@ storiesOf("List Layout", module).add("full view", () => {
             <Button buttonTheme="dark" size="large">
               Add list
             </Button>
-            <Button fit="square" size="large">
+            <Button fit="square" size="large" onClick={handleUpdateClick}>
               <Sync size="16" />
             </Button>
           </React.Fragment>
@@ -60,7 +86,9 @@ storiesOf("List Layout", module).add("full view", () => {
                 <ListLayoutList
                   items={options}
                   noItemsText="No items found"
-                  totalCount={20}
+                  totalCount={optionsCount}
+                  pagination={pagination}
+                  setPagination={setPagination}
                   actions={
                     <ListLayoutList.Actions
                       onSelect={selectAll}
@@ -79,15 +107,22 @@ storiesOf("List Layout", module).add("full view", () => {
                       onChange={handleCheckboxChange}
                       selected={selected.includes(item)}
                     >
-                      {item}
+                      {item}isRequired
                     </ListLayoutList.Item>
                   )}
                 />
               )}
             </SelectableList>
 
-            <div>some</div>
-            {/* <ListLayoutList items={[]} noItemsText="No items found" /> */}
+            <PersonsListListPerson
+              person={{
+                photo:
+                  "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
+                idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
+              }}
+              searchType={searchType}
+              onSearchTypeChange={setSearchType}
+            />
           </React.Fragment>
         }
       />

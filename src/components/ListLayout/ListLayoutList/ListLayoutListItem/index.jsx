@@ -31,7 +31,7 @@ export function ListLayoutListItem({
 
 ListLayoutListItem.propTypes = {
   selectable: PropTypes.bool,
-  item: PropTypes.text,
+  item: PropTypes.string,
   onChange: PropTypes.func,
   selected: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),

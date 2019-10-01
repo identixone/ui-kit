@@ -11,19 +11,28 @@ import { ListLayoutListActions } from "./ListLayoutListActions";
 import { Ban } from "../../../assets/icons";
 
 function ListLayoutList({
+  listRef,
   items,
   renderItem,
   noItemsText,
   totalCount,
   actions,
+  pagination,
+  setPagination,
 }) {
   return (
-    <ListLayoutListWrapper centered={items.length === 0}>
-      {items.length ? (
+    <ListLayoutListWrapper>
+      {totalCount !== 0 ? (
         <React.Fragment>
           {actions && actions}
-          <StyledListLayoutList>{items.map(renderItem)}</StyledListLayoutList>
-          <ListLayoutListPagination totalCount={totalCount} />
+          <StyledListLayoutList rerf={listRef}>
+            {items.map(renderItem)}
+          </StyledListLayoutList>
+          <ListLayoutListPagination
+            totalCount={totalCount}
+            pagination={pagination}
+            setPagination={setPagination}
+          />
         </React.Fragment>
       ) : (
         <ListLayoutNotice icon={<Ban size="48" />}>
@@ -35,11 +44,14 @@ function ListLayoutList({
 }
 
 ListLayoutList.propTypes = {
+  listRef: PropTypes.object,
   items: PropTypes.array.isRequired,
-  renderItem: PropTypes.func.isRequired,
+  renderItem: PropTypes.func,
   noItemsText: PropTypes.string,
   totalCount: PropTypes.number,
   actions: PropTypes.element,
+  pagination: PropTypes.object.isRequired,
+  setPagination: PropTypes.func.isRequired,
 };
 
 ListLayoutList.defaultProps = {

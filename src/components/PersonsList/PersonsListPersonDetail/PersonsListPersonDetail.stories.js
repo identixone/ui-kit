@@ -16,7 +16,7 @@ storiesOf("PersonsListPersonDetail", module).add("default", () => {
     initial_facesize: 4095,
     initial_liveness: "",
     initial_photo:
-      "http://d1.testing.identix.local/dl1/v2/25ed735750c5fa5feabc89e522eca7af51911420/bb73aaafa1596e5425dc514a361ad4ef658f2758/65894d86f87233e058fe28f57e572abdf7c8b4359b1b9928859d1231059ad0a4.jpeg",
+      "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
     junk: 0,
     liveness: { failed: 0, passed: 0, undetermined: 0 },
     reinit: 0,
