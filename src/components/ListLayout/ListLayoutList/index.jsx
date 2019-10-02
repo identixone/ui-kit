@@ -19,13 +19,14 @@ function ListLayoutList({
   actions,
   pagination,
   setPagination,
+  columns,
 }) {
   return (
     <ListLayoutListWrapper>
       {totalCount !== 0 ? (
         <React.Fragment>
           {actions && actions}
-          <StyledListLayoutList rerf={listRef}>
+          <StyledListLayoutList rerf={listRef} columns={columns}>
             {items.map(renderItem)}
           </StyledListLayoutList>
           <ListLayoutListPagination
@@ -52,12 +53,14 @@ ListLayoutList.propTypes = {
   actions: PropTypes.element,
   pagination: PropTypes.object.isRequired,
   setPagination: PropTypes.func.isRequired,
+  columns: PropTypes.oneOf(1, 2),
 };
 
 ListLayoutList.defaultProps = {
   items: [],
   renderItem: item => <ListLayoutListItem>{item}</ListLayoutListItem>,
   noItemsText: "No items",
+  columns: 1,
 };
 
 ListLayoutList.Item = ListLayoutListItem;

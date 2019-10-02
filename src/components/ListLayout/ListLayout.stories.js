@@ -16,118 +16,317 @@ import { PersonsListListPerson } from "../PersonsList/PersonsListListPerson/inde
 
 import { searchTypes } from "../PersonsList/PersonsListListPerson/PersonsListListPersonTypeSelect";
 
-storiesOf("List Layout", module).add("full view", () => {
-  const options = [
-    "Leonardo-8bbd",
-    "Raphael-8bb9",
-    "Donatello-8bb10",
-    "Michelangelo-8bb10",
-    "Splinter-8bb10",
-    "April O'Neil-8bb10",
-    "Casey Jones-8bb10",
-  ];
+const names = [
+  "Leonardo",
+  "Raphael",
+  "Donatello",
+  "Michelangelo",
+  "Splinter",
+  "April O'Neil",
+  "Casey Jones",
+  "Hamato Yoshi",
+  "Venus de Milo",
+  "Mighty Mutanimals",
+  "Metalhead",
+  "Mutagen Man",
+  "Ninjara",
+  "Fugitoid",
+  "Tang Shen",
+  "Kirby O'Neil",
+  "Mrs. O'Neil",
+  "Aka",
+  "Gothano",
+  "Toad Baron",
+  "Allies",
+  "Al'Falqa",
+  "Punk Frogs",
+  "Renet Tilley",
+  "Tattoo",
+  "The Warrior Dragon",
+  "Angel",
+  "Antagonists",
+  "Foot Clan",
+  "Krang",
+  "Ch'rell",
+  "Lord Dregg",
+  "Hi-Tech",
+  "Titanus",
+  "Purple Dragons",
+  "Rat King",
+  "Bishop",
+  "Yaotl's Brotherhood",
+  "Dragonlord",
+  "Go Komodo",
+  "King Komodo",
+  "Savanti Romero",
+  "Null",
+  "Maligna",
+  "Adversary",
+  "Chi-you",
+  "Triceratons",
+  "The Dragon",
+  "Darrius Dun",
+  "Street Phantoms",
+  "Jammerhead",
+  "Mutants",
+  "Ace Duck",
+  "Alopex",
+  "Armaggon",
+  "Bloodsucker",
+  "Dale McGillicutty",
+  "Groundchuck and Dirtbag",
+  "Doctor El",
+  "Halfcourt",
+  "Herman",
+  "Hothead",
+  "Hot Spot",
+  "King Lionheart",
+  "Manmoth",
+  "Mona Lisa",
+  "Monty Moose",
+  "Muckman",
+  "Old Hob",
+  "Pete",
+  "Perri Grey",
+  "Pizza Face",
+  "Sandstorm",
+  "Sally Pride",
+  "Scrag",
+  "Scratch",
+  "Sergeant Bananas",
+  "Scumbug",
+  "Uncanny Trio",
+  "Verminator-X",
+  "Walkabout",
+  "Wyrm",
+];
 
-  const optionsCount = number("List items count", 20);
+function getOptions(count) {
+  return names.slice(0, count);
+}
 
-  function ListLayoutConsumer() {
-    const {
-      pagination,
-      setPagination,
+storiesOf("List Layout", module)
+  .add("full view one column", () => {
+    const options = getOptions(10);
+    const optionsCount = number("List items count", 20);
 
-      searchQuery,
-      setSearchQuery,
+    function ListLayoutConsumer() {
+      const {
+        pagination,
+        setPagination,
 
-      fetchListWithParams,
-    } = useListFetch({
-      fetchList: action("Fetch list"),
-    });
+        searchQuery,
+        setSearchQuery,
 
-    const [searchType, setSearchType] = useState(searchTypes[0]);
+        fetchListWithParams,
+      } = useListFetch({
+        fetchList: action("Fetch list"),
+      });
 
-    function handleSearchChange({ target: { value } }) {
-      setSearchQuery(value);
-    }
+      const [searchType, setSearchType] = useState(searchTypes[0]);
 
-    function handleUpdateClick() {
-      fetchListWithParams();
-    }
+      function handleSearchChange({ target: { value } }) {
+        setSearchQuery(value);
+      }
 
-    return (
-      <ListLayout
-        title="Some title"
-        buttons={
-          <React.Fragment>
-            <Button buttonTheme="dark" size="large">
-              Add list
-            </Button>
-            <Button fit="square" size="large" onClick={handleUpdateClick}>
-              <Sync size="16" />
-            </Button>
-          </React.Fragment>
-        }
-        search={
-          <Search
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Enter search query..."
-          />
-        }
-        content={
-          <React.Fragment>
-            <SelectableList options={options}>
-              {({
-                selected,
-                handleCheckboxChange,
-                options,
-                selectAll,
-                deselectAll,
-                isAllSelected,
-              }) => (
-                <ListLayoutList
-                  items={options}
-                  noItemsText="No items found"
-                  totalCount={optionsCount}
-                  pagination={pagination}
-                  setPagination={setPagination}
-                  actions={
-                    <ListLayoutList.Actions
-                      onSelect={selectAll}
-                      onDeselect={deselectAll}
-                      isSelectAvailable={!isAllSelected}
-                      isDeselectAvailable={selected.length !== 0}
-                    >
-                      {selected.length !== 0 &&
-                        `Items selected: ${selected.length}`}
-                    </ListLayoutList.Actions>
-                  }
-                  renderItem={item => (
-                    <ListLayoutList.Item
-                      selectable={true}
-                      item={item}
-                      onChange={handleCheckboxChange}
-                      selected={selected.includes(item)}
-                    >
-                      {item}isRequired
-                    </ListLayoutList.Item>
-                  )}
-                />
-              )}
-            </SelectableList>
+      function handleUpdateClick() {
+        fetchListWithParams();
+      }
 
-            <PersonsListListPerson
-              person={{
-                photo:
-                  "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
-                idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
-              }}
-              searchType={searchType}
-              onSearchTypeChange={setSearchType}
+      return (
+        <ListLayout
+          title="Some title"
+          buttons={
+            <React.Fragment>
+              <Button buttonTheme="dark" size="large">
+                Add list
+              </Button>
+              <Button fit="square" size="large" onClick={handleUpdateClick}>
+                <Sync size="16" />
+              </Button>
+            </React.Fragment>
+          }
+          search={
+            <Search
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Enter search query..."
             />
-          </React.Fragment>
-        }
-      />
-    );
-  }
+          }
+          content={
+            <React.Fragment>
+              <SelectableList options={options}>
+                {({
+                  selected,
+                  handleCheckboxChange,
+                  options,
+                  selectAll,
+                  deselectAll,
+                  isAllSelected,
+                }) => (
+                  <ListLayoutList
+                    items={options}
+                    noItemsText="No items found"
+                    totalCount={optionsCount}
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    actions={
+                      <ListLayoutList.Actions
+                        onSelect={selectAll}
+                        onDeselect={deselectAll}
+                        isSelectAvailable={!isAllSelected}
+                        isDeselectAvailable={selected.length !== 0}
+                      >
+                        {selected.length !== 0 &&
+                          `Items selected: ${selected.length}`}
+                      </ListLayoutList.Actions>
+                    }
+                    renderItem={item => (
+                      <ListLayoutList.Item
+                        selectable={true}
+                        item={item}
+                        onChange={handleCheckboxChange}
+                        selected={selected.includes(item)}
+                        badges={
+                          <ListLayoutList.Item.Badge color="#1e8ab8">
+                            included
+                          </ListLayoutList.Item.Badge>
+                        }
+                      >
+                        {item}
+                      </ListLayoutList.Item>
+                    )}
+                  />
+                )}
+              </SelectableList>
 
-  return <ListLayoutConsumer />;
-});
+              <PersonsListListPerson
+                person={{
+                  photo:
+                    "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
+                  idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
+                }}
+                searchType={searchType}
+                onSearchTypeChange={setSearchType}
+              />
+            </React.Fragment>
+          }
+        />
+      );
+    }
+
+    return <ListLayoutConsumer />;
+  })
+  .add("full view two columns", () => {
+    const options = getOptions(20);
+
+    const optionsCount = number("List items count", 20);
+
+    function ListLayoutConsumer() {
+      const {
+        pagination,
+        setPagination,
+
+        searchQuery,
+        setSearchQuery,
+
+        fetchListWithParams,
+      } = useListFetch({
+        fetchList: action("Fetch list"),
+      });
+
+      const [searchType, setSearchType] = useState(searchTypes[0]);
+
+      function handleSearchChange({ target: { value } }) {
+        setSearchQuery(value);
+      }
+
+      function handleUpdateClick() {
+        fetchListWithParams();
+      }
+
+      return (
+        <ListLayout
+          title="Some title"
+          buttons={
+            <React.Fragment>
+              <Button buttonTheme="dark" size="large">
+                Add list
+              </Button>
+              <Button fit="square" size="large" onClick={handleUpdateClick}>
+                <Sync size="16" />
+              </Button>
+            </React.Fragment>
+          }
+          search={
+            <Search
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Enter search query..."
+            />
+          }
+          content={
+            <React.Fragment>
+              <SelectableList options={options}>
+                {({
+                  selected,
+                  handleCheckboxChange,
+                  options,
+                  selectAll,
+                  deselectAll,
+                  isAllSelected,
+                }) => (
+                  <ListLayoutList
+                    items={options}
+                    noItemsText="No items found"
+                    totalCount={optionsCount}
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    columns={2}
+                    actions={
+                      <ListLayoutList.Actions
+                        onSelect={selectAll}
+                        onDeselect={deselectAll}
+                        isSelectAvailable={!isAllSelected}
+                        isDeselectAvailable={selected.length !== 0}
+                      >
+                        {selected.length !== 0 &&
+                          `Items selected: ${selected.length}`}
+                      </ListLayoutList.Actions>
+                    }
+                    renderItem={item => (
+                      <ListLayoutList.Item
+                        selectable={true}
+                        item={item}
+                        onChange={handleCheckboxChange}
+                        selected={selected.includes(item)}
+                        badges={
+                          <ListLayoutList.Item.Badge color="#1e8ab8">
+                            included
+                          </ListLayoutList.Item.Badge>
+                        }
+                      >
+                        {item}
+                      </ListLayoutList.Item>
+                    )}
+                  />
+                )}
+              </SelectableList>
+
+              <PersonsListListPerson
+                person={{
+                  photo:
+                    "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
+                  idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
+                }}
+                searchType={searchType}
+                onSearchTypeChange={setSearchType}
+              />
+            </React.Fragment>
+          }
+        />
+      );
+    }
+
+    return <ListLayoutConsumer />;
+  });

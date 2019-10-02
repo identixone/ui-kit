@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { StyledListLayoutListItem } from "./StyledListLayoutListItem";
 import { ListLayoutListItemCheckbox } from "./ListLayoutListItemCheckbox";
 import { ListLayoutListItemText } from "./ListLayoutListItemText";
+import { ListLayoutListItemBadges } from "./ListLayoutListItemBadges";
+import { ListLayoutListItemBadge } from "./ListLayoutListItemBadge";
 
 export function ListLayoutListItem({
   selectable,
@@ -24,7 +26,7 @@ export function ListLayoutListItem({
         />
       )}
       <ListLayoutListItemText to={to}>{children}</ListLayoutListItemText>
-      {badges}
+      {badges && <ListLayoutListItemBadges>{badges}</ListLayoutListItemBadges>}
     </StyledListLayoutListItem>
   );
 }
@@ -38,3 +40,7 @@ ListLayoutListItem.propTypes = {
   badges: PropTypes.element,
   to: PropTypes.string,
 };
+
+ListLayoutListItem.defaultProps = { badges: [] };
+
+ListLayoutListItem.Badge = ListLayoutListItemBadge;

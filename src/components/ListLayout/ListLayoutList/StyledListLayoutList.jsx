@@ -5,6 +5,8 @@ export const StyledListLayoutList = styled.ul`
   margin: 0;
   list-style-type: none;
   min-height: 350px;
+  column-count: ${({ columns }) => columns};
+  column-gap: 20px;
 
   &:not(:only-child) {
     margin-bottom: 27px;
