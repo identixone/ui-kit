@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ThemeProvider } from "styled-components";
@@ -17,66 +17,29 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
-export default class ByPhotoCreate extends Component {
-  static propTypes = {
-    createdPerson: PropTypes.object,
-    createError: PropTypes.object,
-    clearResult: PropTypes.func.isRequired,
-    fetchEntries: PropTypes.func.isRequired,
-    componentDidFetch: PropTypes.func.isRequired,
-    handleUploadFile: PropTypes.func.isRequired,
-    hasDropped: PropTypes.bool,
-    isCreating: PropTypes.bool,
-  };
+function ByPhotoCreate({
+  createdPerson,
+  createError,
+  clearResult,
+  fetchEntries,
+  componentDidFetch,
+  handleUploadFile,
+  hasDropped,
+  isCreating,
+}) {
+  const [createResultTimeout, setCreateResultTimeout] = useState(null);
 
-  state = {
-    createResultTimeout: null,
-  };
 
-  componentDidUpdate(prevProps) {
-    const {
-      createdPerson,
-      createError,
-      isCreating,
-      hasDropped,
-      componentDidFetch,
-    } = this.props;
-    const isPersonNew = createdPerson && createdPerson.conf === "new";
-    const isCreateFinished = prevProps.isCreating && !isCreating;
-
-    if (hasDropped && (createError || createdPerson)) {
-      componentDidFetch();
-    }
-
-    if (isPersonNew || createError) {
-      if (!this.state.createResultTimeout) {
-        this.setState({
-          createResultTimeout: setTimeout(this.clearResult, ERROR_CLEAR_TIMER),
-        });
-      }
-
-      if (isCreateFinished) {
-        !createError && this.props.fetchEntries({});
-      }
-    }
+  function clearResult() {
+    clearResult();
+    setCreateResultTimeout(null)
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.state.createResultTimeout);
-  }
-
-  clearResult = () => {
-    this.props.clearResult();
-    this.setState({ createResultTimeout: null });
-  };
-
-  handleClickLink = e => {
+  function handleClickLink(e) {
     e.stopPropagation();
-  };
+  }
 
-  renderContent = () => {
-    const { createdPerson, createError, hasDropped } = this.props;
-
+  function renderContent() {
     return createdPerson ? (
       createdPerson.conf === "new" ? (
         <div>
@@ -101,12 +64,12 @@ export default class ByPhotoCreate extends Component {
           <ThemeProvider theme={{ mode: createdPerson.conf }}>
             <StyledRoundButtonColor
               to={`/entries/${createdPerson.idxid}/`}
-              onClick={this.handleClickLink}
+              onClick={handleClickLink}
             >
               <AngleRight size="16" />
             </StyledRoundButtonColor>
           </ThemeProvider>
-          <StyledByPhotoCreateRoundButton onClick={this.props.clearResult}>
+          <StyledByPhotoCreateRoundButton onClick={clearResult}>
             <Times size="16" />
           </StyledByPhotoCreateRoundButton>
         </div>
@@ -126,15 +89,48 @@ export default class ByPhotoCreate extends Component {
     );
   };
 
-  render() {
-    const { createdPerson, createError } = this.props;
-    return (
-      <FiltersUploadPhoto
-        handleUploadFile={this.props.handleUploadFile}
-        render={this.renderContent}
-        isLockDrop={this.props.hasDropped}
-        isLockUpload={createdPerson || createError}
-      />
-    );
-  }
+
+  useEffect(() => {
+    const isPersonNew = createdPerson && createdPerson.conf === "new";
+    const isCreateFinished = prevProps.isCreating && !isCreating;
+
+    if (hasDropped && (createError || createdPerson)) {
+      componentDidFetch();
+    }
+
+    if (isPersonNew || createError) {
+      if (!createResultTimeout) {
+        setCreateResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
+      }
+
+      if (isCreateFinished) {
+        !createError && fetchEntries({});
+      }
+    }
+
+    return () => {
+      clearTimeout(createResultTimeout);
+
+    }
+  });
+
+  return (
+    <FiltersUploadPhoto
+      handleUploadFile={handleUploadFile}
+      render={renderContent}
+      isLockDrop={hasDropped}
+      isLockUpload={createdPerson || createError}
+    />
+  );
 }
+
+ByPhotoCreate.propTypes = {
+  createdPerson: PropTypes.object,
+  createError: PropTypes.object,
+  clearResult: PropTypes.func.isRequired,
+  fetchEntries: PropTypes.func.isRequired,
+  componentDidFetch: PropTypes.func.isRequired,
+  handleUploadFile: PropTypes.func.isRequired,
+  hasDropped: PropTypes.bool,
+  isCreating: PropTypes.bool,
+};
