@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const StepperContext = React.createContext({
@@ -17,57 +17,50 @@ const withStepperContext = WrappedComponent => {
   return WithStepperContext;
 };
 
-export class Stepper extends React.Component {
-  static propTypes = {
-    onStepChanges: PropTypes.func,
-    onReset: PropTypes.func,
-    initialActiveStepIndex: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-    children: PropTypes.func,
-  };
+function Stepper({
+  onStepChanges,
+  onReset,
+  initialActiveStepIndex,
+  children,
+}){
+  const [state, setState] = useState({activeStepIndex: initialActiveStepIndex})
 
-  static defaultProps = {
-    onStepChanges: () => {},
-    onReset: () => {},
-    initialActiveStepIndex: 1,
-    stepUpdater: () => {},
-  };
-
-  static Step = withStepperContext(({ id, children, activeStepIndex }) => {
-    return id === activeStepIndex ? children : null;
-  });
-
-  state = {
-    activeStepIndex: this.props.initialActiveStepIndex,
-  };
-
-  goToStep = activeStepIndex => {
-    this.setState({ activeStepIndex }, () => {
-      this.props.onStepChanges(activeStepIndex);
+  function goToStep(activeStepIndex) {
+    setState({ activeStepIndex }, () => {
+      onStepChanges(activeStepIndex);
     });
-  };
+  }
 
-  reset = () => {
-    this.setState(
-      { activeStepIndex: this.props.initialActiveStepIndex },
-      this.props.onReset
+  function reset() {
+    setState(
+      { activeStepIndex: initialActiveStepIndex },
+      onReset
     );
-  };
+  }
 
-  render() {
-    const { activeStepIndex } = this.state;
-    const { children } = this.props;
+    const { activeStepIndex } = state;
 
     return (
-      <StepperContext.Provider value={this.state}>
+      <StepperContext.Provider value={state}>
         {children({
           activeStepIndex,
-          goToStep: this.goToStep,
-          reset: this.reset,
+          goToStep: goToStep,
+          reset: reset,
         })}
       </StepperContext.Provider>
     );
-  }
 }
+
+Stepper.propTypes = {
+  onStepChanges: PropTypes.func,
+  onReset: PropTypes.func,
+  initialActiveStepIndex: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+  children: PropTypes.func,
+};
+
+Stepper.Step = withStepperContext(({ id, children, activeStepIndex }) => {
+  return id === activeStepIndex ? children : null;
+});
