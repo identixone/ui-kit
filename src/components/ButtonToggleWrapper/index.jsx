@@ -1,65 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-export class ButtonToggleWrapper extends React.Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]),
-    isOpen: PropTypes.bool,
-    render: PropTypes.func,
-    onChange: PropTypes.func,
-    onCrossClick: PropTypes.func,
-    mode: PropTypes.string,
-    icon: PropTypes.node,
-  };
+export function ButtonToggleWrapper({children,
+  isOpen,
+  render,
+  onChange,
+  onCrossClick,
+  mode,
+  icon,
+}){
+  const [state, setState] = useState({
+    isOpen: isOpen,
+  });
 
-  static defaultProps = {
-    isOpen: false,
-    onCrossClick: () => {},
-  };
-
-  state = {
-    isOpen: this.props.isOpen,
-  };
-
-  handleToggleClick = () => {
-    this.setState(
+  function handleToggleClick() {
+    setState(
       ({ isOpen }) => ({ isOpen: !isOpen }),
       () => {
-        this.props.onChange(this.state.isOpen);
+        onChange(state.isOpen);
       }
     );
   };
 
-  handleCrossClick = () => {
-    this.setState(
+  function handleCrossClick() {
+    setState(
       ({ isOpen }) => (isOpen ? { isOpen: false } : null),
       () => {
-        this.props.onChange(this.state.isOpen);
-        this.props.onCrossClick();
+        onChange(state.isOpen);
+        onCrossClick();
       }
     );
   };
+  
+  useEffect(() => {
+    setState({ isOpen: isOpen });
+  }, [isOpen]);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.isOpen !== prevProps.isOpen) {
-      this.setState({ isOpen: this.props.isOpen });
-    }
-  }
-
-  render() {
-    const { isOpen } = this.state;
-    const { children, icon, mode } = this.props;
-
-    return this.props.render({
-      isOpen: isOpen,
-      icon: icon,
-      children,
-      mode,
-      handleToggleClick: this.handleToggleClick,
-      handleCrossClick: this.handleCrossClick,
-    });
-  }
+  return render({
+    isOpen: state.isOpen,
+    icon: icon,
+    children,
+    mode,
+    handleToggleClick: handleToggleClick,
+    handleCrossClick: handleCrossClick,
+  });
 }
+
+ButtonToggleWrapper.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+  isOpen: PropTypes.bool,
+  render: PropTypes.func,
+  onChange: PropTypes.func,
+  onCrossClick: PropTypes.func,
+  mode: PropTypes.string,
+  icon: PropTypes.node,
+};
+
+ButtonToggleWrapper.defaultProps = {
+  isOpen: false,
+  onCrossClick: () => {},
+};
