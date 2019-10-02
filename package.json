@@ -73,6 +73,7 @@
     "react-router-dom": "^5.1.2",
     "react-transition-group": "^4.3.0",
     "react-use": "^12.2.2",
+    "react-useportal": "^1.0.4",
     "styled-components": "^4.4.0",
     "styled-icons": "^8.4.2",
     "styled-theming": "^2.2.0",
