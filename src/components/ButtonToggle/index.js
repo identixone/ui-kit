@@ -11,7 +11,7 @@ import { ButtonToggleWrapper } from "../ButtonToggleWrapper";
 
 import { Times } from "../../assets/icons";
 
-function ButtonToggle({ children, icon, mode, onChange }) {
+export function ButtonToggle({ children, icon, mode, onChange }) {
   return (
     <ButtonToggleWrapper
       onChange={onChange}
