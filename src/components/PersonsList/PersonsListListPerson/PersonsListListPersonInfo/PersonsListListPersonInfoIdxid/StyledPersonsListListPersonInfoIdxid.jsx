@@ -5,7 +5,7 @@ import { colors } from "../../../../../themes/colors";
 export const StyledPersonsListListPersonInfoIdxid = styled.span`
   font-size: 13px;
   line-height: 1.38;
-  color: #aaaaaa;
+  color: ${colors.brownGray};
 
   span {
     color: ${colors.black};

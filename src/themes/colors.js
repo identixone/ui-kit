@@ -33,16 +33,20 @@ export const colors = {
 
   blueWhite: "#e4e9eb",
   blueGray: "#6a8694",
+  brownGray: "#aaaaaa",
   veryLightBlue: "#e4e9ec",
 
   darkestBlue: "#2e4669",
   middleBlue: "#42608C",
   simpleBlue: "#4c6a95",
+  iceBlue: "#f0f1f2",
 
   darkestPink: "#b6245e",
   middlePink: "#be2c66",
   simplePink: "#d2477e",
   darkBlack: "#222",
+
+  bloodOrange: "#ef5305",
 };
 
 export default colors;

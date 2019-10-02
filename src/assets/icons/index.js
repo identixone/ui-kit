@@ -23,6 +23,7 @@ export {
   CalendarAlt,
   Qrcode,
   Ban,
+  Trash,
 } from "styled-icons/fa-solid";
 
 export {

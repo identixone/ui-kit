@@ -12,7 +12,7 @@ export const PaginationControlButton = styled(PaginationButton).attrs(() => ({
   justify-content: center;
   border-radius: 4px;
   color: ${colors.slate};
-  background-color: #f0f1f2;
+  background-color: ${colors.iceBlue};
   /* Сделано для того, чтобы пагинация не прыгала при появлении/пропалдании стрелок */
   visibility: ${({ hidden }) => (hidden ? "hidden" : "visible")};
 `;

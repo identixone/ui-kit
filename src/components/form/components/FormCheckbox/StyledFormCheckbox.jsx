@@ -20,8 +20,8 @@ function getStyles({ disabled, checked }) {
       border-color: ${colors.slate};
 
       &:hover {
-        background-color: #aaaaaa;
-        border-color: #aaaaaa;
+        background-color: ${colors.brownGray};
+        border-color: ${colors.brownGray};
       }
     `;
   }
