@@ -11,27 +11,11 @@ import { ButtonToggleWrapper } from "../ButtonToggleWrapper";
 
 import { Times } from "../../assets/icons";
 
-export class ButtonToggle extends React.Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]),
-    onChange: PropTypes.func,
-    mode: PropTypes.string,
-    icon: PropTypes.node,
-  };
-
-  static defaultProps = {
-    onCrossClick: () => {},
-  };
-
-  render() {
-    const { children, icon, mode, onChange } = this.props;
-    return (
-      <ButtonToggleWrapper
-        onChange={onChange}
-        render={({ handleToggleClick, handleCrossClick, isOpen }) => {
+function ButtonToggle({ children, icon, mode, onChange }) {
+  return (
+    <ButtonToggleWrapper
+      onChange={onChange}
+      render={({ handleToggleClick, handleCrossClick, isOpen }) => {
           return (
             <ThemeProvider theme={{ mode }}>
               <StyledButtonToggleContainer>
@@ -53,7 +37,19 @@ export class ButtonToggle extends React.Component {
             </ThemeProvider>
           );
         }}
-      />
-    );
-  }
+    />
+  );
 }
+ButtonToggle.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+  onChange: PropTypes.func,
+  mode: PropTypes.string,
+  icon: PropTypes.node,
+};
+
+ButtonToggle = defaultProps = {
+  onCrossClick: () => {},
+};
