@@ -24,8 +24,7 @@ export default function ByPhotoSearch({
   error,
   hasDropped,
 }) {
-
-  function handleClickLink (e) {
+  function handleClickLink(e) {
     e.stopPropagation();
   }
 
@@ -72,13 +71,10 @@ export default function ByPhotoSearch({
         </TextDrag>
       </div>
     );
-  };
+  }
 
   useEffect(() => {
-    if (
-      hasDropped &&
-      (error || personSearchResult)
-    ) {
+    if (hasDropped && (error || personSearchResult)) {
       componentDidFetch();
     }
     if (error) {

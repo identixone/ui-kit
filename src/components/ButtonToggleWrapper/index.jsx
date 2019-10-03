@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-export function ButtonToggleWrapper({children,
+export function ButtonToggleWrapper({
+  children,
   isOpen,
   render,
   onChange,
   onCrossClick,
   mode,
   icon,
-}){
+}) {
   const [state, setState] = useState({
     isOpen: isOpen,
   });
@@ -20,7 +21,7 @@ export function ButtonToggleWrapper({children,
         onChange(state.isOpen);
       }
     );
-  };
+  }
 
   function handleCrossClick() {
     setState(
@@ -30,8 +31,8 @@ export function ButtonToggleWrapper({children,
         onCrossClick();
       }
     );
-  };
-  
+  }
+
   useEffect(() => {
     setState({ isOpen: isOpen });
   }, [isOpen]);

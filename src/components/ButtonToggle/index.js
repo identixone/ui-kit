@@ -16,27 +16,24 @@ export function ButtonToggle({ children, icon, mode, onChange }) {
     <ButtonToggleWrapper
       onChange={onChange}
       render={({ handleToggleClick, handleCrossClick, isOpen }) => {
-          return (
-            <ThemeProvider theme={{ mode }}>
-              <StyledButtonToggleContainer>
-                <StyledButtonToggle
-                  onClick={handleToggleClick}
-                  isActive={isOpen}
-                >
-                  {icon}
-                </StyledButtonToggle>
-                {isOpen && (
-                  <React.Fragment>
-                    <ButtonMiddle mode={mode}>{children}</ButtonMiddle>
-                    <ButtonClose onClick={handleCrossClick} mode={mode}>
-                      <Times size="16" />
-                    </ButtonClose>
-                  </React.Fragment>
-                )}
-              </StyledButtonToggleContainer>
-            </ThemeProvider>
-          );
-        }}
+        return (
+          <ThemeProvider theme={{ mode }}>
+            <StyledButtonToggleContainer>
+              <StyledButtonToggle onClick={handleToggleClick} isActive={isOpen}>
+                {icon}
+              </StyledButtonToggle>
+              {isOpen && (
+                <React.Fragment>
+                  <ButtonMiddle mode={mode}>{children}</ButtonMiddle>
+                  <ButtonClose onClick={handleCrossClick} mode={mode}>
+                    <Times size="16" />
+                  </ButtonClose>
+                </React.Fragment>
+              )}
+            </StyledButtonToggleContainer>
+          </ThemeProvider>
+        );
+      }}
     />
   );
 }
@@ -50,6 +47,6 @@ ButtonToggle.propTypes = {
   icon: PropTypes.node,
 };
 
-ButtonToggle = defaultProps = {
+ButtonToggle.defaultProps = {
   onCrossClick: () => {},
 };

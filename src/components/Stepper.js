@@ -17,13 +17,10 @@ const withStepperContext = WrappedComponent => {
   return WithStepperContext;
 };
 
-function Stepper({
-  onStepChanges,
-  onReset,
-  initialActiveStepIndex,
-  children,
-}){
-  const [state, setState] = useState({activeStepIndex: initialActiveStepIndex})
+function Stepper({ onStepChanges, onReset, initialActiveStepIndex, children }) {
+  const [state, setState] = useState({
+    activeStepIndex: initialActiveStepIndex,
+  });
 
   function goToStep(activeStepIndex) {
     setState({ activeStepIndex }, () => {
@@ -32,23 +29,20 @@ function Stepper({
   }
 
   function reset() {
-    setState(
-      { activeStepIndex: initialActiveStepIndex },
-      onReset
-    );
+    setState({ activeStepIndex: initialActiveStepIndex }, onReset);
   }
 
-    const { activeStepIndex } = state;
+  const { activeStepIndex } = state;
 
-    return (
-      <StepperContext.Provider value={state}>
-        {children({
-          activeStepIndex,
-          goToStep: goToStep,
-          reset: reset,
-        })}
-      </StepperContext.Provider>
-    );
+  return (
+    <StepperContext.Provider value={state}>
+      {children({
+        activeStepIndex,
+        goToStep: goToStep,
+        reset: reset,
+      })}
+    </StepperContext.Provider>
+  );
 }
 
 Stepper.propTypes = {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { usePrevious } from "react-use";
 
 import { ThemeProvider } from "styled-components";
 
@@ -29,10 +30,11 @@ export default function ByPhotoCreate({
 }) {
   const [createResultTimeout, setCreateResultTimeout] = useState(null);
 
+  const prevIsCreating = usePrevious(isCreating);
 
   function handleClearResult() {
     clearResult();
-    setCreateResultTimeout(null)
+    setCreateResultTimeout(null);
   }
 
   function handleClickLink(e) {
@@ -87,12 +89,11 @@ export default function ByPhotoCreate({
         </TextDrag>
       </div>
     );
-  };
-
+  }
 
   useEffect(() => {
     const isPersonNew = createdPerson && createdPerson.conf === "new";
-    const isCreateFinished = prevProps.isCreating && !isCreating;
+    const isCreateFinished = prevIsCreating && !isCreating;
 
     if (hasDropped && (createError || createdPerson)) {
       componentDidFetch();
@@ -110,9 +111,8 @@ export default function ByPhotoCreate({
 
     return () => {
       clearTimeout(createResultTimeout);
-
-    }
-  });
+    };
+  }, [createdPerson, isCreating, hasDropped]);
 
   return (
     <FiltersUploadPhoto
