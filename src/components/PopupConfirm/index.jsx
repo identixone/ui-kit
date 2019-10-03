@@ -13,7 +13,7 @@ function PopupConfirm({
   onConfirm,
   portalRef,
 }) {
-  const [openPopup, closePopup, isPopupOpen, Portal] = usePortal({
+  const [openPopup, closePopup, isPopupOpen, Portal, togglePopup] = usePortal({
     onOpen({ portal, targetEl }) {
       const { top, left } = targetEl.getBoundingClientRect();
 
@@ -29,14 +29,6 @@ function PopupConfirm({
     },
   });
 
-  function togglePopup(...args) {
-    if (isPopupOpen) {
-      closePopup(...args);
-    } else {
-      openPopup(...args);
-    }
-  }
-
   return (
     <React.Fragment>
       {children({ openPopup, closePopup, togglePopup, isPopupOpen })}
@@ -46,7 +38,10 @@ function PopupConfirm({
             title={title}
             okText={okText}
             cancelText={cancelText}
-            onConfirm={onConfirm}
+            onConfirm={() => {
+              closePopup();
+              onConfirm();
+            }}
             onCancel={closePopup}
           />
         </Portal>
