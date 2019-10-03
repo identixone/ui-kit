@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 import { upperFirst } from "lodash-es";
@@ -16,34 +16,20 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
-export default class ByPhotoSearch extends Component {
-  static propTypes = {
-    personSearchResult: PropTypes.object,
-    clearResult: PropTypes.func.isRequired,
-    componentDidFetch: PropTypes.func.isRequired,
-    handleUploadFile: PropTypes.func.isRequired,
-    error: PropTypes.object,
-    hasDropped: PropTypes.bool,
-  };
+export default function ByPhotoSearch({
+  personSearchResult,
+  clearResult,
+  componentDidFetch,
+  handleUploadFile,
+  error,
+  hasDropped,
+}) {
 
-  componentDidUpdate() {
-    if (
-      this.props.hasDropped &&
-      (this.props.error || this.props.personSearchResult)
-    ) {
-      this.props.componentDidFetch();
-    }
-    if (this.props.error) {
-      setTimeout(() => this.props.clearResult(), ERROR_CLEAR_TIMER);
-    }
+  function handleClickLink (e) {
+    e.stopPropagation();
   }
 
-  handleClickLink = e => {
-    e.stopPropagation();
-  };
-
-  renderContent = () => {
-    const { personSearchResult, error, hasDropped } = this.props;
+  function renderContent() {
     const isHaveResults = personSearchResult || error;
     return isHaveResults ? (
       error ? (
@@ -67,13 +53,13 @@ export default class ByPhotoSearch extends Component {
           <ThemeProvider theme={{ mode: personSearchResult.conf }}>
             <StyledRoundButtonColor
               to={`/entries/${personSearchResult.idxid}/`}
-              onClick={this.handleClickLink}
+              onClick={handleClickLink}
             >
               <AngleRight size="16" />
             </StyledRoundButtonColor>
           </ThemeProvider>
 
-          <StyledByPhotoSearchRoundButton onClick={this.props.clearResult}>
+          <StyledByPhotoSearchRoundButton onClick={clearResult}>
             <Times size="16" />
           </StyledByPhotoSearchRoundButton>
         </div>
@@ -88,15 +74,33 @@ export default class ByPhotoSearch extends Component {
     );
   };
 
-  render() {
-    const { personSearchResult, error } = this.props;
-    return (
-      <FiltersUploadPhoto
-        handleUploadFile={this.props.handleUploadFile}
-        render={this.renderContent}
-        isLockDrop={this.props.hasDropped}
-        isLockUpload={personSearchResult || error}
-      />
-    );
-  }
+  useEffect(() => {
+    if (
+      hasDropped &&
+      (error || personSearchResult)
+    ) {
+      componentDidFetch();
+    }
+    if (error) {
+      setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
+    }
+  });
+
+  return (
+    <FiltersUploadPhoto
+      handleUploadFile={handleUploadFile}
+      render={renderContent}
+      isLockDrop={hasDropped}
+      isLockUpload={personSearchResult || error}
+    />
+  );
 }
+
+ByPhotoSearch.propTypes = {
+  personSearchResult: PropTypes.object,
+  clearResult: PropTypes.func.isRequired,
+  componentDidFetch: PropTypes.func.isRequired,
+  handleUploadFile: PropTypes.func.isRequired,
+  error: PropTypes.object,
+  hasDropped: PropTypes.bool,
+};

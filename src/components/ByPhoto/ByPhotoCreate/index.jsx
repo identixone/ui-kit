@@ -17,7 +17,7 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
-function ByPhotoCreate({
+export default function ByPhotoCreate({
   createdPerson,
   createError,
   clearResult,
@@ -30,7 +30,7 @@ function ByPhotoCreate({
   const [createResultTimeout, setCreateResultTimeout] = useState(null);
 
 
-  function clearResult() {
+  function handleClearResult() {
     clearResult();
     setCreateResultTimeout(null)
   }
@@ -69,7 +69,7 @@ function ByPhotoCreate({
               <AngleRight size="16" />
             </StyledRoundButtonColor>
           </ThemeProvider>
-          <StyledByPhotoCreateRoundButton onClick={clearResult}>
+          <StyledByPhotoCreateRoundButton onClick={handleClearResult}>
             <Times size="16" />
           </StyledByPhotoCreateRoundButton>
         </div>
