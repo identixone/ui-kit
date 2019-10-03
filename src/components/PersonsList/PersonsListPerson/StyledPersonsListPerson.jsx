@@ -1,18 +1,15 @@
 import styled from "styled-components";
 
+import { colors } from "../../../themes/colors";
+
 const StyledPersonsListPersonsListItem = styled.li`
-  width: 300px;
-  height: 80px;
+  width: 278px;
+  height: 94px;
   border-radius: 4px;
-  background-color: #f9f9f9;
+  background-color: ${colors.iceBlue};
   display: flex;
   position: relative;
-  margin-bottom: 20px;
-  cursor: pointer;
-
-  &:not(:nth-child(3n)) {
-    margin-right: 20px;
-  }
+  overflow: hidden;
 `;
 
 export default StyledPersonsListPersonsListItem;

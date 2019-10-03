@@ -37,7 +37,11 @@ export {
   ArrowAltCircleRight,
 } from "styled-icons/fa-regular";
 
-export { KeyboardArrowRight, KeyboardArrowLeft } from "styled-icons/material";
+export {
+  KeyboardArrowRight,
+  KeyboardArrowLeft,
+  PlaylistAdd,
+} from "styled-icons/material";
 
 export { default as Sync } from "./Sync";
 export { default as Asterisk } from "./Asterisk";
