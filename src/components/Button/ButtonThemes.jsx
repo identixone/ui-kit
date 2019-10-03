@@ -129,13 +129,17 @@ const outlineTheme = css`
   ${getPseudoForShadow}
 
   ${({ disabled }) =>
-    !disabled &&
-    css`
-      &:hover {
-        color: #fff;
-        background-color: #3b4b5a;
-      }
-    `}
+    !disabled
+      ? css`
+          &:hover {
+            color: #fff;
+            background-color: #3b4b5a;
+          }
+        `
+      : css`
+          opacity: 0.4;
+        `} 
+    
 
   &:after {
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
