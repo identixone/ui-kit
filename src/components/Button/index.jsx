@@ -50,7 +50,6 @@ Button.propTypes = {
   fit: PropTypes.oneOf(["rect", "square", "circle"]),
   // Названо так, потому что конфликтует с props.theme из styled-theming
   buttonTheme: PropTypes.oneOf([
-    "outline",
     "light",
     "light-gray",
     "dark",
@@ -63,6 +62,8 @@ Button.propTypes = {
     "reset",
     "lighter",
     "disabled",
+    "outline",
+    "outline-accent",
   ]),
 
   // Проперти добавлено для того, чтобы в FF не показывать аутлайн (работает только через !important)

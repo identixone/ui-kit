@@ -146,6 +146,30 @@ const outlineTheme = css`
   }
 `;
 
+const outlineAccentTheme = css`
+  color: ${colors.bloodOrange};
+  border: 1px solid ${colors.bloodOrange};
+
+  ${getPseudoForShadow}
+
+  ${({ disabled }) =>
+    !disabled
+      ? css`
+          &:hover {
+            color: #fff;
+            background-color: ${colors.bloodOrange};
+          }
+        `
+      : css`
+          opacity: 0.4;
+        `} 
+    
+
+  &:after {
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  }
+`;
+
 export default {
   light: lightTheme,
   dark: darkTheme,
@@ -159,4 +183,5 @@ export default {
   disabled: disabledTheme,
   "light-gray": lighterGrayTheme,
   outline: outlineTheme,
+  "outline-accent": outlineAccentTheme,
 };
