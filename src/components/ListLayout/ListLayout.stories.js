@@ -1,26 +1,28 @@
 import React, { useState } from "react";
+
 import { storiesOf } from "@storybook/react";
 import { number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import { useListFetch } from "../../hooks";
 
-import { ListLayout } from "./index.jsx";
+import { ListLayout, ListLayoutList } from "./index.jsx";
+
+import {
+  PersonsListListPerson,
+  PersonsListPerson,
+  PersonsListPersonDetail,
+  personsListsSearchTypes,
+} from "../PersonsList";
+
 import { Search } from "../Search";
 import { Button } from "../Button";
-import { Sync } from "../../assets/icons";
-import { ListLayoutList } from "./ListLayoutList";
 import { SelectableList } from "../SelectableList";
-
-import { PersonsListListPerson } from "../PersonsList/PersonsListListPerson/index";
-
-import { searchTypes } from "../PersonsList/PersonsListListPerson/PersonsListListPersonTypeSelect";
-import { PersonsListPerson } from "../PersonsList/PersonsListPerson/index";
-
 import { UIBadge } from "../UIBadge";
 
+import { Sync } from "../../assets/icons";
+
 import { property as prop } from "lodash-es";
-import { PersonsListPersonDetail } from "../PersonsList/PersonsListPersonDetail/index";
 
 const names = [
   "Leonardo",
@@ -129,7 +131,7 @@ storiesOf("List Layout", module)
         fetchList: action("Fetch list"),
       });
 
-      const [searchType, setSearchType] = useState(searchTypes[0]);
+      const [searchType, setSearchType] = useState(personsListsSearchTypes[0]);
 
       function handleSearchChange({ target: { value } }) {
         setSearchQuery(value);
@@ -237,7 +239,7 @@ storiesOf("List Layout", module)
         fetchList: action("Fetch list"),
       });
 
-      const [searchType, setSearchType] = useState(searchTypes[0]);
+      const [searchType, setSearchType] = useState(personsListsSearchTypes[0]);
 
       function handleSearchChange({ target: { value } }) {
         setSearchQuery(value);

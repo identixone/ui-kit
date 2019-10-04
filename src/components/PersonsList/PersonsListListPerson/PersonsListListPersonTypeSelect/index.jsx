@@ -6,20 +6,7 @@ import { StyledPersonsListListPersonTypeSelect } from "./StyledPersonsListListPe
 import { PersonsListListPersonTypeSelectLabel } from "./PersonsListListPersonTypeSelectLabel";
 import { PersonsListListPersonTypeSelectDropdownWrapper } from "./PersonsListListPersonTypeSelectDropdownWrapper";
 
-export const searchTypes = [
-  {
-    value: "included",
-    label: "Included",
-  },
-  {
-    value: "excluded",
-    label: "Excluded",
-  },
-  {
-    value: "included_excluded",
-    label: "Included + excluded",
-  },
-];
+import { personsListsSearchTypes } from "../../constants";
 
 export function PersonsListListPersonTypeSelect({ onChange, type }) {
   return (
@@ -32,7 +19,7 @@ export function PersonsListListPersonTypeSelect({ onChange, type }) {
           id="search-type"
           value={type}
           onChange={onChange}
-          options={searchTypes}
+          options={personsListsSearchTypes}
         />
         <span>person</span>
       </PersonsListListPersonTypeSelectDropdownWrapper>
