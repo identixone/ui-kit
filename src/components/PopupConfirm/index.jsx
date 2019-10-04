@@ -38,11 +38,15 @@ function PopupConfirm({
             title={title}
             okText={okText}
             cancelText={cancelText}
-            onConfirm={() => {
-              closePopup();
+            onConfirm={e => {
+              e.stopPropagation();
+              closePopup(e);
               onConfirm();
             }}
-            onCancel={closePopup}
+            onCancel={e => {
+              e.stopPropagation();
+              closePopup(e);
+            }}
           />
         </Portal>
       )}

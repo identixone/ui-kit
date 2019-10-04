@@ -7,7 +7,7 @@ import { ListLayoutListItemText } from "./ListLayoutListItemText";
 import { ListLayoutListItemBadges } from "./ListLayoutListItemBadges";
 import { ListLayoutListItemBadge } from "./ListLayoutListItemBadge";
 
-export function ListLayoutListItem({
+function ListLayoutListItem({
   selectable,
   item,
   onChange,
@@ -44,3 +44,5 @@ ListLayoutListItem.propTypes = {
 ListLayoutListItem.defaultProps = { badges: [] };
 
 ListLayoutListItem.Badge = ListLayoutListItemBadge;
+
+export { ListLayoutListItem, StyledListLayoutListItem };

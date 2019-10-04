@@ -58,7 +58,9 @@ ListLayoutList.propTypes = {
 
 ListLayoutList.defaultProps = {
   items: [],
-  renderItem: item => <ListLayoutListItem>{item}</ListLayoutListItem>,
+  renderItem: item => (
+    <ListLayoutListItem key={item}>{item}</ListLayoutListItem>
+  ),
   noItemsText: "No items",
   columns: 1,
 };

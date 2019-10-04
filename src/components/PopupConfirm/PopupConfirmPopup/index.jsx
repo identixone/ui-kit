@@ -44,4 +44,4 @@ PopupConfirmPopup.defaultProps = {
   cancelText: "Cancel",
 };
 
-export { PopupConfirmPopup };
+export { PopupConfirmPopup, StyledPopupConfirmPopup };

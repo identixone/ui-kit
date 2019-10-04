@@ -8,7 +8,7 @@ import { ListLayoutButtons } from "./ListLayoutButtons";
 import { ListLayoutSearch } from "./ListLayoutSearch";
 import { ListLayoutContent } from "./ListLayoutContent";
 
-export function ListLayout({ title, buttons, search, content }) {
+export function ListLayout({ title, buttons, search, actions, content }) {
   return (
     <StyledListLayout>
       <ListLayoutHeader>
@@ -16,6 +16,7 @@ export function ListLayout({ title, buttons, search, content }) {
         {buttons && <ListLayoutButtons>{buttons}</ListLayoutButtons>}
       </ListLayoutHeader>
       {search && <ListLayoutSearch>{search}</ListLayoutSearch>}
+      {actions && actions}
       {content && <ListLayoutContent>{content}</ListLayoutContent>}
     </StyledListLayout>
   );
@@ -25,5 +26,6 @@ ListLayout.propTypes = {
   title: PropTypes.string,
   buttons: PropTypes.element,
   search: PropTypes.element,
+  actions: PropTypes.element,
   content: PropTypes.element,
 };

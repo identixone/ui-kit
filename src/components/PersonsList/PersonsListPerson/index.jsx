@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import StyledPersonsListPerson from "./StyledPersonsListPerson";
+import { StyledPersonsListPerson } from "./StyledPersonsListPerson";
 import PersonsListPersonActionButton, {
   PersonsListPersonActionButtonIcon,
 } from "./PersonsListPersonActionButton";
@@ -21,7 +21,6 @@ function PersonsListPerson({
   onClick,
   addPersonsToList,
   deletePersonsFromList,
-  name,
   isSelected,
   mode,
   onChange,
@@ -70,7 +69,7 @@ function PersonsListPerson({
       <PersonsListPersonPhoto src={person.initial_photo} />
       {!isAddingMode && (
         <PersonsListPersonCheckbox
-          name={name}
+          name={person.idxid}
           value={isSelected}
           onChange={onChange}
           isHidden={!isMouseOver && !isSelected}
@@ -98,7 +97,10 @@ function PersonsListPerson({
           {({ togglePopup }) => (
             <PersonsListPersonActionButton
               data-testid="persons-list-remove-person"
-              onClick={togglePopup}
+              onClick={e => {
+                e.stopPropagation();
+                togglePopup(e);
+              }}
               isHidden={!isMouseOver}
               isDisabled={isPersonsDeletingFromList}
               mode={mode}
@@ -118,7 +120,6 @@ PersonsListPerson.propTypes = {
   person: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   addPersonsToList: PropTypes.func.isRequired,
   deletePersonsFromList: PropTypes.func.isRequired,

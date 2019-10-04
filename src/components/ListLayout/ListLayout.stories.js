@@ -15,6 +15,9 @@ import { SelectableList } from "../SelectableList";
 import { PersonsListListPerson } from "../PersonsList/PersonsListListPerson/index";
 
 import { searchTypes } from "../PersonsList/PersonsListListPerson/PersonsListListPersonTypeSelect";
+import { PersonsListPerson } from "../PersonsList/PersonsListPerson/index";
+
+import { property as prop } from "lodash-es";
 
 const names = [
   "Leonardo",
@@ -325,6 +328,113 @@ storiesOf("List Layout", module)
             </React.Fragment>
           }
         />
+      );
+    }
+
+    return <ListLayoutConsumer />;
+  })
+  .add("list of persons", () => {
+    const persons = (count =>
+      [...new Array(count)].map((_, id) => ({
+        idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33" + id,
+        idxid_source: {
+          id: 133971,
+          name: "Default_is_a_long value goes heree",
+        },
+        initial_photo:
+          "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
+      })))(10);
+
+    const optionsCount = number("List items count", 20);
+
+    function ListLayoutConsumer() {
+      const {
+        pagination,
+        setPagination,
+
+        searchQuery,
+        setSearchQuery,
+      } = useListFetch({
+        fetchList: action("Fetch list"),
+      });
+
+      const [searchType, setSearchType] = useState(searchTypes[0]);
+      const [detailed, setDetailed] = useState(null);
+
+      function handleSearchChange({ target: { value } }) {
+        setSearchQuery(value);
+      }
+
+      console.log({ detailed });
+
+      return (
+        <SelectableList options={persons.map(prop("idxid"))}>
+          {({
+            selected,
+            handleCheckboxChange,
+            selectAll,
+            deselectAll,
+            isAllSelected,
+            isAllDeselected,
+          }) => (
+            <ListLayout
+              search={
+                <Search
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  placeholder="Enter search query..."
+                />
+              }
+              actions={
+                <ListLayoutList.Actions
+                  onSelect={selectAll}
+                  onDeselect={deselectAll}
+                  isSelectAvailable={!isAllSelected}
+                  isDeselectAvailable={!isAllDeselected}
+                  additional={
+                    <Button
+                      buttonTheme="outline-accent"
+                      isDisabled={isAllDeselected}
+                    >
+                      Remove selected
+                    </Button>
+                  }
+                >
+                  {selected.length !== 0
+                    ? `${selected.length} persons selected`
+                    : "No person selected"}
+                </ListLayoutList.Actions>
+              }
+              content={
+                <React.Fragment>
+                  <ListLayoutList
+                    items={persons}
+                    noItemsText="No items found"
+                    totalCount={optionsCount}
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    columns={2}
+                    renderItem={person => (
+                      <PersonsListPerson
+                        key={person.idxid}
+                        onChange={handleCheckboxChange}
+                        onClick={setDetailed}
+                        isSelected={selected.includes(person.idxid)}
+                        person={person}
+                      />
+                    )}
+                  />
+
+                  <PersonsListListPerson
+                    error={{}}
+                    searchType={searchType}
+                    onSearchTypeChange={setSearchType}
+                  />
+                </React.Fragment>
+              }
+            />
+          )}
+        </SelectableList>
       );
     }
 
