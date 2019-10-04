@@ -9,7 +9,7 @@ export function PersonsListListPersonInfoIdxid({ idxid }) {
     <StyledPersonsListListPersonInfoIdxid>
       ID{" "}
       <span>
-        <IdFormat id={idxid} />
+        <IdFormat>{idxid}</IdFormat>
       </span>
     </StyledPersonsListListPersonInfoIdxid>
   );

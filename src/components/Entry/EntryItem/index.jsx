@@ -162,7 +162,11 @@ export class EntryItem extends Component {
               <StyledRow>
                 ID
                 <span>
-                  {copyId ? <IdCopy id={idxid} /> : <IdFormat id={idxid} />}
+                  {copyId ? (
+                    <IdCopy id={idxid} />
+                  ) : (
+                    <IdFormat>{idxid}</IdFormat>
+                  )}
                 </span>
               </StyledRow>
               <StyledRow>

@@ -2,19 +2,17 @@ import PropTypes from "prop-types";
 
 import { isNotEmpty } from "../utils/helpers";
 
-export function Value(props) {
-  const { children, defaultValue } = props;
-
-  return isNotEmpty(children) && children !== 0 && children !== ""
-    ? children
-    : defaultValue;
+export function Value({ children, defaultValue, isZeroEmpty }) {
+  return isNotEmpty(children, isZeroEmpty) ? children : defaultValue;
 }
 
 Value.propTypes = {
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   defaultValue: PropTypes.any,
+  isZeroEmpty: PropTypes.bool,
 };
 
 Value.defaultProps = {
-  defaultValue: "-",
+  defaultValue: "—",
+  isZeroEmpty: false,
 };

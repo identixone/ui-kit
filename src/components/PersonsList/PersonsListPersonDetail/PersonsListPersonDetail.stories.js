@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { object } from "@storybook/addon-knobs";
+import { object, boolean } from "@storybook/addon-knobs";
 
 import { PersonsListPersonDetail } from "./index.jsx";
 
@@ -24,5 +24,14 @@ storiesOf("PersonsListPersonDetail", module).add("default", () => {
     total: 1,
   });
 
-  return <PersonsListPersonDetail person={person} />;
+  const isLoading = boolean("isLoading", false);
+  const isPersonNotExists = boolean("isPersonNotExists", false);
+
+  return (
+    <PersonsListPersonDetail
+      person={!isPersonNotExists && person}
+      isLoading={isLoading}
+      isPersonNotExists={isPersonNotExists}
+    />
+  );
 });

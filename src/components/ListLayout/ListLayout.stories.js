@@ -17,6 +17,8 @@ import { PersonsListListPerson } from "../PersonsList/PersonsListListPerson/inde
 import { searchTypes } from "../PersonsList/PersonsListListPerson/PersonsListListPersonTypeSelect";
 import { PersonsListPerson } from "../PersonsList/PersonsListPerson/index";
 
+import { UIBadge } from "../UIBadge";
+
 import { property as prop } from "lodash-es";
 
 const names = [
@@ -190,11 +192,7 @@ storiesOf("List Layout", module)
                         item={item}
                         onChange={handleCheckboxChange}
                         selected={selected.includes(item)}
-                        badges={
-                          <ListLayoutList.Item.Badge color="#1e8ab8">
-                            included
-                          </ListLayoutList.Item.Badge>
-                        }
+                        badges={<UIBadge>included</UIBadge>}
                       >
                         {item}
                       </ListLayoutList.Item>
@@ -303,11 +301,7 @@ storiesOf("List Layout", module)
                         item={item}
                         onChange={handleCheckboxChange}
                         selected={selected.includes(item)}
-                        badges={
-                          <ListLayoutList.Item.Badge color="#1e8ab8">
-                            included
-                          </ListLayoutList.Item.Badge>
-                        }
+                        badges={<UIBadge>included</UIBadge>}
                       >
                         {item}
                       </ListLayoutList.Item>

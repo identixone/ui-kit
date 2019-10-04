@@ -7,6 +7,7 @@ export const colors = {
   /* for types of records */
   navyBlue: "#1e8ab9",
   darkBlue: "#1A5D7B",
+  bluish: "#1e8ab8",
   lightGreen: "#409655",
   greenish: "#3f9655",
   lightYellow: "#ffc228",

@@ -5,7 +5,6 @@ import { StyledListLayoutListItem } from "./StyledListLayoutListItem";
 import { ListLayoutListItemCheckbox } from "./ListLayoutListItemCheckbox";
 import { ListLayoutListItemText } from "./ListLayoutListItemText";
 import { ListLayoutListItemBadges } from "./ListLayoutListItemBadges";
-import { ListLayoutListItemBadge } from "./ListLayoutListItemBadge";
 
 function ListLayoutListItem({
   selectable,
@@ -42,7 +41,5 @@ ListLayoutListItem.propTypes = {
 };
 
 ListLayoutListItem.defaultProps = { badges: [] };
-
-ListLayoutListItem.Badge = ListLayoutListItemBadge;
 
 export { ListLayoutListItem, StyledListLayoutListItem };

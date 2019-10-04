@@ -11,7 +11,7 @@ function PersonsListPersonData({ idxid, source }) {
   return (
     <StyledPersonsListPersonData>
       <PersonsListPersonDataItem>
-        ID <IdFormat id={idxid} />
+        ID <IdFormat>{idxid}</IdFormat>
       </PersonsListPersonDataItem>
       <PersonsListPersonDataItem>
         Place of first entry:

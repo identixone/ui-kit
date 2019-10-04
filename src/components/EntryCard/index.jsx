@@ -22,13 +22,13 @@ import noimageid from "../../assets/images/noimageid.png";
 import {
   timeFormat,
   formatFaceSize,
-  isNotEmpty,
   mapFiltersToGetParams,
+  formatSex,
 } from "../../utils/helpers";
 import EntryAdditionalButtons from "../EntryAdditionalButtons/index";
 
 function EntryCard(props) {
-  const { person, filters, actions, className, showFoundEntries } = props;
+  const { person, filters, actions, className } = props;
   const {
     age,
     idxid_created,
@@ -47,8 +47,6 @@ function EntryCard(props) {
   function handleDelete() {
     props.onDelete(idxid);
   }
-
-  const sexName = (isNotEmpty(sex) && (sex === 0 ? "male" : "female")) || "-";
 
   return (
     <StyledEntryCard className={className}>
@@ -97,7 +95,7 @@ function EntryCard(props) {
         <StyledLabel>
           Sex
           <StyledData>
-            <Value>{sexName}</Value>
+            <Value>{formatSex(sex)}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
@@ -140,14 +138,12 @@ function EntryCard(props) {
           </StyledData>
         </StyledLabel>
 
-        {showFoundEntries && (
-          <StyledLabel>
-            Found entries
-            <StyledData>
-              <Value>{total}</Value>
-            </StyledData>
-          </StyledLabel>
-        )}
+        <StyledLabel>
+          Found entries
+          <StyledData>
+            <Value>{total}</Value>
+          </StyledData>
+        </StyledLabel>
       </StyledColumnSecond>
     </StyledEntryCard>
   );
@@ -159,14 +155,12 @@ EntryCard.propTypes = {
   filters: PropTypes.object.isRequired,
   actions: PropTypes.bool.isRequired,
   className: PropTypes.string,
-  showFoundEntries: PropTypes.bool,
 };
 
 EntryCard.defaultProps = {
   person: {},
   filters: {},
   actions: false,
-  showFoundEntries: true,
 };
 
 export { EntryCard, StyledEntryCard };

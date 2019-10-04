@@ -30,10 +30,6 @@ export function createUUID() {
   return uuid;
 }
 
-export function formatDate(date) {
-  return date.toISOString();
-}
-
 export function dataURItoBlob(dataURI) {
   // convert base64/URLEncoded data component to raw binary data held in a string
   var byteString;
@@ -65,6 +61,28 @@ function timeFormater(time, fromat) {
   const formatedTime =
     time && dayjs(time).isValid() && dayjs(time).format(fromat);
   return formatedTime || "-";
+}
+
+export function formatDate(date, format = "DD MMM YYYY, HH:mm:ss") {
+  if (!dayjs(date).isValid()) return null;
+
+  return dayjs(date).format(format);
+}
+
+/**
+ *
+ * проверить и поменять название при использовании данного хелпера
+ */
+// export function formatDate(date) {
+//   return date.toISOString();
+// }
+
+export function dateToIso(date) {
+  return date.toISOString();
+}
+
+export function formatSex(sex) {
+  return sex === 0 ? "male" : "female";
 }
 
 export function toggleInArray(arr = [], item) {
@@ -121,8 +139,13 @@ export function parseFilters(filters) {
   return {};
 }
 
-export function isNotEmpty(value) {
-  return typeof value !== "undefined" && value !== null && value !== "";
+export function isNotEmpty(value, isZeroEmpty) {
+  return (
+    typeof value !== "undefined" &&
+    value !== null &&
+    value !== "" &&
+    (isZeroEmpty ? value !== 0 : true)
+  );
 }
 
 export function getBase64(file) {

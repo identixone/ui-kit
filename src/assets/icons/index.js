@@ -41,6 +41,7 @@ export {
   KeyboardArrowRight,
   KeyboardArrowLeft,
   PlaylistAdd,
+  PlaylistAddCheck,
 } from "styled-icons/material";
 
 export { default as Sync } from "./Sync";

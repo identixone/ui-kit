@@ -1,4 +1,5 @@
 export * from "./Badge";
+export * from "./UIBadge";
 export * from "./Button";
 export * from "./ButtonToggle";
 export * from "./ButtonLink";
@@ -46,6 +47,7 @@ export * from "./WithCurrentOpenItem";
 export * from "./Tabs";
 export * from "./Stepper";
 export * from "./Value";
+export * from "./ValueSpan";
 export * from "./FaceSize";
 export * from "./PopupContainer";
 export * from "./GloalStyles";
