@@ -15,22 +15,14 @@ export function ButtonToggleWrapper({
   });
 
   function handleToggleClick() {
-    setState(
-      ({ isOpen }) => ({ isOpen: !isOpen }),
-      () => {
-        onChange(state.isOpen);
-      }
-    );
+    setState(({ isOpen }) => ({ isOpen: !isOpen }));
+    onChange(state.isOpen);
   }
 
   function handleCrossClick() {
-    setState(
-      ({ isOpen }) => (isOpen ? { isOpen: false } : null),
-      () => {
-        onChange(state.isOpen);
-        onCrossClick();
-      }
-    );
+    setState(({ isOpen }) => (isOpen ? { isOpen: false } : null));
+    onChange(state.isOpen);
+    onCrossClick();
   }
 
   useEffect(() => {

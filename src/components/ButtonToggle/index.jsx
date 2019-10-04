@@ -19,7 +19,11 @@ export function ButtonToggle({ children, icon, mode, onChange }) {
         return (
           <ThemeProvider theme={{ mode }}>
             <StyledButtonToggleContainer>
-              <StyledButtonToggle onClick={handleToggleClick} isActive={isOpen}>
+              <StyledButtonToggle
+                onClick={handleToggleClick}
+                isActive={isOpen}
+                data-testid="button-toggle"
+              >
                 {icon}
               </StyledButtonToggle>
               {isOpen && (
