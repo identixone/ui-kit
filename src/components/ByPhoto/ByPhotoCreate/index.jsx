@@ -44,14 +44,14 @@ export default function ByPhotoCreate({
   function renderContent() {
     return createdPerson ? (
       createdPerson.conf === "new" ? (
-        <div>
+        <div data-testid="created-person-message">
           <StyledPlaceRound>Person created</StyledPlaceRound>
           <StyledByPhotoCreatePlaceGray>
             {createdPerson.idxid}
           </StyledByPhotoCreatePlaceGray>
         </div>
       ) : (
-        <div>
+        <div data-testid="exist-person-message">
           <StyledByPhotoCreatePlaceLeftRound>
             Creation error, such person exists
           </StyledByPhotoCreatePlaceLeftRound>
@@ -77,12 +77,12 @@ export default function ByPhotoCreate({
         </div>
       )
     ) : createError ? (
-      <div>
+      <div data-testid="create-error-message">
         <StyledPlaceRound>Error {createError.status}</StyledPlaceRound>
         <span>{createError.data.detail || "No person found in database"}</span>
       </div>
     ) : (
-      <div>
+      <div data-testid="create-person-message">
         <StyledPlaceRound>Create persona mode</StyledPlaceRound>
         <TextDrag isLockDrop={hasDropped}>
           drag and drop file (.jpg, .png) or click to select
