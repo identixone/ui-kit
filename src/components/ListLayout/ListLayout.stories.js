@@ -20,6 +20,7 @@ import { PersonsListPerson } from "../PersonsList/PersonsListPerson/index";
 import { UIBadge } from "../UIBadge";
 
 import { property as prop } from "lodash-es";
+import { PersonsListPersonDetail } from "../PersonsList/PersonsListPersonDetail/index";
 
 const names = [
   "Leonardo",
@@ -335,6 +336,7 @@ storiesOf("List Layout", module)
           id: 133971,
           name: "Default_is_a_long value goes heree",
         },
+        initial_facesize: 4095 * id,
         initial_photo:
           "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
       })))(10);
@@ -352,14 +354,11 @@ storiesOf("List Layout", module)
         fetchList: action("Fetch list"),
       });
 
-      const [searchType, setSearchType] = useState(searchTypes[0]);
       const [detailed, setDetailed] = useState(null);
 
       function handleSearchChange({ target: { value } }) {
         setSearchQuery(value);
       }
-
-      console.log({ detailed });
 
       return (
         <SelectableList options={persons.map(prop("idxid"))}>
@@ -419,10 +418,8 @@ storiesOf("List Layout", module)
                     )}
                   />
 
-                  <PersonsListListPerson
-                    error={{}}
-                    searchType={searchType}
-                    onSearchTypeChange={setSearchType}
+                  <PersonsListPersonDetail
+                    person={persons.find(person => person.idxid === detailed)}
                   />
                 </React.Fragment>
               }

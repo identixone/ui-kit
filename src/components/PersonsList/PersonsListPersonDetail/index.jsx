@@ -28,11 +28,11 @@ function PersonsListPersonDetail({
       ) : person && !isPersonNotExists ? (
         <PersonsListPersonDetailInfo person={person} />
       ) : isPersonNotExists ? (
-        <NoticeHero icon={<Ban size="48" />} title="person not found" />
+        <NoticeHero icon={<Ban size="48" />} title="Person not found" />
       ) : (
         <NoticeHero
-          icon={<PlaylistAddCheck size="24" />}
-          title="select person to view details"
+          icon={<PlaylistAddCheck size="48" />}
+          title="Select person to view details"
         />
       )}
     </StyledPersonsListPersonDetail>

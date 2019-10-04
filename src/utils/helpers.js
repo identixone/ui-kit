@@ -108,6 +108,8 @@ export function searchInList(list, query, keys) {
 }
 
 export function formatFaceSize(facesize) {
+  if (facesize !== 0 && !facesize) return null;
+
   let fs = Math.floor(facesize / 1000);
 
   return fs >= 100 ? (fs = "99k+") : fs + "k";
