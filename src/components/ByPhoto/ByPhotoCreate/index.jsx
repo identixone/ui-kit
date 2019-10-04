@@ -18,7 +18,7 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
-export default function ByPhotoCreate({
+function ByPhotoCreate({
   createdPerson,
   createError,
   clearResult,
@@ -134,3 +134,7 @@ ByPhotoCreate.propTypes = {
   hasDropped: PropTypes.bool,
   isCreating: PropTypes.bool,
 };
+
+export { ByPhotoCreate };
+
+export default ByPhotoCreate;

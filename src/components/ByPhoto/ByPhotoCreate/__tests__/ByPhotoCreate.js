@@ -1,7 +1,7 @@
 import React from "react";
 
 import { render } from "../../../../../test/utils";
-import ByPhotoCreate from "../index.jsx";
+import { ByPhotoCreate } from "../index.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("ByPhotoCreate tests", () => {

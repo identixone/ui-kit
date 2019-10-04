@@ -11,7 +11,7 @@ import { ButtonToggleWrapper } from "../ButtonToggleWrapper";
 
 import { Times } from "../../assets/icons";
 
-export function ButtonToggle({ children, icon, mode, onChange }) {
+function ButtonToggle({ children, icon, mode, onChange }) {
   return (
     <ButtonToggleWrapper
       onChange={onChange}
@@ -54,3 +54,7 @@ ButtonToggle.propTypes = {
 ButtonToggle.defaultProps = {
   onCrossClick: () => {},
 };
+
+export { ButtonToggle };
+
+export default ButtonToggle;

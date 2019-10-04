@@ -16,7 +16,7 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
-export default function ByPhotoSearch({
+function ByPhotoSearch({
   personSearchResult,
   clearResult,
   componentDidFetch,
@@ -32,14 +32,14 @@ export default function ByPhotoSearch({
     const isHaveResults = personSearchResult || error;
     return isHaveResults ? (
       error ? (
-        <div>
+        <div data-testid="search-person-error">
           <StyledByPhotoSearchPlace>
             Error {error.status}
           </StyledByPhotoSearchPlace>
           <span>{error.data.detail || "No person found in database"}</span>
         </div>
       ) : (
-        <div>
+        <div data-testid="search-person-found-message">
           <StyledByPhotoSearchPlace>Person found</StyledByPhotoSearchPlace>
           <ThemeProvider theme={{ mode: personSearchResult.conf }}>
             <StyledPlaceColor>
@@ -64,7 +64,7 @@ export default function ByPhotoSearch({
         </div>
       )
     ) : (
-      <div>
+      <div data-testid="search-person-mode">
         <StyledByPhotoSearchPlace>Search persona mode</StyledByPhotoSearchPlace>
         <TextDrag isLockDrop={hasDropped}>
           drag and drop file (.jpg, .png) or click to select
@@ -100,3 +100,7 @@ ByPhotoSearch.propTypes = {
   error: PropTypes.object,
   hasDropped: PropTypes.bool,
 };
+
+export { ByPhotoSearch };
+
+export default ByPhotoSearch;
