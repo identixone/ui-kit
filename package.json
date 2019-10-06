@@ -51,7 +51,9 @@
   },
   "peerDependencies": {
     "react": ">=16.9",
-    "react-dom": ">=16.9"
+    "prop-types": ">=15.7",
+    "react-dom": ">=16.9",
+    "react-router-dom": ">=5.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.2",
@@ -65,12 +67,9 @@
     "moment": "^2.24.0",
     "nouislider": "^14.0.2",
     "nouislider-react": "^3.3.3",
-    "npm-check-updates": "^3.1.23",
-    "prop-types": "^15.7.2",
     "rc-notification": "^3.3.1",
     "react-dropzone": "^10.1.9",
     "react-qr-svg": "^2.2.1",
-    "react-router-dom": "^5.1.2",
     "react-transition-group": "^4.3.0",
     "react-use": "^12.2.2",
     "react-useportal": "^1.0.4",

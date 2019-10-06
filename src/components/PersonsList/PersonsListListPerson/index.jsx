@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { StyledPersonsListListPerson } from "./StyledPersonsListListPerson";
@@ -6,6 +6,7 @@ import { PersonsListListPersonInfo } from "./PersonsListListPersonInfo";
 import { PersonsListListPersonNotFoundNotice } from "./PersonsListListPersonNotFoundNotice";
 import { PersonsListListPersonTypeSelect } from "./PersonsListListPersonTypeSelect";
 import { PersonsListListPersonButton } from "./PersonsListListPersonButton";
+import { PersonsListListPersonSpinner } from "./PersonsListListPersonSpinner";
 
 /**
  *
@@ -15,16 +16,25 @@ import { PersonsListListPersonButton } from "./PersonsListListPersonButton";
 
 export function PersonsListListPerson({
   person,
+  personIdxid,
+  fetchPerson,
+  isPersonFetching,
   error,
   searchType,
   onSearchTypeChange,
   onRemove,
   onAdd,
 }) {
+  useEffect(() => {
+    fetchPerson(personIdxid);
+  }, [personIdxid]);
+
   return (
     <StyledPersonsListListPerson>
       {error ? (
         <PersonsListListPersonNotFoundNotice />
+      ) : isPersonFetching || !person ? (
+        <PersonsListListPersonSpinner />
       ) : (
         <React.Fragment>
           <PersonsListListPersonInfo
@@ -62,6 +72,9 @@ export function PersonsListListPerson({
 
 PersonsListListPerson.propTypes = {
   person: PropTypes.object.isRequired,
+  personIdxid: PropTypes.string.isRequired,
+  fetchPerson: PropTypes.func.isRequired,
+  isPersonFetching: PropTypes.bool.isRequired,
   error: PropTypes.object.isRequired,
   searchType: PropTypes.string,
   onSearchTypeChange: PropTypes.func,
