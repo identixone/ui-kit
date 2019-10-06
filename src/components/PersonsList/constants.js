@@ -1,14 +1,14 @@
 export const personsListsSearchTypes = [
   {
-    value: "included",
+    value: "includes",
     label: "Included",
   },
   {
-    value: "excluded",
+    value: "excludes",
     label: "Excluded",
   },
   {
-    value: "included_excluded",
+    value: "includes_excludes",
     label: "Included + excluded",
   },
 ];

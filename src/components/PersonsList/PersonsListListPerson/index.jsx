@@ -26,7 +26,9 @@ export function PersonsListListPerson({
   onAdd,
 }) {
   useEffect(() => {
-    fetchPerson(personIdxid);
+    if (personIdxid) {
+      fetchPerson({ idxid: personIdxid });
+    }
   }, [personIdxid]);
 
   return (
@@ -38,14 +40,14 @@ export function PersonsListListPerson({
       ) : (
         <React.Fragment>
           <PersonsListListPersonInfo
-            photo={person.photo}
+            photo={person.initial_photo}
             idxid={person.idxid}
           />
           <PersonsListListPersonTypeSelect
             type={searchType}
             onChange={onSearchTypeChange}
           />
-          {searchType.value.includes("excluded") && (
+          {searchType.value.includes("excludes") && (
             <PersonsListListPersonButton
               isFullWidth={true}
               size="large"
@@ -55,7 +57,7 @@ export function PersonsListListPerson({
               Add to selected
             </PersonsListListPersonButton>
           )}
-          {searchType.value.includes("included") && (
+          {searchType.value.includes("includes") && (
             <PersonsListListPersonButton
               isFullWidth={true}
               size="large"
