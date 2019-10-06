@@ -33,6 +33,7 @@ export * from "./PageFiltersList";
 export * from "./PageLoader";
 export * from "./PageWrapper";
 export * from "./PhotoBased";
+export * from "./PersonsList";
 export * from "./Popup";
 export * from "./PopupConfirm";
 export * from "./RouteSection";
