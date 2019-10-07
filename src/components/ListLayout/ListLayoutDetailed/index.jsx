@@ -9,4 +9,5 @@ export const ListLayoutDetailed = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-height: 221px;
 `;
