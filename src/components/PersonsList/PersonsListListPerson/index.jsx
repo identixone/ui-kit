@@ -35,11 +35,9 @@ export function PersonsListListPerson({
 
   return (
     <StyledPersonsListListPerson>
-      {!person ? (
-        "enter person id"
-      ) : error ? (
+      {error ? (
         <PersonsListListPersonNotFoundNotice />
-      ) : isPersonFetching ? (
+      ) : !person || isPersonFetching ? (
         <PersonsListListPersonSpinner />
       ) : (
         <React.Fragment>

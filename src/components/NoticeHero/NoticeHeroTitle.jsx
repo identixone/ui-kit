@@ -6,5 +6,5 @@ export const NoticeHeroTitle = styled.h3`
   font-weight: normal;
   color: #141518;
   margin: 0 auto;
-  max-width: 110px;
+  max-width: 190px;
 `;
