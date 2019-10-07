@@ -24,6 +24,8 @@ export function PersonsListListPerson({
   onSearchTypeChange,
   onRemove,
   onAdd,
+  isAddAvailable,
+  isRemoveAvailable,
 }) {
   useEffect(() => {
     if (personIdxid) {
@@ -55,6 +57,7 @@ export function PersonsListListPerson({
               size="large"
               onClick={onAdd}
               buttonTheme="dark"
+              isDisabled={!isAddAvailable}
             >
               Add to selected
             </PersonsListListPersonButton>
@@ -64,6 +67,7 @@ export function PersonsListListPerson({
               isFullWidth={true}
               size="large"
               onClick={onRemove}
+              isDisabled={!isRemoveAvailable}
             >
               Remove from selected
             </PersonsListListPersonButton>
@@ -84,4 +88,6 @@ PersonsListListPerson.propTypes = {
   onSearchTypeChange: PropTypes.func,
   onRemove: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
+  isAddAvailable: PropTypes.bool.isRequired,
+  isRemoveAvailable: PropTypes.bool.isRequired,
 };

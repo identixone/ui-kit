@@ -17,7 +17,7 @@ function getSize(height, paddnig) {
 }
 
 const mediumSize = css`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.013px;
 
