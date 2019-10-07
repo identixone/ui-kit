@@ -2,55 +2,55 @@ import React from "react";
 import { fireEvent } from "@testing-library/react";
 
 import { render } from "../../../../test/utils";
-import { ButtonToggle } from "../index.jsx";
+import { ButtonToggleWrapper } from "../index.jsx";
 import { Plus } from "../../../assets/icons";
 
-describe("ButtonToggle tests", () => {
-  const handleChangeButtonToggleMock = jest.fn();
+describe("ButtonToggleWrapper tests", () => {
+  const handleChangeButtonToggleWrapperMock = jest.fn();
   afterEach(() => {
-    handleChangeButtonToggleMock.mockClear();
+    handleChangeButtonToggleWrapperMock.mockClear();
   });
 
   afterAll(() => {
-    handleChangeButtonToggleMock.mockReset();
+    handleChangeButtonToggleWrapperMock.mockReset();
   });
 
   const defaultProps = {
     icon: <Plus />,
     mode: "blue",
-    onChange: handleChangeButtonToggleMock,
+    onChange: handleChangeButtonToggleWrapperMock,
   };
 
-  function getDefaultButtonToggle(props) {
+  function getDefaultButtonToggleWrapper(props) {
     return render(
-      <ButtonToggle {...defaultProps} {...props}>
+      <ButtonToggleWrapper {...defaultProps} {...props}>
         <div>s</div>
-      </ButtonToggle>
+      </ButtonToggleWrapper>
     );
   }
 
-  function renderButtonToggle(props) {
-    return getDefaultButtonToggle(props);
+  function renderButtonToggleWrapper(props) {
+    return getDefaultButtonToggleWrapper(props);
   }
 
-  test.skip("ButtonToggle is showing after first render when have items more than established limit(20)", () => {
-    const { queryByTestId } = renderButtonToggle();
+  test.skip("ButtonToggleWrapper is showing after first render", () => {
+    const { queryByTestId } = renderButtonToggleWrapper();
 
     expect(queryByTestId("button-toggle")).toBeInTheDocument();
   });
 
-  test.skip("ButtonToggle is hiding after first render when have items less than established limit(20)", () => {
-    const { getByTestId } = renderButtonToggle();
-    expect(getByTestId("button-toggle")).toHaveStyleRule(
+  test.skip("ButtonToggleWrapper have 'blue' mode style", () => {
+    const { getByTestId } = renderButtonToggleWrapper();
+    expect(getByTestId("button-toggle")).toHaveStyle(
       "background-color",
       "#f3f3f3"
     );
   });
 
-  test.skip("ButtonToggle action must been called with correct offset(next page offset)", () => {
-    const { getByTestId } = renderButtonToggle();
-    handleChangeButtonToggleMock.mockClear();
+  test.skip("ButtonToggleWrapper action must been called with correct offset(next page offset)", () => {
+    const { getByTestId } = renderButtonToggleWrapper();
+    handleChangeButtonToggleWrapperMock.mockClear();
     fireEvent.click(getByTestId("button-toggle"));
-    expect(handleChangeButtonToggleMock).toHaveBeenCalledTimes(1);
+    expect(handleChangeButtonToggleWrapperMock).toHaveBeenCalledTimes(1);
   });
 });

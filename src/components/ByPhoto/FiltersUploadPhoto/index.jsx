@@ -37,22 +37,26 @@ export function FiltersUploadPhoto({
         maxSize={4096000}
         multiple={false}
         accept={imagesAcceptMimeTypes}
+        data-testid={"upload-photo-dropzone"}
       >
         {({ getRootProps, getInputProps, isDragActive }) => {
           return (
             <React.Fragment>
               <StyledUploadPlace
                 isDragActive={isDragActive}
+                data-testid={"upload-place"}
                 {...getRootProps()}
               >
                 <StyledUploadTarget
                   isLockDrop={isLockDrop}
                   isLockUpload={isLockUpload}
+                  data-testid="upload-target"
                 >
                   {render()}
                 </StyledUploadTarget>
               </StyledUploadPlace>
               <StyledUploadInput
+                data-testid={"upload-input"}
                 {...getInputProps()}
                 onChange={handleChangeUploadInput}
               />

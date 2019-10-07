@@ -33,21 +33,20 @@ describe("ButtonToggle tests", () => {
     return getDefaultButtonToggle(props);
   }
 
-  test("ButtonToggle is showing after first render when have items more than established limit(20)", () => {
+  test("ButtonToggle is showing after first render", () => {
     const { queryByTestId } = renderButtonToggle();
 
     expect(queryByTestId("button-toggle")).toBeInTheDocument();
   });
 
-  test("ButtonToggle is hiding after first render when have items less than established limit(20)", () => {
+  test("ButtonToggle have 'blue' mode style", () => {
     const { getByTestId } = renderButtonToggle();
-    expect(getByTestId("button-toggle")).toHaveStyleRule(
-      "background-color",
-      "#f3f3f3"
+    expect(getByTestId("button-toggle")).toHaveStyle(
+      "background-color: #f3f3f3"
     );
   });
 
-  test("ButtonToggle action must been called with correct offset(next page offset)", () => {
+  test("ButtonToggle action must been called", () => {
     const { getByTestId } = renderButtonToggle();
     handleChangeButtonToggleMock.mockClear();
     fireEvent.click(getByTestId("button-toggle"));
