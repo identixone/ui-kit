@@ -5,9 +5,9 @@ import {
   useUpdateEffect,
   useDeepCompareEffect,
 } from "react-use";
-import { debounce } from "lodash-es";
+import { debounce, isEqual } from "lodash-es";
 
-function usePagination(defaultPagination = { limit: 10, offset: 0 }) {
+function usePagination(defaultPagination) {
   const [pagination, setPagination] = useSetState(defaultPagination);
 
   function resetPagination() {
@@ -17,7 +17,7 @@ function usePagination(defaultPagination = { limit: 10, offset: 0 }) {
   return { pagination, setPagination, resetPagination };
 }
 
-function useSearchQuery(initialSearchQuery = "") {
+function useSearchQuery(initialSearchQuery) {
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
 
   return { searchQuery, setSearchQuery };
@@ -31,8 +31,8 @@ function useFetchParams(initialFetchParams = {}) {
 
 export function useListFetch({
   fetchList,
-  pagination: defaultPagination,
-  searchQuery: initialSearchQuery,
+  pagination: defaultPagination = { limit: 10, offset: 0 },
+  searchQuery: initialSearchQuery = "",
   clearList = true,
   searchQueryHook = useSearchQuery,
 }) {
@@ -68,8 +68,14 @@ export function useListFetch({
   useDeepCompareEffect(() => {
     const hasDebounce = prevFetchParams && prevFetchParams.q !== fetchParams.q;
 
-    if (fetchParams.offset !== pagination.offset) {
-      setPagination({ offset: fetchParams.offset });
+    if (fetchParams.q !== searchQuery) {
+      setSearchQuery(fetchParams.q);
+    }
+
+    const { offset, limit } = fetchParams;
+
+    if (!isEqual({ offset, limit }, pagination)) {
+      setPagination({ offset, limit });
     }
 
     fetchListWithParams(hasDebounce);
@@ -87,6 +93,9 @@ export function useListFetch({
     pagination,
     setPagination,
     resetPagination,
+
+    fetchParams,
+    setFetchParams,
 
     searchQuery,
     setSearchQuery,
