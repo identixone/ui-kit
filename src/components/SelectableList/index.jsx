@@ -90,6 +90,13 @@ export class SelectableList extends React.Component {
     if (prevProps.value !== this.props.value) {
       this.setState({ selected: this.props.value });
     }
+    if (prevProps.options !== this.props.options) {
+      this.setState(({ selected }) => {
+        return {
+          selected: selected.filter(item => this.props.options.includes(item)),
+        };
+      });
+    }
   }
 
   render() {
