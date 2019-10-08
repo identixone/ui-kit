@@ -34,12 +34,13 @@ export function useListFetch({
   pagination: defaultPagination,
   searchQuery: initialSearchQuery,
   clearList = true,
+  searchQueryHook = useSearchQuery,
 }) {
   if (!(fetchList instanceof Function)) {
     console.warn("You did not specify fetchList function");
   }
 
-  const { searchQuery, setSearchQuery } = useSearchQuery(initialSearchQuery);
+  const { searchQuery, setSearchQuery } = searchQueryHook(initialSearchQuery);
   const { pagination, setPagination, resetPagination } = usePagination(
     defaultPagination
   );
