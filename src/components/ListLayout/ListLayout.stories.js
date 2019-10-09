@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { storiesOf } from "@storybook/react";
-import { number } from "@storybook/addon-knobs";
+import { number, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import { useListFetch } from "../../hooks";
@@ -117,6 +117,7 @@ storiesOf("List Layout", module)
   .add("full view one column", () => {
     const options = getOptions(10);
     const optionsCount = number("List items count", 20);
+    const isLoading = boolean("is loading", false);
 
     function ListLayoutConsumer() {
       const {
@@ -178,6 +179,7 @@ storiesOf("List Layout", module)
                     totalCount={optionsCount}
                     pagination={pagination}
                     setPagination={setPagination}
+                    isLoading={isLoading}
                     actions={
                       <ListLayoutList.Actions
                         onSelect={selectAll}

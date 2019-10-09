@@ -7,12 +7,14 @@ import { ListLayoutNotice } from "../ListLayoutNotice";
 import { ListLayoutListItem } from "./ListLayoutListItem";
 import { ListLayoutListPagination } from "./ListLayoutListPagination";
 import { ListLayoutListActions } from "./ListLayoutListActions";
+import { ListLayoutListSpinner } from "./ListLayoutListSpinner";
 
 import { Ban } from "../../../assets/icons";
 
 function ListLayoutList({
   listRef,
   items,
+  isLoading,
   renderItem,
   noItemsText,
   totalCount,
@@ -20,21 +22,30 @@ function ListLayoutList({
   pagination,
   setPagination,
   columns,
+  className,
 }) {
   return (
     <ListLayoutListWrapper>
       {totalCount !== 0 ? (
-        <React.Fragment>
-          {actions && actions}
-          <StyledListLayoutList rerf={listRef} columns={columns}>
-            {items.map(renderItem)}
-          </StyledListLayoutList>
-          <ListLayoutListPagination
-            totalCount={totalCount}
-            pagination={pagination}
-            setPagination={setPagination}
-          />
-        </React.Fragment>
+        isLoading ? (
+          <ListLayoutListSpinner />
+        ) : (
+          <React.Fragment>
+            {actions && actions}
+            <StyledListLayoutList
+              rerf={listRef}
+              columns={columns}
+              className={className}
+            >
+              {items.map(renderItem)}
+            </StyledListLayoutList>
+            <ListLayoutListPagination
+              totalCount={totalCount}
+              pagination={pagination}
+              setPagination={setPagination}
+            />
+          </React.Fragment>
+        )
       ) : (
         <ListLayoutNotice icon={<Ban size="48" />}>
           {noItemsText}
@@ -54,6 +65,8 @@ ListLayoutList.propTypes = {
   pagination: PropTypes.object.isRequired,
   setPagination: PropTypes.func.isRequired,
   columns: PropTypes.oneOf(1, 2),
+  className: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 ListLayoutList.defaultProps = {

@@ -8,6 +8,7 @@ const PersonsListPersonDataItem = styled.p`
   white-space: nowrap; /* Запрещаем перенос строк */
   overflow: hidden; /* Обрезаем все, что не помещается в область */
   text-overflow: ellipsis; /* Добавляем многоточие */
+  line-height: 1.38;
 
   &:not(:last-child) {
     margin-bottom: 10px;
