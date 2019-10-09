@@ -28,7 +28,7 @@ import {
 import EntryAdditionalButtons from "../EntryAdditionalButtons/index";
 
 function EntryCard(props) {
-  const { person, filters, actions, className, showFoundEntries } = props;
+  const { person, filters, actions, showFoundEntries } = props;
   const {
     age,
     idxid_created,
@@ -45,14 +45,15 @@ function EntryCard(props) {
   } = person;
 
   function handleDelete() {
+    console.log("DELETE---------------------");
     props.onDelete(idxid);
   }
 
   const sexName = (isNotEmpty(sex) && (sex === 0 ? "male" : "female")) || "-";
 
   return (
-    <StyledEntryCard className={className}>
-      {reinit ? <StyledReinit>RE</StyledReinit> : ""}
+    <StyledEntryCard>
+      {reinit ? <StyledReinit data-testid="reinit">RE</StyledReinit> : ""}
       <StyledEntryCardPhoto>
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}
@@ -62,7 +63,7 @@ function EntryCard(props) {
 
       {/* TODO: использовать слоты для actions */}
       {actions && (
-        <EntryAdditionalButtons>
+        <EntryAdditionalButtons data-testid="additional-buttons">
           <StyledCloseButton
             buttonTheme="light-gray"
             to={`/entries/${mapFiltersToGetParams(filters)}`}
@@ -90,13 +91,13 @@ function EntryCard(props) {
         </StyledLabel>
         <StyledLabel>
           Age
-          <StyledData>
+          <StyledData data-testid="age-value">
             <Value>{age}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Sex
-          <StyledData>
+          <StyledData data-testid="sex-value">
             <Value>{sexName}</Value>
           </StyledData>
         </StyledLabel>
@@ -158,7 +159,6 @@ EntryCard.propTypes = {
   person: PropTypes.object.isRequired,
   filters: PropTypes.object.isRequired,
   actions: PropTypes.bool.isRequired,
-  className: PropTypes.string,
   showFoundEntries: PropTypes.bool,
 };
 
