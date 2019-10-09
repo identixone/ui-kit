@@ -26,9 +26,11 @@ function ListLayoutList({
 }) {
   return (
     <ListLayoutListWrapper>
-      {totalCount !== 0 ? (
-        isLoading ? (
-          <ListLayoutListSpinner />
+      {!isLoading ? (
+        totalCount === 0 ? (
+          <ListLayoutNotice icon={<Ban size="48" />}>
+            {noItemsText}
+          </ListLayoutNotice>
         ) : (
           <React.Fragment>
             {actions && actions}
@@ -47,9 +49,7 @@ function ListLayoutList({
           </React.Fragment>
         )
       ) : (
-        <ListLayoutNotice icon={<Ban size="48" />}>
-          {noItemsText}
-        </ListLayoutNotice>
+        <ListLayoutListSpinner />
       )}
     </ListLayoutListWrapper>
   );

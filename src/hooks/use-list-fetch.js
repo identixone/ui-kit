@@ -10,11 +10,7 @@ import { debounce, isEqual } from "lodash-es";
 function usePagination(defaultPagination) {
   const [pagination, setPagination] = useSetState(defaultPagination);
 
-  function resetPagination() {
-    setPagination(defaultPagination);
-  }
-
-  return { pagination, setPagination, resetPagination };
+  return { pagination, setPagination };
 }
 
 function useSearchQuery(initialSearchQuery) {
@@ -41,9 +37,8 @@ export function useListFetch({
   }
 
   const { searchQuery, setSearchQuery } = searchQueryHook(initialSearchQuery);
-  const { pagination, setPagination, resetPagination } = usePagination(
-    defaultPagination
-  );
+  const { pagination, setPagination } = usePagination(defaultPagination);
+
   const initialFetchParams = {
     q: searchQuery,
     limit: pagination.limit,
@@ -62,6 +57,14 @@ export function useListFetch({
       debouncedFetchList(params);
     } else {
       fetchList(params);
+    }
+  }
+
+  function resetPagination() {
+    if (pagination.offset !== 0) {
+      setPagination({ offset: 0 });
+    } else {
+      fetchListWithParams();
     }
   }
 
