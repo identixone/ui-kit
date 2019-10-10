@@ -17,6 +17,7 @@ export function PersonsListListPersonTypeSelect({ onChange, type }) {
       <PersonsListListPersonTypeSelectDropdownWrapper>
         <PersonsListListPersonTypeSelectDropdown
           id="search-type"
+          data-testid="idxid-search-type"
           value={type}
           onChange={onChange}
           options={personsListsSearchTypes}

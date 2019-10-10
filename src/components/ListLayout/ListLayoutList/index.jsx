@@ -23,12 +23,16 @@ function ListLayoutList({
   setPagination,
   columns,
   className,
+  ...restProps
 }) {
   return (
-    <ListLayoutListWrapper>
+    <ListLayoutListWrapper data-testid={restProps["data-testid"]}>
       {!isLoading ? (
         totalCount === 0 ? (
-          <ListLayoutNotice icon={<Ban size="48" />}>
+          <ListLayoutNotice
+            icon={<Ban size="48" />}
+            data-testid="empty-list-notice"
+          >
             {noItemsText}
           </ListLayoutNotice>
         ) : (

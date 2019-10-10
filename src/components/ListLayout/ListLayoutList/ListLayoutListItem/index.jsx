@@ -14,9 +14,10 @@ function ListLayoutListItem({
   children,
   badges,
   to,
+  ...restProps
 }) {
   return (
-    <StyledListLayoutListItem>
+    <StyledListLayoutListItem data-testid={restProps["data-testid"]}>
       {selectable && (
         <ListLayoutListItemCheckbox
           name={item}
@@ -38,6 +39,7 @@ ListLayoutListItem.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   badges: PropTypes.element,
   to: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 ListLayoutListItem.defaultProps = { badges: [] };

@@ -48,6 +48,7 @@ Search.propTypes = {
 
 Search.defaultProps = {
   iconSize: 23,
+  "data-testid": "search-input",
 };
 
 export { Search, StyledSearch };

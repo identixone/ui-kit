@@ -24,6 +24,7 @@ export function ListLayoutListActions({
       <ListLayoutListActionsText>{children}</ListLayoutListActionsText>
       <ListLayoutListActionsButtons>
         <Button
+          data-testid="select-all"
           buttonTheme="outline"
           onClick={onSelect}
           isDisabled={!isSelectAvailable}
@@ -31,6 +32,7 @@ export function ListLayoutListActions({
           Select all
         </Button>
         <Button
+          data-testid="deselect-all"
           buttonTheme="outline"
           onClick={onDeselect}
           isDisabled={!isDeselectAvailable}

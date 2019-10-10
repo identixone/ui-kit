@@ -44,7 +44,7 @@ PersonsListPersonDetail.propTypes = {
   fetchPerson: PropTypes.func.isRequired,
   personIdxid: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
-  isPersonNotExists: PropTypes.bool.isRequired,
+  isPersonNotExists: PropTypes.bool,
 };
 
 export { PersonsListPersonDetail, StyledPersonsListPersonDetail };

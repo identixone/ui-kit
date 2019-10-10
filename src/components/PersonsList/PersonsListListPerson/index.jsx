@@ -35,7 +35,7 @@ export function PersonsListListPerson({
 
   return (
     <StyledPersonsListListPerson>
-      {isPersonFetching ? (
+      {(isPersonFetching || !person) && !error ? (
         <PersonsListListPersonSpinner />
       ) : error ? (
         <PersonsListListPersonNotFoundNotice />
@@ -56,6 +56,7 @@ export function PersonsListListPerson({
               onClick={onAdd}
               buttonTheme="dark"
               isDisabled={!isAddAvailable}
+              data-testid="add-selected"
             >
               Add to selected
             </PersonsListListPersonButton>
@@ -66,6 +67,7 @@ export function PersonsListListPerson({
               size="large"
               onClick={onRemove}
               isDisabled={!isRemoveAvailable}
+              data-testid="delete-selected"
             >
               Remove from selected
             </PersonsListListPersonButton>

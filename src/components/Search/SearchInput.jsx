@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const SearchInput = styled.input.attrs({
   type: "search",
   spellCheck: "false",
-  "data-testid": "search-input",
 })`
   outline: none;
   border: none;

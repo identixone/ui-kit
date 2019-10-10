@@ -23,7 +23,7 @@ function PopupConfirm({
        */
       portal.current.style.cssText = `
           position: absolute;
-          top: ${top - 95 / 2}px;
+          top: ${top - 95 / 2 + window.scrollY}px;
           left: ${left - 239 / 2 + 65}px;
         `;
     },
