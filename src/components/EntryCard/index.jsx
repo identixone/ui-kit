@@ -116,32 +116,32 @@ function EntryCard(props) {
         <StyledLabel>
           Total existing entries
           <StyledData>
-            <Value>{total}</Value>
+            <Value isZeroEmpty={true}>{total}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Exact entries
           <StyledData>
-            <Value>{exact}</Value>
+            <Value isZeroEmpty={true}>{exact}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           HA entries
           <StyledData>
-            <Value>{ha}</Value>
+            <Value isZeroEmpty={true}>{ha}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Junk entries
           <StyledData>
-            <Value>{junk}</Value>
+            <Value isZeroEmpty={true}>{junk}</Value>
           </StyledData>
         </StyledLabel>
 
         <StyledLabel>
           Found entries
           <StyledData>
-            <Value>{total}</Value>
+            <Value isZeroEmpty={true}>{total}</Value>
           </StyledData>
         </StyledLabel>
       </StyledColumnSecond>
