@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { object } from "@storybook/addon-knobs";
+import { object, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import { PersonsListPerson } from "./index";
@@ -23,6 +23,7 @@ storiesOf("PersonsListPerson", module)
         <div style={{ paddingTop: 50 }}>
           <PersonsListPerson
             isSelected={isSelected}
+            isActive={boolean("is active", false)}
             onChange={({ target: { checked } }) => setIsSelected(checked)}
             person={person}
             deletePersonsFromList={action("deletePersonsFromList")}
@@ -43,9 +44,11 @@ storiesOf("PersonsListPerson", module)
 
     function PersonsListPersonWrapper() {
       const [isSelected, setIsSelected] = useState(false);
+
       return (
         <PersonsListPerson
           isSelected={isSelected}
+          isActive={boolean("is active", false)}
           onChange={({ target: { checked } }) => setIsSelected(checked)}
           person={person}
           deletePersonsFromList={action("deletePersonsFromList")}

@@ -22,6 +22,7 @@ function PersonsListPerson({
   addPersonsToList,
   deletePersonsFromList,
   isSelected,
+  isActive,
   mode,
   onChange,
   isPersonsAddingToList,
@@ -61,6 +62,7 @@ function PersonsListPerson({
 
   return (
     <StyledPersonsListPerson
+      isActive={isActive}
       onClick={handleListItemClick}
       data-testid="persons-list-person"
       onMouseOver={() => setIsMouseOver(true)}
@@ -120,6 +122,7 @@ PersonsListPerson.propTypes = {
   person: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   addPersonsToList: PropTypes.func.isRequired,
   deletePersonsFromList: PropTypes.func.isRequired,
