@@ -9,12 +9,17 @@ import { ListLayoutSearch } from "./ListLayoutSearch";
 import { ListLayoutContent } from "./ListLayoutContent";
 
 export function ListLayout({ title, buttons, search, actions, content }) {
+  const hasHeader = title || buttons;
+
   return (
     <StyledListLayout>
-      <ListLayoutHeader>
-        {title && <ListLayoutTitle level={1}>{title}</ListLayoutTitle>}
-        {buttons && <ListLayoutButtons>{buttons}</ListLayoutButtons>}
-      </ListLayoutHeader>
+      {hasHeader && (
+        <ListLayoutHeader>
+          {title && <ListLayoutTitle level={1}>{title}</ListLayoutTitle>}
+          {buttons && <ListLayoutButtons>{buttons}</ListLayoutButtons>}
+        </ListLayoutHeader>
+      )}
+
       {search && <ListLayoutSearch>{search}</ListLayoutSearch>}
       {actions && actions}
       {content && <ListLayoutContent>{content}</ListLayoutContent>}
@@ -33,4 +38,3 @@ ListLayout.propTypes = {
 export * from "./ListLayoutList";
 export * from "./ListLayoutNotice";
 export * from "./ListLayoutDetailed";
-export * from "./ListLayoutContext";

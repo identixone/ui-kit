@@ -12,8 +12,6 @@ function DeleteSureButton({
   size,
   isDisabled,
   className,
-  deleteText,
-  sureText,
 }) {
   return (
     <DeleteSure onDelete={onDelete}>
@@ -25,10 +23,10 @@ function DeleteSureButton({
           onClick={handleClick}
           onMouseLeave={handleMouseLeave}
           size={size}
-          disabled={isDisabled}
+          isDisabled={isDisabled}
           data-testid="delete-button"
         >
-          {isSure ? sureText || "Sure?" : deleteText || "Delete"}
+          {isSure ? "Sure?" : "Delete"}
         </StyledDeleteSureButton>
       )}
     </DeleteSure>
