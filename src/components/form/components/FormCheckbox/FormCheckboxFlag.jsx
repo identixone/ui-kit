@@ -10,7 +10,7 @@ const FormCheckboxFlag = styled.div`
     display: block;
     width: 6px;
     height: 15px;
-    border: 2px solid #ffffff;
+    border: 2px solid #fff;
     border-top: 0;
     border-left: 0;
     transition: transform 120ms ease;
