@@ -21,8 +21,6 @@ import { EntryAdditionalButton } from "../../EntryAdditionalButtons/EntryAdditio
 
 const COLOR_CHANGE_RATE = 60; // seconds
 
-const NO_DELETE_TYPES = ["reinit", "new"];
-
 export class EntryItem extends Component {
   static propTypes = {
     entry: PropTypes.object,
@@ -90,9 +88,9 @@ export class EntryItem extends Component {
       liveness,
       source,
       direction,
-      first_name,
-      middle_name,
-      second_name,
+      first_name = "",
+      middle_name = "",
+      second_name = "",
       deleted,
       detected,
     } = this.props.entry;
@@ -179,7 +177,7 @@ export class EntryItem extends Component {
             </StyledEntriesColumn>
             {additionalButtons && (
               <EntryAdditionalButtons>
-                {!deleted && this.isCanBeDeleted(conf) && (
+                {!deleted && (
                   <EntryAdditionalButton onClick={this.handleDelete}>
                     delete
                   </EntryAdditionalButton>
@@ -190,10 +188,6 @@ export class EntryItem extends Component {
         </ThemeProvider>
       </StyledEntry>
     );
-  }
-
-  isCanBeDeleted(conf) {
-    return !NO_DELETE_TYPES.some(type => conf === type);
   }
 
   handleDelete = e => {
