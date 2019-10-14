@@ -156,7 +156,7 @@ export class EntryItem extends Component {
               />
             </div>
             <ThemeProvider theme={{ mode: conf }}>
-              <ColumnEntryType type={conf} />
+              <ColumnEntryType type={conf} title="type" />
             </ThemeProvider>
             <StyledEntriesColumn width={280}>
               <StyledRow>

@@ -105,7 +105,7 @@ export class EntryIdItem extends Component {
           </StyledPhotoContainer>
         </StyledPhoto>
         <ThemeProvider theme={{ mode: conf }}>
-          <ColumnEntryIdType type={conf} />
+          <ColumnEntryIdType type={conf} title="type" />
         </ThemeProvider>
         <StyledIdColumn width={160}>
           <Label>Confidence</Label>
