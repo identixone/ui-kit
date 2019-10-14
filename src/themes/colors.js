@@ -43,6 +43,8 @@ export const colors = {
   middlePink: "#be2c66",
   simplePink: "#d2477e",
   darkBlack: "#222",
+  red: "red",
+  green: "green",
 };
 
 export default colors;

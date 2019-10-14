@@ -9,7 +9,7 @@ import StyledType from "./StyledType";
 export function ColumnEntryType(props) {
   return (
     <StyledColumnDetection>
-      <StyledTitle>Type</StyledTitle>
+      {props.title && <StyledTitle>{props.title}</StyledTitle>}
       <StyledType>{props.type}</StyledType>
     </StyledColumnDetection>
   );
@@ -17,12 +17,13 @@ export function ColumnEntryType(props) {
 
 ColumnEntryType.propTypes = {
   type: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
 export function ColumnEntryIdType(props) {
   return (
     <StyledColumnIdDetection>
-      <StyledTitle>Type</StyledTitle>
+      {props.title && <StyledTitle>{props.title}</StyledTitle>}
       <StyledType data-testid="entry-type">{props.type}</StyledType>
     </StyledColumnIdDetection>
   );
@@ -30,4 +31,5 @@ export function ColumnEntryIdType(props) {
 
 ColumnEntryIdType.propTypes = {
   type: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };

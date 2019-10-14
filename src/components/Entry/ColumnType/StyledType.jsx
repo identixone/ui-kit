@@ -10,6 +10,8 @@ const boxBackgroundColor = theme("mode", {
   ha: colors.lightYellow,
   junk: colors.lightRed,
   nm: colors.gray,
+  accepted: colors.green,
+  declined: colors.red,
 });
 
 const StyledType = styled.div`
