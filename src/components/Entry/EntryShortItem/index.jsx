@@ -97,7 +97,9 @@ export class EntryItem extends Component {
       liveness,
       source,
       direction,
-      full_name,
+      first_name,
+      middle_name,
+      second_name,
       deleted,
       detected,
     } = this.props.entry;
@@ -105,13 +107,21 @@ export class EntryItem extends Component {
     const { blurredEntries, pointer, additionalButtons } = this.props;
 
     const { colorMode } = this.state;
-    const isDetectedShow =
-      conf === "exact" ||
-      conf === "junk" ||
-      conf === "nm" ||
-      conf === "det" ||
-      conf === "ha";
-    const isInitialShow = !(conf === "nm") && !(conf === "det");
+    const isDetectedShow = !!photo;
+    const isInitialShow = !!initial_photo;
+
+    const getDirection = () => {
+      switch (direction) {
+        case null:
+          return "All";
+        case 0:
+          return "Enter";
+        case 1:
+          return "Exit";
+        default:
+          return "";
+      }
+    };
 
     return (
       <StyledEntry
@@ -153,7 +163,7 @@ export class EntryItem extends Component {
               <StyledRow>
                 Full name
                 <span>
-                  <Value>{full_name}</Value>
+                  <Value>{`${first_name} ${middle_name} ${second_name}`}</Value>
                 </span>
               </StyledRow>
 
@@ -172,7 +182,7 @@ export class EntryItem extends Component {
               <StyledRow>
                 Direction
                 <span>
-                  <Value>{direction}</Value>
+                  <Value>{getDirection()}</Value>
                 </span>
               </StyledRow>
             </StyledEntriesColumn>
