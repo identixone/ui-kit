@@ -26,23 +26,16 @@ const NO_DELETE_TYPES = ["reinit", "new"];
 export class EntryItem extends Component {
   static propTypes = {
     entry: PropTypes.object,
-    live: PropTypes.bool,
     active: PropTypes.bool,
-    onClick: PropTypes.func,
     onLoad: PropTypes.func,
-    push: PropTypes.func,
-    updateCurrentEntryIdxid: PropTypes.func,
     deletePersonEntries: PropTypes.func,
     highlight: PropTypes.bool,
     blurredEntries: PropTypes.bool,
-    pointer: PropTypes.bool,
     additionalButtons: PropTypes.bool,
   };
   static defaultProps = {
     active: false,
-    live: false,
     entry: {},
-    pointer: true,
     onLoad: () => {},
     additionalButtons: false,
   };
@@ -104,7 +97,7 @@ export class EntryItem extends Component {
       detected,
     } = this.props.entry;
 
-    const { blurredEntries, pointer, additionalButtons } = this.props;
+    const { blurredEntries, additionalButtons } = this.props;
 
     const { colorMode } = this.state;
     const isDetectedShow = !!photo;
@@ -128,10 +121,8 @@ export class EntryItem extends Component {
         data-testid="entry-item"
         data-idxid={idxid}
         ref={this.entryref}
-        pointer={pointer && !deleted && isInitialShow}
         mode={"entries"}
         deleted={deleted}
-        onClick={this.handleClick}
       >
         <ThemeProvider theme={{ mode: colorMode }}>
           <StyledRecCard>
@@ -213,17 +204,5 @@ export class EntryItem extends Component {
 
   handleLoadImage = () => {
     this.props && this.props.onLoad && this.props.onLoad();
-  };
-
-  handleClick = () => {
-    if (!this.state.deleted) {
-      if (this.props.live) {
-        this.props.onClick(this.props.entry.id);
-      } else {
-        const { idxid } = this.props.entry;
-        this.props.updateCurrentEntryIdxid(idxid);
-        idxid && this.props.push(`/entries/${idxid}/`);
-      }
-    }
   };
 }
