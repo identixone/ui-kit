@@ -9,7 +9,7 @@ export function ColumnEntryType(props) {
   return (
     <StyledColumnDetection id={props.id}>
       {props.title && <StyledTitle>{props.title}</StyledTitle>}
-      <StyledType>{props.type}</StyledType>
+      <StyledType hasTitle={!!props.title}>{props.type}</StyledType>
     </StyledColumnDetection>
   );
 }

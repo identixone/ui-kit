@@ -23,6 +23,7 @@ export function EntryItemWrapper({
   pointer,
   additionalButtons,
   children,
+  isInitialShow,
 }) {
   const entryref = useRef();
   const [state, setState] = useState({
@@ -67,14 +68,12 @@ export function EntryItemWrapper({
   }, []);
 
   useEffect(() => {
-    return {
+    setState({
       colorMode: active ? "active" : state.actualColorMode,
-    };
+    });
   }, [active]);
 
-  const { conf, idxid, deleted } = entry;
-
-  const isInitialShow = !(conf === "nm") && !(conf === "det"); //TODO: перенести в пропс
+  const { idxid, deleted } = entry;
 
   return (
     <StyledEntry
@@ -88,7 +87,7 @@ export function EntryItemWrapper({
     >
       <ThemeProvider theme={{ mode: state.colorMode }}>
         <StyledRecCard>
-          {children && children()}
+          {children}
           {additionalButtons && (
             <EntryAdditionalButtons>
               {!deleted && (
@@ -124,4 +123,5 @@ EntryItemWrapper.propTypes = {
   highlight: PropTypes.bool,
   pointer: PropTypes.bool,
   additionalButtons: PropTypes.bool,
+  isInitialShow: PropTypes.bool,
 };

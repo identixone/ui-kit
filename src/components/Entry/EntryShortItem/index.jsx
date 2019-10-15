@@ -8,20 +8,15 @@ import { config } from "../config";
 import StyledRow from "../StyledRow";
 import StyledEntriesColumn from "../columns/StyledEntriesColumn";
 
-import StyledEntry from "../StyledEntry";
-import StyledRecCard from "../StyledRecCard";
 import Liveness from "../Liveness";
 import { ColumnEntryType } from "../ColumnType";
 
 import { Value } from "../../Value";
 import { PhotoBased } from "../../PhotoBased";
 
-import EntryAdditionalButtons from "../../EntryAdditionalButtons";
-import { EntryAdditionalButton } from "../../EntryAdditionalButtons/EntryAdditionalButton";
+import { EntryItemWrapper } from "../EntryItemWrapper";
 
-const COLOR_CHANGE_RATE = 60; // seconds
-
-export class EntryItem extends Component {
+export class EntryShortItem extends Component {
   static propTypes = {
     entry: PropTypes.object,
     active: PropTypes.bool,
@@ -38,66 +33,23 @@ export class EntryItem extends Component {
     additionalButtons: false,
   };
 
-  entryref = React.createRef();
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      actualColorMode: "default",
-      colorMode: props.active ? "active" : "default",
-      deleted: false,
-    };
-
-    this.timer = null;
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    const { active } = props;
-    return {
-      colorMode: active ? "active" : state.actualColorMode,
-    };
-  }
-
-  componentDidMount() {
-    if (this.props.highlight) {
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-      this.setState({
-        colorMode: "new",
-        actualColorMode: "new",
-      });
-
-      this.timer = setTimeout(() => {
-        this.setState({
-          colorMode: "default",
-          actualColorMode: "default",
-        });
-      }, COLOR_CHANGE_RATE * 1000);
-    }
-  }
-
   render() {
     const {
       initial_photo,
       photo,
       conf,
       facesize,
-      idxid,
       liveness,
       source,
       direction,
       first_name = "",
       middle_name = "",
       second_name = "",
-      deleted,
       detected,
     } = this.props.entry;
 
-    const { blurredEntries, additionalButtons } = this.props;
+    const { blurredEntries } = this.props;
 
-    const { colorMode } = this.state;
     const isDetectedShow = !!photo;
     const isInitialShow = !!initial_photo;
 
@@ -115,86 +67,61 @@ export class EntryItem extends Component {
     };
 
     return (
-      <StyledEntry
-        data-testid="entry-item"
-        data-idxid={idxid}
-        ref={this.entryref}
-        mode={"entries"}
-        deleted={deleted}
-      >
-        <ThemeProvider theme={{ mode: colorMode }}>
-          <StyledRecCard>
-            <Liveness liveness={liveness} />
-            <div>
-              <PhotoBased
-                blurredEntries={blurredEntries}
-                junksi={config.set.normal.view.junksi}
-                facesize={!isDetectedShow ? formatFaceSize(facesize) : ""}
-                photo={initial_photo}
-                conf={conf}
-                title={"Initial"}
-                isVisible={isInitialShow}
-                onLoad={this.handleLoadImage}
-              />
-              <PhotoBased
-                type={"detected"}
-                title={"Detected"}
-                facesize={formatFaceSize(facesize)}
-                photo={photo}
-                isVisible={isDetectedShow}
-                onLoad={this.handleLoadImage}
-              />
-            </div>
-            <ThemeProvider theme={{ mode: conf }}>
-              <ColumnEntryType type={conf} />
-            </ThemeProvider>
-            <StyledEntriesColumn width={280}>
-              <StyledRow>
-                Full name
-                <span>
-                  <Value>{`${first_name} ${middle_name} ${second_name}`}</Value>
-                </span>
-              </StyledRow>
-
-              <StyledRow>
-                Detected
-                <span>
-                  <Value>{timeFormat(detected)}</Value>
-                </span>
-              </StyledRow>
-              <StyledRow>
-                Source
-                <span>
-                  <Value>{source.name}</Value>
-                </span>
-              </StyledRow>
-              <StyledRow>
-                Direction
-                <span>
-                  <Value>{getDirection()}</Value>
-                </span>
-              </StyledRow>
-            </StyledEntriesColumn>
-            {additionalButtons && (
-              <EntryAdditionalButtons>
-                {!deleted && (
-                  <EntryAdditionalButton onClick={this.handleDelete}>
-                    delete
-                  </EntryAdditionalButton>
-                )}
-              </EntryAdditionalButtons>
-            )}
-          </StyledRecCard>
+      <EntryItemWrapper isInitialShow={isInitialShow} {...this.props}>
+        <Liveness liveness={liveness} />
+        <div>
+          <PhotoBased
+            blurredEntries={blurredEntries}
+            junksi={config.set.normal.view.junksi}
+            facesize={!isDetectedShow ? formatFaceSize(facesize) : ""}
+            photo={initial_photo}
+            conf={conf}
+            title={"Initial"}
+            isVisible={isInitialShow}
+            onLoad={this.handleLoadImage}
+          />
+          <PhotoBased
+            type={"detected"}
+            title={"Detected"}
+            facesize={formatFaceSize(facesize)}
+            photo={photo}
+            isVisible={isDetectedShow}
+            onLoad={this.handleLoadImage}
+          />
+        </div>
+        <ThemeProvider theme={{ mode: conf }}>
+          <ColumnEntryType type={conf} />
         </ThemeProvider>
-      </StyledEntry>
+        <StyledEntriesColumn width={280}>
+          <StyledRow>
+            Full name
+            <span>
+              <Value>{`${first_name} ${middle_name} ${second_name}`}</Value>
+            </span>
+          </StyledRow>
+
+          <StyledRow>
+            Detected
+            <span>
+              <Value>{timeFormat(detected)}</Value>
+            </span>
+          </StyledRow>
+          <StyledRow>
+            Source
+            <span>
+              <Value>{source.name}</Value>
+            </span>
+          </StyledRow>
+          <StyledRow>
+            Direction
+            <span>
+              <Value>{getDirection()}</Value>
+            </span>
+          </StyledRow>
+        </StyledEntriesColumn>
+      </EntryItemWrapper>
     );
   }
-
-  handleDelete = e => {
-    const { id } = this.props.entry;
-    this.props.deletePersonEntries(id);
-    e.stopPropagation();
-  };
 
   handleLoadImage = () => {
     this.props && this.props.onLoad && this.props.onLoad();
