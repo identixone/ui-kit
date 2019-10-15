@@ -84,10 +84,20 @@ export class EntriesDatetimeFilter extends Component {
     setErrors: PropTypes.func,
     errors: PropTypes.object,
     isApplying: PropTypes.bool,
+    // defaultStartDateData: PropTypes.object,
   };
 
   static defaultProps = {
     onChange: () => {},
+    defaultStartDateData: {
+      year: "2016",
+      month: 0,
+      day: 1,
+      hour: "0",
+      minute: "0",
+      second: "0",
+      millisecond: "000",
+    },
   };
 
   state = {
@@ -357,6 +367,7 @@ export default withFormik({
     msTo: number().max(config.msTo.max, "error"),
   }),
   handleSubmit: (values, { props }) => {
+    const { defaultStartDateData } = props;
     const {
       yearFrom,
       monthFrom,
@@ -377,13 +388,13 @@ export default withFormik({
     const today = moment();
 
     const startDate = moment({
-      year: yearFrom || "2016",
-      month: monthFrom ? Number(monthFrom) - 1 : 0,
-      day: dayFrom || 1,
-      hour: hourFrom || "0",
-      minute: minuteFrom || "0",
-      second: secondFrom || "0",
-      millisecond: msFrom || "000",
+      year: yearFrom || defaultStartDateData.year,
+      month: monthFrom ? Number(monthFrom) - 1 : defaultStartDateData.month,
+      day: dayFrom || defaultStartDateData.day,
+      hour: hourFrom || defaultStartDateData.hour,
+      minute: minuteFrom || defaultStartDateData.minute,
+      second: secondFrom || defaultStartDateData.second,
+      millisecond: msFrom || defaultStartDateData.millisecond,
     });
 
     const endDate = moment({
