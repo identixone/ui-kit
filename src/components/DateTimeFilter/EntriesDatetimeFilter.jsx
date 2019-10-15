@@ -377,8 +377,8 @@ export default withFormik({
     const today = moment();
 
     const startDate = moment({
-      year: yearFrom || "0001",
-      month: monthFrom ? Number(monthFrom) - 1 : 1,
+      year: yearFrom || "2016",
+      month: monthFrom ? Number(monthFrom) - 1 : 0,
       day: dayFrom || 1,
       hour: hourFrom || "0",
       minute: minuteFrom || "0",
