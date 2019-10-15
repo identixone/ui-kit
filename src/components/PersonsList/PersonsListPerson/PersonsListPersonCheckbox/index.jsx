@@ -21,6 +21,7 @@ function PersonsListPersonCheckbox({ name, onChange, value, isHidden }) {
         onChange={onChange}
         value={value}
         checkboxTheme="dark"
+        size="large"
       />
     </StyledPersonsListPersonCheckbox>
   );
