@@ -85,7 +85,7 @@ export class EntriesDatetimeFilter extends Component {
     setErrors: PropTypes.func,
     errors: PropTypes.object,
     isApplying: PropTypes.bool,
-    defaultStartDateData: PropTypes.object, // eslint-disable react/no-unused-prop-types
+    defaultStartDateData: PropTypes.object,
   };
 
   static defaultProps = {
