@@ -6,6 +6,7 @@ import { FormCheckbox } from "../components";
 
 storiesOf("Form Components", module).add("default", () => {
   const checkboxTheme = select("Checkbox theme", ["light", "dark"], "light");
+  const checkboxSize = select("Checkbox size", ["small", "large"], "small");
   const isCheckboxDisabled = boolean("Is checkbox disabled", false);
   const checkboxValue = boolean("Checkbox value", false);
 
@@ -26,6 +27,7 @@ storiesOf("Form Components", module).add("default", () => {
             value={this.state.checkbox}
             onChange={this.handleCheckboxChange}
             checkboxTheme={checkboxTheme}
+            size={checkboxSize}
             disabled={isCheckboxDisabled}
           />
         </div>

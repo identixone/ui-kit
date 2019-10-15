@@ -20,18 +20,13 @@ const lightTheme = css`
 
         &:hover {
           background-color: #f2f5f7;
-          border-color: #f2f5f7;
         }
       `;
     }
 
     return css`
       background-color: ${colors.whiteSimple};
-      border-color: #dadada;
-
-      &:hover {
-        background-color: #f2f5f7;
-      }
+      border-color: #9aa7b3;
     `;
   }}
 
@@ -55,8 +50,8 @@ const darkTheme = css`
         border-color: ${colors.slate};
 
         &:hover {
-          background-color: ${colors.brownGray};
-          border-color: ${colors.brownGray};
+          background-color: #6e7b88;
+          border-color: #6e7b88;
         }
       `;
     }
