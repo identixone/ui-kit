@@ -156,6 +156,8 @@ export class EntryItem extends Component {
   }
 
   handleLoadImage = () => {
-    this.props && this.props.onLoad && this.props.onLoad();
+    if (this.props.onLoad) {
+      this.props.onLoad();
+    }
   };
 }

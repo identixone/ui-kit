@@ -175,7 +175,7 @@ class PageFiltersListComponent extends React.Component {
                 </PageFiltersListContentTop>
                 <PageFiltersListSearch
                   placeholder={placeholder}
-                  data-testid="persons-lists-search"
+                  data-testid="filters-lists-search"
                 />
                 {actions && (
                   <PageFiltersListActions>{actions}</PageFiltersListActions>
