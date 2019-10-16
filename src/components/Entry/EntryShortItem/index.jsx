@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 
-import { timeFormat, formatFaceSize } from "../../../utils/helpers";
+import { timeFormat } from "../../../utils/helpers";
 import { config } from "../config";
 
 import StyledRow from "../StyledRow";
+import StyledColumn from "../columns/StyledColumn";
 import StyledEntriesColumn from "../columns/StyledEntriesColumn";
 
-import Liveness from "../Liveness";
 import { ColumnEntryType } from "../ColumnType";
 
 import { Value } from "../../Value";
@@ -36,46 +36,41 @@ export class EntryShortItem extends Component {
   render() {
     const {
       initial_photo,
-      photo,
-      conf,
-      facesize,
-      liveness,
+      detected_photo,
+      accepted,
       source,
+      device,
       direction,
-      first_name = "",
-      middle_name = "",
-      second_name = "",
-      detected,
+      person = "",
+      created,
     } = this.props.entry;
 
     const { blurredEntries } = this.props;
 
-    const isDetectedShow = !!photo;
+    const isDetectedShow = !!detected_photo;
     const isInitialShow = !!initial_photo;
 
     const getDirection = () => {
       switch (direction) {
-        case null:
-          return "All";
         case 0:
           return "Enter";
         case 1:
           return "Exit";
         default:
-          return "";
+          return "All";
       }
     };
 
+    const mode = accepted ? "accepted" : "declined";
+
     return (
       <EntryItemWrapper isInitialShow={isInitialShow} {...this.props}>
-        <Liveness liveness={liveness} />
         <div>
           <PhotoBased
             blurredEntries={blurredEntries}
             junksi={config.set.normal.view.junksi}
-            facesize={!isDetectedShow ? formatFaceSize(facesize) : ""}
             photo={initial_photo}
-            conf={conf}
+            conf={mode}
             title={"Initial"}
             isVisible={isInitialShow}
             onLoad={this.handleLoadImage}
@@ -83,33 +78,39 @@ export class EntryShortItem extends Component {
           <PhotoBased
             type={"detected"}
             title={"Detected"}
-            facesize={formatFaceSize(facesize)}
-            photo={photo}
+            photo={detected_photo}
             isVisible={isDetectedShow}
             onLoad={this.handleLoadImage}
           />
         </div>
-        <ThemeProvider theme={{ mode: conf }}>
-          <ColumnEntryType type={conf} />
+        <ThemeProvider theme={{ mode: mode }}>
+          <ColumnEntryType type={mode} />
         </ThemeProvider>
         <StyledEntriesColumn width={280}>
           <StyledRow>
             Full name
             <span>
-              <Value>{`${first_name} ${middle_name} ${second_name}`}</Value>
+              <Value>{person}</Value>
             </span>
           </StyledRow>
-
+        </StyledEntriesColumn>
+        <StyledColumn>
           <StyledRow>
             Detected
             <span>
-              <Value>{timeFormat(detected)}</Value>
+              <Value>{timeFormat(created)}</Value>
+            </span>
+          </StyledRow>
+          <StyledRow>
+            Device
+            <span>
+              <Value>{device}</Value>
             </span>
           </StyledRow>
           <StyledRow>
             Source
             <span>
-              <Value>{source.name}</Value>
+              <Value>{source}</Value>
             </span>
           </StyledRow>
           <StyledRow>
@@ -118,7 +119,7 @@ export class EntryShortItem extends Component {
               <Value>{getDirection()}</Value>
             </span>
           </StyledRow>
-        </StyledEntriesColumn>
+        </StyledColumn>
       </EntryItemWrapper>
     );
   }
