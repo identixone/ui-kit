@@ -13,6 +13,8 @@ function FormCheckbox({
   value,
   disabled,
   className,
+  checkboxTheme,
+  size,
   ...restProps
 }) {
   const checked = Boolean(value);
@@ -23,6 +25,8 @@ function FormCheckbox({
       checked={checked}
       className={className}
       htmlFor={name}
+      checkboxTheme={checkboxTheme}
+      size={size}
     >
       <FormCheckboxFlag checked={checked} />
       <FormCheckboxInput
@@ -47,6 +51,13 @@ FormCheckbox.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
+  checkboxTheme: PropTypes.oneOf(["light", "dark"]),
+  size: PropTypes.oneOf(["small", "large"]),
+};
+
+FormCheckbox.defaultProps = {
+  checkboxTheme: "light",
+  size: "small",
 };
 
 export { FormCheckbox, StyledFormCheckbox };

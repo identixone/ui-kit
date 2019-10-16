@@ -7,7 +7,9 @@ export const colors = {
   /* for types of records */
   navyBlue: "#1e8ab9",
   darkBlue: "#1A5D7B",
+  bluish: "#1e8ab8",
   lightGreen: "#409655",
+  greenish: "#3f9655",
   lightYellow: "#ffc228",
   lightRed: "#f65502",
   gray: "#5d7784",
@@ -33,16 +35,20 @@ export const colors = {
 
   blueWhite: "#e4e9eb",
   blueGray: "#6a8694",
+  brownGray: "#aaaaaa",
   veryLightBlue: "#e4e9ec",
 
   darkestBlue: "#2e4669",
   middleBlue: "#42608C",
   simpleBlue: "#4c6a95",
+  iceBlue: "#f0f1f2",
 
   darkestPink: "#b6245e",
   middlePink: "#be2c66",
   simplePink: "#d2477e",
   darkBlack: "#222",
+
+  bloodOrange: "#ef5305",
 };
 
 export default colors;

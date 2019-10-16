@@ -25,11 +25,7 @@ storiesOf("Button", module).add("default", () => {
     ],
     "light"
   );
-  const buttonSize = select(
-    "Button size",
-    ["small", "medium", "large"],
-    "small"
-  );
+  const buttonSize = select("Button size", ["medium", "large"], "medium");
   const buttonFit = select("Button fit", ["rect", "square", "circle"], "rect");
 
   const isButtonDisabled = boolean("Is disabled", false);

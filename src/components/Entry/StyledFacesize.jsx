@@ -6,6 +6,7 @@ const StyledFacesize = styled.div`
   top: -7px;
   width: 35px;
   font-size: 11px;
+  line-height: 18px;
   font-weight: 600;
   text-align: center;
   color: #fff;

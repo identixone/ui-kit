@@ -5,16 +5,20 @@ import StyledPersonsListPersonData from "./StyledPersonsListPersonData";
 import PersonsListPersonDataItem from "./PersonsListPersonDataItem";
 
 import { IdFormat } from "../../../IdFormat";
+import { Value } from "../../../Value";
 
 function PersonsListPersonData({ idxid, source }) {
   return (
     <StyledPersonsListPersonData>
       <PersonsListPersonDataItem>
-        <b>ID</b> <IdFormat id={idxid} />
+        ID <IdFormat>{idxid}</IdFormat>
       </PersonsListPersonDataItem>
       <PersonsListPersonDataItem>
-        <b>Place of first entry</b>
-        <br /> {source}
+        Place of first entry:
+        <br />{" "}
+        <b>
+          <Value>{source}</Value>
+        </b>
       </PersonsListPersonDataItem>
     </StyledPersonsListPersonData>
   );

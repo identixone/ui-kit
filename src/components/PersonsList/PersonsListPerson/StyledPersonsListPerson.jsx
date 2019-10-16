@@ -1,18 +1,39 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const StyledPersonsListPersonsListItem = styled.li`
-  width: 300px;
-  height: 80px;
+import { colors } from "../../../themes/colors";
+
+function getStyles({ isActive }) {
+  return isActive
+    ? css`
+        color: ${colors.whiteSimple};
+        background-color: ${colors.slate};
+
+        b {
+          color: ${colors.whiteSimple};
+        }
+      `
+    : css`
+        color: ${colors.brownGray};
+        background-color: ${colors.iceBlue};
+
+        b {
+          color: ${colors.black};
+        }
+      `;
+}
+
+export const StyledPersonsListPerson = styled.li`
+  width: 278px;
+  height: 94px;
   border-radius: 4px;
-  background-color: #f9f9f9;
   display: flex;
   position: relative;
-  margin-bottom: 20px;
-  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 120ms ease-in-out, color 120ms ease-in-out;
 
-  &:not(:nth-child(3n)) {
-    margin-right: 20px;
+  ${getStyles}
+
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
   }
 `;
-
-export default StyledPersonsListPersonsListItem;
