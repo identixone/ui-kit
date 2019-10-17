@@ -9,6 +9,7 @@ const StyledEntry = styled.li`
   width: 938px;
   line-height: 18px;
   opacity: ${props => (props.deleted ? "0.4" : "1")};
+
   ${props =>
     props.mode === "entries"
       ? css`

@@ -20,7 +20,7 @@ const ERROR_CLEAR_TIMER = 5000;
 export default class ByPhotoCreate extends Component {
   static propTypes = {
     createdPerson: PropTypes.object,
-    createError: PropTypes.object,
+    error: PropTypes.object,
     clearResult: PropTypes.func.isRequired,
     fetchEntries: PropTypes.func.isRequired,
     componentDidFetch: PropTypes.func.isRequired,
@@ -36,7 +36,7 @@ export default class ByPhotoCreate extends Component {
   componentDidUpdate(prevProps) {
     const {
       createdPerson,
-      createError,
+      error,
       isCreating,
       hasDropped,
       componentDidFetch,
@@ -44,11 +44,11 @@ export default class ByPhotoCreate extends Component {
     const isPersonNew = createdPerson && createdPerson.conf === "new";
     const isCreateFinished = prevProps.isCreating && !isCreating;
 
-    if (hasDropped && (createError || createdPerson)) {
+    if (hasDropped && (error || createdPerson)) {
       componentDidFetch();
     }
 
-    if (isPersonNew || createError) {
+    if (isPersonNew || error) {
       if (!this.state.createResultTimeout) {
         this.setState({
           createResultTimeout: setTimeout(this.clearResult, ERROR_CLEAR_TIMER),
@@ -56,7 +56,7 @@ export default class ByPhotoCreate extends Component {
       }
 
       if (isCreateFinished) {
-        !createError && this.props.fetchEntries({});
+        !error && this.props.fetchEntries({});
       }
     }
   }
@@ -75,7 +75,7 @@ export default class ByPhotoCreate extends Component {
   };
 
   renderContent = () => {
-    const { createdPerson, createError, hasDropped } = this.props;
+    const { createdPerson, error, hasDropped } = this.props;
 
     return createdPerson ? (
       createdPerson.conf === "new" ? (
@@ -111,10 +111,10 @@ export default class ByPhotoCreate extends Component {
           </StyledByPhotoCreateRoundButton>
         </div>
       )
-    ) : createError ? (
+    ) : error ? (
       <div>
-        <StyledPlaceRound>Error {createError.status}</StyledPlaceRound>
-        <span>{createError.data.detail || "No person found in database"}</span>
+        <StyledPlaceRound>Error {error.status}</StyledPlaceRound>
+        <span>{error.data.detail || "No person found in database"}</span>
       </div>
     ) : (
       <div>
@@ -127,13 +127,13 @@ export default class ByPhotoCreate extends Component {
   };
 
   render() {
-    const { createdPerson, createError } = this.props;
+    const { createdPerson, error } = this.props;
     return (
       <FiltersUploadPhoto
         handleUploadFile={this.props.handleUploadFile}
         render={this.renderContent}
         isLockDrop={this.props.hasDropped}
-        isLockUpload={createdPerson || createError}
+        isLockUpload={createdPerson || error}
       />
     );
   }

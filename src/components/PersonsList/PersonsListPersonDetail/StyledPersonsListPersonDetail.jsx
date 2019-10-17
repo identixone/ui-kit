@@ -1,37 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { Segment } from "../../Segment";
+import { ListLayoutDetailed } from "../../ListLayout/ListLayoutDetailed/index";
 
-import { fadeEnter, fadeExit } from "../../../assets/animations";
-import StyledColumnFirst from "../../EntryCard/StyledColumnFirst";
-import StyledColumn from "../../EntryCard/StyledColumn";
-
-const centeredStyles = css`
+export const StyledPersonsListPersonDetail = styled(ListLayoutDetailed)`
+  min-height: 502px;
+  width: 334px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 15px;
+  flex-direction: column;
 `;
-
-const StyledPersonsListPersonDetail = styled(Segment)`
-  flex: 150px 0 0;
-  margin-bottom: 30px;
-  min-height: 150px;
-
-  ${({ isCentered }) => isCentered && centeredStyles}
-
-  ${StyledColumnFirst} {
-    margin-left: 190px;
-  }
-
-  ${StyledColumn} {
-    margin-right: 40px;
-  }
-
-  .person-preview {
-    ${fadeEnter(300)}
-    ${fadeExit(300)}
-  }
-`;
-
-export default StyledPersonsListPersonDetail;

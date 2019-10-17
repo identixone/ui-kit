@@ -8,6 +8,10 @@ import StyledCopyContainer from "./StyledCopyContainer";
 
 const getShortId = id => id.split("-")[4];
 
+/**
+ * Тут нужно использовать IdFormat, чтобы не дублировать код форматирования
+ * Возможно придется дополнить api IdFormat
+ */
 export function IdCopy({ id, defaultValue }) {
   return id ? (
     <Flash

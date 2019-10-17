@@ -15,7 +15,7 @@ export const GloalStyles = createGlobalStyle`
     height: 100%;
   }
 
-  input, textarea {
+  input, textarea, button {
     font-family: Open Sans, Helvetica Neue, sans-serif;
   }
 

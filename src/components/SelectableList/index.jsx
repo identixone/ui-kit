@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { uniq } from "lodash-es";
+import { uniq, noop } from "lodash-es";
 
 export class SelectableList extends React.Component {
   static propTypes = {
@@ -14,6 +14,7 @@ export class SelectableList extends React.Component {
 
   static defaultProps = {
     options: [],
+    onChange: noop,
   };
 
   deselectAll = () => {
@@ -88,6 +89,13 @@ export class SelectableList extends React.Component {
 
     if (prevProps.value !== this.props.value) {
       this.setState({ selected: this.props.value });
+    }
+    if (prevProps.options !== this.props.options) {
+      this.setState(({ selected }) => {
+        return {
+          selected: selected.filter(item => this.props.options.includes(item)),
+        };
+      });
     }
   }
 

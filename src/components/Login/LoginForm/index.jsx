@@ -21,6 +21,7 @@ import { isEmpty } from "lodash-es";
 
 export class LoginFormComponent extends Component {
   static propTypes = {
+    title: PropTypes.string,
     logoSrc: PropTypes.string,
     login: PropTypes.func.isRequired,
     isLogging: PropTypes.bool.isRequired,
@@ -95,12 +96,12 @@ export class LoginFormComponent extends Component {
   };
 
   render() {
-    const { logoSrc } = this.props;
+    const { logoSrc, title } = this.props;
 
     return (
       <LoginFormWrapper>
-        <LoginFormLogo src={logoSrc} />
-        <LoginFormTilte>IO:Cloud - Login page</LoginFormTilte>
+        {logoSrc && <LoginFormLogo src={logoSrc} />}
+        {title && <LoginFormTilte>{title}</LoginFormTilte>}
         <StyledLoginForm
           onSubmit={this.handleFormSubmit}
           data-testid="login-form"

@@ -1,153 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import StyledPersonsListPerson from "./StyledPersonsListPerson";
+import { StyledPersonsListPerson } from "./StyledPersonsListPerson";
 import PersonsListPersonActionButton, {
   PersonsListPersonActionButtonIcon,
 } from "./PersonsListPersonActionButton";
 import PersonsListPersonCheckbox from "./PersonsListPersonCheckbox";
 import PersonsListPersonData from "./PersonsListPersonData";
-import PersonsListPersonPhoto from "./PersonsListPersonPhoto";
+import { PersonsListPersonPhoto } from "./PersonsListPersonPhoto";
 
-import { DeleteSure } from "../../DeleteSure";
-import { UserPlus, UserTimes, Exclamation } from "../../../assets/icons";
+import { PopupConfirm } from "../../PopupConfirm/index";
+
+import { PlaylistAdd, Trash } from "../../../assets/icons";
 
 import { get } from "lodash-es";
 
-class PersonsListPerson extends React.Component {
-  static propTypes = {
-    person: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    addPersonsToList: PropTypes.func.isRequired,
-    deletePersonsFromList: PropTypes.func.isRequired,
-    personsListId: PropTypes.number.isRequired,
-    mode: PropTypes.string,
-    isPersonsDeletingFromList: PropTypes.bool.isRequired,
-    isPersonsAddingToList: PropTypes.bool.isRequired,
-  };
+function PersonsListPerson({
+  person,
+  personsListId,
+  onClick,
+  addPersonsToList,
+  deletePersonsFromList,
+  isSelected,
+  isActive,
+  mode,
+  onChange,
+  isPersonsAddingToList,
+  isPersonsDeletingFromList,
+}) {
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
-  static defaultProps = {
-    person: {},
-  };
+  function handleListItemClick() {
+    onClick(person.idxid);
+  }
 
-  state = {
-    isMouseOver: false,
-  };
-
-  handleTriggerHover = () => {
-    this.setState({ isMouseOver: true });
-  };
-
-  handleTriggerLeave = () => {
-    this.setState({ isMouseOver: false });
-  };
-
-  handleListItemClick = () => {
-    this.props.onClick(this.props.person.idxid);
-  };
-
-  handleDeleteButtonClick = () => {
-    this.props.deletePersonsFromList({
-      listId: this.props.personsListId,
-      persons: [this.props.person.idxid],
+  function handleDeleteButtonClick() {
+    deletePersonsFromList({
+      listId: personsListId,
+      persons: [person.idxid],
       meta: {
-        listId: this.props.personsListId,
-        persons: [this.props.person.idxid],
+        listId: personsListId,
+        persons: [person.idxid],
       },
     });
-  };
+  }
 
-  handleAddButtonClick = e => {
+  function handleAddButtonClick(e) {
     e.stopPropagation();
 
-    this.props.addPersonsToList({
-      persons: [this.props.person.idxid],
-      listId: this.props.personsListId,
+    addPersonsToList({
+      persons: [person.idxid],
+      listId: personsListId,
       meta: {
-        listId: this.props.personsListId,
-        person: this.props.person,
+        listId: personsListId,
+        person: person,
       },
     });
-  };
-
-  render() {
-    const {
-      person,
-      isSelected,
-      name,
-      onChange,
-      isPersonsAddingToList,
-      isPersonsDeletingFromList,
-      mode,
-    } = this.props;
-    const { isMouseOver } = this.state;
-
-    const isAddingMode = mode === "add";
-
-    return (
-      <StyledPersonsListPerson
-        onClick={this.handleListItemClick}
-        data-testid="persons-list-person"
-        onMouseOver={this.handleTriggerHover}
-        onMouseLeave={this.handleTriggerLeave}
-      >
-        <PersonsListPersonPhoto src={person.initial_photo} />
-        {!isAddingMode && (
-          <PersonsListPersonCheckbox
-            name={name}
-            value={isSelected}
-            onChange={onChange}
-            isHidden={!isMouseOver && !isSelected}
-            data-testid={`persons-list-person-select-${person.idxid}`}
-          />
-        )}
-        <PersonsListPersonData
-          idxid={person.idxid}
-          source={get(person, "idxid_source.name", "-")}
-        />
-        {isAddingMode ? (
-          <PersonsListPersonActionButton
-            data-testid="persons-list-add-person"
-            mode="add"
-            onClick={this.handleAddButtonClick}
-            isHidden={false}
-            isDisabled={isPersonsAddingToList}
-          >
-            <PersonsListPersonActionButtonIcon>
-              <UserPlus size="18" />
-            </PersonsListPersonActionButtonIcon>
-          </PersonsListPersonActionButton>
-        ) : (
-          <DeleteSure onDelete={this.handleDeleteButtonClick}>
-            {({ isSure, handleClick, handleMouseLeave }) => {
-              return (
-                <PersonsListPersonActionButton
-                  data-testid="persons-list-remove-person"
-                  mode="remove"
-                  isSure={isSure}
-                  onClick={handleClick}
-                  onMouseLeave={handleMouseLeave}
-                  isHidden={!isMouseOver}
-                  isDisabled={isPersonsDeletingFromList}
-                >
-                  <PersonsListPersonActionButtonIcon>
-                    {isSure ? (
-                      <Exclamation size="14" />
-                    ) : (
-                      <UserTimes size="18" />
-                    )}
-                  </PersonsListPersonActionButtonIcon>
-                </PersonsListPersonActionButton>
-              );
-            }}
-          </DeleteSure>
-        )}
-      </StyledPersonsListPerson>
-    );
   }
+
+  const isAddingMode = mode === "add";
+
+  return (
+    <StyledPersonsListPerson
+      isActive={isActive}
+      onClick={handleListItemClick}
+      data-testid="persons-list-person"
+      onMouseOver={() => setIsMouseOver(true)}
+      onMouseLeave={() => setIsMouseOver(false)}
+    >
+      <PersonsListPersonPhoto src={person.initial_photo} />
+      {!isAddingMode && (
+        <PersonsListPersonCheckbox
+          name={person.idxid}
+          value={isSelected}
+          onChange={onChange}
+          isHidden={!isMouseOver && !isSelected}
+          data-testid={`persons-list-person-select-${person.idxid}`}
+        />
+      )}
+      <PersonsListPersonData
+        idxid={person.idxid}
+        source={get(person, "idxid_source.name", "-")}
+      />
+      {isAddingMode ? (
+        <PersonsListPersonActionButton
+          data-testid="persons-list-add-person"
+          onClick={handleAddButtonClick}
+          isHidden={false}
+          isDisabled={isPersonsAddingToList}
+          mode={mode}
+        >
+          <PersonsListPersonActionButtonIcon>
+            <PlaylistAdd size="24" />
+          </PersonsListPersonActionButtonIcon>
+        </PersonsListPersonActionButton>
+      ) : (
+        <PopupConfirm onConfirm={handleDeleteButtonClick}>
+          {({ togglePopup }) => (
+            <PersonsListPersonActionButton
+              data-testid="persons-list-remove-person"
+              onClick={e => {
+                e.stopPropagation();
+                togglePopup(e);
+              }}
+              isHidden={!isMouseOver}
+              isDisabled={isPersonsDeletingFromList}
+              mode={mode}
+            >
+              <PersonsListPersonActionButtonIcon>
+                <Trash size="16" />
+              </PersonsListPersonActionButtonIcon>
+            </PersonsListPersonActionButton>
+          )}
+        </PopupConfirm>
+      )}
+    </StyledPersonsListPerson>
+  );
 }
 
-export { PersonsListPerson };
+PersonsListPerson.propTypes = {
+  person: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  addPersonsToList: PropTypes.func.isRequired,
+  deletePersonsFromList: PropTypes.func.isRequired,
+  personsListId: PropTypes.number.isRequired,
+  mode: PropTypes.string,
+  isPersonsDeletingFromList: PropTypes.bool.isRequired,
+  isPersonsAddingToList: PropTypes.bool.isRequired,
+};
+
+PersonsListPerson.defaultProps = {
+  person: {},
+};
+
+export { PersonsListPerson, StyledPersonsListPerson };
