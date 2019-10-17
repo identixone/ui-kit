@@ -49,6 +49,8 @@ export const colors = {
   darkBlack: "#222",
 
   bloodOrange: "#ef5305",
+  red: "#dc0909",
+  green: "#008000",
 };
 
 export default colors;

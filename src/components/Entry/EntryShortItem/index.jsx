@@ -2,45 +2,33 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 
-import { timeFormat, formatFaceSize } from "../../../utils/helpers";
+import { timeFormat } from "../../../utils/helpers";
 import { config } from "../config";
 
 import StyledRow from "../StyledRow";
 import StyledColumn from "../columns/StyledColumn";
 import StyledEntriesColumn from "../columns/StyledEntriesColumn";
 
-import Liveness from "../Liveness";
 import { ColumnEntryType } from "../ColumnType";
 
 import { Value } from "../../Value";
 import { PhotoBased } from "../../PhotoBased";
-import { IdCopy } from "../../IdCopy";
-import { IdFormat } from "../../IdFormat";
 
 import { EntryItemWrapper } from "../EntryItemWrapper";
 
-export class EntryItem extends Component {
+export class EntryShortItem extends Component {
   static propTypes = {
     entry: PropTypes.object,
-    live: PropTypes.bool,
     active: PropTypes.bool,
-    onClick: PropTypes.func,
     onLoad: PropTypes.func,
-    push: PropTypes.func,
-    updateCurrentEntryIdxid: PropTypes.func,
     deletePersonEntries: PropTypes.func,
     highlight: PropTypes.bool,
     blurredEntries: PropTypes.bool,
-    pointer: PropTypes.bool,
-    copyId: PropTypes.bool,
     additionalButtons: PropTypes.bool,
   };
   static defaultProps = {
     active: false,
-    live: false,
     entry: {},
-    pointer: true,
-    copyId: true,
     onLoad: () => {},
     additionalButtons: false,
   };
@@ -48,41 +36,41 @@ export class EntryItem extends Component {
   render() {
     const {
       initial_photo,
-      photo,
-      conf,
-      age,
-      created,
-      idxid_created,
-      facesize,
-      idxid,
-      mood,
-      sex,
-      liveness,
+      detected_photo,
+      accepted,
       source,
+      device,
+      direction,
+      person = "",
+      created,
     } = this.props.entry;
 
-    const { blurredEntries, copyId } = this.props;
+    const { blurredEntries } = this.props;
 
-    const isDetectedShow =
-      conf === "exact" ||
-      conf === "junk" ||
-      conf === "nm" ||
-      conf === "det" ||
-      conf === "ha";
-    const isInitialShow = !(conf === "nm") && !(conf === "det");
+    const isDetectedShow = !!detected_photo;
+    const isInitialShow = !!initial_photo;
 
-    const type = config.entryType[conf].full;
-    const sexStr = config.sex[sex];
+    const getDirection = () => {
+      switch (direction) {
+        case 0:
+          return "Enter";
+        case 1:
+          return "Exit";
+        default:
+          return "All";
+      }
+    };
+
+    const mode = accepted ? "accepted" : "declined";
+
     return (
       <EntryItemWrapper isInitialShow={isInitialShow} {...this.props}>
-        <Liveness liveness={liveness} />
         <div>
           <PhotoBased
             blurredEntries={blurredEntries}
             junksi={config.set.normal.view.junksi}
-            facesize={!isDetectedShow ? formatFaceSize(facesize) : ""}
             photo={initial_photo}
-            conf={conf}
+            conf={mode}
             title={"Initial"}
             isVisible={isInitialShow}
             onLoad={this.handleLoadImage}
@@ -90,28 +78,23 @@ export class EntryItem extends Component {
           <PhotoBased
             type={"detected"}
             title={"Detected"}
-            facesize={formatFaceSize(facesize)}
-            photo={photo}
+            photo={detected_photo}
             isVisible={isDetectedShow}
             onLoad={this.handleLoadImage}
           />
         </div>
-        <ThemeProvider theme={{ mode: conf }}>
-          <ColumnEntryType type={conf} title="type" />
+        <ThemeProvider theme={{ mode: mode }}>
+          <ColumnEntryType type={mode} />
         </ThemeProvider>
         <StyledEntriesColumn width={280}>
           <StyledRow>
-            ID
+            Full name
             <span>
-              {copyId ? <IdCopy id={idxid} /> : <IdFormat id={idxid} />}
+              <Value>{person}</Value>
             </span>
           </StyledRow>
-          <StyledRow>
-            Confidence
-            <span>
-              <Value>{type}</Value>
-            </span>
-          </StyledRow>
+        </StyledEntriesColumn>
+        <StyledColumn>
           <StyledRow>
             Detected
             <span>
@@ -119,35 +102,21 @@ export class EntryItem extends Component {
             </span>
           </StyledRow>
           <StyledRow>
-            Card created
+            Device
             <span>
-              <Value>{timeFormat(idxid_created)}</Value>
-            </span>
-          </StyledRow>
-        </StyledEntriesColumn>
-        <StyledColumn>
-          <StyledRow>
-            Age
-            <span>
-              <Value>{age}</Value>
-            </span>
-          </StyledRow>
-          <StyledRow>
-            Sex
-            <span>
-              <Value>{sexStr}</Value>
-            </span>
-          </StyledRow>
-          <StyledRow>
-            Mood
-            <span>
-              <Value>{mood}</Value>
+              <Value>{device}</Value>
             </span>
           </StyledRow>
           <StyledRow>
             Source
             <span>
-              <Value>{source.name}</Value>
+              <Value>{source}</Value>
+            </span>
+          </StyledRow>
+          <StyledRow>
+            Direction
+            <span>
+              <Value>{getDirection()}</Value>
             </span>
           </StyledRow>
         </StyledColumn>
@@ -156,8 +125,6 @@ export class EntryItem extends Component {
   }
 
   handleLoadImage = () => {
-    if (this.props.onLoad) {
-      this.props.onLoad();
-    }
+    this.props && this.props.onLoad && this.props.onLoad();
   };
 }

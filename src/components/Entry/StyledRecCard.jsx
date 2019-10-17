@@ -15,6 +15,8 @@ const StyledRecCard = styled.div`
   line-height: 18px;
   overflow: hidden;
   border-radius: 4px;
+  line-height: 18px;
+  height: 100%;
   background-color: ${boxBackgroundColor || colors.whiteGray};
   height: 100%;
 `;
