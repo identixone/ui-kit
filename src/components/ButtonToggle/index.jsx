@@ -11,10 +11,11 @@ import { ButtonToggleWrapper } from "../ButtonToggleWrapper";
 
 import { Times } from "../../assets/icons";
 
-function ButtonToggle({ children, icon, mode, onChange }) {
+function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
   return (
     <ButtonToggleWrapper
       onChange={onChange}
+      onCrossClick={onCrossClick}
       render={({ handleToggleClick, handleCrossClick, isOpen }) => {
         return (
           <ThemeProvider theme={{ mode }}>
@@ -42,6 +43,7 @@ function ButtonToggle({ children, icon, mode, onChange }) {
   );
 }
 ButtonToggle.propTypes = {
+  onCrossClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -55,6 +57,6 @@ ButtonToggle.defaultProps = {
   onCrossClick: () => {},
 };
 
-export { ButtonToggle };
+export { ButtonToggle, StyledButtonToggle };
 
 export default ButtonToggle;

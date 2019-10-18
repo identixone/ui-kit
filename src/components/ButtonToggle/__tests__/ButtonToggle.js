@@ -4,6 +4,7 @@ import { fireEvent } from "@testing-library/react";
 import { render } from "../../../../test/utils";
 import { ButtonToggle } from "../index.jsx";
 import { Plus } from "../../../assets/icons";
+import colors from "../../../themes/colors";
 
 describe("ButtonToggle tests", () => {
   const handleChangeButtonToggleMock = jest.fn();
@@ -33,16 +34,10 @@ describe("ButtonToggle tests", () => {
     return getDefaultButtonToggle(props);
   }
 
-  test("ButtonToggle is showing after first render", () => {
-    const { queryByTestId } = renderButtonToggle();
-
-    expect(queryByTestId("button-toggle")).toBeInTheDocument();
-  });
-
   test("ButtonToggle have 'blue' mode style", () => {
     const { getByTestId } = renderButtonToggle();
     expect(getByTestId("button-toggle")).toHaveStyle(
-      "background-color: #f3f3f3"
+      `background-color: ${colors.grayLight}`
     );
   });
 

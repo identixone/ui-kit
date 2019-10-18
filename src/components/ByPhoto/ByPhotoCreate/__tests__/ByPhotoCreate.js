@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 describe("ByPhotoCreate tests", () => {
   const fetchEntriesMock = jest.fn();
   const clearResultMock = jest.fn();
-  const componentDidFetchMock = jest.fn();
+  const onCreateFinishedMock = jest.fn();
   const handleUploadFileMock = jest.fn();
   const createdPersonMock = {
     idxid: "5d8b4cca-6306-4aca-971a-3104749fdf03",
@@ -45,7 +45,7 @@ describe("ByPhotoCreate tests", () => {
     clearResultMock: clearResultMock,
     createdPerson: null,
     createError: null,
-    componentDidFetch: componentDidFetchMock,
+    onCreateFinished: onCreateFinishedMock,
     handleUploadFile: handleUploadFileMock,
     hasDropped: false,
     isCreating: false,

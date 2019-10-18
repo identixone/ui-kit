@@ -16,6 +16,12 @@ storiesOf("ByPhotoCreate", module).add("default", () => {
     source: "webcam",
     conf: "new",
   };
+  const createErrorMock = {
+    status: 404,
+    data: {
+      detail: "No person found in database",
+    },
+  };
 
   const hasDropped = boolean("has dropped", false);
   const isCreating = boolean("is creating", false);
@@ -23,10 +29,10 @@ storiesOf("ByPhotoCreate", module).add("default", () => {
   return (
     <ByPhotoCreate
       createdPerson={object("CreatedPerson", createdPersonMock)}
-      createError={null}
+      createError={object("CreateError", createErrorMock)}
       clearResult={action("clear result")}
       fetchEntries={action("fetch entries")}
-      componentDidFetch={action("component did fetch")}
+      onCreateFinished={action("component did fetch")}
       handleUploadFile={action("handle upload file")}
       hasDropped={hasDropped}
       isCreating={isCreating}

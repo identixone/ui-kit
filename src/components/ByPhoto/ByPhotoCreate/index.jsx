@@ -23,7 +23,7 @@ function ByPhotoCreate({
   createError,
   clearResult,
   fetchEntries,
-  componentDidFetch,
+  onCreateFinished,
   handleUploadFile,
   hasDropped,
   isCreating,
@@ -96,7 +96,7 @@ function ByPhotoCreate({
     const isCreateFinished = prevIsCreating && !isCreating;
 
     if (hasDropped && (createError || createdPerson)) {
-      componentDidFetch();
+      onCreateFinished();
     }
 
     if (isPersonNew || createError) {
@@ -129,7 +129,7 @@ ByPhotoCreate.propTypes = {
   createError: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
   fetchEntries: PropTypes.func.isRequired,
-  componentDidFetch: PropTypes.func.isRequired,
+  onCreateFinished: PropTypes.func.isRequired,
   handleUploadFile: PropTypes.func.isRequired,
   hasDropped: PropTypes.bool,
   isCreating: PropTypes.bool,

@@ -19,7 +19,7 @@ const ERROR_CLEAR_TIMER = 5000;
 function ByPhotoSearch({
   personSearchResult,
   clearResult,
-  componentDidFetch,
+  onCreateFinished,
   handleUploadFile,
   error,
   hasDropped,
@@ -75,7 +75,7 @@ function ByPhotoSearch({
 
   useEffect(() => {
     if (hasDropped && (error || personSearchResult)) {
-      componentDidFetch();
+      onCreateFinished();
     }
     if (error) {
       setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
@@ -95,7 +95,7 @@ function ByPhotoSearch({
 ByPhotoSearch.propTypes = {
   personSearchResult: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
-  componentDidFetch: PropTypes.func.isRequired,
+  onCreateFinished: PropTypes.func.isRequired,
   handleUploadFile: PropTypes.func.isRequired,
   error: PropTypes.object,
   hasDropped: PropTypes.bool,

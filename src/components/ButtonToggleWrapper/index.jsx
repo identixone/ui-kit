@@ -31,11 +31,11 @@ export function ButtonToggleWrapper({
 
   return render({
     isOpen: state.isOpen,
-    icon: icon,
+    icon,
     children,
     mode,
-    handleToggleClick: handleToggleClick,
-    handleCrossClick: handleCrossClick,
+    handleToggleClick,
+    handleCrossClick,
   });
 }
 
