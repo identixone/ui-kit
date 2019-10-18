@@ -22,27 +22,18 @@ export default class ByPhotoCreate extends Component {
     createdPerson: PropTypes.object,
     error: PropTypes.object,
     clearResult: PropTypes.func.isRequired,
-    fetchEntries: PropTypes.func.isRequired,
     componentDidFetch: PropTypes.func.isRequired,
     handleUploadFile: PropTypes.func.isRequired,
     hasDropped: PropTypes.bool,
-    isCreating: PropTypes.bool,
   };
 
   state = {
     createResultTimeout: null,
   };
 
-  componentDidUpdate(prevProps) {
-    const {
-      createdPerson,
-      error,
-      isCreating,
-      hasDropped,
-      componentDidFetch,
-    } = this.props;
+  componentDidUpdate() {
+    const { createdPerson, error, hasDropped, componentDidFetch } = this.props;
     const isPersonNew = createdPerson && createdPerson.conf === "new";
-    const isCreateFinished = prevProps.isCreating && !isCreating;
 
     if (hasDropped && (error || createdPerson)) {
       componentDidFetch();
@@ -53,10 +44,6 @@ export default class ByPhotoCreate extends Component {
         this.setState({
           createResultTimeout: setTimeout(this.clearResult, ERROR_CLEAR_TIMER),
         });
-      }
-
-      if (isCreateFinished) {
-        !error && this.props.fetchEntries({});
       }
     }
   }
