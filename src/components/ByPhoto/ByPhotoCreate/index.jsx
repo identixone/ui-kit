@@ -19,35 +19,21 @@ const ERROR_CLEAR_TIMER = 5000;
 
 export default class ByPhotoCreate extends Component {
   static propTypes = {
-    sources: PropTypes.object,
-    filters: PropTypes.object,
     createdPerson: PropTypes.object,
     error: PropTypes.object,
     clearResult: PropTypes.func.isRequired,
-    fetchEntries: PropTypes.func.isRequired,
-    changeEntriesFilter: PropTypes.func.isRequired,
     componentDidFetch: PropTypes.func.isRequired,
     handleUploadFile: PropTypes.func.isRequired,
     hasDropped: PropTypes.bool,
-    isPersonCreating: PropTypes.bool,
   };
 
   state = {
     createResultTimeout: null,
   };
 
-  componentDidUpdate(prevProps) {
-    const {
-      createdPerson,
-      error,
-      isPersonCreating,
-      hasDropped,
-      componentDidFetch,
-      sources,
-      filters,
-    } = this.props;
+  componentDidUpdate() {
+    const { createdPerson, error, hasDropped, componentDidFetch } = this.props;
     const isPersonNew = createdPerson && createdPerson.conf === "new";
-    const isCreateFinished = prevProps.isPersonCreating && !isPersonCreating;
 
     if (hasDropped && (error || createdPerson)) {
       componentDidFetch();
@@ -58,14 +44,6 @@ export default class ByPhotoCreate extends Component {
         this.setState({
           createResultTimeout: setTimeout(this.clearResult, ERROR_CLEAR_TIMER),
         });
-      }
-      const source = sources.find(source => source.name === "upload").id;
-
-      if (isCreateFinished) {
-        !error && this.props.changeEntriesFilter({ source: source });
-        if (filters.source === source) {
-          this.props.fetchEntries({});
-        }
       }
     }
   }
