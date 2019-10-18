@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 const StepperContext = React.createContext({
@@ -28,16 +28,21 @@ function Stepper({ onStepChanges, onReset, initialActiveStepIndex, children }) {
   }
 
   function reset() {
-    setState({ activeStepIndex: initialActiveStepIndex }, onReset);
+    setState({ activeStepIndex: initialActiveStepIndex });
+    onReset();
   }
 
   const { activeStepIndex } = state;
+
+  useEffect(() => {
+    onStepChanges(activeStepIndex);
+  }, [activeStepIndex]);
 
   return (
     <StepperContext.Provider value={state}>
       {children({
         activeStepIndex,
-        goToStep: goToStep,
+        goToStep,
         reset: reset,
       })}
     </StepperContext.Provider>

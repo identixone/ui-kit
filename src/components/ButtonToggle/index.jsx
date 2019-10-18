@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useIsOpen } from "./use-is-open";
+import { useIsOpen } from "../../hooks/use-is-open";
 
 import { ThemeProvider } from "styled-components";
 import StyledButtonToggle from "./StyledButtonToggle";
@@ -54,7 +54,7 @@ ButtonToggle.propTypes = {
     PropTypes.node,
   ]),
   onChange: PropTypes.func,
-  mode: PropTypes.string,
+  mode: PropTypes.oneOf(["red", "blue"]),
   icon: PropTypes.node,
 };
 

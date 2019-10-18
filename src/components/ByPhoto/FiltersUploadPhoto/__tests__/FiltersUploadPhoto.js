@@ -59,11 +59,4 @@ describe("FiltersUploadPhoto tests", () => {
     fireEvent.change(getByTestId("upload-input"));
     expect(handleUploadFileMock).toHaveBeenCalledTimes(1);
   });
-
-  test("FiltersUploadPhoto action must been called once", () => {
-    const { getByTestId } = renderFiltersUploadPhoto();
-    handleUploadFileMock.mockClear();
-    fireEvent.change(getByTestId("upload-input"));
-    expect(handleUploadFileMock).toHaveBeenCalledTimes(1);
-  });
 });

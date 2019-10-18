@@ -46,7 +46,7 @@ describe("EntryCard tests", () => {
   function getDefaultEntryCard(props) {
     return render(
       <Router>
-        <EntryCard {...defaultProps} {...props}></EntryCard>
+        <EntryCard {...defaultProps} {...props} />
       </Router>
     );
   }

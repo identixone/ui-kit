@@ -7,20 +7,20 @@ import { Plus } from "../../../assets/icons";
 import colors from "../../../themes/colors";
 
 describe("ButtonToggle tests", () => {
-  const handleChangeButtonToggleMock = jest.fn();
+  const onChangeMock = jest.fn();
   afterEach(() => {
-    handleChangeButtonToggleMock.mockClear();
+    onChangeMock.mockClear();
   });
 
   afterAll(() => {
-    handleChangeButtonToggleMock.mockReset();
+    onChangeMock.mockReset();
   });
 
   const defaultProps = {
     icon: <Plus />,
     mode: "blue",
     isActive: true,
-    onChange: handleChangeButtonToggleMock,
+    onChange: onChangeMock,
   };
 
   function getDefaultButtonToggle(props) {
@@ -45,8 +45,8 @@ describe("ButtonToggle tests", () => {
 
   test("ButtonToggle action must been called", () => {
     const { getByTestId } = renderButtonToggle();
-    handleChangeButtonToggleMock.mockClear();
+    onChangeMock.mockClear();
     fireEvent.click(getByTestId("button-toggle"));
-    expect(handleChangeButtonToggleMock).toHaveBeenCalledTimes(1);
+    expect(onChangeMock).toHaveBeenCalledTimes(1);
   });
 });
