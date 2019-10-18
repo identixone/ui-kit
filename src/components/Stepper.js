@@ -23,9 +23,8 @@ function Stepper({ onStepChanges, onReset, initialActiveStepIndex, children }) {
   });
 
   function goToStep(activeStepIndex) {
-    setState({ activeStepIndex }, () => {
-      onStepChanges(activeStepIndex);
-    });
+    setState({ activeStepIndex });
+    onStepChanges(activeStepIndex);
   }
 
   function reset() {

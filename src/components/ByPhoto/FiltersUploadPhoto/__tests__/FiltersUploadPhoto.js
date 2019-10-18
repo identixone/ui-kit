@@ -26,9 +26,7 @@ describe("FiltersUploadPhoto tests", () => {
   function getDefaultFiltersUploadPhoto(props) {
     return render(
       <Router>
-        <FiltersUploadPhoto {...defaultProps} {...props}>
-          <div>s</div>
-        </FiltersUploadPhoto>
+        <FiltersUploadPhoto {...defaultProps} {...props}></FiltersUploadPhoto>
       </Router>
     );
   }

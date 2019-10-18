@@ -29,6 +29,12 @@ describe("ByPhotoCreate tests", () => {
     source: "webcam",
     conf: "exact",
   };
+  const createErrorMock = {
+    status: 404,
+    data: {
+      detail: "No person found in database",
+    },
+  };
 
   afterEach(() => {
     fetchEntriesMock.mockClear();
@@ -48,15 +54,13 @@ describe("ByPhotoCreate tests", () => {
     onCreateFinished: onCreateFinishedMock,
     handleUploadFile: handleUploadFileMock,
     hasDropped: false,
-    isCreating: false,
+    isPersonCreating: false,
   };
 
   function getDefaultByPhotoCreate(props) {
     return render(
       <Router>
-        <ByPhotoCreate {...defaultProps} {...props}>
-          <div>s</div>
-        </ByPhotoCreate>
+        <ByPhotoCreate {...defaultProps} {...props} />
       </Router>
     );
   }
@@ -89,7 +93,7 @@ describe("ByPhotoCreate tests", () => {
 
   test("ByPhotoCreate If have creation error show error message", () => {
     const { queryByTestId } = renderByPhotoCreate({
-      createError: { status: 500, data: { detail: "Some server error" } },
+      createError: createErrorMock,
     });
 
     expect(queryByTestId("create-error-message")).toBeInTheDocument();

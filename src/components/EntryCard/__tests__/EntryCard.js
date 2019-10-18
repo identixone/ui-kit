@@ -1,4 +1,5 @@
 import React from "react";
+import { fireEvent } from "@testing-library/react";
 
 import { render } from "../../../../test/utils";
 import { EntryCard } from "../index.jsx";
@@ -45,9 +46,7 @@ describe("EntryCard tests", () => {
   function getDefaultEntryCard(props) {
     return render(
       <Router>
-        <EntryCard {...defaultProps} {...props}>
-          <div>s</div>
-        </EntryCard>
+        <EntryCard {...defaultProps} {...props}></EntryCard>
       </Router>
     );
   }
@@ -82,11 +81,12 @@ describe("EntryCard tests", () => {
     expect(getByTestId("sex-value")).toHaveTextContent("female");
   });
 
-  /*test("EntryCard action delete must been called once", () => {
+  test("EntryCard action delete must been called once", () => {
     const { getByTestId } = renderEntryCard();
 
     fireEvent.click(getByTestId("delete-button"));
+    fireEvent.click(getByTestId("delete-button"));
 
     expect(handleDeleteMock).toHaveBeenCalledTimes(1);
-  });*/
+  });
 });

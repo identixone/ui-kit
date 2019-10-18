@@ -101,6 +101,10 @@ ByPhotoSearch.propTypes = {
   hasDropped: PropTypes.bool,
 };
 
-export { ByPhotoSearch };
+export {
+  ByPhotoSearch,
+  StyledByPhotoSearchPlace,
+  StyledByPhotoSearchPlaceGray,
+};
 
 export default ByPhotoSearch;

@@ -23,9 +23,7 @@ describe("ButtonToggleWrapper tests", () => {
 
   function getDefaultButtonToggleWrapper(props) {
     return render(
-      <ButtonToggleWrapper {...defaultProps} {...props}>
-        <div>s</div>
-      </ButtonToggleWrapper>
+      <ButtonToggleWrapper {...defaultProps} {...props}></ButtonToggleWrapper>
     );
   }
 

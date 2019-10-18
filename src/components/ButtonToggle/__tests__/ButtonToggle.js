@@ -19,13 +19,14 @@ describe("ButtonToggle tests", () => {
   const defaultProps = {
     icon: <Plus />,
     mode: "blue",
+    isActive: true,
     onChange: handleChangeButtonToggleMock,
   };
 
   function getDefaultButtonToggle(props) {
     return render(
       <ButtonToggle {...defaultProps} {...props}>
-        <div>s</div>
+        ButtonText
       </ButtonToggle>
     );
   }
@@ -36,8 +37,9 @@ describe("ButtonToggle tests", () => {
 
   test("ButtonToggle have 'blue' mode style", () => {
     const { getByTestId } = renderButtonToggle();
+    fireEvent.click(getByTestId("button-toggle"));
     expect(getByTestId("button-toggle")).toHaveStyle(
-      `background-color: ${colors.grayLight}`
+      `background-color: ${colors.darkestBlue}`
     );
   });
 

@@ -43,9 +43,7 @@ describe("ByPhotoSearch tests", () => {
   function getDefaultByPhotoSearch(props) {
     return render(
       <Router>
-        <ByPhotoSearch {...defaultProps} {...props}>
-          <div>s</div>
-        </ByPhotoSearch>
+        <ByPhotoSearch {...defaultProps} {...props} />
       </Router>
     );
   }

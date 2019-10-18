@@ -45,7 +45,6 @@ function EntryCard(props) {
   } = person;
 
   function handleDelete() {
-    console.log("DELETE---------------------");
     props.onDelete(idxid);
   }
 
