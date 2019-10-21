@@ -45,7 +45,6 @@ describe("ButtonToggle tests", () => {
 
   test("ButtonToggle action must been called", () => {
     const { getByTestId } = renderButtonToggle();
-    onChangeMock.mockClear();
     fireEvent.click(getByTestId("button-toggle"));
     expect(onChangeMock).toHaveBeenCalledTimes(1);
   });

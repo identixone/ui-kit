@@ -3,16 +3,17 @@ import { useState, useEffect } from "react";
 export function useIsOpen(isOpen) {
   const [stateIsOpen, setIsOpen] = useState(isOpen);
 
-  function setToggle() {
+  function toggleIsOpen() {
     setIsOpen(!isOpen);
   }
+
   function setClose() {
-    setIsOpen(isOpen ? false : null);
+    setIsOpen(false);
   }
 
   useEffect(() => {
     setIsOpen(isOpen);
   }, [isOpen]);
 
-  return [stateIsOpen, setToggle, setClose];
+  return [stateIsOpen, toggleIsOpen, setClose];
 }

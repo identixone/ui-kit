@@ -72,7 +72,9 @@ describe("ByPhotoCreate tests", () => {
   test("ByPhotoCreate If have no created person and creation errors show message to create person", () => {
     const { queryByTestId } = renderByPhotoCreate({});
 
-    expect(queryByTestId("create-person-message")).toBeInTheDocument();
+    expect(queryByTestId("create-person-message")).toHaveTextContent(
+      "drag and drop file (.jpg, .png) or click to select"
+    );
   });
 
   test("ByPhotoCreate If have created person show person message", () => {
@@ -80,7 +82,9 @@ describe("ByPhotoCreate tests", () => {
       createdPerson: createdPersonMock,
     });
 
-    expect(queryByTestId("created-person-message")).toBeInTheDocument();
+    expect(queryByTestId("create-person-message")).toHaveTextContent(
+      createdPersonMock.idxid
+    );
   });
 
   test("ByPhotoCreate If person already exist show message about it", () => {
@@ -88,7 +92,9 @@ describe("ByPhotoCreate tests", () => {
       createdPerson: createdExistPersonMock,
     });
 
-    expect(queryByTestId("exist-person-message")).toBeInTheDocument();
+    expect(queryByTestId("create-person-message")).toHaveTextContent(
+      "Creation error, such person exists"
+    );
   });
 
   test("ByPhotoCreate If have creation error show error message", () => {
@@ -96,6 +102,8 @@ describe("ByPhotoCreate tests", () => {
       createError: createErrorMock,
     });
 
-    expect(queryByTestId("create-error-message")).toBeInTheDocument();
+    expect(queryByTestId("create-person-message")).toHaveTextContent(
+      `Error ${createErrorMock.status}`
+    );
   });
 });

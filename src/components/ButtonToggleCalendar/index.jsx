@@ -19,10 +19,10 @@ export function ButtonToggleCalendar({
   isActive,
   handleCrossClick,
 }) {
-  const [stateIsOpen, setToggle, setClose] = useIsOpen(isOpen);
+  const [stateIsOpen, toggleIsOpen, setClose] = useIsOpen(isOpen);
 
   function handleToggleClick() {
-    setToggle();
+    toggleIsOpen();
     onChange(isOpen);
   }
 

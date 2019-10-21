@@ -62,3 +62,5 @@ Stepper.propTypes = {
 Stepper.Step = withStepperContext(({ id, children, activeStepIndex }) => {
   return id === activeStepIndex ? children : null;
 });
+
+export { Stepper };

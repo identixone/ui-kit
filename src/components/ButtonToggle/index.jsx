@@ -12,16 +12,16 @@ import ButtonMiddle from "./StyledButtonMiddle";
 import { Times } from "../../assets/icons";
 
 function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
-  const [stateIsOpen, setToggle, setClose] = useIsOpen(false);
+  const [isOpen, toggleIsOpen, setClose] = useIsOpen(false);
 
   function handleToggleClick() {
-    setToggle();
-    onChange(stateIsOpen);
+    toggleIsOpen();
+    onChange(isOpen);
   }
 
   function handleCrossClick() {
     setClose();
-    onChange(stateIsOpen);
+    onChange(isOpen);
     onCrossClick();
   }
 
@@ -30,12 +30,12 @@ function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
       <StyledButtonToggleContainer>
         <StyledButtonToggle
           onClick={handleToggleClick}
-          isActive={stateIsOpen}
+          isActive={isOpen}
           data-testid="button-toggle"
         >
           {icon}
         </StyledButtonToggle>
-        {stateIsOpen && (
+        {isOpen && (
           <React.Fragment>
             <ButtonMiddle mode={mode}>{children}</ButtonMiddle>
             <ButtonClose onClick={handleCrossClick} mode={mode}>

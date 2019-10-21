@@ -44,14 +44,14 @@ function ByPhotoCreate({
   function renderContent() {
     return createdPerson ? (
       createdPerson.conf === "new" ? (
-        <div data-testid="created-person-message">
+        <div data-testid="create-person-message">
           <StyledPlaceRound>Person created</StyledPlaceRound>
           <StyledByPhotoCreatePlaceGray>
             {createdPerson.idxid}
           </StyledByPhotoCreatePlaceGray>
         </div>
       ) : (
-        <div data-testid="exist-person-message">
+        <div data-testid="create-person-message">
           <StyledByPhotoCreatePlaceLeftRound>
             Creation error, such person exists
           </StyledByPhotoCreatePlaceLeftRound>
@@ -77,7 +77,7 @@ function ByPhotoCreate({
         </div>
       )
     ) : createError ? (
-      <div data-testid="create-error-message">
+      <div data-testid="create-person-message">
         <StyledPlaceRound>Error {createError.status}</StyledPlaceRound>
         <span>{createError.data.detail || "No person found in database"}</span>
       </div>
