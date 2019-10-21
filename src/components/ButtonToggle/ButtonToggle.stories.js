@@ -8,11 +8,7 @@ import { ButtonToggle } from "./index.jsx";
 
 storiesOf("ButtonToggle", module).add("default", () => {
   const buttonText = text("Button text", "Arunoda");
-  const buttonMode = select(
-    "Button mode",
-    ["new", "reinit", "exact", "ha", "junk", "nm"],
-    "new"
-  );
+  const buttonMode = select("Button mode", ["red", "blue"], "red");
 
   return (
     <ButtonToggle
