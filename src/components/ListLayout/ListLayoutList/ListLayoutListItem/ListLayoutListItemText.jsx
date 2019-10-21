@@ -12,4 +12,5 @@ export const ListLayoutListItemText = styled.p.attrs(({ to }) => ({
   color: ${colors.black};
   margin: 0;
   text-decoration: none;
+  width: 100%;
 `;
