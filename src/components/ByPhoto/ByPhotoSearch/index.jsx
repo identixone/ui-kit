@@ -24,10 +24,6 @@ function ByPhotoSearch({
   error,
   hasDropped,
 }) {
-  function handleClickLink(e) {
-    e.stopPropagation();
-  }
-
   function renderContent() {
     const isHaveResults = personSearchResult || error;
     return isHaveResults ? (
@@ -52,7 +48,6 @@ function ByPhotoSearch({
           <ThemeProvider theme={{ mode: personSearchResult.conf }}>
             <StyledRoundButtonColor
               to={`/entries/${personSearchResult.idxid}/`}
-              onClick={handleClickLink}
             >
               <AngleRight size="16" />
             </StyledRoundButtonColor>
