@@ -14,7 +14,8 @@ export function IdCopy({ children, id }) {
   const { flash, isFlashing } = useFlash();
   const [{ isCopyAvailable }, copyToClipboard] = useCopyToClipboard();
 
-  function handleCopyClick() {
+  function handleCopyClick(ev) {
+    ev.stopPropagation();
     flash();
     copyToClipboard(localId);
   }
