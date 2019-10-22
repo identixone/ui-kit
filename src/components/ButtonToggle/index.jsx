@@ -17,10 +17,6 @@ function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
     onChange,
   });
 
-  function handleToggleClick() {
-    toggleIsOpen();
-  }
-
   function handleCrossClick() {
     setIsOpen(false);
     onCrossClick();
@@ -30,7 +26,7 @@ function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
     <ThemeProvider theme={{ mode }}>
       <StyledButtonToggleContainer>
         <StyledButtonToggle
-          onClick={handleToggleClick}
+          onClick={toggleIsOpen}
           isActive={isOpen}
           data-testid="button-toggle"
         >

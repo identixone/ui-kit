@@ -24,10 +24,6 @@ export function ButtonToggleCalendar({
     onChange,
   });
 
-  function handleToggleClick() {
-    toggleIsOpen();
-  }
-
   function onCrossClick() {
     setIsOpen(false);
     handleCrossClick();
@@ -38,7 +34,7 @@ export function ButtonToggleCalendar({
       <StyledButtonToggleContainer height={height}>
         <StyledButtonToggle
           data-testid="button-toggle-calendar"
-          onClick={handleToggleClick}
+          onClick={toggleIsOpen}
           isActive={stateIsOpen || isActive}
         >
           {icon}
