@@ -12,9 +12,9 @@ import ButtonMiddle from "./StyledButtonMiddle";
 import { Times } from "../../assets/icons";
 
 function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
-  const [isOpen, toggleIsOpen, setClose] = useIsOpen({
+  const { isOpen, toggleIsOpen, setIsOpen } = useIsOpen({
     isOpen: false,
-    onChange: onChange,
+    onChange,
   });
 
   function handleToggleClick() {
@@ -22,7 +22,7 @@ function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
   }
 
   function handleCrossClick() {
-    setClose();
+    setIsOpen(false);
     onCrossClick();
   }
 
@@ -48,6 +48,7 @@ function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
     </ThemeProvider>
   );
 }
+
 ButtonToggle.propTypes = {
   onCrossClick: PropTypes.func,
   children: PropTypes.oneOfType([

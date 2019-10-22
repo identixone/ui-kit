@@ -17,21 +17,17 @@ const imagesAcceptMimeTypes = [
 
 export function FiltersUploadPhoto({
   render,
-  handleUploadFile,
+  onUpload,
   isLockDrop,
   isLockUpload,
 }) {
-  function handleDrop(acceptedFiles) {
-    handleUploadFile(acceptedFiles);
-  }
-
   function handleChangeUploadInput(e) {
-    handleUploadFile(e.currentTarget.files);
+    onUpload(e.currentTarget.files);
   }
 
   return (
     <Dropzone
-      onDrop={handleDrop}
+      onDrop={onUpload}
       disabled={isLockUpload}
       maxSize={4096000}
       multiple={false}
@@ -69,7 +65,7 @@ export function FiltersUploadPhoto({
 
 FiltersUploadPhoto.propTypes = {
   render: PropTypes.func.isRequired,
-  handleUploadFile: PropTypes.func,
+  onUpload: PropTypes.func,
   isLockDrop: PropTypes.bool,
   isLockUpload: PropTypes.bool,
 };

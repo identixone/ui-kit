@@ -22,8 +22,8 @@ import noimageid from "../../assets/images/noimageid.png";
 import {
   timeFormat,
   formatFaceSize,
-  isNotEmpty,
   mapFiltersToGetParams,
+  formatSex,
 } from "../../utils/helpers";
 import EntryAdditionalButtons from "../EntryAdditionalButtons/index";
 
@@ -48,11 +48,9 @@ function EntryCard(props) {
     props.onDelete(idxid);
   }
 
-  const sexName = (isNotEmpty(sex) && (sex === 0 ? "male" : "female")) || "-";
-
   return (
     <StyledEntryCard>
-      {reinit ? <StyledReinit data-testid="reinit">RE</StyledReinit> : ""}
+      {reinit && <StyledReinit data-testid="reinit">RE</StyledReinit>}
       <StyledEntryCardPhoto>
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}
@@ -97,7 +95,7 @@ function EntryCard(props) {
         <StyledLabel>
           Sex
           <StyledData data-testid="sex-value">
-            <Value>{sexName}</Value>
+            <Value>{formatSex(sex)}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>

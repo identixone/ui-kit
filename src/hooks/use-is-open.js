@@ -8,10 +8,6 @@ export function useIsOpen({ isOpen, onChange }) {
     setIsOpen(!isOpen);
   }
 
-  function setClose() {
-    setIsOpen(false);
-  }
-
   useEffect(() => {
     setIsOpen(isOpen);
   }, [isOpen]);
@@ -20,5 +16,5 @@ export function useIsOpen({ isOpen, onChange }) {
     onChange(stateIsOpen);
   }, [stateIsOpen]);
 
-  return [stateIsOpen, toggleIsOpen, setClose];
+  return { isOpen: stateIsOpen, toggleIsOpen, setIsOpen };
 }

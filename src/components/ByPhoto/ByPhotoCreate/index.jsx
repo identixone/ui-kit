@@ -37,10 +37,6 @@ function ByPhotoCreate({
     setCreateResultTimeout(null);
   }
 
-  function handleClickLink(e) {
-    e.stopPropagation();
-  }
-
   useEffect(() => {
     const isPersonNew = createdPerson && createdPerson.conf === "new";
     const isCreateFinished = prevIsCreating && !isCreating;
@@ -87,10 +83,7 @@ function ByPhotoCreate({
             {createdPerson.idxid}
           </StyledByPhotoCreatePlaceGray>
           <ThemeProvider theme={{ mode: createdPerson.conf }}>
-            <StyledRoundButtonColor
-              to={`/entries/${createdPerson.idxid}/`}
-              onClick={handleClickLink}
-            >
+            <StyledRoundButtonColor to={`/entries/${createdPerson.idxid}/`}>
               <AngleRight size="16" />
             </StyledRoundButtonColor>
           </ThemeProvider>

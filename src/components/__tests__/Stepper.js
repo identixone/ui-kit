@@ -19,18 +19,15 @@ describe("Stepper tests", () => {
   });
 
   const steps = {
-    getWebcamPhoto: "get-webcam-photo",
-    uploadPhoto: "upload-photo",
-    selectIdType: "select-id-type",
-    compare: "compare",
-    compareResult: "compare-result",
-    verifyResult: "verify-result",
+    step1: "step-1",
+    step2: "step-2",
+    step3: "step-3",
   };
 
   function getDefaultStepper() {
     return render(
       <Stepper
-        initialActiveStepIndex={steps.uploadPhoto}
+        initialActiveStepIndex={steps.step1}
         onReset={handleStepperResetMock}
         onStepChanges={onStepChangesMock}
       >
@@ -43,7 +40,7 @@ describe("Stepper tests", () => {
               data-testid="actions-button"
               size="large"
               onClick={() => {
-                stepperProps.goToStep(steps.compare);
+                stepperProps.goToStep(steps.step2);
               }}
             >
               Next
@@ -60,12 +57,12 @@ describe("Stepper tests", () => {
 
   test("Stepper content catch default step", () => {
     const { getByTestId } = renderStepper();
-    expect(getByTestId("stepper-index")).toHaveTextContent(steps.uploadPhoto);
+    expect(getByTestId("stepper-index")).toHaveTextContent(steps.step1);
   });
 
   test("Stepper content have changed state when click to change", () => {
     const { getByTestId } = renderStepper();
     fireEvent.click(getByTestId("actions-button"));
-    expect(getByTestId("stepper-index")).toHaveTextContent(steps.compare);
+    expect(getByTestId("stepper-index")).toHaveTextContent(steps.step2);
   });
 });

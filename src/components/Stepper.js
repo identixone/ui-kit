@@ -18,28 +18,26 @@ const withStepperContext = WrappedComponent => {
 };
 
 function Stepper({ onStepChanges, onReset, initialActiveStepIndex, children }) {
-  const [state, setState] = useState({
-    activeStepIndex: initialActiveStepIndex,
-  });
+  const [activeStepIndex, setActiveStepIndex] = useState(
+    initialActiveStepIndex
+  );
 
   function goToStep(activeStepIndex) {
-    setState({ activeStepIndex });
+    setActiveStepIndex(activeStepIndex);
     onStepChanges(activeStepIndex);
   }
 
   function reset() {
-    setState({ activeStepIndex: initialActiveStepIndex });
+    setActiveStepIndex(initialActiveStepIndex);
     onReset();
   }
-
-  const { activeStepIndex } = state;
 
   useEffect(() => {
     onStepChanges(activeStepIndex);
   }, [activeStepIndex]);
 
   return (
-    <StepperContext.Provider value={state}>
+    <StepperContext.Provider value={activeStepIndex}>
       {children({
         activeStepIndex,
         goToStep,

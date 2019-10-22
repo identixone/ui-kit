@@ -16,21 +16,26 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
+let clearResultTimeout;
+
 function ByPhotoSearch({
   personSearchResult,
   clearResult,
-  onCreateFinished,
+  onSearchFinished,
   handleUploadFile,
   error,
   hasDropped,
 }) {
   useEffect(() => {
     if (hasDropped && (error || personSearchResult)) {
-      onCreateFinished();
+      onSearchFinished();
     }
     if (error) {
-      setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
+      clearResultTimeout = setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
     }
+    return () => {
+      window.clearTimeout(clearResultTimeout);
+    };
   });
 
   function renderContent() {
@@ -90,7 +95,7 @@ function ByPhotoSearch({
 ByPhotoSearch.propTypes = {
   personSearchResult: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
-  onCreateFinished: PropTypes.func.isRequired,
+  onSearchFinished: PropTypes.func.isRequired,
   handleUploadFile: PropTypes.func.isRequired,
   error: PropTypes.object,
   hasDropped: PropTypes.bool,

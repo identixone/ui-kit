@@ -12,7 +12,7 @@ storiesOf("FiltersUploadPhoto", module).add("default", () => {
   return (
     <FiltersUploadPhoto
       render={() => <div>some content</div>}
-      handleUploadFile={action("upload file")}
+      onUpload={action("upload file")}
       isLockDrop={isLockDrop}
       isLockUpload={isLockUpload}
     />

@@ -6,18 +6,18 @@ import { FiltersUploadPhoto } from "../index.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("FiltersUploadPhoto tests", () => {
-  const handleUploadFileMock = jest.fn();
+  const onUploadMock = jest.fn();
 
   afterEach(() => {
-    handleUploadFileMock.mockClear();
+    onUploadMock.mockClear();
   });
 
   afterAll(() => {
-    handleUploadFileMock.mockReset();
+    onUploadMock.mockReset();
   });
 
   const defaultProps = {
-    handleUploadFile: handleUploadFileMock,
+    handleUploadFile: onUploadMock,
     render: () => <div>some content</div>,
     isLockDrop: false,
     isLockUpload: false,
@@ -44,21 +44,18 @@ describe("FiltersUploadPhoto tests", () => {
   test("FiltersUploadPhoto upload unlocked by default", () => {
     const { queryByTestId } = renderFiltersUploadPhoto();
 
-    expect(queryByTestId("upload-target")).toHaveStyle("cursor: pointer");
     expect(queryByTestId("upload-input")).not.toBeDisabled();
   });
 
   test("FiltersUploadPhoto upload locked by flag", () => {
     const { queryByTestId } = renderFiltersUploadPhoto({ isLockUpload: true });
 
-    expect(queryByTestId("upload-target")).toHaveStyle("cursor: default");
     expect(queryByTestId("upload-input")).toBeDisabled();
   });
 
   test("FiltersUploadPhoto action must been called once", () => {
     const { getByTestId } = renderFiltersUploadPhoto();
-    handleUploadFileMock.mockClear();
     fireEvent.change(getByTestId("upload-input"));
-    expect(handleUploadFileMock).toHaveBeenCalledTimes(1);
+    expect(onUploadMock).toHaveBeenCalledTimes(1);
   });
 });
