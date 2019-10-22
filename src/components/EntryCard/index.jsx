@@ -28,7 +28,7 @@ import {
 import EntryAdditionalButtons from "../EntryAdditionalButtons/index";
 
 function EntryCard(props) {
-  const { person, filters, actions, showFoundEntries } = props;
+  const { person, filters, actions, showFoundEntries, className } = props;
   const {
     age,
     idxid_created,
@@ -50,7 +50,11 @@ function EntryCard(props) {
 
   return (
     <StyledEntryCard>
-      {reinit && <StyledReinit data-testid="reinit">RE</StyledReinit>}
+      {reinit && (
+        <StyledReinit className={className} data-testid="reinit">
+          RE
+        </StyledReinit>
+      )}
       <StyledEntryCardPhoto>
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}
@@ -116,25 +120,25 @@ function EntryCard(props) {
         <StyledLabel>
           Total existing entries
           <StyledData>
-            <Value>{total}</Value>
+            <Value isZeroEmpty={true}>{total}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Exact entries
           <StyledData>
-            <Value>{exact}</Value>
+            <Value isZeroEmpty={true}>{exact}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           HA entries
           <StyledData>
-            <Value>{ha}</Value>
+            <Value isZeroEmpty={true}>{ha}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Junk entries
           <StyledData>
-            <Value>{junk}</Value>
+            <Value isZeroEmpty={true}>{junk}</Value>
           </StyledData>
         </StyledLabel>
 
@@ -157,6 +161,7 @@ EntryCard.propTypes = {
   filters: PropTypes.object.isRequired,
   actions: PropTypes.bool.isRequired,
   showFoundEntries: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 EntryCard.defaultProps = {

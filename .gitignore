@@ -6,7 +6,7 @@
 node_modules/
 
 # Build
-dist/
+/dist/
 
 # ENV file
 .env
@@ -15,4 +15,4 @@ nginx.env
 .DS_store
 
 # Tests
-coverage
+coverage/

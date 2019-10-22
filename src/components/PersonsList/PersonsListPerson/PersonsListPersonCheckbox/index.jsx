@@ -16,7 +16,13 @@ function PersonsListPersonCheckbox({ name, onChange, value, isHidden }) {
       onClick={handleLabelClick}
       isHidden={isHidden}
     >
-      <FormCheckbox name={name} onChange={onChange} value={value} />
+      <FormCheckbox
+        name={name}
+        onChange={onChange}
+        value={value}
+        checkboxTheme="dark"
+        size="large"
+      />
     </StyledPersonsListPersonCheckbox>
   );
 }

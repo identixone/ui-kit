@@ -14,6 +14,7 @@ function Button({
   fit,
   className,
   isRounded,
+  isFullWidth,
   ...restProps
 }) {
   return (
@@ -27,6 +28,7 @@ function Button({
       fit={fit}
       isRounded={isRounded}
       className={className}
+      isFullWidth={isFullWidth}
       {...restProps}
     >
       {children}
@@ -42,6 +44,7 @@ Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   isDisabled: PropTypes.bool,
   isRounded: PropTypes.bool,
+  isFullWidth: PropTypes.bool,
   type: PropTypes.oneOf(["button", "submit"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   fit: PropTypes.oneOf(["rect", "square", "circle"]),
@@ -59,6 +62,8 @@ Button.propTypes = {
     "reset",
     "lighter",
     "disabled",
+    "outline",
+    "outline-accent",
   ]),
 
   // Проперти добавлено для того, чтобы в FF не показывать аутлайн (работает только через !important)
@@ -69,6 +74,7 @@ Button.propTypes = {
 Button.defaultProps = {
   isDisabled: false,
   isRounded: true,
+  isFullWidth: false,
   type: "button",
   size: "medium",
   buttonTheme: "light",

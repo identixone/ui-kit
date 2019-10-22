@@ -7,7 +7,7 @@ const centeredStyles = css`
   align-items: center;
   justify-content: center;
 
-  ${StyledNoticeContainer} {
+  > ${StyledNoticeContainer} {
     position: relative;
     top: -34px;
   }

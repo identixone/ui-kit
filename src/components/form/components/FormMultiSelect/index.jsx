@@ -14,6 +14,7 @@ import FormMultiSelectTags from "./FormMultiSelectTags";
 import FormMultiSelectTagsItem from "./FormMultiSelectTags/FormMultiSelectTagsItem";
 
 import { searchInList } from "../../../../utils/helpers";
+import { some } from "lodash-es";
 
 const BACKSPACE_KEY_CODE = 8;
 
@@ -212,8 +213,19 @@ class FormMultiSelect extends React.Component {
                     ref={menuRef}
                   >
                     {isOpen &&
-                      searchInList(options, inputValue)
-                        .filter(option => !selected.includes(option))
+                      searchInList(
+                        options,
+                        inputValue,
+                        options[0] && options[0].label && ["label"]
+                      )
+                        .filter(option => {
+                          /** Проверка наличия объекта или примитива в массиве
+                           * TODO: Возможно стоит вынести в отдельную функцию
+                           */
+                          return !(
+                            some(selected, option) || selected.includes(option)
+                          );
+                        })
                         .map((item, index) => {
                           return (
                             <FormMultiSelectOption

@@ -4,30 +4,35 @@ import { Button } from "../../../Button";
 
 import { colors } from "../../../../themes/colors";
 
-const sureStyles = css`
-  color: ${colors.whiteSimple};
-  background-color: ${colors.brownSimple};
-  opacity: 1;
-`;
+function getModeStyles({ mode }) {
+  return {
+    add: css`
+      color: ${colors.greenish};
+    `,
+    default: css`
+      color: ${colors.bloodOrange};
+    `,
+  }[mode || "default"];
+}
 
 const PersonsListPersonActionButton = styled(Button).attrs({
   buttonTheme: "reset",
 })`
-  margin-left: auto;
-  width: 36px;
-  border-radius: 4px;
-  background-color: ${({ mode }) =>
-    mode === "add" ? "green" : colors.grayBlueDark2};
-  color: ${({ mode }) => (mode === "add" ? colors.whiteSimple : colors.black)};
-  transition: opacity 120ms ease-in-out;
-  flex-direction: column;
-  padding-top: 8px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   opacity: ${({ isHidden }) => {
-    return isHidden ? 0 : 0.7;
+    return isHidden ? 0 : 1;
   }};
 
-  ${({ isSure, mode }) => isSure && mode === "remove" && sureStyles}
+  ${getModeStyles}
 `;
 
 export default PersonsListPersonActionButton;

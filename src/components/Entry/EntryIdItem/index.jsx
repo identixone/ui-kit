@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 
 import jump from "jump.js";
 import StyledIdEntry from "./StyledIdEntry";
-import { ColumnEntryIdType } from "../ColumnType/index";
+import { ColumnEntryType } from "../ColumnType/index";
 import StyledIdColumn from "../columns/StyledIdColumn";
 import StyledPhotoBadge from "../StyledPhotoBadge";
 import StyledPhoto from "../StyledPhoto";
@@ -51,6 +51,7 @@ export class EntryIdItem extends Component {
 
   render() {
     const {
+      id,
       photo,
       conf,
       created,
@@ -105,7 +106,7 @@ export class EntryIdItem extends Component {
           </StyledPhotoContainer>
         </StyledPhoto>
         <ThemeProvider theme={{ mode: conf }}>
-          <ColumnEntryIdType type={conf} />
+          <ColumnEntryType type={conf} title="type" id={id} />
         </ThemeProvider>
         <StyledIdColumn width={160}>
           <Label>Confidence</Label>

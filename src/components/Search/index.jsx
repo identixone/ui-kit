@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { StyledSearch } from "./StyledSearch";
 import { SearchInput } from "./SearchInput";
+import { SearchFakeInputValue } from "./SearchFakeInputValue";
 import { SearchIcon } from "./SearchIcon";
 import { SearchClearButton } from "./SearchClearButton";
 
@@ -25,6 +26,7 @@ function Search({
         onChange={onChange}
         value={value}
       />
+      <SearchFakeInputValue>{value}</SearchFakeInputValue>
       {value && (
         <SearchClearButton
           onClick={() => {
@@ -48,6 +50,7 @@ Search.propTypes = {
 
 Search.defaultProps = {
   iconSize: 23,
+  "data-testid": "search-input",
 };
 
-export { Search, StyledSearch };
+export { Search, StyledSearch, SearchFakeInputValue };

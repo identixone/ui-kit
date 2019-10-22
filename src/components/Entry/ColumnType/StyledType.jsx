@@ -10,6 +10,8 @@ const boxBackgroundColor = theme("mode", {
   ha: colors.lightYellow,
   junk: colors.lightRed,
   nm: colors.gray,
+  accepted: colors.green,
+  declined: colors.red,
 });
 
 const StyledType = styled.div`
@@ -19,6 +21,7 @@ const StyledType = styled.div`
   text-align: center;
   text-transform: lowercase;
   color: ${colors.whiteSimple};
+  margin-top: ${props => (props.hasTitle ? "0" : "30px")};
   background-color: ${colors.slate};
   background-color: ${boxBackgroundColor};
   padding-bottom: 3px;
