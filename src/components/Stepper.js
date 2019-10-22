@@ -57,6 +57,12 @@ Stepper.propTypes = {
   children: PropTypes.func,
 };
 
+Stepper.defaultProps = {
+  onStepChanges: () => {},
+  onReset: () => {},
+  initialActiveStepIndex: 1,
+};
+
 Stepper.Step = withStepperContext(({ id, children, activeStepIndex }) => {
   return id === activeStepIndex ? children : null;
 });
