@@ -26,11 +26,11 @@ function ByPhotoCreate({
   onCreateFinished,
   handleUploadFile,
   hasDropped,
-  isCreating,
+  isPersonCreating,
 }) {
   const [createResultTimeout, setCreateResultTimeout] = useState(null);
 
-  const prevIsCreating = usePrevious(isCreating);
+  const prevIsPersonCreating = usePrevious(isPersonCreating);
 
   function handleClearResult() {
     clearResult();
@@ -39,7 +39,7 @@ function ByPhotoCreate({
 
   useEffect(() => {
     const isPersonNew = createdPerson && createdPerson.conf === "new";
-    const isCreateFinished = prevIsCreating && !isCreating;
+    const isCreateFinished = prevIsPersonCreating && !isPersonCreating;
 
     if (hasDropped && (createError || createdPerson)) {
       onCreateFinished();
@@ -58,7 +58,7 @@ function ByPhotoCreate({
     return () => {
       clearTimeout(createResultTimeout);
     };
-  }, [createdPerson, isCreating, hasDropped]);
+  }, [createdPerson, isPersonCreating, hasDropped]);
 
   function renderContent() {
     return createdPerson ? (
@@ -125,7 +125,7 @@ ByPhotoCreate.propTypes = {
   onCreateFinished: PropTypes.func.isRequired,
   handleUploadFile: PropTypes.func.isRequired,
   hasDropped: PropTypes.bool,
-  isCreating: PropTypes.bool,
+  isPersonCreating: PropTypes.bool,
 };
 
 export { ByPhotoCreate };

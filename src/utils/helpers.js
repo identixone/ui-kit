@@ -34,14 +34,6 @@ export function formatDate(date) {
   return date.toISOString();
 }
 
-export function formatSex(sex) {
-  if (isNotEmpty(sex)) {
-    return sex === 0 ? "male" : "female";
-  } else {
-    return "-";
-  }
-}
-
 export function dataURItoBlob(dataURI) {
   // convert base64/URLEncoded data component to raw binary data held in a string
   var byteString;
