@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 import { Clone } from "../../assets/icons";
+import { colors } from "../../themes";
 
-const IdCopyIcon = styled(Clone)`
-  color: #bec9ce;
+export const IdCopyIcon = styled(Clone)`
+  color: ${colors.grayBlueMiddle};
   margin-left: 5px;
 `;
-
-export default IdCopyIcon;

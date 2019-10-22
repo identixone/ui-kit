@@ -1,57 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Flash } from "../Flash";
-import { CopyItem } from "../CopyItem";
-import IdCopyIcon from "./IdCopyIcon";
-import StyledCopyContainer from "./StyledCopyContainer";
+import { useCopyToClipboard } from "../../hooks";
+import { useFlash } from "../Flash";
 
-const getShortId = id => id.split("-")[4];
+import { StyledIdCopy } from "./StyledIdCopy";
+import { IdCopyIcon } from "./IdCopyIcon";
+import { IdFormat } from "../IdFormat";
 
-/**
- * Тут нужно использовать IdFormat, чтобы не дублировать код форматирования
- * Возможно придется дополнить api IdFormat
- */
-export function IdCopy({ id, defaultValue }) {
-  return id ? (
-    <Flash
-      render={({ flash }) => {
-        return (
-          <CopyItem
-            render={({ copyItemRef, copyData, isCopyAvailible }) => {
-              const handleCopyClick = ev => {
-                ev.stopPropagation();
-                flash();
-                copyData(ev);
-              };
+export function IdCopy({ children, id }) {
+  const localId = id || children;
 
-              return (
-                <React.Fragment>
-                  <Flash.Flashing>
-                    <StyledCopyContainer onClick={handleCopyClick}>
-                      {getShortId(id)}
-                      {isCopyAvailible && <IdCopyIcon width="15" />}
-                    </StyledCopyContainer>
-                  </Flash.Flashing>
-                  <input hidden ref={copyItemRef} defaultValue={id} />
-                </React.Fragment>
-              );
-            }}
-          />
-        );
-      }}
-    />
-  ) : (
-    defaultValue
+  const { flash, isFlashing } = useFlash();
+  const [{ isCopyAvailable }, copyToClipboard] = useCopyToClipboard();
+
+  function handleCopyClick() {
+    flash();
+    copyToClipboard(localId);
+  }
+
+  return (
+    <StyledIdCopy onClick={handleCopyClick} isFlashing={isFlashing}>
+      <IdFormat>{localId}</IdFormat>
+      {isCopyAvailable && <IdCopyIcon width="15" />}
+    </StyledIdCopy>
   );
 }
 
 IdCopy.propTypes = {
-  id: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string,
-};
-
-IdCopy.defaultProps = {
-  id: "",
-  defaultValue: "-",
+  id: PropTypes.string,
+  children: PropTypes.string,
 };
