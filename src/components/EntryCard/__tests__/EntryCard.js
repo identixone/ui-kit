@@ -39,7 +39,6 @@ describe("EntryCard tests", () => {
     person: personMock,
     filters: {},
     actions: true,
-    showFoundEntries: true,
     onDelete: handleDeleteMock,
   };
 
