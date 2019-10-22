@@ -36,7 +36,7 @@ describe("ByPhotoSearch tests", () => {
 
   const defaultProps = {
     clearResult: clearResultMock,
-    onSearchFinished: onEffectFinishedMock,
+    onEffectFinished: onEffectFinishedMock,
     handleUploadFile: handleUploadFileMock,
     hasDropped: false,
     isCreating: false,
