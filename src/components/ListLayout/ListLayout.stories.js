@@ -23,6 +23,7 @@ import { UIBadge } from "../UIBadge";
 import { Sync } from "../../assets/icons";
 
 import { property as prop } from "lodash-es";
+import { personMock } from "../../../test/__mocks__";
 
 const names = [
   "Leonardo",
@@ -207,11 +208,7 @@ storiesOf("List Layout", module)
               </SelectableList>
 
               <PersonsListListPerson
-                person={{
-                  photo:
-                    "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
-                  idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
-                }}
+                person={personMock}
                 searchType={searchType}
                 onSearchTypeChange={setSearchType}
               />
@@ -316,11 +313,7 @@ storiesOf("List Layout", module)
               </SelectableList>
 
               <PersonsListListPerson
-                person={{
-                  photo:
-                    "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
-                  idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
-                }}
+                person={personMock}
                 searchType={searchType}
                 onSearchTypeChange={setSearchType}
               />
@@ -335,14 +328,9 @@ storiesOf("List Layout", module)
   .add("list of persons", () => {
     const persons = (count =>
       [...new Array(count)].map((_, id) => ({
+        ...personMock,
         idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33" + id,
-        idxid_source: {
-          id: 133971,
-          name: "Default_is_a_long value goes heree",
-        },
         initial_facesize: 4095 * id,
-        initial_photo:
-          "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
       })))(10);
 
     const optionsCount = number("List items count", 20);

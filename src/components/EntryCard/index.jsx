@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { IdCopy } from "../IdCopy";
 import { Value } from "../Value";
 import { FaceSize } from "../FaceSize";
-import { LazyImage } from "../LazyImage";
 
 import { StyledCloseButton } from "./StyledCloseButton";
 import { StyledDeleteButton } from "./StyledDeleteButton";
@@ -16,6 +15,7 @@ import StyledReinit from "./StyledReinit";
 import StyledColumnFirst from "./StyledColumnFirst";
 import StyledColumnSecond from "./StyledColumnSecond";
 import StyledEntryCardPhoto from "./StyledEntryCardPhoto";
+import { EntryCardPersonImage } from "./EntryCardPersonImage";
 
 import { colors } from "../../themes/colors";
 import noimageid from "../../assets/images/noimageid.png";
@@ -55,7 +55,7 @@ function EntryCard(props) {
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}
         </FaceSize>
-        <LazyImage src={initial_photo || noimageid} />
+        <EntryCardPersonImage src={initial_photo || noimageid} />
       </StyledEntryCardPhoto>
 
       {/* TODO: использовать слоты для actions */}
