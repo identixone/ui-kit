@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { usePrevious } from "react-use";
 
 import { ThemeProvider } from "styled-components";
 
@@ -22,15 +21,12 @@ function ByPhotoCreate({
   createdPerson,
   createError,
   clearResult,
-  fetchEntries,
   onEffectFinished,
   handleUploadFile,
   hasDropped,
   isPersonCreating,
 }) {
   const [createResultTimeout, setCreateResultTimeout] = useState(null);
-
-  const prevIsPersonCreating = usePrevious(isPersonCreating);
 
   function handleClearResult() {
     clearResult();
@@ -39,7 +35,6 @@ function ByPhotoCreate({
 
   useEffect(() => {
     const isPersonNew = createdPerson && createdPerson.conf === "new";
-    const isCreateFinished = prevIsPersonCreating && !isPersonCreating;
 
     if (hasDropped && (createError || createdPerson)) {
       onEffectFinished();
@@ -48,10 +43,6 @@ function ByPhotoCreate({
     if (isPersonNew || createError) {
       if (!createResultTimeout) {
         setCreateResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
-      }
-
-      if (isCreateFinished) {
-        !createError && fetchEntries({});
       }
     }
 
@@ -121,7 +112,6 @@ ByPhotoCreate.propTypes = {
   createdPerson: PropTypes.object,
   createError: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
-  fetchEntries: PropTypes.func.isRequired,
   onEffectFinished: PropTypes.func.isRequired,
   handleUploadFile: PropTypes.func.isRequired,
   hasDropped: PropTypes.bool,
