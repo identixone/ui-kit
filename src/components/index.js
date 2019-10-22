@@ -22,6 +22,7 @@ export * from "./Header";
 export * from "./IdCopy";
 export * from "./IdFormat";
 export * from "./InfiniteScroll";
+export * from "./ImageCentered";
 export * from "./LazyImage";
 export * from "./ListItemPopup";
 export * from "./ListLayout";
