@@ -2,6 +2,7 @@ export const colors = {
   whiteSimple: "#fff",
   whiteGray: "#f9f9f9",
   whiteGrayLight: "#f7f8f9",
+  whiteGrayDark: "#f2f2f2",
   whiteBlue: "#f2f6fa",
   whiteYellow: "#f8f8ee",
   /* for types of records */

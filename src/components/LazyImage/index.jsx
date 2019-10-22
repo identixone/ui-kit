@@ -6,10 +6,12 @@ import { useState, useEffect } from "react";
 import { StyledLazyImage } from "./StyledLazyImage";
 
 export function LazyImage({
+  src,
   children,
   className,
   onLoad,
   "data-testid": testId,
+  imgRef,
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -26,23 +28,30 @@ export function LazyImage({
   }
 
   return (
-    <StyledLazyImage
-      className={className}
-      data-testid={testId}
-      isImageLoaded={isLoaded}
-    >
-      {React.cloneElement(children, {
-        onLoad: handleImageLoaded,
-      })}
+    <StyledLazyImage className={className} isImageLoaded={isLoaded}>
+      {children ? (
+        React.cloneElement(children, {
+          onLoad: handleImageLoaded,
+        })
+      ) : (
+        <img
+          src={src}
+          onLoad={handleImageLoaded}
+          data-testid={testId}
+          ref={imgRef}
+        />
+      )}
     </StyledLazyImage>
   );
 }
 
 LazyImage.propTypes = {
-  className: PropTypes.string,
-  "data-testid": PropTypes.string,
-  onLoad: PropTypes.func,
+  src: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  className: PropTypes.string,
+  onLoad: PropTypes.func,
+  "data-testid": PropTypes.string,
+  imgRef: PropTypes.object,
 };
 
 LazyImage.defaultProps = {

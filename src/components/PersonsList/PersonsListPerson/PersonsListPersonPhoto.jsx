@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { LazyImage } from "../../LazyImage";
+import { ImageCentered } from "../../ImageCentered";
 
-export const PersonsListPersonPhoto = styled(LazyImage)`
+export const PersonsListPersonPhoto = styled(ImageCentered)`
   height: 94px;
   flex: 94px 0 0;
 `;

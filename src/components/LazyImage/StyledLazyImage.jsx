@@ -1,15 +1,21 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import colors from "../../themes/colors";
 
-export const StyledLazyImage = styled.div`
-  background-color: ${({ isImageLoaded }) =>
-    !isImageLoaded ? "#f2f2f2" : colors.whiteSimple};
-  overflow: hidden;
+function getStyles({ isImageLoaded }) {
+  return !isImageLoaded
+    ? css`
+        background-color: ${colors.whiteGrayDark};
 
-  img {
-    display: ${({ isImageLoaded }) => (isImageLoaded ? "block" : "none")};
-    width: 100%;
-    height: 100%;
-  }
+        img {
+          display: none;
+        }
+      `
+    : css`
+        background-color: ${colors.whiteSimple};
+      `;
+}
+
+export const StyledLazyImage = styled.div`
+  ${getStyles}
 `;
