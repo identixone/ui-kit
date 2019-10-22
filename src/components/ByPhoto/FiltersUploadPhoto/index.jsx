@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Dropzone from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
 import StyledUploadPlace from "./StyledUploadPlace";
 import StyledUploadInput from "./StyledUploadInput";
@@ -25,41 +25,37 @@ export function FiltersUploadPhoto({
     onUpload(e.currentTarget.files);
   }
 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: onUpload,
+    disabled: isLockUpload,
+    maxSize: 4096000,
+    multiple: false,
+    accept: imagesAcceptMimeTypes,
+    "data-testid": "upload-photo-dropzone",
+  });
+
   return (
-    <Dropzone
-      onDrop={onUpload}
-      disabled={isLockUpload}
-      maxSize={4096000}
-      multiple={false}
-      accept={imagesAcceptMimeTypes}
-      data-testid={"upload-photo-dropzone"}
-    >
-      {({ getRootProps, getInputProps, isDragActive }) => {
-        return (
-          <React.Fragment>
-            <StyledUploadPlace
-              isDragActive={isDragActive}
-              data-testid={"upload-place"}
-              {...getRootProps()}
-            >
-              <StyledUploadTarget
-                isLockDrop={isLockDrop}
-                isLockUpload={isLockUpload}
-                data-testid="upload-target"
-              >
-                {render()}
-              </StyledUploadTarget>
-            </StyledUploadPlace>
-            <StyledUploadInput
-              data-testid={"upload-input"}
-              disabled={isLockUpload}
-              {...getInputProps()}
-              onChange={handleChangeUploadInput}
-            />
-          </React.Fragment>
-        );
-      }}
-    </Dropzone>
+    <React.Fragment>
+      <StyledUploadPlace
+        isDragActive={isDragActive}
+        data-testid={"upload-place"}
+        {...getRootProps()}
+      >
+        <StyledUploadTarget
+          isLockDrop={isLockDrop}
+          isLockUpload={isLockUpload}
+          data-testid="upload-target"
+        >
+          {render()}
+        </StyledUploadTarget>
+      </StyledUploadPlace>
+      <StyledUploadInput
+        data-testid={"upload-input"}
+        disabled={isLockUpload}
+        {...getInputProps()}
+        onChange={handleChangeUploadInput}
+      />
+    </React.Fragment>
   );
 }
 
