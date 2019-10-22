@@ -109,7 +109,7 @@ function ByPhotoCreate({
 
   return (
     <FiltersUploadPhoto
-      handleUploadFile={handleUploadFile}
+      onUpload={handleUploadFile}
       render={renderContent}
       isLockDrop={hasDropped}
       isLockUpload={createdPerson || createError}
