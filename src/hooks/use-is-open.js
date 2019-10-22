@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useUpdateEffect } from "react-use";
 
 export function useIsOpen({ isOpen, onChange }) {
   const [stateIsOpen, setIsOpen] = useState(isOpen);
@@ -15,7 +16,7 @@ export function useIsOpen({ isOpen, onChange }) {
     setIsOpen(isOpen);
   }, [isOpen]);
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     onChange(stateIsOpen);
   }, [stateIsOpen]);
 

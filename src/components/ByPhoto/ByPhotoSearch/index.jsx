@@ -44,7 +44,7 @@ function ByPhotoSearch({
           <span>{error.data.detail || "No person found in database"}</span>
         </div>
       ) : (
-        <div data-testid="search-person-found-message">
+        <div data-testid="search-person-message">
           <StyledByPhotoSearchPlace>Person found</StyledByPhotoSearchPlace>
           <ThemeProvider theme={{ mode: personSearchResult.conf }}>
             <StyledPlaceColor>
@@ -68,7 +68,7 @@ function ByPhotoSearch({
         </div>
       )
     ) : (
-      <div data-testid="search-person-mode">
+      <div data-testid="search-person-message">
         <StyledByPhotoSearchPlace>Search persona mode</StyledByPhotoSearchPlace>
         <TextDrag isLockDrop={hasDropped}>
           drag and drop file (.jpg, .png) or click to select

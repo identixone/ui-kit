@@ -19,6 +19,10 @@ describe("ByPhotoSearch tests", () => {
     idxid_created: "2019-07-03T11:15:00.170576Z",
     idxid_source: { name: "webcam" },
   };
+  const personSearchErrorMock = {
+    status: 500,
+    data: { detail: "Some server error" },
+  };
 
   afterEach(() => {
     fetchEntriesMock.mockClear();
@@ -55,7 +59,9 @@ describe("ByPhotoSearch tests", () => {
   test("ByPhotoSearch If have no created person and creation errors show message to create person", () => {
     const { queryByTestId } = renderByPhotoSearch({});
 
-    expect(queryByTestId("search-person-mode")).toBeInTheDocument();
+    expect(queryByTestId("search-person-message")).toHaveTextContent(
+      "drag and drop file (.jpg, .png) or click to select"
+    );
   });
 
   test("ByPhotoSearch If have created person show person message", () => {
@@ -63,14 +69,18 @@ describe("ByPhotoSearch tests", () => {
       personSearchResult: personSearchResultMock,
     });
 
-    expect(queryByTestId("search-person-found-message")).toBeInTheDocument();
+    expect(queryByTestId("search-person-message")).toHaveTextContent(
+      personSearchResultMock.idxid
+    );
   });
 
   test("ByPhotoSearch If have creation error show error message", () => {
     const { queryByTestId } = renderByPhotoSearch({
-      error: { status: 500, data: { detail: "Some server error" } },
+      error: personSearchErrorMock,
     });
 
-    expect(queryByTestId("search-person-message")).toBeInTheDocument();
+    expect(queryByTestId("search-person-message")).toHaveTextContent(
+      `Error ${personSearchErrorMock.status}`
+    );
   });
 });
