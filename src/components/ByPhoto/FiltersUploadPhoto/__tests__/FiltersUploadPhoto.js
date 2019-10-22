@@ -45,12 +45,14 @@ describe("FiltersUploadPhoto tests", () => {
     const { queryByTestId } = renderFiltersUploadPhoto();
 
     expect(queryByTestId("upload-target")).toHaveStyle("cursor: pointer");
+    expect(queryByTestId("upload-input")).not.toBeDisabled();
   });
 
   test("FiltersUploadPhoto upload locked by flag", () => {
     const { queryByTestId } = renderFiltersUploadPhoto({ isLockUpload: true });
 
     expect(queryByTestId("upload-target")).toHaveStyle("cursor: default");
+    expect(queryByTestId("upload-input")).toBeDisabled();
   });
 
   test("FiltersUploadPhoto action must been called once", () => {

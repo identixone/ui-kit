@@ -56,6 +56,7 @@ export function FiltersUploadPhoto({
             </StyledUploadPlace>
             <StyledUploadInput
               data-testid={"upload-input"}
+              disabled={isLockUpload}
               {...getInputProps()}
               onChange={handleChangeUploadInput}
             />
