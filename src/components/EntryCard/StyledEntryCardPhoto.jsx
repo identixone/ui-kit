@@ -10,10 +10,6 @@ const StyledEntryCardPhoto = styled.div`
   width: 150px;
   background-color: #fff;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.05);
-
-  img {
-    height: 150px;
-  }
 `;
 
 export default StyledEntryCardPhoto;

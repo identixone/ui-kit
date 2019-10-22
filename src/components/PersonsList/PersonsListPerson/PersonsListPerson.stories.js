@@ -5,20 +5,15 @@ import { action } from "@storybook/addon-actions";
 
 import { PersonsListPerson } from "./index";
 
+import { personMock } from "../../../../test/__mocks__";
+
 storiesOf("PersonsListPerson", module)
   .add("default", () => {
-    const person = object("Person", {
-      idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
-      idxid_source: {
-        id: 133971,
-        name: "Default_is_a_long value goes heree",
-      },
-      initial_photo:
-        "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
-    });
+    const person = object("Person", personMock);
 
     function PersonsListPersonWrapper() {
       const [isSelected, setIsSelected] = useState(false);
+
       return (
         <div style={{ paddingTop: 50 }}>
           <PersonsListPerson
@@ -35,12 +30,7 @@ storiesOf("PersonsListPerson", module)
     return <PersonsListPersonWrapper />;
   })
   .add("adding mode", () => {
-    const person = object("Person", {
-      idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33",
-      idxid_source: { id: 133971, name: "upload" },
-      initial_photo:
-        "https://pbs.twimg.com/profile_images/438441330302140416/o8Yv7bwr_400x400.jpeg",
-    });
+    const person = object("Person", personMock);
 
     function PersonsListPersonWrapper() {
       const [isSelected, setIsSelected] = useState(false);
