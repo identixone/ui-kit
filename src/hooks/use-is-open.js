@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useIsOpen(isOpen) {
+export function useIsOpen({ isOpen, onChange }) {
   const [stateIsOpen, setIsOpen] = useState(isOpen);
 
   function toggleIsOpen() {
@@ -14,6 +14,10 @@ export function useIsOpen(isOpen) {
   useEffect(() => {
     setIsOpen(isOpen);
   }, [isOpen]);
+
+  useEffect(() => {
+    onChange(stateIsOpen);
+  }, [stateIsOpen]);
 
   return [stateIsOpen, toggleIsOpen, setClose];
 }

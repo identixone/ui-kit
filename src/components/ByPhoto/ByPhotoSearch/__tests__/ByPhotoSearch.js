@@ -71,6 +71,6 @@ describe("ByPhotoSearch tests", () => {
       error: { status: 500, data: { detail: "Some server error" } },
     });
 
-    expect(queryByTestId("search-person-error")).toBeInTheDocument();
+    expect(queryByTestId("search-person-message")).toBeInTheDocument();
   });
 });

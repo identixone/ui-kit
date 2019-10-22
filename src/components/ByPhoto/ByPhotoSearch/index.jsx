@@ -24,11 +24,20 @@ function ByPhotoSearch({
   error,
   hasDropped,
 }) {
+  useEffect(() => {
+    if (hasDropped && (error || personSearchResult)) {
+      onCreateFinished();
+    }
+    if (error) {
+      setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
+    }
+  });
+
   function renderContent() {
     const isHaveResults = personSearchResult || error;
     return isHaveResults ? (
       error ? (
-        <div data-testid="search-person-error">
+        <div data-testid="search-person-message">
           <StyledByPhotoSearchPlace>
             Error {error.status}
           </StyledByPhotoSearchPlace>
@@ -67,15 +76,6 @@ function ByPhotoSearch({
       </div>
     );
   }
-
-  useEffect(() => {
-    if (hasDropped && (error || personSearchResult)) {
-      onCreateFinished();
-    }
-    if (error) {
-      setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
-    }
-  });
 
   return (
     <FiltersUploadPhoto

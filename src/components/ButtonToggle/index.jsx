@@ -12,16 +12,17 @@ import ButtonMiddle from "./StyledButtonMiddle";
 import { Times } from "../../assets/icons";
 
 function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
-  const [isOpen, toggleIsOpen, setClose] = useIsOpen(false);
+  const [isOpen, toggleIsOpen, setClose] = useIsOpen({
+    isOpen: false,
+    onChange: onChange,
+  });
 
   function handleToggleClick() {
     toggleIsOpen();
-    onChange(isOpen);
   }
 
   function handleCrossClick() {
     setClose();
-    onChange(isOpen);
     onCrossClick();
   }
 
@@ -54,7 +55,7 @@ ButtonToggle.propTypes = {
     PropTypes.node,
   ]),
   onChange: PropTypes.func,
-  mode: PropTypes.oneOf(["red", "blue"]),
+  mode: PropTypes.oneOf(["redMode", "blueMode"]),
   icon: PropTypes.node,
 };
 

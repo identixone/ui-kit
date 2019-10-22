@@ -41,6 +41,29 @@ function ByPhotoCreate({
     e.stopPropagation();
   }
 
+  useEffect(() => {
+    const isPersonNew = createdPerson && createdPerson.conf === "new";
+    const isCreateFinished = prevIsCreating && !isCreating;
+
+    if (hasDropped && (createError || createdPerson)) {
+      onCreateFinished();
+    }
+
+    if (isPersonNew || createError) {
+      if (!createResultTimeout) {
+        setCreateResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
+      }
+
+      if (isCreateFinished) {
+        !createError && fetchEntries({});
+      }
+    }
+
+    return () => {
+      clearTimeout(createResultTimeout);
+    };
+  }, [createdPerson, isCreating, hasDropped]);
+
   function renderContent() {
     return createdPerson ? (
       createdPerson.conf === "new" ? (
@@ -90,29 +113,6 @@ function ByPhotoCreate({
       </div>
     );
   }
-
-  useEffect(() => {
-    const isPersonNew = createdPerson && createdPerson.conf === "new";
-    const isCreateFinished = prevIsCreating && !isCreating;
-
-    if (hasDropped && (createError || createdPerson)) {
-      onCreateFinished();
-    }
-
-    if (isPersonNew || createError) {
-      if (!createResultTimeout) {
-        setCreateResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
-      }
-
-      if (isCreateFinished) {
-        !createError && fetchEntries({});
-      }
-    }
-
-    return () => {
-      clearTimeout(createResultTimeout);
-    };
-  }, [createdPerson, isCreating, hasDropped]);
 
   return (
     <FiltersUploadPhoto
