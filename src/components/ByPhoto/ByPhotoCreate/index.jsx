@@ -19,7 +19,7 @@ const ERROR_CLEAR_TIMER = 5000;
 
 function ByPhotoCreate({
   createdPerson,
-  createError,
+  error,
   clearResult,
   onUploadEnd,
   onUpload,
@@ -36,11 +36,11 @@ function ByPhotoCreate({
   useEffect(() => {
     const isPersonNew = createdPerson && createdPerson.conf === "new";
 
-    if (hasDropped && (createError || createdPerson)) {
+    if (hasDropped && (error || createdPerson)) {
       onUploadEnd();
     }
 
-    if (isPersonNew || createError) {
+    if (isPersonNew || error) {
       if (!createResultTimeout) {
         setCreateResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
       }
@@ -83,10 +83,10 @@ function ByPhotoCreate({
           </StyledByPhotoCreateRoundButton>
         </div>
       )
-    ) : createError ? (
+    ) : error ? (
       <div data-testid="create-person-message">
-        <StyledPlaceRound>Error {createError.status}</StyledPlaceRound>
-        <span>{createError.data.detail || "No person found in database"}</span>
+        <StyledPlaceRound>Error {error.status}</StyledPlaceRound>
+        <span>{error.data.detail || "No person found in database"}</span>
       </div>
     ) : (
       <div data-testid="create-person-message">
@@ -103,14 +103,14 @@ function ByPhotoCreate({
       onUpload={onUpload}
       render={renderContent}
       isLockDrop={hasDropped}
-      isLockUpload={createdPerson || createError}
+      isLockUpload={createdPerson || error}
     />
   );
 }
 
 ByPhotoCreate.propTypes = {
   createdPerson: PropTypes.object,
-  createError: PropTypes.object,
+  error: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
   onUploadEnd: PropTypes.func.isRequired,
   onUpload: PropTypes.func.isRequired,

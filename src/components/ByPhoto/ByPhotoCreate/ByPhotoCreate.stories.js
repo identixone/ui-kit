@@ -24,18 +24,15 @@ storiesOf("ByPhotoCreate", module).add("default", () => {
   };
 
   const hasDropped = boolean("has dropped", false);
-  const isCreating = boolean("is creating", false);
 
   return (
     <ByPhotoCreate
       createdPerson={object("CreatedPerson", createdPersonMock)}
-      createError={object("CreateError", createErrorMock)}
+      error={object("CreateError", createErrorMock)}
       clearResult={action("clear result")}
-      fetchEntries={action("fetch entries")}
-      onUploadEnd={action("component did fetch")}
-      onUpload={action("handle upload file")}
+      onUploadEnd={action("end of upload file")}
+      onUpload={action("upload file")}
       hasDropped={hasDropped}
-      isCreating={isCreating}
     />
   );
 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 import { upperFirst } from "lodash-es";
@@ -25,18 +25,17 @@ function ByPhotoSearch({
   hasDropped,
 }) {
   const hasResults = personSearchResult || error;
+  const [searchResultTimeout, setSearchResultTimeout] = useState(null);
 
   useEffect(() => {
-    let clearResultTimeout;
-
     if (hasDropped && hasResults) {
       onUploadEnd();
     }
     if (error) {
-      clearResultTimeout = setTimeout(clearResult, ERROR_CLEAR_TIMER);
+      setSearchResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
     }
     return () => {
-      clearTimeout(clearResultTimeout);
+      clearTimeout(searchResultTimeout);
     };
   });
 
