@@ -5,7 +5,7 @@ import StyledColumnDetection from "./StyledColumnDetection";
 import StyledTitle from "./StyledTitle";
 import StyledType from "./StyledType";
 
-export function ColumnEntryType(props) {
+function EntryCardEntryType(props) {
   return (
     <StyledColumnDetection id={props.id}>
       {props.title && <StyledTitle>{props.title}</StyledTitle>}
@@ -14,8 +14,10 @@ export function ColumnEntryType(props) {
   );
 }
 
-ColumnEntryType.propTypes = {
+EntryCardEntryType.propTypes = {
   type: PropTypes.string.isRequired,
   title: PropTypes.string,
   id: PropTypes.number,
 };
+
+export { EntryCardEntryType };

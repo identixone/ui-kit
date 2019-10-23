@@ -17,7 +17,7 @@ import { PhotoBased } from "../../PhotoBased";
 import { IdCopy } from "../../IdCopy";
 import { IdFormat } from "../../IdFormat";
 
-import { EntryItemWrapper } from "../EntryItemWrapper";
+import { EntryCardContainer } from "../EntryCardContainer";
 
 export class EntryItem extends Component {
   static propTypes = {
@@ -35,6 +35,7 @@ export class EntryItem extends Component {
     copyId: PropTypes.bool,
     additionalButtons: PropTypes.bool,
   };
+
   static defaultProps = {
     active: false,
     live: false,
@@ -43,6 +44,12 @@ export class EntryItem extends Component {
     copyId: true,
     onLoad: () => {},
     additionalButtons: false,
+  };
+
+  handleLoadImage = () => {
+    if (this.props.onLoad) {
+      this.props.onLoad();
+    }
   };
 
   render() {
@@ -69,13 +76,16 @@ export class EntryItem extends Component {
       conf === "nm" ||
       conf === "det" ||
       conf === "ha";
+
     const isInitialShow = !(conf === "nm") && !(conf === "det");
 
     const type = config.entryType[conf].full;
     const sexStr = config.sex[sex];
+
     return (
-      <EntryItemWrapper isInitialShow={isInitialShow} {...this.props}>
+      <EntryCardContainer isInitialShow={isInitialShow} {...this.props}>
         <Liveness liveness={liveness} />
+
         <div>
           <PhotoBased
             blurredEntries={blurredEntries}
@@ -96,9 +106,11 @@ export class EntryItem extends Component {
             onLoad={this.handleLoadImage}
           />
         </div>
+
         <ThemeProvider theme={{ mode: conf }}>
           <ColumnEntryType type={conf} title="type" />
         </ThemeProvider>
+
         <StyledEntriesColumn width={280}>
           <StyledRow>
             ID
@@ -125,6 +137,7 @@ export class EntryItem extends Component {
             </span>
           </StyledRow>
         </StyledEntriesColumn>
+
         <StyledColumn>
           <StyledRow>
             Age
@@ -151,13 +164,7 @@ export class EntryItem extends Component {
             </span>
           </StyledRow>
         </StyledColumn>
-      </EntryItemWrapper>
+      </EntryCardContainer>
     );
   }
-
-  handleLoadImage = () => {
-    if (this.props.onLoad) {
-      this.props.onLoad();
-    }
-  };
 }

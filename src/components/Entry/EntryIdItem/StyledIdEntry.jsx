@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import StyledEntry from "../StyledEntry.jsx";
+import { StyledEntryCardContainer } from "../EntryCardContainer";
 
-const StyledIdEntry = styled(StyledEntry)`
+const StyledIdEntry = styled(StyledEntryCardContainer)`
   height: 105px;
 `;
 

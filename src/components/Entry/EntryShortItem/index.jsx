@@ -14,7 +14,7 @@ import { ColumnEntryType } from "../ColumnType";
 import { Value } from "../../Value";
 import { PhotoBased } from "../../PhotoBased";
 
-import { EntryItemWrapper } from "../EntryItemWrapper";
+import { EntryCardContainer } from "../EntryCardContainer";
 
 export class EntryShortItem extends Component {
   static propTypes = {
@@ -64,7 +64,7 @@ export class EntryShortItem extends Component {
     const mode = accepted ? "accepted" : "declined";
 
     return (
-      <EntryItemWrapper isInitialShow={isInitialShow} {...this.props}>
+      <EntryCardContainer isInitialShow={isInitialShow} {...this.props}>
         <div>
           <PhotoBased
             blurredEntries={blurredEntries}
@@ -120,7 +120,7 @@ export class EntryShortItem extends Component {
             </span>
           </StyledRow>
         </StyledColumn>
-      </EntryItemWrapper>
+      </EntryCardContainer>
     );
   }
 
