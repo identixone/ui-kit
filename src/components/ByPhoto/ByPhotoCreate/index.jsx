@@ -24,7 +24,6 @@ function ByPhotoCreate({
   onUploadEnd,
   onUpload,
   hasDropped,
-  isPersonCreating,
 }) {
   const [createResultTimeout, setCreateResultTimeout] = useState(null);
 
@@ -49,7 +48,7 @@ function ByPhotoCreate({
     return () => {
       clearTimeout(createResultTimeout);
     };
-  }, [createdPerson, isPersonCreating, hasDropped]);
+  }, [createdPerson, hasDropped]);
 
   function renderContent() {
     return createdPerson ? (
@@ -115,7 +114,6 @@ ByPhotoCreate.propTypes = {
   onUploadEnd: PropTypes.func.isRequired,
   onUpload: PropTypes.func.isRequired,
   hasDropped: PropTypes.bool,
-  isPersonCreating: PropTypes.bool,
 };
 
 export { ByPhotoCreate };

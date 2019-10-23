@@ -50,7 +50,6 @@ describe("ByPhotoCreate tests", () => {
     onUploadEnd: onUploadEndMock,
     onUpload: onUploadMock,
     hasDropped: false,
-    isPersonCreating: false,
   };
 
   function getDefaultByPhotoCreate(props) {
