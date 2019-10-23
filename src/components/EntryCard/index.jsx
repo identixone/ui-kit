@@ -50,7 +50,7 @@ function EntryCard(props) {
 
   return (
     <StyledEntryCard className={className}>
-      {reinit ? <StyledReinit>RE</StyledReinit> : ""}
+      {reinit && <StyledReinit data-testid="reinit">RE</StyledReinit>}
       <StyledEntryCardPhoto>
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}
@@ -60,7 +60,7 @@ function EntryCard(props) {
 
       {/* TODO: использовать слоты для actions */}
       {actions && (
-        <EntryAdditionalButtons>
+        <EntryAdditionalButtons data-testid="additional-buttons">
           <StyledCloseButton
             buttonTheme="light-gray"
             to={`/entries/${mapFiltersToGetParams(filters)}`}
@@ -88,13 +88,13 @@ function EntryCard(props) {
         </StyledLabel>
         <StyledLabel>
           Age
-          <StyledData>
+          <StyledData data-testid="age-value">
             <Value>{age}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Sex
-          <StyledData>
+          <StyledData data-testid="sex-value">
             <Value>{formatSex(sex)}</Value>
           </StyledData>
         </StyledLabel>
@@ -137,11 +137,10 @@ function EntryCard(props) {
             <Value isZeroEmpty={true}>{junk}</Value>
           </StyledData>
         </StyledLabel>
-
         <StyledLabel>
           Found entries
           <StyledData>
-            <Value isZeroEmpty={true}>{total}</Value>
+            <Value>{total}</Value>
           </StyledData>
         </StyledLabel>
       </StyledColumnSecond>

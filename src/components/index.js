@@ -4,7 +4,6 @@ export * from "./Button";
 export * from "./ButtonToggle";
 export * from "./ButtonLink";
 export * from "./ButtonToggleCalendar";
-export * from "./ButtonToggleWrapper";
 export * from "./ByPhoto";
 export * from "./CopyItem";
 export * from "./DateTimeFilter";

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Dropzone from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
 import StyledUploadPlace from "./StyledUploadPlace";
 import StyledUploadInput from "./StyledUploadInput";
@@ -15,58 +15,53 @@ const imagesAcceptMimeTypes = [
   ".JPEG",
 ];
 
-export class FiltersUploadPhoto extends Component {
-  static propTypes = {
-    render: PropTypes.func.isRequired,
-    handleDrop: PropTypes.func,
-    handleUploadFile: PropTypes.func,
-    isLockDrop: PropTypes.bool,
-    isLockUpload: PropTypes.bool,
-  };
-
-  handleDrop = acceptedFiles => {
-    this.props.handleUploadFile(acceptedFiles);
-  };
-
-  handleUploadFile = e => {
-    this.props.handleUploadFile(e.currentTarget.files);
-  };
-
-  render() {
-    return (
-      (
-        <div onClick={this.handleOpenUploadSelection}>
-          <Dropzone
-            onDrop={this.handleDrop}
-            disabled={this.props.isLockUpload}
-            maxSize={4096000}
-            multiple={false}
-            accept={imagesAcceptMimeTypes}
-          >
-            {({ getRootProps, getInputProps, isDragActive }) => {
-              return (
-                <React.Fragment>
-                  <StyledUploadPlace
-                    isDragActive={isDragActive}
-                    {...getRootProps()}
-                  >
-                    <StyledUploadTarget
-                      isLockDrop={this.props.isLockDrop}
-                      isLockUpload={this.props.isLockUpload}
-                    >
-                      {this.props.render()}
-                    </StyledUploadTarget>
-                  </StyledUploadPlace>
-                  <StyledUploadInput
-                    {...getInputProps()}
-                    onChange={this.handleUploadFile}
-                  />
-                </React.Fragment>
-              );
-            }}
-          </Dropzone>
-        </div>
-      ) || ""
-    );
+export function FiltersUploadPhoto({
+  render,
+  onUpload,
+  isLockDrop,
+  isLockUpload,
+}) {
+  function handleChangeUploadInput(e) {
+    onUpload(e.currentTarget.files);
   }
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: onUpload,
+    disabled: isLockUpload,
+    maxSize: 4096000,
+    multiple: false,
+    accept: imagesAcceptMimeTypes,
+    "data-testid": "upload-photo-dropzone",
+  });
+
+  return (
+    <React.Fragment>
+      <StyledUploadPlace
+        isDragActive={isDragActive}
+        data-testid={"upload-place"}
+        {...getRootProps()}
+      >
+        <StyledUploadTarget
+          isLockDrop={isLockDrop}
+          isLockUpload={isLockUpload}
+          data-testid="upload-target"
+        >
+          {render()}
+        </StyledUploadTarget>
+      </StyledUploadPlace>
+      <StyledUploadInput
+        data-testid={"upload-input"}
+        disabled={isLockUpload}
+        {...getInputProps()}
+        onChange={handleChangeUploadInput}
+      />
+    </React.Fragment>
+  );
 }
+
+FiltersUploadPhoto.propTypes = {
+  render: PropTypes.func.isRequired,
+  onUpload: PropTypes.func,
+  isLockDrop: PropTypes.bool,
+  isLockUpload: PropTypes.bool,
+};
