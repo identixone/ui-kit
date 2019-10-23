@@ -17,7 +17,7 @@ describe("FiltersUploadPhoto tests", () => {
   });
 
   const defaultProps = {
-    handleUploadFile: onUploadMock,
+    onUpload: onUploadMock,
     render: () => <div>some content</div>,
     isLockDrop: false,
     isLockUpload: false,

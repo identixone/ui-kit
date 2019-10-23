@@ -33,7 +33,7 @@ storiesOf("ByPhotoCreate", module).add("default", () => {
       clearResult={action("clear result")}
       fetchEntries={action("fetch entries")}
       onUploadEnd={action("component did fetch")}
-      handleUploadFile={action("handle upload file")}
+      onUpload={action("handle upload file")}
       hasDropped={hasDropped}
       isCreating={isCreating}
     />

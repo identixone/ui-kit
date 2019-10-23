@@ -8,7 +8,7 @@ describe("ByPhotoSearch tests", () => {
   const fetchEntriesMock = jest.fn();
   const clearResultMock = jest.fn();
   const onUploadEndMock = jest.fn();
-  const handleUploadFileMock = jest.fn();
+  const onUploadMock = jest.fn();
   const personSearchResultMock = {
     conf: "exact",
     idxid: "5d8b4cca-6306-4aca-971a-3104749fdf03",
@@ -37,7 +37,7 @@ describe("ByPhotoSearch tests", () => {
   const defaultProps = {
     clearResult: clearResultMock,
     onUploadEnd: onUploadEndMock,
-    handleUploadFile: handleUploadFileMock,
+    onUpload: onUploadMock,
     hasDropped: false,
     isCreating: false,
     personSearchResult: null,

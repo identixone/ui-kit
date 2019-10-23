@@ -27,7 +27,7 @@ storiesOf("ByPhotoSearch", module).add("default", () => {
       clearResult={action("clear result")}
       fetchEntries={action("fetch entries")}
       onUploadEnd={action("create is finished")}
-      handleUploadFile={action("handle upload file")}
+      onUpload={action("handle upload file")}
       hasDropped={hasDropped}
       isCreating={isCreating}
     />

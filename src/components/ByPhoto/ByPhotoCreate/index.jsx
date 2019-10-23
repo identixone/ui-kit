@@ -22,7 +22,7 @@ function ByPhotoCreate({
   createError,
   clearResult,
   onUploadEnd,
-  handleUploadFile,
+  onUpload,
   hasDropped,
   isPersonCreating,
 }) {
@@ -100,7 +100,7 @@ function ByPhotoCreate({
 
   return (
     <FiltersUploadPhoto
-      onUpload={handleUploadFile}
+      onUpload={onUpload}
       render={renderContent}
       isLockDrop={hasDropped}
       isLockUpload={createdPerson || createError}
@@ -113,7 +113,7 @@ ByPhotoCreate.propTypes = {
   createError: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
   onUploadEnd: PropTypes.func.isRequired,
-  handleUploadFile: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired,
   hasDropped: PropTypes.bool,
   isPersonCreating: PropTypes.bool,
 };

@@ -8,7 +8,7 @@ describe("ByPhotoCreate tests", () => {
   const fetchEntriesMock = jest.fn();
   const clearResultMock = jest.fn();
   const onUploadEndMock = jest.fn();
-  const handleUploadFileMock = jest.fn();
+  const onUploadMock = jest.fn();
   const createdPersonMock = {
     idxid: "5d8b4cca-6306-4aca-971a-3104749fdf03",
     age: 25,
@@ -52,7 +52,7 @@ describe("ByPhotoCreate tests", () => {
     createdPerson: null,
     createError: null,
     onCreateFinished: onUploadEndMock,
-    handleUploadFile: handleUploadFileMock,
+    onUpload: onUploadMock,
     hasDropped: false,
     isPersonCreating: false,
   };
