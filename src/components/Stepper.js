@@ -37,7 +37,7 @@ function Stepper({ onStepChanges, onReset, initialActiveStepIndex, children }) {
   }, [activeStepIndex]);
 
   return (
-    <StepperContext.Provider value={activeStepIndex}>
+    <StepperContext.Provider value={{ activeStepIndex }}>
       {children({
         activeStepIndex,
         goToStep,
