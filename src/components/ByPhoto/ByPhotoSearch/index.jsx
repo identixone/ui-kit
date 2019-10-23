@@ -21,14 +21,14 @@ let clearResultTimeout;
 function ByPhotoSearch({
   personSearchResult,
   clearResult,
-  onEffectFinished,
+  unlockUploadDrop,
   handleUploadFile,
   error,
   hasDropped,
 }) {
   useEffect(() => {
     if (hasDropped && (error || personSearchResult)) {
-      onEffectFinished();
+      unlockUploadDrop();
     }
     if (error) {
       clearResultTimeout = setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
@@ -95,7 +95,7 @@ function ByPhotoSearch({
 ByPhotoSearch.propTypes = {
   personSearchResult: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
-  onEffectFinished: PropTypes.func.isRequired,
+  unlockUploadDrop: PropTypes.func.isRequired,
   handleUploadFile: PropTypes.func.isRequired,
   error: PropTypes.object,
   hasDropped: PropTypes.bool,

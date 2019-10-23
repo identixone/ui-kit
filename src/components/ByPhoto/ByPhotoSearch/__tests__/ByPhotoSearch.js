@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 describe("ByPhotoSearch tests", () => {
   const fetchEntriesMock = jest.fn();
   const clearResultMock = jest.fn();
-  const onEffectFinishedMock = jest.fn();
+  const unlockUploadDropMock = jest.fn();
   const handleUploadFileMock = jest.fn();
   const personSearchResultMock = {
     conf: "exact",
@@ -36,7 +36,7 @@ describe("ByPhotoSearch tests", () => {
 
   const defaultProps = {
     clearResult: clearResultMock,
-    onEffectFinished: onEffectFinishedMock,
+    unlockUploadDrop: unlockUploadDropMock,
     handleUploadFile: handleUploadFileMock,
     hasDropped: false,
     isCreating: false,
