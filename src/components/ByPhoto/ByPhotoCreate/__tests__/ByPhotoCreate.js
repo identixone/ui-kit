@@ -5,7 +5,6 @@ import { ByPhotoCreate } from "../index.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("ByPhotoCreate tests", () => {
-  const fetchEntriesMock = jest.fn();
   const clearResultMock = jest.fn();
   const onUploadEndMock = jest.fn();
   const onUploadMock = jest.fn();
@@ -37,17 +36,14 @@ describe("ByPhotoCreate tests", () => {
   };
 
   afterEach(() => {
-    fetchEntriesMock.mockClear();
     clearResultMock.mockClear();
   });
 
   afterAll(() => {
-    fetchEntriesMock.mockReset();
     clearResultMock.mockReset();
   });
 
   const defaultProps = {
-    fetchEntries: fetchEntriesMock,
     clearResultMock: clearResultMock,
     createdPerson: null,
     createError: null,

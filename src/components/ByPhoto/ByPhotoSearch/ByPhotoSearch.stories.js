@@ -25,7 +25,6 @@ storiesOf("ByPhotoSearch", module).add("default", () => {
       createdPerson={object("CreatedPerson", createdPersonMock)}
       createError={null}
       clearResult={action("clear result")}
-      fetchEntries={action("fetch entries")}
       onUploadEnd={action("create is finished")}
       onUpload={action("handle upload file")}
       hasDropped={hasDropped}

@@ -5,7 +5,6 @@ import { ByPhotoSearch } from "../index.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("ByPhotoSearch tests", () => {
-  const fetchEntriesMock = jest.fn();
   const clearResultMock = jest.fn();
   const onUploadEndMock = jest.fn();
   const onUploadMock = jest.fn();
@@ -25,12 +24,10 @@ describe("ByPhotoSearch tests", () => {
   };
 
   afterEach(() => {
-    fetchEntriesMock.mockClear();
     clearResultMock.mockClear();
   });
 
   afterAll(() => {
-    fetchEntriesMock.mockReset();
     clearResultMock.mockReset();
   });
 
