@@ -28,7 +28,7 @@ describe("ByPhotoCreate tests", () => {
     source: "webcam",
     conf: "exact",
   };
-  const createErrorMock = {
+  const errorMock = {
     status: 404,
     data: {
       detail: "No person found in database",
@@ -47,7 +47,7 @@ describe("ByPhotoCreate tests", () => {
     clearResultMock: clearResultMock,
     createdPerson: null,
     createError: null,
-    onCreateFinished: onUploadEndMock,
+    onUploadEnd: onUploadEndMock,
     onUpload: onUploadMock,
     hasDropped: false,
     isPersonCreating: false,
@@ -95,11 +95,11 @@ describe("ByPhotoCreate tests", () => {
 
   test("ByPhotoCreate If have creation error show error message", () => {
     const { queryByTestId } = renderByPhotoCreate({
-      createError: createErrorMock,
+      createError: errorMock,
     });
 
     expect(queryByTestId("create-person-message")).toHaveTextContent(
-      `Error ${createErrorMock.status}`
+      `Error ${errorMock.status}`
     );
   });
 });

@@ -23,7 +23,7 @@ storiesOf("ByPhotoSearch", module).add("default", () => {
   return (
     <ByPhotoSearch
       createdPerson={object("CreatedPerson", createdPersonMock)}
-      createError={null}
+      error={null}
       clearResult={action("clear result")}
       onUploadEnd={action("create is finished")}
       onUpload={action("handle upload file")}

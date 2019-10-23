@@ -16,7 +16,7 @@ storiesOf("ByPhotoCreate", module).add("default", () => {
     source: "webcam",
     conf: "new",
   };
-  const createErrorMock = {
+  const errorMock = {
     status: 404,
     data: {
       detail: "No person found in database",
@@ -28,7 +28,7 @@ storiesOf("ByPhotoCreate", module).add("default", () => {
   return (
     <ByPhotoCreate
       createdPerson={object("CreatedPerson", createdPersonMock)}
-      error={object("CreateError", createErrorMock)}
+      error={object("CreateError", errorMock)}
       clearResult={action("clear result")}
       onUploadEnd={action("end of upload file")}
       onUpload={action("upload file")}
