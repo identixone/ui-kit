@@ -49,12 +49,8 @@ function EntryCard(props) {
   }
 
   return (
-    <StyledEntryCard>
-      {reinit && (
-        <StyledReinit className={className} data-testid="reinit">
-          RE
-        </StyledReinit>
-      )}
+    <StyledEntryCard className={className}>
+      {reinit && <StyledReinit data-testid="reinit">RE</StyledReinit>}
       <StyledEntryCardPhoto>
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}

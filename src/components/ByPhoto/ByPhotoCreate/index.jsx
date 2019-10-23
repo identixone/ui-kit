@@ -21,7 +21,7 @@ function ByPhotoCreate({
   createdPerson,
   createError,
   clearResult,
-  unlockUploadDrop,
+  onUploadEnd,
   handleUploadFile,
   hasDropped,
   isPersonCreating,
@@ -37,7 +37,7 @@ function ByPhotoCreate({
     const isPersonNew = createdPerson && createdPerson.conf === "new";
 
     if (hasDropped && (createError || createdPerson)) {
-      unlockUploadDrop();
+      onUploadEnd();
     }
 
     if (isPersonNew || createError) {
@@ -112,7 +112,7 @@ ByPhotoCreate.propTypes = {
   createdPerson: PropTypes.object,
   createError: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
-  unlockUploadDrop: PropTypes.func.isRequired,
+  onUploadEnd: PropTypes.func.isRequired,
   handleUploadFile: PropTypes.func.isRequired,
   hasDropped: PropTypes.bool,
   isPersonCreating: PropTypes.bool,

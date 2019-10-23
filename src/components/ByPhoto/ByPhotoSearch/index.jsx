@@ -16,22 +16,24 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
-let clearResultTimeout;
-
 function ByPhotoSearch({
   personSearchResult,
   clearResult,
-  unlockUploadDrop,
-  handleUploadFile,
+  onUploadEnd,
+  onUpload,
   error,
   hasDropped,
 }) {
+  const hasResults = personSearchResult || error;
+
   useEffect(() => {
-    if (hasDropped && (error || personSearchResult)) {
-      unlockUploadDrop();
+    let clearResultTimeout;
+
+    if (hasDropped && hasResults) {
+      onUploadEnd();
     }
     if (error) {
-      clearResultTimeout = setTimeout(() => clearResult(), ERROR_CLEAR_TIMER);
+      clearResultTimeout = setTimeout(clearResult, ERROR_CLEAR_TIMER);
     }
     return () => {
       window.clearTimeout(clearResultTimeout);
@@ -39,8 +41,7 @@ function ByPhotoSearch({
   });
 
   function renderContent() {
-    const isHaveResults = personSearchResult || error;
-    return isHaveResults ? (
+    return hasResults ? (
       error ? (
         <div data-testid="search-person-message">
           <StyledByPhotoSearchPlace>
@@ -84,7 +85,7 @@ function ByPhotoSearch({
 
   return (
     <FiltersUploadPhoto
-      onUpload={handleUploadFile}
+      onUpload={onUpload}
       render={renderContent}
       isLockDrop={hasDropped}
       isLockUpload={personSearchResult || error}
@@ -95,8 +96,8 @@ function ByPhotoSearch({
 ByPhotoSearch.propTypes = {
   personSearchResult: PropTypes.object,
   clearResult: PropTypes.func.isRequired,
-  unlockUploadDrop: PropTypes.func.isRequired,
-  handleUploadFile: PropTypes.func.isRequired,
+  onUploadEnd: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired,
   error: PropTypes.object,
   hasDropped: PropTypes.bool,
 };
