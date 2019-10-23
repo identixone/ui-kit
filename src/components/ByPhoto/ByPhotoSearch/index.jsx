@@ -36,7 +36,7 @@ function ByPhotoSearch({
       clearResultTimeout = setTimeout(clearResult, ERROR_CLEAR_TIMER);
     }
     return () => {
-      window.clearTimeout(clearResultTimeout);
+      clearTimeout(clearResultTimeout);
     };
   });
 
