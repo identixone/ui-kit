@@ -36,7 +36,6 @@ describe("ByPhotoSearch tests", () => {
     onUploadEnd: onUploadEndMock,
     onUpload: onUploadMock,
     hasDropped: false,
-    isCreating: false,
     personSearchResult: null,
     error: null,
   };
@@ -53,7 +52,7 @@ describe("ByPhotoSearch tests", () => {
     return getDefaultByPhotoSearch(props);
   }
 
-  test("ByPhotoSearch If have no created person and creation errors show message to create person", () => {
+  test("ByPhotoSearch If have no search result and search errors show message to search person", () => {
     const { queryByTestId } = renderByPhotoSearch({});
 
     expect(queryByTestId("search-person-message")).toHaveTextContent(
@@ -61,7 +60,7 @@ describe("ByPhotoSearch tests", () => {
     );
   });
 
-  test("ByPhotoSearch If have created person show person message", () => {
+  test("ByPhotoSearch If have search result show result message", () => {
     const { queryByTestId } = renderByPhotoSearch({
       personSearchResult: personSearchResultMock,
     });
@@ -71,7 +70,7 @@ describe("ByPhotoSearch tests", () => {
     );
   });
 
-  test("ByPhotoSearch If have creation error show error message", () => {
+  test("ByPhotoSearch If have search error show error message", () => {
     const { queryByTestId } = renderByPhotoSearch({
       error: personSearchErrorMock,
     });

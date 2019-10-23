@@ -46,7 +46,7 @@ describe("ByPhotoCreate tests", () => {
   const defaultProps = {
     clearResultMock: clearResultMock,
     createdPerson: null,
-    createError: null,
+    error: null,
     onUploadEnd: onUploadEndMock,
     onUpload: onUploadMock,
     hasDropped: false,
@@ -95,7 +95,7 @@ describe("ByPhotoCreate tests", () => {
 
   test("ByPhotoCreate If have creation error show error message", () => {
     const { queryByTestId } = renderByPhotoCreate({
-      createError: errorMock,
+      error: errorMock,
     });
 
     expect(queryByTestId("create-person-message")).toHaveTextContent(

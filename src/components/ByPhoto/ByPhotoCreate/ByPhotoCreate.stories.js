@@ -27,8 +27,8 @@ storiesOf("ByPhotoCreate", module).add("default", () => {
 
   return (
     <ByPhotoCreate
-      createdPerson={object("CreatedPerson", createdPersonMock)}
-      error={object("CreateError", errorMock)}
+      createdPerson={object("created person", createdPersonMock)}
+      error={object("error", errorMock)}
       clearResult={action("clear result")}
       onUploadEnd={action("end of upload file")}
       onUpload={action("upload file")}
