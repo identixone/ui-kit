@@ -1,43 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider } from "styled-components";
 
+import {
+  EntryCardContainer,
+  EntryCardPhotos,
+  EntryCardPhoto,
+  EntryCardEntryType,
+  EntryCardLiveness,
+  EntryCardInfo,
+  EntryCardInfoColumn,
+  EntryCardInfoItem,
+  EntryCardInfoItemLabel,
+  EntryCardInfoItemValue,
+  EntryCardButtonDelete,
+} from "../components";
+import EntryAdditionalButtons from "../../EntryAdditionalButtons";
+import { IdCopy } from "../../IdCopy";
+
+import { get } from "lodash-es";
 import { timeFormat, formatFaceSize, formatSex } from "../../../utils/helpers";
 import { config } from "../config";
 
-import StyledRow from "../StyledRow";
-import StyledColumn from "../columns/StyledColumn";
-import StyledEntriesColumn from "../columns/StyledEntriesColumn";
-
-import Liveness from "../Liveness";
-import { ColumnEntryType } from "../ColumnType";
-
-import { Value } from "../../Value";
-import { EntryCardPhoto } from "../EntryCardPhotos/EntryCardPhoto";
-import { IdCopy } from "../../IdCopy";
-import { IdFormat } from "../../IdFormat";
-
-import { EntryCardContainer } from "../EntryCardContainer";
-import { EntryCardPhotos } from "../EntryCardPhotos/index";
-
-import { EntryCardEntryType } from "./EntryCardEntryType";
-
-import { get } from "lodash-es";
-
-export function EntryCard({ entry, copyId, onClick }) {
+export function EntryCard({ entry, onClick, onDelete }) {
   const confsWithDetected = ["exact", "junk", "nm", "det", "ha"];
   const confsWithInitial = ["new", "exact", "junk", "ha", "reinit"];
+  const confsWithDelete = ["new", "exact", "junk", "ha"];
 
   const isDetectedShow = confsWithDetected.includes(entry.conf);
   const isInitialShow = confsWithInitial.includes(entry.conf);
+  const isDeleteble = confsWithDelete.includes(entry.conf);
 
   const confidence = get(config.entryType, `[${entry.conf}].full`, entry.conf);
 
   const facesizeToRender = formatFaceSize(entry.facesize);
 
   return (
-    <EntryCardContainer entry={entry} onClick={onClick}>
-      <Liveness liveness={entry.liveness} />
+    <EntryCardContainer entry={entry} onClick={() => onClick(entry.id)}>
+      <EntryCardLiveness liveness={entry.liveness} />
 
       <EntryCardPhotos>
         <EntryCardPhoto
@@ -55,59 +54,65 @@ export function EntryCard({ entry, copyId, onClick }) {
         />
       </EntryCardPhotos>
 
-      <EntryCardEntryType type={entry.conf} />
+      <EntryCardEntryType title="Type" type={entry.conf} />
 
-      <StyledEntriesColumn width={280}>
-        <StyledRow>
-          ID
-          {copyId ? <IdCopy id={entry.idxid} /> : <IdFormat id={entry.idxid} />}
-        </StyledRow>
-        <StyledRow>
-          Confidence
-          <span>
-            <Value>{confidence}</Value>
-          </span>
-        </StyledRow>
-        <StyledRow>
-          Detected
-          <span>
-            <Value>{timeFormat(entry.created)}</Value>
-          </span>
-        </StyledRow>
-        <StyledRow>
-          Card created
-          <span>
-            <Value>{timeFormat(entry.idxid_created)}</Value>
-          </span>
-        </StyledRow>
-      </StyledEntriesColumn>
+      <EntryCardInfo>
+        <EntryCardInfoColumn>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>ID</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>
+              <IdCopy id={entry.idxid} />
+            </EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>Confidence</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>{confidence}</EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>Detected</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>
+              {timeFormat(entry.created)}
+            </EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>Card created</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>
+              {timeFormat(entry.idxid_created)}
+            </EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+        </EntryCardInfoColumn>
 
-      <StyledColumn>
-        <StyledRow>
-          Age
-          <span>
-            <Value>{entry.age}</Value>
-          </span>
-        </StyledRow>
-        <StyledRow>
-          Sex
-          <span>
-            <Value>{formatSex(entry.sex)}</Value>
-          </span>
-        </StyledRow>
-        <StyledRow>
-          Mood
-          <span>
-            <Value>{entry.mood}</Value>
-          </span>
-        </StyledRow>
-        <StyledRow>
-          Source
-          <span>
-            <Value>{entry.source.name}</Value>
-          </span>
-        </StyledRow>
-      </StyledColumn>
+        <EntryCardInfoColumn>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>Age</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>{entry.age}</EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>Sex</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>
+              {formatSex(entry.sex)}
+            </EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>Mood</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>{entry.mood}</EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+          <EntryCardInfoItem>
+            <EntryCardInfoItemLabel>Source</EntryCardInfoItemLabel>
+            <EntryCardInfoItemValue>
+              {get(entry.source, "name")}
+            </EntryCardInfoItemValue>
+          </EntryCardInfoItem>
+        </EntryCardInfoColumn>
+      </EntryCardInfo>
+
+      <EntryAdditionalButtons>
+        {isDeleteble && (
+          <EntryCardButtonDelete onDelete={() => onDelete(entry.id)}>
+            Delete
+          </EntryCardButtonDelete>
+        )}
+      </EntryAdditionalButtons>
     </EntryCardContainer>
   );
 }
@@ -115,15 +120,9 @@ export function EntryCard({ entry, copyId, onClick }) {
 EntryCard.propTypes = {
   entry: PropTypes.object,
   onClick: PropTypes.func,
-  blurredEntries: PropTypes.bool,
-  copyId: PropTypes.bool,
+  onDelete: PropTypes.func,
 };
 
 EntryCard.defaultProps = {
-  active: false,
-  live: false,
   entry: {},
-  pointer: true,
-  copyId: true,
-  additionalButtons: false,
 };
