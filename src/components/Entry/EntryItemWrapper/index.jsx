@@ -45,7 +45,7 @@ export function EntryItemWrapper({
     }
   }
 
-  function isCanBeDelete(conf) {
+  function isDeleteble(conf) {
     return !deleted && !noDeleteTypes.includes(conf);
   }
 
@@ -92,7 +92,7 @@ export function EntryItemWrapper({
           {children}
           {additionalButtons && (
             <EntryAdditionalButtons>
-              {isCanBeDelete(conf) && (
+              {isDeleteble(conf) && (
                 <EntryAdditionalButton onClick={handleDelete}>
                   delete
                 </EntryAdditionalButton>
