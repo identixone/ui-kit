@@ -25,7 +25,6 @@ function ByPhotoSearch({
   onUpload,
   error,
   hasDropped,
-  isPersonSearching,
 }) {
   const { setUseTimeout, resetUseTimeout } = useTimeout(ERROR_CLEAR_TIMER);
   const hasResults = personSearchResult || error;
@@ -42,7 +41,7 @@ function ByPhotoSearch({
     if (error) {
       setUseTimeout(clearResult);
     }
-  }, [isPersonSearching, hasDropped, personSearchResult, error]);
+  }, [hasDropped, personSearchResult, error]);
 
   function renderContent() {
     return hasResults ? (
@@ -104,7 +103,6 @@ ByPhotoSearch.propTypes = {
   onUpload: PropTypes.func.isRequired,
   error: PropTypes.object,
   hasDropped: PropTypes.bool,
-  isPersonSearching: PropTypes.bool,
 };
 
 export {
