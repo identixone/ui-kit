@@ -32,13 +32,13 @@ export function EntryItemWrapper({
     colorMode: active ? "active" : "default",
     deleted: false,
   });
+  const { idxid, deleted, id, conf } = entry;
 
   function handleClick() {
     if (!state.deleted) {
       if (live) {
-        onClick(entry.id);
+        onClick(entry);
       } else {
-        const { idxid } = entry;
         updateCurrentEntryIdxid(idxid);
         idxid && push(`/entries/${idxid}/`);
       }
@@ -46,11 +46,10 @@ export function EntryItemWrapper({
   }
 
   function isCanBeDelete(conf) {
-    return !noDeleteTypes.some(type => conf === type);
+    return !deleted && !noDeleteTypes.includes(conf);
   }
 
   function handleDelete(e) {
-    const { id } = entry;
     deletePersonEntries(id);
     e.stopPropagation();
   }
@@ -78,8 +77,6 @@ export function EntryItemWrapper({
     });
   }, [active]);
 
-  const { idxid, deleted } = entry;
-
   return (
     <StyledEntry
       data-testid="entry-item"
@@ -95,7 +92,7 @@ export function EntryItemWrapper({
           {children}
           {additionalButtons && (
             <EntryAdditionalButtons>
-              {!deleted && isCanBeDelete(entry.conf) && (
+              {isCanBeDelete(conf) && (
                 <EntryAdditionalButton onClick={handleDelete}>
                   delete
                 </EntryAdditionalButton>
