@@ -24,6 +24,7 @@ export function EntryItemWrapper({
   additionalButtons,
   children,
   isInitialShow,
+  noDeleteTypes,
 }) {
   const entryref = useRef();
   const [state, setState] = useState({
@@ -31,13 +32,14 @@ export function EntryItemWrapper({
     colorMode: active ? "active" : "default",
     deleted: false,
   });
+  const { idxid, deleted, id, conf } = entry;
+  const isDeleteble = !deleted && !noDeleteTypes.includes(conf);
 
   function handleClick() {
     if (!state.deleted) {
       if (live) {
-        onClick(entry.id);
+        onClick(entry);
       } else {
-        const { idxid } = entry;
         updateCurrentEntryIdxid(idxid);
         idxid && push(`/entries/${idxid}/`);
       }
@@ -45,7 +47,6 @@ export function EntryItemWrapper({
   }
 
   function handleDelete(e) {
-    const { id } = entry;
     deletePersonEntries(id);
     e.stopPropagation();
   }
@@ -73,8 +74,6 @@ export function EntryItemWrapper({
     });
   }, [active]);
 
-  const { idxid, deleted } = entry;
-
   return (
     <StyledEntry
       data-testid="entry-item"
@@ -90,7 +89,7 @@ export function EntryItemWrapper({
           {children}
           {additionalButtons && (
             <EntryAdditionalButtons>
-              {!deleted && (
+              {isDeleteble && (
                 <EntryAdditionalButton onClick={handleDelete}>
                   delete
                 </EntryAdditionalButton>
@@ -109,6 +108,7 @@ EntryItemWrapper.defaultProps = {
   entry: {},
   pointer: true,
   additionalButtons: false,
+  noDeleteTypes: ["reinit", "new"],
 };
 
 EntryItemWrapper.propTypes = {
@@ -124,4 +124,5 @@ EntryItemWrapper.propTypes = {
   pointer: PropTypes.bool,
   additionalButtons: PropTypes.bool,
   isInitialShow: PropTypes.bool,
+  noDeleteTypes: PropTypes.arrayOf(PropTypes.string),
 };
