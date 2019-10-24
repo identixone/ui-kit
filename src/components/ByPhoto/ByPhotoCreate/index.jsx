@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+
+import { useTimeout } from "../../../hooks";
 
 import { ThemeProvider } from "styled-components";
 
@@ -25,11 +27,11 @@ function ByPhotoCreate({
   onUpload,
   hasDropped,
 }) {
-  const [createResultTimeout, setCreateResultTimeout] = useState(null);
+  const { setUseTimeout, resetUseTimeout } = useTimeout(ERROR_CLEAR_TIMER);
 
   function handleClearResult() {
     clearResult();
-    setCreateResultTimeout(null);
+    resetUseTimeout();
   }
 
   useEffect(() => {
@@ -40,15 +42,9 @@ function ByPhotoCreate({
     }
 
     if (isPersonNew || error) {
-      if (!createResultTimeout) {
-        setCreateResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
-      }
+      setUseTimeout(clearResult);
     }
-
-    return () => {
-      clearTimeout(createResultTimeout);
-    };
-  }, [createdPerson, hasDropped]);
+  }, [createdPerson, error, hasDropped]);
 
   function renderContent() {
     return createdPerson ? (
