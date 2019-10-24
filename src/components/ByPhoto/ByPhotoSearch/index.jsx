@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 import { upperFirst } from "lodash-es";
+
+import { useTimeout } from "../../../hooks";
 
 import { FiltersUploadPhoto } from "../FiltersUploadPhoto";
 
@@ -23,21 +25,24 @@ function ByPhotoSearch({
   onUpload,
   error,
   hasDropped,
+  isPersonSearching,
 }) {
+  const { setUseTimeout, resetUseTimeout } = useTimeout(ERROR_CLEAR_TIMER);
   const hasResults = personSearchResult || error;
-  const [searchResultTimeout, setSearchResultTimeout] = useState(null);
+
+  function handleClearResult() {
+    clearResult();
+    resetUseTimeout();
+  }
 
   useEffect(() => {
     if (hasDropped && hasResults) {
       onUploadEnd();
     }
     if (error) {
-      setSearchResultTimeout(setTimeout(clearResult, ERROR_CLEAR_TIMER));
+      setUseTimeout(clearResult);
     }
-    return () => {
-      clearTimeout(searchResultTimeout);
-    };
-  });
+  }, [isPersonSearching, hasDropped, personSearchResult, error]);
 
   function renderContent() {
     return hasResults ? (
@@ -67,7 +72,7 @@ function ByPhotoSearch({
             </StyledRoundButtonColor>
           </ThemeProvider>
 
-          <StyledByPhotoSearchRoundButton onClick={clearResult}>
+          <StyledByPhotoSearchRoundButton onClick={handleClearResult}>
             <Times size="16" />
           </StyledByPhotoSearchRoundButton>
         </div>
@@ -99,6 +104,7 @@ ByPhotoSearch.propTypes = {
   onUpload: PropTypes.func.isRequired,
   error: PropTypes.object,
   hasDropped: PropTypes.bool,
+  isPersonSearching: PropTypes.bool,
 };
 
 export {
