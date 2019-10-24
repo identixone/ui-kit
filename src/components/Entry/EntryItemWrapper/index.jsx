@@ -33,6 +33,7 @@ export function EntryItemWrapper({
     deleted: false,
   });
   const { idxid, deleted, id, conf } = entry;
+  const isDeleteble = !deleted && !noDeleteTypes.includes(conf);
 
   function handleClick() {
     if (!state.deleted) {
@@ -43,10 +44,6 @@ export function EntryItemWrapper({
         idxid && push(`/entries/${idxid}/`);
       }
     }
-  }
-
-  function isDeleteble(conf) {
-    return !deleted && !noDeleteTypes.includes(conf);
   }
 
   function handleDelete(e) {
@@ -92,7 +89,7 @@ export function EntryItemWrapper({
           {children}
           {additionalButtons && (
             <EntryAdditionalButtons>
-              {isDeleteble(conf) && (
+              {isDeleteble && (
                 <EntryAdditionalButton onClick={handleDelete}>
                   delete
                 </EntryAdditionalButton>
