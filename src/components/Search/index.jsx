@@ -1,31 +1,56 @@
-import styled from "styled-components";
+import React from "react";
+import PropTypes from "prop-types";
 
-import { SearchInput } from "../SearchInput";
-import StyledSearchInput from "../SearchInput/StyledSearchInput";
-import SearchInputIcon from "../SearchInput/SearchInputIcon";
+import { StyledSearch } from "./StyledSearch";
+import { SearchInput } from "./SearchInput";
+import { SearchFakeInputValue } from "./SearchFakeInputValue";
+import { SearchIcon } from "./SearchIcon";
+import { SearchClearButton } from "./SearchClearButton";
 
-export const Search = styled(SearchInput).attrs({
-  iconSize: 33,
-})`
-  height: 63px;
-  border-radius: 8px;
-  background-color: #bdc5c9;
+function Search({
+  value,
+  onChange,
+  placeholder,
+  innerRef,
+  className,
+  iconSize,
+  ...restProps
+}) {
+  return (
+    <StyledSearch className={className}>
+      <SearchIcon size={iconSize} />
+      <SearchInput
+        data-testid={restProps["data-testid"]}
+        ref={innerRef}
+        placeholder={placeholder ? placeholder : undefined}
+        onChange={onChange}
+        value={value}
+      />
+      <SearchFakeInputValue>{value}</SearchFakeInputValue>
+      {value && (
+        <SearchClearButton
+          onClick={() => {
+            onChange({ target: { value: "" } });
+          }}
+        />
+      )}
+    </StyledSearch>
+  );
+}
 
-  ${StyledSearchInput} {
-    background-color: transparent;
-    font-size: 36px;
-    font-weight: 600;
-    color: #fff;
-    padding-left: 0;
+Search.propTypes = {
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func,
+  innerRef: PropTypes.object,
+  iconSize: PropTypes.number,
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
+};
 
-    &::placeholder {
-      color: #fff;
-    }
-  }
+Search.defaultProps = {
+  iconSize: 23,
+  "data-testid": "search-input",
+};
 
-  ${SearchInputIcon} {
-    min-width: 70px;
-    max-width: 70px;
-    color: #fff;
-  }
-`;
+export { Search, StyledSearch, SearchFakeInputValue };

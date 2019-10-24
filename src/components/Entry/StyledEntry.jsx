@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
+
 import { EntryAdditionalButton } from "../EntryAdditionalButtons/EntryAdditionalButton";
+import { Flash } from "../Flash";
 
 const StyledEntry = styled.li`
   height: 121px;
@@ -7,7 +9,13 @@ const StyledEntry = styled.li`
   cursor: ${props => (props.pointer ? "pointer" : "")};
   float: left;
   width: 938px;
+  line-height: 18px;
   opacity: ${props => (props.deleted ? "0.4" : "1")};
+
+  ${Flash} {
+    position: static;
+  }
+
   ${props =>
     props.mode === "entries"
       ? css`

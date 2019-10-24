@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 const isCopyAvailible =
   document.queryCommandSupported && document.queryCommandSupported("copy");
 
+/**
+ * Deprecated
+ * (useCopyToClipboard)
+ */
 export class CopyItem extends React.Component {
   static propTypes = {
     render: PropTypes.func.isRequired,

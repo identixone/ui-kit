@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { IdCopy } from "../IdCopy";
 import { Value } from "../Value";
 import { FaceSize } from "../FaceSize";
-import { LazyImage } from "../LazyImage";
 
 import { StyledCloseButton } from "./StyledCloseButton";
 import { StyledDeleteButton } from "./StyledDeleteButton";
@@ -16,19 +15,20 @@ import StyledReinit from "./StyledReinit";
 import StyledColumnFirst from "./StyledColumnFirst";
 import StyledColumnSecond from "./StyledColumnSecond";
 import StyledEntryCardPhoto from "./StyledEntryCardPhoto";
+import { EntryCardPersonImage } from "./EntryCardPersonImage";
 
 import { colors } from "../../themes/colors";
 import noimageid from "../../assets/images/noimageid.png";
 import {
   timeFormat,
   formatFaceSize,
-  isNotEmpty,
   mapFiltersToGetParams,
+  formatSex,
 } from "../../utils/helpers";
 import EntryAdditionalButtons from "../EntryAdditionalButtons/index";
 
 function EntryCard(props) {
-  const { person, filters, actions, className, showFoundEntries } = props;
+  const { person, filters, actions, className } = props;
   const {
     age,
     idxid_created,
@@ -48,21 +48,19 @@ function EntryCard(props) {
     props.onDelete(idxid);
   }
 
-  const sexName = (isNotEmpty(sex) && (sex === 0 ? "male" : "female")) || "-";
-
   return (
     <StyledEntryCard className={className}>
-      {reinit ? <StyledReinit>RE</StyledReinit> : ""}
+      {reinit && <StyledReinit data-testid="reinit">RE</StyledReinit>}
       <StyledEntryCardPhoto>
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}
         </FaceSize>
-        <LazyImage src={initial_photo || noimageid} />
+        <EntryCardPersonImage src={initial_photo || noimageid} />
       </StyledEntryCardPhoto>
 
       {/* TODO: использовать слоты для actions */}
       {actions && (
-        <EntryAdditionalButtons>
+        <EntryAdditionalButtons data-testid="additional-buttons">
           <StyledCloseButton
             buttonTheme="light-gray"
             to={`/entries/${mapFiltersToGetParams(filters)}`}
@@ -90,14 +88,14 @@ function EntryCard(props) {
         </StyledLabel>
         <StyledLabel>
           Age
-          <StyledData>
+          <StyledData data-testid="age-value">
             <Value>{age}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Sex
-          <StyledData>
-            <Value>{sexName}</Value>
+          <StyledData data-testid="sex-value">
+            <Value>{formatSex(sex)}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
@@ -118,36 +116,33 @@ function EntryCard(props) {
         <StyledLabel>
           Total existing entries
           <StyledData>
-            <Value>{total}</Value>
+            <Value isZeroEmpty={true}>{total}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Exact entries
           <StyledData>
-            <Value>{exact}</Value>
+            <Value isZeroEmpty={true}>{exact}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           HA entries
           <StyledData>
-            <Value>{ha}</Value>
+            <Value isZeroEmpty={true}>{ha}</Value>
           </StyledData>
         </StyledLabel>
         <StyledLabel>
           Junk entries
           <StyledData>
-            <Value>{junk}</Value>
+            <Value isZeroEmpty={true}>{junk}</Value>
           </StyledData>
         </StyledLabel>
-
-        {showFoundEntries && (
-          <StyledLabel>
-            Found entries
-            <StyledData>
-              <Value>{total}</Value>
-            </StyledData>
-          </StyledLabel>
-        )}
+        <StyledLabel>
+          Found entries
+          <StyledData>
+            <Value>{total}</Value>
+          </StyledData>
+        </StyledLabel>
       </StyledColumnSecond>
     </StyledEntryCard>
   );
@@ -159,14 +154,12 @@ EntryCard.propTypes = {
   filters: PropTypes.object.isRequired,
   actions: PropTypes.bool.isRequired,
   className: PropTypes.string,
-  showFoundEntries: PropTypes.bool,
 };
 
 EntryCard.defaultProps = {
   person: {},
   filters: {},
   actions: false,
-  showFoundEntries: true,
 };
 
 export { EntryCard, StyledEntryCard };

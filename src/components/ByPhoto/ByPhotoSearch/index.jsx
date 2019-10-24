@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 import { upperFirst } from "lodash-es";
+
+import { useTimeout } from "../../../hooks";
 
 import { FiltersUploadPhoto } from "../FiltersUploadPhoto";
 
@@ -16,45 +18,42 @@ import { AngleRight, Times } from "../../../assets/icons";
 
 const ERROR_CLEAR_TIMER = 5000;
 
-export default class ByPhotoSearch extends Component {
-  static propTypes = {
-    personSearchResult: PropTypes.object,
-    clearResult: PropTypes.func.isRequired,
-    componentDidFetch: PropTypes.func.isRequired,
-    handleUploadFile: PropTypes.func.isRequired,
-    error: PropTypes.object,
-    hasDropped: PropTypes.bool,
-  };
+function ByPhotoSearch({
+  personSearchResult,
+  clearResult,
+  onUploadEnd,
+  onUpload,
+  error,
+  hasDropped,
+}) {
+  const { setUseTimeout, resetUseTimeout } = useTimeout(ERROR_CLEAR_TIMER);
+  const hasResults = personSearchResult || error;
 
-  componentDidUpdate() {
-    if (
-      this.props.hasDropped &&
-      (this.props.error || this.props.personSearchResult)
-    ) {
-      this.props.componentDidFetch();
-    }
-    if (this.props.error) {
-      setTimeout(() => this.props.clearResult(), ERROR_CLEAR_TIMER);
-    }
+  function handleClearResult() {
+    clearResult();
+    resetUseTimeout();
   }
 
-  handleClickLink = e => {
-    e.stopPropagation();
-  };
+  useEffect(() => {
+    if (hasDropped && hasResults) {
+      onUploadEnd();
+    }
+    if (error) {
+      setUseTimeout(clearResult);
+    }
+  }, [hasDropped, personSearchResult, error]);
 
-  renderContent = () => {
-    const { personSearchResult, error, hasDropped } = this.props;
-    const isHaveResults = personSearchResult || error;
-    return isHaveResults ? (
+  function renderContent() {
+    return hasResults ? (
       error ? (
-        <div>
+        <div data-testid="search-person-message">
           <StyledByPhotoSearchPlace>
             Error {error.status}
           </StyledByPhotoSearchPlace>
           <span>{error.data.detail || "No person found in database"}</span>
         </div>
       ) : (
-        <div>
+        <div data-testid="search-person-message">
           <StyledByPhotoSearchPlace>Person found</StyledByPhotoSearchPlace>
           <ThemeProvider theme={{ mode: personSearchResult.conf }}>
             <StyledPlaceColor>
@@ -67,36 +66,49 @@ export default class ByPhotoSearch extends Component {
           <ThemeProvider theme={{ mode: personSearchResult.conf }}>
             <StyledRoundButtonColor
               to={`/entries/${personSearchResult.idxid}/`}
-              onClick={this.handleClickLink}
             >
               <AngleRight size="16" />
             </StyledRoundButtonColor>
           </ThemeProvider>
 
-          <StyledByPhotoSearchRoundButton onClick={this.props.clearResult}>
+          <StyledByPhotoSearchRoundButton onClick={handleClearResult}>
             <Times size="16" />
           </StyledByPhotoSearchRoundButton>
         </div>
       )
     ) : (
-      <div>
+      <div data-testid="search-person-message">
         <StyledByPhotoSearchPlace>Search persona mode</StyledByPhotoSearchPlace>
         <TextDrag isLockDrop={hasDropped}>
           drag and drop file (.jpg, .png) or click to select
         </TextDrag>
       </div>
     );
-  };
-
-  render() {
-    const { personSearchResult, error } = this.props;
-    return (
-      <FiltersUploadPhoto
-        handleUploadFile={this.props.handleUploadFile}
-        render={this.renderContent}
-        isLockDrop={this.props.hasDropped}
-        isLockUpload={personSearchResult || error}
-      />
-    );
   }
+
+  return (
+    <FiltersUploadPhoto
+      onUpload={onUpload}
+      render={renderContent}
+      isLockDrop={hasDropped}
+      isLockUpload={personSearchResult || error}
+    />
+  );
 }
+
+ByPhotoSearch.propTypes = {
+  personSearchResult: PropTypes.object,
+  clearResult: PropTypes.func.isRequired,
+  onUploadEnd: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired,
+  error: PropTypes.object,
+  hasDropped: PropTypes.bool,
+};
+
+export {
+  ByPhotoSearch,
+  StyledByPhotoSearchPlace,
+  StyledByPhotoSearchPlaceGray,
+};
+
+export default ByPhotoSearch;

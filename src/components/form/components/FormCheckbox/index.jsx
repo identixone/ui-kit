@@ -5,7 +5,6 @@ import StyledFormCheckbox from "./StyledFormCheckbox";
 
 import FormCheckboxFlag from "./FormCheckboxFlag";
 import FormCheckboxInput from "./FormCheckboxInput";
-import { FormCheckboxMarker } from "./FormCheckboxMarker";
 
 function FormCheckbox({
   onChange,
@@ -14,25 +13,32 @@ function FormCheckbox({
   value,
   disabled,
   className,
+  checkboxTheme,
+  size,
   ...restProps
 }) {
   const checked = Boolean(value);
 
   return (
-    <StyledFormCheckbox disabled={disabled} className={className}>
-      <FormCheckboxMarker disabled={disabled}>
-        <FormCheckboxFlag checked={checked} disabled={disabled} />
-        <FormCheckboxInput
-          id={name}
-          name={name}
-          type="checkbox"
-          checked={checked}
-          onChange={onChange}
-          onBlur={onBlur}
-          disabled={disabled}
-          data-testid={restProps["data-testid"] || name}
-        />
-      </FormCheckboxMarker>
+    <StyledFormCheckbox
+      disabled={disabled}
+      checked={checked}
+      className={className}
+      htmlFor={name}
+      checkboxTheme={checkboxTheme}
+      size={size}
+    >
+      <FormCheckboxFlag checked={checked} />
+      <FormCheckboxInput
+        id={name}
+        name={name}
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        onBlur={onBlur}
+        disabled={disabled}
+        data-testid={restProps["data-testid"] || name}
+      />
     </StyledFormCheckbox>
   );
 }
@@ -45,10 +51,13 @@ FormCheckbox.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
+  checkboxTheme: PropTypes.oneOf(["light", "dark"]),
+  size: PropTypes.oneOf(["small", "large"]),
 };
 
 FormCheckbox.defaultProps = {
-  type: "text",
+  checkboxTheme: "light",
+  size: "small",
 };
 
-export { FormCheckbox, StyledFormCheckbox, FormCheckboxMarker };
+export { FormCheckbox, StyledFormCheckbox };

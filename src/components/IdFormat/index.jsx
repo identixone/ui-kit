@@ -1,17 +1,14 @@
+import React from "react";
 import PropTypes from "prop-types";
+
+import { Value } from "../Value";
 
 const getShortId = id => id.split("-")[4];
 
-export function IdFormat({ id, defaultValue }) {
-  return id ? getShortId(id) : defaultValue;
+export function IdFormat({ children }) {
+  return <Value>{children ? getShortId(children) : null}</Value>;
 }
 
 IdFormat.propTypes = {
-  id: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string,
-};
-
-IdFormat.defaultProps = {
-  id: "",
-  defaultValue: "-",
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
 };

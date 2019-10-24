@@ -8,6 +8,7 @@ const FormDropdownInput = styled.input`
   width: 100px;
   margin: 4px 15px;
   height: 20px;
+  font-size: 16px;
 `;
 
 export default FormDropdownInput;

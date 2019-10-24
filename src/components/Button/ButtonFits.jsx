@@ -2,6 +2,8 @@ import { css } from "styled-components";
 
 const rectFit = css``;
 
+const squareFit = css``;
+
 const circleFit = css`
   border-radius: 50%;
 `;
@@ -9,4 +11,5 @@ const circleFit = css`
 export default {
   rect: rectFit,
   circle: circleFit,
+  square: squareFit,
 };

@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { ThemeProvider } from "styled-components";
+import { useIsOpen } from "../../hooks/use-is-open";
 
+import { ThemeProvider } from "styled-components";
 import StyledButtonToggle from "./StyledButtonToggle";
 import StyledButtonToggleContainer from "./StyledButtonToggleContainer";
-import { ButtonToggleWrapper } from "../ButtonToggleWrapper";
 import StyledButtonClose from "./StyledButtonClose";
 
 import { Times } from "../../assets/icons";
@@ -19,31 +19,33 @@ export function ButtonToggleCalendar({
   isActive,
   handleCrossClick,
 }) {
+  const { isOpen: stateIsOpen, toggleIsOpen, setIsOpen } = useIsOpen({
+    isOpen,
+    onChange,
+  });
+
+  function onCrossClick() {
+    setIsOpen(false);
+    handleCrossClick();
+  }
+
   return (
-    <ButtonToggleWrapper
-      onChange={onChange}
-      isOpen={isOpen}
-      render={({ handleToggleClick, isOpen }) => {
-        return (
-          <ThemeProvider theme={{ mode }}>
-            <StyledButtonToggleContainer height={height}>
-              <StyledButtonToggle
-                data-testid="button-toggle-calendar"
-                onClick={handleToggleClick}
-                isActive={isOpen || isActive}
-              >
-                {icon}
-              </StyledButtonToggle>
-              {isActive && !isOpen && (
-                <StyledButtonClose onClick={handleCrossClick} mode={mode}>
-                  <Times size="16" />
-                </StyledButtonClose>
-              )}
-            </StyledButtonToggleContainer>
-          </ThemeProvider>
-        );
-      }}
-    />
+    <ThemeProvider theme={{ mode }}>
+      <StyledButtonToggleContainer height={height}>
+        <StyledButtonToggle
+          data-testid="button-toggle-calendar"
+          onClick={toggleIsOpen}
+          isActive={stateIsOpen || isActive}
+        >
+          {icon}
+        </StyledButtonToggle>
+        {isActive && !isOpen && (
+          <StyledButtonClose onClick={onCrossClick} mode={mode}>
+            <Times size="16" />
+          </StyledButtonClose>
+        )}
+      </StyledButtonToggleContainer>
+    </ThemeProvider>
   );
 }
 

@@ -6,4 +6,5 @@ export const StyledHeaderTopMenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  line-height: 18px;
 `;

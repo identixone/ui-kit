@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const PageNum = styled.span`
-  text-align: center;
+const PageNum = styled.div`
+  display: flex;
 `;
 
 export default PageNum;

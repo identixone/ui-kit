@@ -1,5 +1,21 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const StyledLazyImage = styled.img``;
+import colors from "../../themes/colors";
 
-export default StyledLazyImage;
+function getStyles({ isImageLoaded }) {
+  return !isImageLoaded
+    ? css`
+        background-color: ${colors.whiteGrayDark};
+
+        img {
+          display: none;
+        }
+      `
+    : css`
+        background-color: ${colors.whiteSimple};
+      `;
+}
+
+export const StyledLazyImage = styled.div`
+  ${getStyles}
+`;

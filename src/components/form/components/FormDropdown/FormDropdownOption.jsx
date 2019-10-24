@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const FormDropdownOption = styled.li`
   color: #263238;
@@ -15,8 +15,10 @@ const FormDropdownOption = styled.li`
   ${({ isDisabled }) => {
     return (
       isDisabled &&
-      `border-color: #546E7A;
-      opacity: .5;`
+      css`
+        border-color: #546e7a;
+        opacity: 0.5;
+      `
     );
   }}
 

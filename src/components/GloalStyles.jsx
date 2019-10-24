@@ -8,11 +8,15 @@ export const GloalStyles = createGlobalStyle`
   }
   
   body {
-    font: 16px/18px "Open Sans", Arial, sans-serif;
+    font-family: Open Sans, Helvetica Neue, sans-serif;
     font-weight: 400;
     color: #000;
     user-select: none;
     height: 100%;
+  }
+
+  input, textarea, button {
+    font-family: Open Sans, Helvetica Neue, sans-serif;
   }
 
   #app-container {

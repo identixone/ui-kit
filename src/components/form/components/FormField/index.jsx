@@ -61,8 +61,10 @@ function FormField(props) {
         const getFormComponent = () => {
           return component ? (
             <FormComponent {...formComponentProps} />
+          ) : render ? (
+            render(formComponentProps)
           ) : (
-            render ? render(formComponentProps): ""
+            ""
           );
         };
 
@@ -137,6 +139,11 @@ FormField.propTypes = {
   disabled: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
+  /**
+   * Разобраться, зачем эти пропсы
+   */
+  placeholder: PropTypes.string,
+  valuePlaceholder: PropTypes.string,
 };
 
 FormField.defaultProps = {

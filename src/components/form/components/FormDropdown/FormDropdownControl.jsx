@@ -15,6 +15,7 @@ const FormDropdownControl = styled(Button).attrs({
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-size: 16px;
 
   &:after {
     height: 0;

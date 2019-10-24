@@ -1,44 +1,59 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import StyledLazyImage from "./StyledLazyImage";
-import LazyImageContainer from "./LazyImageContainer";
+import { useState, useEffect } from "react";
 
-import { noop } from "lodash-es";
+import { StyledLazyImage } from "./StyledLazyImage";
 
-export class LazyImage extends Component {
-  static propTypes = {
-    src: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    onLoad: PropTypes.func,
-  };
+export function LazyImage({
+  src,
+  children,
+  className,
+  onLoad,
+  "data-testid": testId,
+  imgRef,
+}) {
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  static defaultProps = {
-    onLoad: noop,
-  };
+  useEffect(() => {
+    if (onLoad && isLoaded) {
+      onLoad();
+    }
+  }, [isLoaded]);
 
-  state = {
-    isLoaded: false,
-  };
-
-  componentDidUpdate(_, prevState) {
-    if (!prevState.isLoaded && this.state.isLoaded) {
-      this.props.onLoad();
+  function handleImageLoaded() {
+    if (!isLoaded) {
+      setIsLoaded(true);
     }
   }
 
-  handleImageLoad = () => {
-    this.setState(({ isLoaded }) => (!isLoaded ? { isLoaded: true } : null));
-  };
-
-  render() {
-    const { className, src } = this.props;
-    const { isLoaded } = this.state;
-
-    return (
-      <LazyImageContainer className={className} isImageLoaded={isLoaded}>
-        <StyledLazyImage src={src} onLoad={this.handleImageLoad} />
-      </LazyImageContainer>
-    );
-  }
+  return (
+    <StyledLazyImage className={className} isImageLoaded={isLoaded}>
+      {children ? (
+        React.cloneElement(children, {
+          onLoad: handleImageLoaded,
+        })
+      ) : (
+        <img
+          src={src}
+          onLoad={handleImageLoaded}
+          data-testid={testId}
+          ref={imgRef}
+        />
+      )}
+    </StyledLazyImage>
+  );
 }
+
+LazyImage.propTypes = {
+  src: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  className: PropTypes.string,
+  onLoad: PropTypes.func,
+  "data-testid": PropTypes.string,
+  imgRef: PropTypes.object,
+};
+
+LazyImage.defaultProps = {
+  "data-testid": "lazy-image",
+};
