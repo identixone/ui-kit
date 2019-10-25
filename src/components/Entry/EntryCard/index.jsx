@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { StyledEntryCard } from "./StyledEntryCard";
 import {
-  EntryCardContainer,
   EntryCardPhotos,
   EntryCardPhoto,
   EntryCardEntryType,
@@ -21,21 +21,26 @@ import { get } from "lodash-es";
 import { timeFormat, formatFaceSize, formatSex } from "../../../utils/helpers";
 import { config } from "../config";
 
-export function EntryCard({ entry, onClick, onDelete }) {
+function EntryCard({ entry, onClick, onDelete, deleted }) {
   const confsWithDetected = ["exact", "junk", "nm", "det", "ha"];
   const confsWithInitial = ["new", "exact", "junk", "ha", "reinit"];
   const confsWithDelete = ["new", "exact", "junk", "ha"];
 
   const isDetectedShow = confsWithDetected.includes(entry.conf);
   const isInitialShow = confsWithInitial.includes(entry.conf);
-  const isDeleteble = confsWithDelete.includes(entry.conf);
+  const isDeleteble = confsWithDelete.includes(entry.conf) && !deleted;
 
   const confidence = get(config.entryType, `[${entry.conf}].full`, entry.conf);
 
   const facesizeToRender = formatFaceSize(entry.facesize);
 
   return (
-    <EntryCardContainer entry={entry} onClick={() => onClick(entry.id)}>
+    <StyledEntryCard
+      data-idxid={entry.idxid}
+      data-testid="entry-item"
+      onClick={() => onClick(entry.id)}
+      deleted={deleted}
+    >
       <EntryCardLiveness liveness={entry.liveness} />
 
       <EntryCardPhotos>
@@ -113,7 +118,7 @@ export function EntryCard({ entry, onClick, onDelete }) {
           </EntryCardButtonDelete>
         )}
       </EntryAdditionalButtons>
-    </EntryCardContainer>
+    </StyledEntryCard>
   );
 }
 
@@ -121,8 +126,11 @@ EntryCard.propTypes = {
   entry: PropTypes.object,
   onClick: PropTypes.func,
   onDelete: PropTypes.func,
+  deleted: PropTypes.bool,
 };
 
 EntryCard.defaultProps = {
   entry: {},
 };
+
+export { EntryCard };

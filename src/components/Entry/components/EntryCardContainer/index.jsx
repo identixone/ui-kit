@@ -1,31 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import { StyledEntryCardContainer } from "./StyledEntryCardContainer";
+import { EntryAdditionalButton } from "../../../EntryAdditionalButtons/EntryAdditionalButton";
+import { EntryCardButtonDelete } from "../EntryCardButtonDelete";
 
-function EntryCardContainer({ entry, onClick, children }) {
-  const { idxid, deleted } = entry;
+const EntryCardContainer = styled.li`
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  line-height: 18px;
 
-  return (
-    <StyledEntryCardContainer
-      data-testid="entry-item"
-      data-idxid={idxid}
-      deleted={deleted}
-      onClick={onClick}
-    >
-      {children}
-    </StyledEntryCardContainer>
-  );
-}
+  ${EntryAdditionalButton}, ${EntryCardButtonDelete} {
+    opacity: 0;
+  }
 
-EntryCardContainer.propTypes = {
-  entry: PropTypes.object.isRequired,
-  children: PropTypes.func,
-  onClick: PropTypes.func,
-};
+  &:hover {
+    ${EntryAdditionalButton}, ${EntryCardButtonDelete} {
+      opacity: 1;
+    }
+  }
+`;
 
-EntryCardContainer.defaultProps = {
-  entry: {},
-};
-
-export { EntryCardContainer, StyledEntryCardContainer };
+export { EntryCardContainer };
