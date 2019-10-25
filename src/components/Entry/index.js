@@ -1,4 +1,3 @@
 export { EntryCard } from "./EntryCard";
+export { EntryLiveCard } from "./EntryLiveCard";
 export { EntryPersonCard } from "./EntryPersonCard";
-// export { EntryShortItem } from "./EntryShortItem";
-// export { EntryIdItem } from "./EntryIdItem";
