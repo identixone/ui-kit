@@ -50,7 +50,7 @@ function EntryCard(props) {
 
   return (
     <StyledEntryCard className={className}>
-      {reinit && <StyledReinit data-testid="reinit">RE</StyledReinit>}
+      {reinit ? <StyledReinit data-testid="reinit">RE</StyledReinit> : null}
       <StyledEntryCardPhoto>
         <FaceSize title="face area in pixels">
           {formatFaceSize(initial_facesize)}
