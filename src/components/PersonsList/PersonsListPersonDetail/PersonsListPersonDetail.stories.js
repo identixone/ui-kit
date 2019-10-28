@@ -6,17 +6,20 @@ import { PersonsListPersonDetail } from "./index.jsx";
 
 import { personMock } from "../../../../test/__mocks__";
 
-storiesOf("PersonsListPersonDetail", module).add("default", () => {
-  const person = object("Person", personMock);
+storiesOf("Persons Lists|PersonsListPersonDetail", module).add(
+  "default",
+  () => {
+    const person = object("Person", personMock);
 
-  const isLoading = boolean("isLoading", false);
-  const isPersonNotExists = boolean("isPersonNotExists", false);
+    const isLoading = boolean("isLoading", false);
+    const isPersonNotExists = boolean("isPersonNotExists", false);
 
-  return (
-    <PersonsListPersonDetail
-      person={!isPersonNotExists && person}
-      isLoading={isLoading}
-      isPersonNotExists={isPersonNotExists}
-    />
-  );
-});
+    return (
+      <PersonsListPersonDetail
+        person={!isPersonNotExists && person}
+        isLoading={isLoading}
+        isPersonNotExists={isPersonNotExists}
+      />
+    );
+  }
+);
