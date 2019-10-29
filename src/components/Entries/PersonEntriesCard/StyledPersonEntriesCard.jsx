@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import {
   EntryCardContainer,
+  EntryCardActions,
   EntryCardActionsButton,
   EntryCardInfo,
   EntryCardInfoColumn,
@@ -22,7 +23,8 @@ const StyledPersonEntriesCard = styled(EntryCardContainer)`
 
   ${EntryCardInfoColumn} {
     &:not(:last-of-type) {
-      margin-right: 50px;
+      width: 305px;
+      margin-right: 48px;
     }
   }
 
@@ -31,12 +33,16 @@ const StyledPersonEntriesCard = styled(EntryCardContainer)`
   }
 
   ${EntryCardInfoItemLabel} {
-    width: 160px;
+    width: 157px;
     font-weight: 600;
   }
 
   ${EntryCardInfoItemValue} {
     font-weight: 300;
+  }
+
+  ${EntryCardActions} {
+    opacity: 1;
   }
 
   ${EntryCardActionsButton} {

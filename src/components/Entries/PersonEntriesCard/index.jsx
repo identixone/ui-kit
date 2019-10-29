@@ -48,7 +48,7 @@ function PersonEntriesCard({
             {timeFormat(person.idxid_created)}
           </EntryCardInfoItem>
           <EntryCardInfoItem label="Place of first entry">
-            {get(person.source, "name")}
+            {get(person.idxid_source, "name")}
           </EntryCardInfoItem>
         </EntryCardInfoColumn>
 
