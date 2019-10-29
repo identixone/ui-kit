@@ -7,11 +7,12 @@ import { EntryCardInfoItemValue } from "./EntryCardInfoItemValue";
 
 const StyledEntryCardInfoItem = styled.div`
   display: flex;
+  line-height: 18px;
 `;
 
-function EntryCardInfoItem({ children, label, isZeroEmpty }) {
+function EntryCardInfoItem({ children, label, isZeroEmpty, className }) {
   return (
-    <StyledEntryCardInfoItem>
+    <StyledEntryCardInfoItem className={className}>
       {!label ? (
         children
       ) : (
@@ -30,6 +31,7 @@ EntryCardInfoItem.propTypes = {
   label: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   isZeroEmpty: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 EntryCardInfoItem.Value = EntryCardInfoItemValue;

@@ -1,14 +1,22 @@
 import styled from "styled-components";
 
 import { EntryCardPhoto } from "../components";
-import { EntryCardPhotoImg } from "../components/EntryCardPhotos/EntryCardPhoto/EntryCardPhotoImg";
+import {
+  EntryCardPhotoImg,
+  EntryCardPhotoFaceSize,
+} from "../components/EntryCardPhotos/EntryCardPhoto";
 
 const PersonEntriesCardPhoto = styled(EntryCardPhoto)`
-  margin-right: 45px;
+  border-right: 8px solid rgb(239, 239, 239);
 
   ${EntryCardPhotoImg} {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+    border-radius: 0;
+  }
+
+  ${EntryCardPhotoFaceSize} {
+    top: -1px;
   }
 `;
 

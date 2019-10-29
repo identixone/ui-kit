@@ -9,13 +9,6 @@ const StyledEntryCardPhoto = styled.div`
     css`
       opacity: 0;
     `}
-
-  ${({ blurred }) =>
-    blurred &&
-    css`
-      opacity: 0.3;
-      filter: blur(5px);
-    `}
 `;
 
 export { StyledEntryCardPhoto };

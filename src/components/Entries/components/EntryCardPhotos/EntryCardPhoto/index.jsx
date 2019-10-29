@@ -15,8 +15,8 @@ function EntryCardPhoto({
   title,
   className,
   hidden,
-  blurred,
   "data-testid": testId,
+  "data-phototype": photoType,
 }) {
   const photoToRender = src || noimage;
 
@@ -24,8 +24,8 @@ function EntryCardPhoto({
     <StyledEntryCardPhoto
       className={className}
       data-testid={testId}
+      data-phototype={photoType}
       hidden={hidden}
-      blurred={blurred}
     >
       <EntryCardPhotoTitle>{title}</EntryCardPhotoTitle>
 
@@ -45,10 +45,15 @@ EntryCardPhoto.propTypes = {
   facesize: PropTypes.string,
   title: PropTypes.string,
   src: PropTypes.string,
+  hidden: PropTypes.bool,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
-  hidden: PropTypes.bool,
-  blurred: PropTypes.bool,
+  "data-phototype": PropTypes.string,
 };
 
-export { EntryCardPhoto, StyledEntryCardPhoto };
+export {
+  EntryCardPhoto,
+  StyledEntryCardPhoto,
+  EntryCardPhotoImg,
+  EntryCardPhotoFaceSize,
+};

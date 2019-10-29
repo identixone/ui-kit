@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { StyledEntryCardContainer } from "./StyledEntryCardContainer";
-import { EntryCardAdditionalButtons } from "../EntryCardAdditionalButtons";
+import { EntryCardActions } from "../EntryCardActions";
 
 function EntryCardContainer({ className, children, actions, deleted }) {
   return (
     <StyledEntryCardContainer className={className} deleted={deleted}>
       {children}
-      <EntryCardAdditionalButtons>{actions}</EntryCardAdditionalButtons>
+      <EntryCardActions>{actions}</EntryCardActions>
     </StyledEntryCardContainer>
   );
 }

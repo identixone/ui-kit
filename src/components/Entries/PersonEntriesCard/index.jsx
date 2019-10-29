@@ -14,11 +14,20 @@ import { get } from "lodash-es";
 import { timeFormat, formatFaceSize, formatSex } from "../../../utils/helpers";
 import { PersonEntriesCardReinit } from "./PersonEntriesCardReinit";
 
-function PersonEntriesCard({ person, className, actions }) {
+function PersonEntriesCard({
+  person,
+  actions,
+  className,
+  "data-testid": testId,
+}) {
   const hasReinit = person.reinit > 0;
 
   return (
-    <StyledPersonEntriesCard className={className} actions={actions}>
+    <StyledPersonEntriesCard
+      className={className}
+      actions={actions}
+      data-testid={testId}
+    >
       <PersonEntriesCardPhoto
         facesize={formatFaceSize(person.initial_facesize)}
         src={person.initial_photo}
@@ -67,12 +76,14 @@ function PersonEntriesCard({ person, className, actions }) {
 
 PersonEntriesCard.propTypes = {
   person: PropTypes.object.isRequired,
-  className: PropTypes.string,
   actions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 PersonEntriesCard.defaultProps = {
   person: {},
+  "data-testid": "person-entries-card",
 };
 
 export { StyledPersonEntriesCard, PersonEntriesCard };

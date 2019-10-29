@@ -5,8 +5,7 @@ import { select, number, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import { EntryPersonCard } from "./index.jsx";
-import { EntryPersonCardReinitButton } from "./EntryPersonCardReinitButton";
-import { EntryCardButtonDelete } from "../components";
+import { EntryCardActionsButton, EntryCardButtonDelete } from "../components";
 
 import { entryMock, personMock } from "../../../../test/__mocks__";
 
@@ -43,17 +42,19 @@ storiesOf("Entries|EntryPersonCard", module).add("default", () => {
       actions={
         !entry.deleted && (
           <React.Fragment>
+            {isReinitable && (
+              <EntryCardActionsButton
+                onClick={() => action("Reinit")(entry.id)}
+              >
+                reinit
+              </EntryCardActionsButton>
+            )}
             {isDeleteble && (
               <EntryCardButtonDelete
                 onDelete={() => action("Delete")(entry.id)}
               >
                 delete
               </EntryCardButtonDelete>
-            )}
-            {isReinitable && (
-              <EntryPersonCardReinitButton onClick={action("Reinit")}>
-                reinit
-              </EntryPersonCardReinitButton>
             )}
           </React.Fragment>
         )

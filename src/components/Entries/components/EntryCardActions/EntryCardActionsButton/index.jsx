@@ -1,11 +1,17 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import Button from "../../../../Button";
 import { ButtonLink } from "../../../../ButtonLink";
+
 import colors from "../../../../../themes/colors";
 
-export const EntryCardAdditionalButtonStyles = css`
-  width: 100%;
+const EntryCardActionsButton = styled(Button).attrs(
+  ({ to, as, buttonTheme }) => ({
+    as: as || to ? ButtonLink : Button,
+    buttonTheme: buttonTheme || "reset",
+  })
+)`
+  width: 115px;
   opacity: 0.7;
   color: ${colors.black};
   font-size: 14px;
@@ -14,6 +20,7 @@ export const EntryCardAdditionalButtonStyles = css`
   background-color: ${colors.grayBlueDark2};
   padding: 0px 22px;
   text-transform: lowercase;
+  text-align: center;
 
   &:first-child {
     border-radius: 0 0 0 5px;
@@ -22,17 +29,10 @@ export const EntryCardAdditionalButtonStyles = css`
   &:not(:last-child) {
     margin-bottom: 6px;
   }
-`;
-
-const EntryCardAdditionalButton = styled(Button).attrs(({ to }) => ({
-  as: to ? ButtonLink : Button,
-}))`
-  ${EntryCardAdditionalButtonStyles}
 
   &:hover {
-    background-color: ${colors.blueWhite};
-    color: ${colors.black};
+    opacity: 0.6;
   }
 `;
 
-export { EntryCardAdditionalButton };
+export { EntryCardActionsButton };

@@ -24,7 +24,7 @@ const StyledEntryPersonCard = styled(EntryCardContainer)`
   }
 
   ${EntryCardInfoColumn} {
-    &:not(:last-child) {
+    &:not(:last-of-type) {
       margin-right: 70px;
     }
   }

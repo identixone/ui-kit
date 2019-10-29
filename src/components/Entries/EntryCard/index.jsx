@@ -21,15 +21,14 @@ function EntryCard({
   entry,
   onClick,
   actions,
-  confsWithInitialBlurred,
   className,
+  "data-testid": testId,
 }) {
   const confsWithDetected = ["exact", "junk", "nm", "det", "ha"];
   const confsWithInitial = ["new", "exact", "junk", "ha", "reinit"];
 
   const isDetectedShow = confsWithDetected.includes(entry.conf);
   const isInitialShow = confsWithInitial.includes(entry.conf);
-  const isInitialBlurred = confsWithInitialBlurred.includes(entry.conf);
 
   const confidence = get(config.entryType, `[${entry.conf}].full`, entry.conf);
 
@@ -44,7 +43,7 @@ function EntryCard({
   return (
     <StyledEntryCard
       data-idxid={entry.idxid}
-      data-testid="entry-item"
+      data-testid={testId}
       onClick={handleEntryCardClick}
       deleted={entry.deleted}
       className={className}
@@ -53,14 +52,15 @@ function EntryCard({
       <EntryCardPhotos>
         <EntryCardPhoto
           title="Initial"
+          data-phototype="initial"
           facesize={!isDetectedShow && facesizeToRender}
           src={entry.initial_photo}
           hidden={!isInitialShow}
-          blurred={isInitialBlurred}
         />
 
         <EntryCardPhoto
           title="Detected"
+          data-phototype="detected"
           facesize={facesizeToRender}
           src={entry.photo}
           hidden={!isDetectedShow}
@@ -104,13 +104,13 @@ EntryCard.propTypes = {
   entry: PropTypes.object.isRequired,
   onClick: PropTypes.func,
   actions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
-  confsWithInitialBlurred: PropTypes.array.isRequired,
   className: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 EntryCard.defaultProps = {
   entry: {},
-  confsWithInitialBlurred: [],
+  "data-testid": "entry-card",
 };
 
 export { EntryCard, StyledEntryCard };

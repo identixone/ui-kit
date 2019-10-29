@@ -15,15 +15,16 @@ import { get } from "lodash-es";
 import { timeFormat, formatFaceSize } from "../../../utils/helpers";
 import { config } from "../config";
 
-function EntryPersonCard({ entry, className, actions }) {
+function EntryPersonCard({ entry, actions, className, "data-testid": testId }) {
   const confidence = get(config.entryType, `[${entry.conf}].full`, entry.conf);
   const facesizeToRender = formatFaceSize(entry.facesize);
 
   return (
     <StyledEntryPersonCard
       deleted={entry.deleted}
-      className={className}
       actions={actions}
+      className={className}
+      data-testid={testId}
     >
       <EntryPersonCardPhoto
         facesize={facesizeToRender}
@@ -57,10 +58,12 @@ EntryPersonCard.propTypes = {
   entry: PropTypes.object.isRequired,
   actions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   className: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 EntryPersonCard.defaultProps = {
   entry: {},
+  "data-testid": "entry-person-card",
 };
 
 export { EntryPersonCard, StyledEntryPersonCard };

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { EntryCardAdditionalButtons } from "../EntryCardAdditionalButtons";
+import { EntryCardActions } from "../EntryCardActions";
 
 function getStyles({ deleted }) {
   return deleted
@@ -20,12 +20,12 @@ const StyledEntryCardContainer = styled.li`
 
   ${getStyles}
 
-  ${EntryCardAdditionalButtons} {
+  ${EntryCardActions} {
     opacity: 0;
   }
 
   &:hover {
-    ${EntryCardAdditionalButtons} {
+    ${EntryCardActions} {
       opacity: 1;
     }
   }
