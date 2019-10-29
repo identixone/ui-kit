@@ -15,8 +15,9 @@ import StyledRoundButtonColor from "../StyledRoundButtonColor";
 import StyledByPhotoSearchRoundButton from "./StyledByPhotoSearchRoundButton";
 
 import { AngleRight, Times } from "../../../assets/icons";
+import { get } from "lodash-es";
 
-const ERROR_CLEAR_TIMER = 5000;
+import { ERROR_CLEAR_TIMER, DEFAULT_ERROR_MESSAGE } from "./constants.js";
 
 function ByPhotoSearch({
   personSearchResult,
@@ -43,6 +44,12 @@ function ByPhotoSearch({
     }
   }, [hasDropped, personSearchResult, error]);
 
+  const errorMessage = get(
+    error,
+    "data.photo.detail",
+    get(error, "data.detail", DEFAULT_ERROR_MESSAGE)
+  );
+
   function renderContent() {
     return hasResults ? (
       error ? (
@@ -50,7 +57,7 @@ function ByPhotoSearch({
           <StyledByPhotoSearchPlace>
             Error {error.status}
           </StyledByPhotoSearchPlace>
-          <span>{error.data.detail || "No person found in database"}</span>
+          <span>{errorMessage}</span>
         </div>
       ) : (
         <div data-testid="search-person-message">
