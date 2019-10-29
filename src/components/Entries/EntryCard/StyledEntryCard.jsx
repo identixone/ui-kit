@@ -15,7 +15,7 @@ import { colors } from "../../../themes/colors";
 
 const StyledEntryCard = styled(EntryCardContainer)`
   height: 121px;
-  padding: 19px 10px 10px 30px;
+  padding: 19px 10px 10px 28px;
   background-color: ${colors.whiteGray};
   border-radius: 4px;
 
@@ -25,7 +25,7 @@ const StyledEntryCard = styled(EntryCardContainer)`
 
   ${StyledEntryCardPhoto} {
     &:not(:last-of-type) {
-      margin-right: 5px;
+      margin-right: 7px;
     }
   }
 
@@ -35,7 +35,8 @@ const StyledEntryCard = styled(EntryCardContainer)`
 
   ${EntryCardInfoColumn} {
     &:not(:last-of-type) {
-      margin-right: 30px;
+      width: 260px;
+      margin-right: 20px;
     }
   }
 
@@ -46,7 +47,7 @@ const StyledEntryCard = styled(EntryCardContainer)`
   }
 
   ${EntryCardInfoItemLabel} {
-    width: 100px;
+    width: 105px;
   }
 
   ${StyledEntryCardLiveness} {

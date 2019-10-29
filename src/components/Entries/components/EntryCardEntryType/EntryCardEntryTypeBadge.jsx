@@ -19,7 +19,7 @@ const color = theme("mode", {
 const EntryCardEntryTypeBadge = styled(UIBadge).attrs({ color })`
   font-size: 17px;
   font-weight: 300;
-  line-height: 26px;
+  line-height: 23px;
   text-transform: lowercase;
   border-radius: 3px;
   width: 85px;

@@ -11,8 +11,9 @@ function getStyles({ deleted }) {
 }
 
 const StyledEntryCardContainer = styled.li`
+  width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
