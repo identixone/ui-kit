@@ -47,11 +47,11 @@ function ByPhotoCreate({
     }
   }, [createdPerson, error, hasDropped]);
 
-  const errorMessageDetail = get(error, "data.detail", null);
-  const errorPhotoMessageDetail = get(error, "data.photo.detail", null);
-
-  const errorMessage =
-    errorMessageDetail || errorPhotoMessageDetail || DEFAULT_ERROR_MESSAGE;
+  const errorMessage = get(
+    error,
+    "data.photo.detail",
+    get(error, "data.detail", DEFAULT_ERROR_MESSAGE)
+  );
 
   function renderContent() {
     return createdPerson ? (
