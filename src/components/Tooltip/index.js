@@ -1,23 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+
+import { useState, useRef, useEffect } from "react";
 
 import { Popup } from "../Popup";
 import TooltipContainer from "./TooltipContainer";
 import TooltipInner from "./TooltipInner";
 import TooltipTitle from "./TooltipTitle";
 
-export function Tooltip(props) {
+function Tooltip(props) {
   const { initialOpen = false, title, children } = props;
   const [isOpen, setIsOpen] = useState(initialOpen);
   const tooltipTrigger = useRef();
-
-  function handleTriggerHover() {
-    setIsOpen(true);
-  }
-
-  function handleTriggerLeave() {
-    setIsOpen(false);
-  }
 
   useEffect(() => {
     const { current: tooltipTriggerEl } = tooltipTrigger;
@@ -33,6 +27,14 @@ export function Tooltip(props) {
     }
   }, []);
 
+  function handleTriggerHover() {
+    setIsOpen(true);
+  }
+
+  function handleTriggerLeave() {
+    setIsOpen(false);
+  }
+
   return (
     <React.Fragment>
       {typeof children === "function" ? (
@@ -41,7 +43,9 @@ export function Tooltip(props) {
           tooltipTrigger,
         })
       ) : (
-        <span ref={tooltipTrigger}>{children}</span>
+        <span ref={tooltipTrigger} data-testid="tooltip-trigger">
+          {children}
+        </span>
       )}
       <Popup
         position={"right"}
@@ -49,7 +53,12 @@ export function Tooltip(props) {
         pupupTrigger={tooltipTrigger}
         triggerContent={children}
         render={({ isOpen, left, top, popupInner }) => (
-          <TooltipContainer isOpen={isOpen} left={left} top={top}>
+          <TooltipContainer
+            data-testid="tooltip-container"
+            isOpen={isOpen}
+            left={left}
+            top={top}
+          >
             <TooltipInner ref={popupInner}>
               <TooltipTitle>{title}</TooltipTitle>
             </TooltipInner>
@@ -65,3 +74,5 @@ Tooltip.propTypes = {
   initialOpen: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
+
+export { Tooltip };
