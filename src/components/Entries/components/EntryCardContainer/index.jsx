@@ -4,9 +4,19 @@ import PropTypes from "prop-types";
 import { StyledEntryCardContainer } from "./StyledEntryCardContainer";
 import { EntryCardActions } from "../EntryCardActions";
 
-function EntryCardContainer({ className, children, actions, deleted }) {
+function EntryCardContainer({
+  className,
+  children,
+  actions,
+  deleted,
+  ...restProps
+}) {
   return (
-    <StyledEntryCardContainer className={className} deleted={deleted}>
+    <StyledEntryCardContainer
+      className={className}
+      deleted={deleted}
+      {...restProps}
+    >
       {children}
       <EntryCardActions>{actions}</EntryCardActions>
     </StyledEntryCardContainer>
