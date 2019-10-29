@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+
+import { useState, useEffect } from "react";
 
 import { createPortal } from "react-dom";
 
 let popupContainer = document.createElement("div");
 let popupInner = React.createRef();
 
-export function Popup(props) {
+function Popup(props) {
   const { initialOpen, position, pupupTrigger, render } = props;
 
   const [isOpen, setIsOpen] = useState(initialOpen);
@@ -14,6 +16,32 @@ export function Popup(props) {
     top: null,
     left: null,
   });
+
+  useEffect(() => {
+    setIsOpen(props.isOpen);
+    if (isOpen === true) {
+      updatePopupCoords();
+    }
+  }, [props.isOpen, isOpen]);
+
+  useEffect(() => {
+    const currentRoot = document.getElementById("app-container");
+    currentRoot.appendChild(popupContainer);
+
+    return () => {
+      if (currentRoot && popupContainer.parentNode == currentRoot) {
+        currentRoot.removeChild(popupContainer);
+      }
+    };
+  });
+
+  useEffect(() => {
+    window.addEventListener("resize", updatePopupCoords);
+
+    return () => {
+      window.removeEventListener("resize", updatePopupCoords);
+    };
+  }, []);
 
   function setPopupCoords(pupupTriggerEl) {
     const { left, top, width, height } = pupupTriggerEl.getBoundingClientRect();
@@ -44,32 +72,6 @@ export function Popup(props) {
     }
   }
 
-  useEffect(() => {
-    setIsOpen(props.isOpen);
-    if (isOpen === true) {
-      updatePopupCoords();
-    }
-  }, [props.isOpen, isOpen]);
-
-  useEffect(() => {
-    const currentRoot = document.getElementById("app-container");
-    currentRoot.appendChild(popupContainer);
-
-    return () => {
-      if (currentRoot && popupContainer.parentNode == currentRoot) {
-        currentRoot.removeChild(popupContainer);
-      }
-    };
-  });
-
-  useEffect(() => {
-    window.addEventListener("resize", updatePopupCoords);
-
-    return () => {
-      window.removeEventListener("resize", updatePopupCoords);
-    };
-  }, []);
-
   return createPortal(
     render({
       isOpen: isOpen,
@@ -83,9 +85,9 @@ export function Popup(props) {
 }
 
 Popup.propTypes = {
-  initialOpen: PropTypes.bool,
+  initialOpen: PropTypes.bool.isRequired,
   pupupTrigger: PropTypes.object,
-  position: PropTypes.oneOf(["right", "top"]),
+  position: PropTypes.oneOf(["right", "top"]).isRequired,
   render: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
 };
@@ -94,3 +96,5 @@ Popup.defaultProps = {
   initialOpen: false,
   position: "right",
 };
+
+export { Popup };
