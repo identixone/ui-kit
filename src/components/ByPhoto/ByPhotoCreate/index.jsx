@@ -16,8 +16,9 @@ import StyledRoundButtonColor from "../StyledRoundButtonColor";
 import StyledByPhotoCreateRoundButton from "./StyledByPhotoCreateRoundButton";
 
 import { AngleRight, Times } from "../../../assets/icons";
+import { get } from "lodash-es";
 
-const ERROR_CLEAR_TIMER = 5000;
+import { ERROR_CLEAR_TIMER, DEFAULT_ERROR_MESSAGE } from "./constants.js";
 
 function ByPhotoCreate({
   createdPerson,
@@ -45,6 +46,12 @@ function ByPhotoCreate({
       setUseTimeout(clearResult);
     }
   }, [createdPerson, error, hasDropped]);
+
+  const errorMessageDetail = get(error, "data.detail", null);
+  const errorPhotoMessageDetail = get(error, "data.photo.detail", null);
+
+  const errorMessage =
+    errorMessageDetail || errorPhotoMessageDetail || DEFAULT_ERROR_MESSAGE;
 
   function renderContent() {
     return createdPerson ? (
@@ -81,7 +88,7 @@ function ByPhotoCreate({
     ) : error ? (
       <div data-testid="create-person-message">
         <StyledPlaceRound>Error {error.status}</StyledPlaceRound>
-        <span>{error.data.detail || "No person found in database"}</span>
+        <span>{errorMessage}</span>
       </div>
     ) : (
       <div data-testid="create-person-message">
