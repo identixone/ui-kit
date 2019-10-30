@@ -4,7 +4,7 @@ import { EntryCardPhoto } from "../components";
 import { EntryCardPhotoImg } from "../components/EntryCardPhotos/EntryCardPhoto/EntryCardPhotoImg";
 
 const EntryPersonCardPhoto = styled(EntryCardPhoto)`
-  margin-right: 45px;
+  margin-right: 63px;
 
   ${EntryCardPhotoImg} {
     width: 100px;

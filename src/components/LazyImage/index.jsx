@@ -21,6 +21,10 @@ export function LazyImage({
     }
   }, [isLoaded]);
 
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src]);
+
   function handleImageLoaded() {
     if (!isLoaded) {
       setIsLoaded(true);

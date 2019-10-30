@@ -27,7 +27,7 @@ function EntryCardPhoto({
       data-phototype={photoType}
       hidden={hidden}
     >
-      <EntryCardPhotoTitle>{title}</EntryCardPhotoTitle>
+      {title && <EntryCardPhotoTitle>{title}</EntryCardPhotoTitle>}
 
       <EntryCardPhotoImgContainer>
         <EntryCardPhotoImg src={photoToRender} />

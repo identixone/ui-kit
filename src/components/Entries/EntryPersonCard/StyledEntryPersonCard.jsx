@@ -12,7 +12,7 @@ import {
 
 const StyledEntryPersonCard = styled(EntryCardContainer)`
   height: 130px;
-  padding: 15px 0 10px 45px;
+  padding: 15px 0 10px 48px;
   background-color: transparent;
 
   &:not(:last-child) {
@@ -25,7 +25,8 @@ const StyledEntryPersonCard = styled(EntryCardContainer)`
 
   ${EntryCardInfoColumn} {
     &:not(:last-of-type) {
-      margin-right: 70px;
+      width: 160px;
+      margin-right: 60px;
     }
   }
 
