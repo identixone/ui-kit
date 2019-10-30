@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+
+import { useTimeout } from "../../../hooks";
 
 import { ThemeProvider } from "styled-components";
 
@@ -14,66 +16,54 @@ import StyledRoundButtonColor from "../StyledRoundButtonColor";
 import StyledByPhotoCreateRoundButton from "./StyledByPhotoCreateRoundButton";
 
 import { AngleRight, Times } from "../../../assets/icons";
+import { get } from "lodash-es";
 
-const ERROR_CLEAR_TIMER = 5000;
+import { ERROR_CLEAR_TIMER, DEFAULT_ERROR_MESSAGE } from "./constants.js";
 
-export default class ByPhotoCreate extends Component {
-  static propTypes = {
-    createdPerson: PropTypes.object,
-    error: PropTypes.object,
-    clearResult: PropTypes.func.isRequired,
-    componentDidFetch: PropTypes.func.isRequired,
-    handleUploadFile: PropTypes.func.isRequired,
-    hasDropped: PropTypes.bool,
-  };
+function ByPhotoCreate({
+  createdPerson,
+  error,
+  clearResult,
+  onUploadEnd,
+  onUpload,
+  hasDropped,
+}) {
+  const { setUseTimeout, resetUseTimeout } = useTimeout(ERROR_CLEAR_TIMER);
 
-  state = {
-    createResultTimeout: null,
-  };
+  function handleClearResult() {
+    clearResult();
+    resetUseTimeout();
+  }
 
-  componentDidUpdate() {
-    const { createdPerson, error, hasDropped, componentDidFetch } = this.props;
+  useEffect(() => {
     const isPersonNew = createdPerson && createdPerson.conf === "new";
 
     if (hasDropped && (error || createdPerson)) {
-      componentDidFetch();
+      onUploadEnd();
     }
 
     if (isPersonNew || error) {
-      if (!this.state.createResultTimeout) {
-        this.setState({
-          createResultTimeout: setTimeout(this.clearResult, ERROR_CLEAR_TIMER),
-        });
-      }
+      setUseTimeout(clearResult);
     }
-  }
+  }, [createdPerson, error, hasDropped]);
 
-  componentWillUnmount() {
-    clearTimeout(this.state.createResultTimeout);
-  }
+  const errorMessage = get(
+    error,
+    "data.photo.detail",
+    get(error, "data.detail", DEFAULT_ERROR_MESSAGE)
+  );
 
-  clearResult = () => {
-    this.props.clearResult();
-    this.setState({ createResultTimeout: null });
-  };
-
-  handleClickLink = e => {
-    e.stopPropagation();
-  };
-
-  renderContent = () => {
-    const { createdPerson, error, hasDropped } = this.props;
-
+  function renderContent() {
     return createdPerson ? (
       createdPerson.conf === "new" ? (
-        <div>
+        <div data-testid="create-person-message">
           <StyledPlaceRound>Person created</StyledPlaceRound>
           <StyledByPhotoCreatePlaceGray>
             {createdPerson.idxid}
           </StyledByPhotoCreatePlaceGray>
         </div>
       ) : (
-        <div>
+        <div data-testid="create-person-message">
           <StyledByPhotoCreatePlaceLeftRound>
             Creation error, such person exists
           </StyledByPhotoCreatePlaceLeftRound>
@@ -86,42 +76,49 @@ export default class ByPhotoCreate extends Component {
             {createdPerson.idxid}
           </StyledByPhotoCreatePlaceGray>
           <ThemeProvider theme={{ mode: createdPerson.conf }}>
-            <StyledRoundButtonColor
-              to={`/entries/${createdPerson.idxid}/`}
-              onClick={this.handleClickLink}
-            >
+            <StyledRoundButtonColor to={`/entries/${createdPerson.idxid}/`}>
               <AngleRight size="16" />
             </StyledRoundButtonColor>
           </ThemeProvider>
-          <StyledByPhotoCreateRoundButton onClick={this.props.clearResult}>
+          <StyledByPhotoCreateRoundButton onClick={handleClearResult}>
             <Times size="16" />
           </StyledByPhotoCreateRoundButton>
         </div>
       )
     ) : error ? (
-      <div>
+      <div data-testid="create-person-message">
         <StyledPlaceRound>Error {error.status}</StyledPlaceRound>
-        <span>{error.data.detail || "No person found in database"}</span>
+        <span>{errorMessage}</span>
       </div>
     ) : (
-      <div>
+      <div data-testid="create-person-message">
         <StyledPlaceRound>Create persona mode</StyledPlaceRound>
         <TextDrag isLockDrop={hasDropped}>
           drag and drop file (.jpg, .png) or click to select
         </TextDrag>
       </div>
     );
-  };
-
-  render() {
-    const { createdPerson, error } = this.props;
-    return (
-      <FiltersUploadPhoto
-        handleUploadFile={this.props.handleUploadFile}
-        render={this.renderContent}
-        isLockDrop={this.props.hasDropped}
-        isLockUpload={createdPerson || error}
-      />
-    );
   }
+
+  return (
+    <FiltersUploadPhoto
+      onUpload={onUpload}
+      render={renderContent}
+      isLockDrop={hasDropped}
+      isLockUpload={createdPerson || error}
+    />
+  );
 }
+
+ByPhotoCreate.propTypes = {
+  createdPerson: PropTypes.object,
+  error: PropTypes.object,
+  clearResult: PropTypes.func.isRequired,
+  onUploadEnd: PropTypes.func.isRequired,
+  onUpload: PropTypes.func.isRequired,
+  hasDropped: PropTypes.bool,
+};
+
+export { ByPhotoCreate };
+
+export default ByPhotoCreate;
