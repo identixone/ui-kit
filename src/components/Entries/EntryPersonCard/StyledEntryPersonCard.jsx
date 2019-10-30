@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
   EntryCardContainer,
   StyledEntryCardEntryType,
+  EntryCardInfo,
   EntryCardInfoColumn,
   StyledEntryCardInfoItem,
   EntryCardInfoItemLabel,
@@ -23,6 +24,10 @@ const StyledEntryPersonCard = styled(EntryCardContainer)`
     margin-right: 70px;
   }
 
+  ${EntryCardInfo} {
+    padding-top: 8px;
+  }
+
   ${EntryCardInfoColumn} {
     &:not(:last-of-type) {
       width: 160px;
@@ -40,6 +45,7 @@ const StyledEntryPersonCard = styled(EntryCardContainer)`
 
   ${EntryCardInfoItemLabel} {
     font-size: 12px;
+    line-height: 16px;
     font-weight: 600;
     text-transform: uppercase;
   }

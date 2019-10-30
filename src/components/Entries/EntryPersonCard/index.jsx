@@ -26,10 +26,7 @@ function EntryPersonCard({ entry, actions, className, "data-testid": testId }) {
       className={className}
       data-testid={testId}
     >
-      <EntryPersonCardPhoto
-        facesize={facesizeToRender}
-        src={entry.initial_photo}
-      />
+      <EntryPersonCardPhoto facesize={facesizeToRender} src={entry.photo} />
 
       <EntryCardEntryType title="Type" type={entry.conf} />
 

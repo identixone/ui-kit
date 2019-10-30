@@ -60,7 +60,7 @@ export function timeFormat(time) {
 function timeFormater(time, fromat) {
   const formatedTime =
     time && dayjs(time).isValid() && dayjs(time).format(fromat);
-  return formatedTime || "-";
+  return formatedTime || "—";
 }
 
 export function formatDate(date, format = "DD MMM YYYY, HH:mm:ss") {
