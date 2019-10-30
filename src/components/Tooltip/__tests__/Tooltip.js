@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent } from "@testing-library/react";
 
 import { render } from "../../../../test/utils";
-import { Tooltip } from "../index.jsx";
+import { Tooltip } from "../index.js";
 
 describe("Tooltip tests", () => {
   const handleDeleteMock = jest.fn();
@@ -38,5 +38,7 @@ describe("Tooltip tests", () => {
     expect(queryByTestId("tooltip-container")).toHaveStyle("opacity: 0");
     fireEvent.mouseOver(queryByTestId("tooltip-trigger"));
     expect(queryByTestId("tooltip-container")).toHaveStyle("opacity: 1");
+    fireEvent.mouseOut(queryByTestId("tooltip-trigger"));
+    expect(queryByTestId("tooltip-container")).toHaveStyle("opacity: 0");
   });
 });

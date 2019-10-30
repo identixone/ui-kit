@@ -18,7 +18,7 @@ function Tooltip(props) {
 
     if (tooltipTriggerEl) {
       tooltipTriggerEl.addEventListener("mouseover", handleTriggerHover);
-      tooltipTriggerEl.addEventListener("mouseleave", handleTriggerLeave);
+      tooltipTriggerEl.addEventListener("mouseout", handleTriggerLeave);
 
       return () => {
         tooltipTriggerEl.removeEventListener("mouseover", handleTriggerHover);
