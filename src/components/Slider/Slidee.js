@@ -19,18 +19,6 @@ const Slidee = styled.ul`
   padding: 0;
   width: 100%;
   list-style: none;
-  li {
-    float: left;
-    margin: 4px 0 4px 0;
-    padding: 0;
-    width: 938px;
-  }
-  li:first-child {
-    margin-top: 0;
-  }
-  li:last-child {
-    margin-bottom: 0;
-  }
 `;
 
 export default Slidee;
