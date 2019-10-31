@@ -82,7 +82,12 @@ export function dateToIso(date) {
 }
 
 export function formatSex(sex) {
-  return sex === 0 ? "male" : "female";
+  return (
+    {
+      0: "male",
+      1: "female",
+    }[sex] || null
+  );
 }
 
 export function toggleInArray(arr = [], item) {
