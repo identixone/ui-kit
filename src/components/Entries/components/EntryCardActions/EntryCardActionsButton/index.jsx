@@ -12,7 +12,6 @@ const EntryCardActionsButton = styled(Button).attrs(
   })
 )`
   width: 115px;
-  opacity: 0.7;
   color: ${colors.black};
   font-size: 14px;
   font-weight: 600;
@@ -21,6 +20,7 @@ const EntryCardActionsButton = styled(Button).attrs(
   padding: 0px 22px;
   text-transform: lowercase;
   text-align: center;
+  opacity: 0.7;
 
   &:first-child {
     border-radius: 0 0 0 5px;
@@ -31,7 +31,7 @@ const EntryCardActionsButton = styled(Button).attrs(
   }
 
   &:hover {
-    opacity: 0.6;
+    opacity: 1;
   }
 `;
 
