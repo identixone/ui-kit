@@ -27,6 +27,7 @@ const EntryCardEntryTypeBadge = styled(UIBadge).attrs({ color })`
   height: 26px;
   display: block;
   box-sizing: border-box;
+  border: 1px solid ${({ color }) => color};
 `;
 
 export { EntryCardEntryTypeBadge };

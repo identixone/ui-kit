@@ -26,4 +26,8 @@ EntryCardEntryType.propTypes = {
   className: PropTypes.string,
 };
 
-export { EntryCardEntryType, StyledEntryCardEntryType };
+export {
+  EntryCardEntryType,
+  StyledEntryCardEntryType,
+  EntryCardEntryTypeBadge,
+};

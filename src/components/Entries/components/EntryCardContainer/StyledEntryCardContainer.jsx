@@ -2,7 +2,10 @@ import styled, { css } from "styled-components";
 
 import { EntryCardActions } from "../EntryCardActions";
 import { StyledEntryCardPhoto } from "../EntryCardPhotos";
-import { StyledEntryCardEntryType } from "../EntryCardEntryType";
+import {
+  StyledEntryCardEntryType,
+  EntryCardEntryTypeBadge,
+} from "../EntryCardEntryType";
 import { StyledEntryCardInfoItem } from "../EntryCardInfoItem";
 import { StyledEntryCardLiveness } from "../EntryCardLiveness";
 
@@ -18,6 +21,7 @@ const themes = {
     backgroundColor: colors.slate,
     textColor: colors.whiteSimple,
     livenessColor: "#E7EFF2",
+    badgeBorderColor: colors.whiteSimple,
   },
 };
 
@@ -47,6 +51,10 @@ const StyledEntryCardContainer = styled.li`
 
   ${StyledEntryCardEntryType} {
     color: ${({ theme }) => themes[theme.theme].textColor};
+  }
+
+  ${EntryCardEntryTypeBadge} {
+    border-color: ${({ theme }) => themes[theme.theme].badgeBorderColor};
   }
 
   ${StyledEntryCardInfoItem} {
