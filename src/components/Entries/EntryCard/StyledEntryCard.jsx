@@ -11,12 +11,9 @@ import {
   StyledEntryCardLiveness,
 } from "../components";
 
-import { colors } from "../../../themes/colors";
-
 const StyledEntryCard = styled(EntryCardContainer)`
   height: 121px;
   padding: 19px 10px 10px 28px;
-  background-color: ${colors.whiteGray};
   border-radius: 4px;
 
   ${EntryCardPhotos} {

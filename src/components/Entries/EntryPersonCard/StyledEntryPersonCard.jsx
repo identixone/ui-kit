@@ -11,10 +11,21 @@ import {
   StyledEntryCardLiveness,
 } from "../components";
 
+import { colors } from "../../../themes/index";
+
+const themes = {
+  light: {
+    backgroundColor: "transparent",
+  },
+  dark: {
+    backgroundColor: colors.slate,
+  },
+};
+
 const StyledEntryPersonCard = styled(EntryCardContainer)`
   height: 130px;
   padding: 15px 0 10px 48px;
-  background-color: transparent;
+  background-color: ${({ theme }) => themes[theme].backgroundColor};
 
   &:not(:last-child) {
     border-bottom: 1px solid #f1f1f1;

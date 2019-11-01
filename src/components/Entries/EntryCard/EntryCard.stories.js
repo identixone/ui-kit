@@ -9,7 +9,7 @@ import { EntryCardButtonDelete } from "../components";
 
 import { entryMock } from "../../../../test/__mocks__";
 
-storiesOf("Entries|EntryCard", module).add("default", () => {
+storiesOf("Entries|EntryCard", module).add("light", () => {
   const conf = select(
     "Conf",
     ["new", "reinit", "exact", "ha", "junk", "nm", "det"],
@@ -20,6 +20,7 @@ storiesOf("Entries|EntryCard", module).add("default", () => {
     ["failed", "passed", "undetermined"],
     "failed"
   );
+  const theme = select("theme", ["light", "dark"], "light");
   const deleted = boolean("Deleted", false);
   const entry = { ...entryMock, conf, liveness, deleted };
 
@@ -30,6 +31,7 @@ storiesOf("Entries|EntryCard", module).add("default", () => {
     <EntryCard
       entry={entry}
       onClick={action("Click")}
+      theme={theme}
       actions={
         isDeleteble && (
           <React.Fragment>

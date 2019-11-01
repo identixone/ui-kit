@@ -20,6 +20,7 @@ storiesOf("Entries|EntryPersonCard", module).add("default", () => {
     ["failed", "passed", "undetermined"],
     "failed"
   );
+  const theme = select("theme", ["light", "dark"], "light");
   const deleted = boolean("Deleted", false);
   const entry = { ...entryMock, conf, liveness, deleted };
   const person = { ...personMock, reinit: number("Reinit count", 0) };
@@ -39,6 +40,7 @@ storiesOf("Entries|EntryPersonCard", module).add("default", () => {
     <EntryPersonCard
       entry={entry}
       onClick={action("Click")}
+      theme={theme}
       actions={
         !entry.deleted && (
           <React.Fragment>
