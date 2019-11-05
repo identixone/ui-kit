@@ -74,7 +74,7 @@ function PersonsListPerson({
           name={person.idxid}
           value={isSelected}
           onChange={onChange}
-          isHidden={!isMouseOver && !isSelected}
+          isHidden={!isMouseOver && !isSelected && !isActive}
           data-testid={`persons-list-person-select-${person.idxid}`}
         />
       )}

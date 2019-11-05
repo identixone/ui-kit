@@ -38,7 +38,7 @@ export function PersonsListPersonDetailInfo({ person }) {
         <PersonValue>{formatSex(person.sex)}</PersonValue>
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>
-        <PersonLabel>Card create</PersonLabel>
+        <PersonLabel>Card created</PersonLabel>
         <PersonValue>{formatDate(person.idxid_created)}</PersonValue>
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>
