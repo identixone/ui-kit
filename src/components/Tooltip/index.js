@@ -1,37 +1,49 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 
-import { Popup } from "../Popup";
+import { usePopup } from "../../hooks/use-popup";
 import TooltipContainer from "./TooltipContainer";
 import TooltipInner from "./TooltipInner";
 import TooltipTitle from "./TooltipTitle";
 
 export function Tooltip(props) {
   const { initialOpen = false, title, children } = props;
-  const [isOpen, setIsOpen] = useState(initialOpen);
   const tooltipTrigger = useRef();
-
-  function handleTriggerHover() {
-    setIsOpen(true);
-  }
-
-  function handleTriggerLeave() {
-    setIsOpen(false);
-  }
 
   useEffect(() => {
     const { current: tooltipTriggerEl } = tooltipTrigger;
 
     if (tooltipTriggerEl) {
-      tooltipTriggerEl.addEventListener("mouseover", handleTriggerHover);
+      tooltipTriggerEl.addEventListener("mouseenter", handleTriggerHover);
       tooltipTriggerEl.addEventListener("mouseleave", handleTriggerLeave);
 
       return () => {
-        tooltipTriggerEl.removeEventListener("mouseover", handleTriggerHover);
+        tooltipTriggerEl.removeEventListener("mouseenter", handleTriggerHover);
         tooltipTriggerEl.removeEventListener("mouseleave", handleTriggerLeave);
       };
     }
   }, []);
+
+  const {
+    Portal,
+    openPortal,
+    closePortal,
+    isOpen,
+    coords,
+    popupInner,
+  } = usePopup({
+    pupupTrigger: tooltipTrigger,
+    position: "right",
+    isOpen: initialOpen,
+  });
+
+  function handleTriggerHover(e) {
+    openPortal(e);
+  }
+
+  function handleTriggerLeave(e) {
+    closePortal(e);
+  }
 
   return (
     <React.Fragment>
@@ -43,19 +55,13 @@ export function Tooltip(props) {
       ) : (
         <span ref={tooltipTrigger}>{children}</span>
       )}
-      <Popup
-        position={"right"}
-        isOpen={isOpen}
-        pupupTrigger={tooltipTrigger}
-        triggerContent={children}
-        render={({ isOpen, left, top, popupInner }) => (
-          <TooltipContainer isOpen={isOpen} left={left} top={top}>
-            <TooltipInner ref={popupInner}>
-              <TooltipTitle>{title}</TooltipTitle>
-            </TooltipInner>
-          </TooltipContainer>
-        )}
-      />
+      <Portal>
+        <TooltipContainer isOpen={isOpen} left={coords.left} top={coords.top}>
+          <TooltipInner ref={popupInner}>
+            <TooltipTitle>{title}</TooltipTitle>
+          </TooltipInner>
+        </TooltipContainer>
+      </Portal>
     </React.Fragment>
   );
 }
