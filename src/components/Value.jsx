@@ -2,8 +2,11 @@ import PropTypes from "prop-types";
 
 import { isNotEmpty } from "../utils/helpers";
 
-export function Value({ children, defaultValue, isZeroEmpty, value }) {
-  const valueToCheck = value || children;
+export function Value(props) {
+  const hasValueInProps = Object.prototype.hasOwnProperty.call(props, "value");
+
+  const { children, defaultValue, isZeroEmpty, value } = props;
+  const valueToCheck = hasValueInProps ? value : children;
 
   return isNotEmpty(valueToCheck, isZeroEmpty) ? children : defaultValue;
 }
