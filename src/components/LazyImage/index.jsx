@@ -31,6 +31,15 @@ export function LazyImage({
     }
   }
 
+  /**
+   * Случай, когда изображение берется из кэша
+   */
+  useEffect(() => {
+    if (!isLoaded && imgRef.current.complete) {
+      setIsLoaded(true);
+    }
+  }, [imgRef.current]);
+
   return (
     <StyledLazyImage className={className} isImageLoaded={isLoaded}>
       {children ? (

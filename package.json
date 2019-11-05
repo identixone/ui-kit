@@ -20,7 +20,8 @@
     "format": "npm run prettier -- --write",
     "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
     "storybook": "start-storybook",
-    "build-storybook": "build-storybook -c .storybook -o docs"
+    "build-storybook": "build-storybook -c .storybook -o docs",
+    "precommit": "lint-staged"
   },
   "betterScripts": {
     "test": {
