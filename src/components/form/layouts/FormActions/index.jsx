@@ -7,6 +7,7 @@ export const FormActions = styled.div`
 
   ${StyledButton} {
     height: 38px;
+    line-height: 38px;
     width: 104px;
     padding: 0 24px;
 
