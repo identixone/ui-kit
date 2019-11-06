@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 
 import { useState, useEffect, useRef } from "react";
-
 import usePortal from "react-useportal";
 
 function usePopup(props) {
   const { pupupTrigger, position } = props;
+  const popupInner = useRef();
 
   const { Portal, openPortal, closePortal, isOpen } = usePortal({
     isOpen: props.isOpen,
@@ -18,7 +18,17 @@ function usePopup(props) {
     left: null,
   });
 
-  let popupInner = useRef();
+  useEffect(() => {
+    window.addEventListener("resize", updatePopupCoords);
+
+    return () => {
+      window.removeEventListener("resize", updatePopupCoords);
+    };
+  }, []);
+
+  useEffect(() => {
+    updatePopupCoords();
+  }, [props.isOpen]);
 
   function setPopupCoords(pupupTriggerEl) {
     const { left, top, width } = pupupTriggerEl.getBoundingClientRect();
@@ -46,14 +56,6 @@ function usePopup(props) {
     const { current: pupupTriggerEl } = pupupTrigger;
     setPopupCoords(pupupTriggerEl);
   }
-
-  useEffect(() => {
-    window.addEventListener("resize", updatePopupCoords);
-
-    return () => {
-      window.removeEventListener("resize", updatePopupCoords);
-    };
-  }, []);
 
   return { Portal, openPortal, closePortal, isOpen, coords, popupInner };
 }
