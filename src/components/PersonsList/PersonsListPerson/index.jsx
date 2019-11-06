@@ -79,6 +79,7 @@ function PersonsListPerson({
         />
       )}
       <PersonsListPersonData
+        isActive={isActive}
         idxid={person.idxid}
         source={get(person, "idxid_source.name", "-")}
       />

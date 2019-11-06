@@ -12,4 +12,5 @@ export const PersonsListPersonDetailInfoItem = styled.p`
 
 export * from "./PersonsListPersonDetailInfoItemLabel";
 export * from "./PersonsListPersonDetailInfoItemValue";
+export * from "./PersonsListPersonDetailInfoItemIdValue";
 export * from "./PersonsListPersonDetailInfoItemPhoto";

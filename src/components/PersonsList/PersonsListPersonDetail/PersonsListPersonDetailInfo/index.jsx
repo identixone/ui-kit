@@ -5,6 +5,7 @@ import {
   PersonsListPersonDetailInfoItem,
   PersonsListPersonDetailInfoItemLabel as PersonLabel,
   PersonsListPersonDetailInfoItemValue as PersonValue,
+  PersonsListPersonDetailInfoItemIdValue as PersonIdValue,
   PersonsListPersonDetailInfoItemPhoto as PersonPhoto,
 } from "./PersonsListPersonDetailInfoItem";
 import { IdFormat } from "../../../IdFormat";
@@ -25,9 +26,9 @@ export function PersonsListPersonDetailInfo({ person }) {
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>
         <PersonLabel>ID</PersonLabel>
-        <PersonValue>
+        <PersonIdValue>
           <IdFormat>{person.idxid}</IdFormat>
-        </PersonValue>
+        </PersonIdValue>
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>
         <PersonLabel>Age</PersonLabel>

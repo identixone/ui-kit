@@ -20,6 +20,7 @@ storiesOf("Persons Lists|PersonsListPerson", module)
             isSelected={isSelected}
             isActive={boolean("is active", false)}
             onChange={({ target: { checked } }) => setIsSelected(checked)}
+            onClick={action("onClick")}
             person={person}
             deletePersonsFromList={action("deletePersonsFromList")}
           />
@@ -40,6 +41,7 @@ storiesOf("Persons Lists|PersonsListPerson", module)
           isSelected={isSelected}
           isActive={boolean("is active", false)}
           onChange={({ target: { checked } }) => setIsSelected(checked)}
+          onClick={action("onClick")}
           person={person}
           deletePersonsFromList={action("deletePersonsFromList")}
           mode="add"
