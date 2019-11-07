@@ -27,7 +27,7 @@ function usePopup(params) {
     top: 0,
     left: 0,
   });
-  let popupInner = useRef();
+  let popupInner = useRef(null);
 
   function updatePopupCoords(trargetEl) {
     if (trargetEl.current) {

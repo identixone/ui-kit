@@ -8,7 +8,7 @@ import TooltipTitle from "./TooltipTitle";
 
 export function Tooltip(props) {
   const { initialOpen = false, title, children } = props;
-  const tooltipTrigger = useRef();
+  const tooltipTrigger = useRef(null);
 
   useEffect(() => {
     const { current: tooltipTriggerEl } = tooltipTrigger;

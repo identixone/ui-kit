@@ -11,7 +11,7 @@ import StyledListItemPopup from "./StyledListItemPopup";
 import ListItemPopupInner from "./ListItemPopupInner";
 
 export function ListItemPopup({ children }) {
-  let pupupTrigger = useRef();
+  let pupupTrigger = useRef(null);
 
   const {
     Portal,
