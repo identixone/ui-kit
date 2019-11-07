@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import { StyledPersonsListPerson } from "./StyledPersonsListPerson";
-import PersonsListPersonActionButton, {
-  PersonsListPersonActionButtonIcon,
-} from "./PersonsListPersonActionButton";
-import PersonsListPersonCheckbox from "./PersonsListPersonCheckbox";
-import PersonsListPersonData from "./PersonsListPersonData";
-import { PersonsListPersonPhoto } from "./PersonsListPersonPhoto";
+import { useState } from "react";
 
-import { PopupConfirm } from "../../PopupConfirm/index";
-
+import { PersonsListPersonId } from "./PersonsListPersonId";
+import { PopupConfirm } from "../../PopupConfirm";
+import { CardSmall, StyledCardSmall } from "../../CardSmall";
+import { IdFormat } from "../../IdFormat";
+import { Value } from "../../Value";
 import { PlaylistAdd, Trash } from "../../../assets/icons";
 
 import { get } from "lodash-es";
+import { colors } from "../../../themes/colors";
 
 function PersonsListPerson({
   person,
@@ -27,6 +25,7 @@ function PersonsListPerson({
   onChange,
   isPersonsAddingToList,
   isPersonsDeletingFromList,
+  className,
 }) {
   const [isMouseOver, setIsMouseOver] = useState(false);
 
@@ -61,16 +60,16 @@ function PersonsListPerson({
   const isAddingMode = mode === "add";
 
   return (
-    <StyledPersonsListPerson
-      isActive={isActive}
+    <CardSmall
+      className={className}
+      theme={isActive ? "dark" : "light"}
       onClick={handleListItemClick}
-      data-testid="persons-list-person"
       onMouseOver={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
+      img={person.initial_photo}
     >
-      <PersonsListPersonPhoto src={person.initial_photo} />
       {!isAddingMode && (
-        <PersonsListPersonCheckbox
+        <CardSmall.Checkbox
           name={person.idxid}
           value={isSelected}
           onChange={onChange}
@@ -78,27 +77,36 @@ function PersonsListPerson({
           data-testid={`persons-list-person-select-${person.idxid}`}
         />
       )}
-      <PersonsListPersonData
-        isActive={isActive}
-        idxid={person.idxid}
-        source={get(person, "idxid_source.name", "-")}
-      />
+
+      <CardSmall.Data idxid={person.idxid}>
+        <CardSmall.DataItem>
+          ID{" "}
+          <PersonsListPersonId isActive={isActive}>
+            <IdFormat>{person.idxid}</IdFormat>
+          </PersonsListPersonId>
+        </CardSmall.DataItem>
+        <CardSmall.DataItem>
+          Place of first entry:
+          <br />{" "}
+          <b>
+            <Value>{get(person, "idxid_source.name", "-")}</Value>
+          </b>
+        </CardSmall.DataItem>
+      </CardSmall.Data>
+
       {isAddingMode ? (
-        <PersonsListPersonActionButton
+        <CardSmall.Button
           data-testid="persons-list-add-person"
           onClick={handleAddButtonClick}
           isHidden={false}
           isDisabled={isPersonsAddingToList}
-          mode={mode}
         >
-          <PersonsListPersonActionButtonIcon>
-            <PlaylistAdd size="24" />
-          </PersonsListPersonActionButtonIcon>
-        </PersonsListPersonActionButton>
+          <PlaylistAdd size="24" color={colors.greenish} />
+        </CardSmall.Button>
       ) : (
         <PopupConfirm onConfirm={handleDeleteButtonClick}>
           {({ togglePopup }) => (
-            <PersonsListPersonActionButton
+            <CardSmall.Button
               data-testid="persons-list-remove-person"
               onClick={e => {
                 e.stopPropagation();
@@ -108,14 +116,12 @@ function PersonsListPerson({
               isDisabled={isPersonsDeletingFromList}
               mode={mode}
             >
-              <PersonsListPersonActionButtonIcon>
-                <Trash size="16" />
-              </PersonsListPersonActionButtonIcon>
-            </PersonsListPersonActionButton>
+              <Trash size="16" color={colors.bloodOrange} />
+            </CardSmall.Button>
           )}
         </PopupConfirm>
       )}
-    </StyledPersonsListPerson>
+    </CardSmall>
   );
 }
 
@@ -131,10 +137,13 @@ PersonsListPerson.propTypes = {
   mode: PropTypes.string,
   isPersonsDeletingFromList: PropTypes.bool.isRequired,
   isPersonsAddingToList: PropTypes.bool.isRequired,
+  className: PropTypes.string,
 };
 
 PersonsListPerson.defaultProps = {
   person: {},
 };
 
-export { PersonsListPerson, StyledPersonsListPerson };
+const StyledPersonListPerson = StyledCardSmall;
+
+export { PersonsListPerson, StyledPersonListPerson };
