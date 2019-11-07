@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { useState, useEffect, useRef } from "react";
 import usePortal from "react-useportal";
 
@@ -78,16 +76,5 @@ function usePopup(params) {
     portalRef,
   };
 }
-
-usePopup.propTypes = {
-  pupupTrigger: PropTypes.object,
-  position: PropTypes.oneOf(["right", "top"]).isRequired,
-  isOpen: PropTypes.bool,
-};
-
-usePopup.defaultProps = {
-  isOpen: false,
-  position: "right",
-};
 
 export { usePopup };
