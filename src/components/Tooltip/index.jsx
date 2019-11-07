@@ -7,7 +7,7 @@ import TooltipInner from "./TooltipInner";
 import TooltipTitle from "./TooltipTitle";
 
 export function Tooltip(props) {
-  const { initialOpen = false, title, children } = props;
+  const { title, children } = props;
   const tooltipTrigger = useRef(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function Tooltip(props) {
   } = usePopup({
     pupupTrigger: tooltipTrigger,
     position: "right",
-    isOpen: initialOpen,
+    isOpen: props.isOpen,
   });
 
   return (
@@ -60,6 +60,6 @@ export function Tooltip(props) {
 
 Tooltip.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  initialOpen: PropTypes.bool,
+  isOpen: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

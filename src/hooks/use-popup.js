@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
 import usePortal from "react-useportal";
 
-let savedTargetEl = null;
 function usePopup(params) {
   const { position } = params;
 
@@ -27,30 +26,35 @@ function usePopup(params) {
     top: 0,
     left: 0,
   });
+
+  const savedTarget = useRef();
   let popupInner = useRef(null);
 
   function updatePopupCoords(trargetEl) {
-    if (trargetEl.current) {
-      savedTargetEl = trargetEl.current;
-    }
     const { current: pupupTriggerEl } = trargetEl;
-    const target = pupupTriggerEl || savedTargetEl;
-    const { left, top, width } = target.getBoundingClientRect();
-    const innerHeight = popupInner.current.offsetHeight;
 
-    switch (position) {
-      case "right":
-        setCoords({
-          top: top + window.scrollY - innerHeight / 2,
-          left: left + width + 10,
-        });
-        break;
-      case "top":
-        setCoords({
-          top: top + window.scrollY - 5,
-          left: left - 5,
-        });
-        break;
+    if (pupupTriggerEl) {
+      savedTarget.current = pupupTriggerEl;
+    }
+    const target = pupupTriggerEl || savedTarget.current;
+    if (target) {
+      const { left, top, width } = target.getBoundingClientRect();
+      const innerHeight = popupInner.current.offsetHeight;
+
+      switch (position) {
+        case "right":
+          setCoords({
+            top: top + window.scrollY - innerHeight / 2,
+            left: left + width + 10,
+          });
+          break;
+        case "top":
+          setCoords({
+            top: top + window.scrollY - 5,
+            left: left - 5,
+          });
+          break;
+      }
     }
   }
 

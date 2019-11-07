@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useRef } from "react";
 
 import { usePopup } from "../../hooks/use-popup";
-import StyledListItemPopupQRCodeContainer from "./StyledListItemPopupQRCodeContainer";
+import { StyledListItemPopupQRCodeContainer } from "./StyledListItemPopupQRCodeContainer";
 
 import { Qrcode as QRCodeIcon } from "@identixone/ui-kit/src/assets/icons";
 
@@ -11,7 +11,7 @@ import StyledListItemPopup from "./StyledListItemPopup";
 import ListItemPopupInner from "./ListItemPopupInner";
 
 export function ListItemPopup({ children }) {
-  let pupupTrigger = useRef(null);
+  const pupupTrigger = useRef(null);
 
   const {
     Portal,
@@ -22,7 +22,7 @@ export function ListItemPopup({ children }) {
     popupInner,
     ref,
   } = usePopup({
-    pupupTrigger: pupupTrigger,
+    pupupTrigger,
     position: "top",
   });
 
