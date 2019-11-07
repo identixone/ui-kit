@@ -14,9 +14,7 @@ function usePopup(params) {
     portalRef,
   } = usePortal({
     isOpen: params.isOpen,
-    onOpen: ({ targetEl }) => {
-      updatePopupCoords(targetEl);
-    },
+    onOpen: ({ targetEl }) => updatePopupCoords(targetEl),
     bindTo: document && document.getElementById("app-container"),
   });
 
