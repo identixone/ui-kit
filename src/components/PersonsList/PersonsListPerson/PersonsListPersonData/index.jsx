@@ -4,14 +4,18 @@ import PropTypes from "prop-types";
 import StyledPersonsListPersonData from "./StyledPersonsListPersonData";
 import PersonsListPersonDataItem from "./PersonsListPersonDataItem";
 
-import { IdFormat } from "../../../IdFormat";
+import { PersonsListPersonDataId } from "./PersonsListPersonDataId";
 import { Value } from "../../../Value";
+import { IdFormat } from "../../../IdFormat/index";
 
-function PersonsListPersonData({ idxid, source }) {
+function PersonsListPersonData({ idxid, source, isActive }) {
   return (
     <StyledPersonsListPersonData>
       <PersonsListPersonDataItem>
-        ID <IdFormat>{idxid}</IdFormat>
+        ID{" "}
+        <PersonsListPersonDataId isActive={isActive}>
+          <IdFormat>{idxid}</IdFormat>
+        </PersonsListPersonDataId>
       </PersonsListPersonDataItem>
       <PersonsListPersonDataItem>
         Place of first entry:
@@ -27,6 +31,7 @@ function PersonsListPersonData({ idxid, source }) {
 PersonsListPersonData.propTypes = {
   idxid: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default PersonsListPersonData;

@@ -4,7 +4,7 @@ export const ListLayoutDetailed = styled.div`
   position: relative;
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1), 0 0 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: rgba(162, 182, 189, 0.2) 0px 0px 80px 0px;
   flex: 334px 0 0;
   padding: 20px;
   display: flex;

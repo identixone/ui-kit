@@ -6,10 +6,16 @@ import { useFlash } from "../Flash";
 
 import { StyledIdCopy } from "./StyledIdCopy";
 import { IdCopyIcon } from "./IdCopyIcon";
-import { IdFormat } from "../IdFormat";
+import { Value } from "../Value";
 
-export function IdCopy({ children, id }) {
-  const localId = id || children;
+const getShortId = id => id.split("-")[4];
+
+export function IdCopy(props) {
+  const hasIdInProps = Object.prototype.hasOwnProperty.call(props, "id");
+
+  const { children, id } = props;
+
+  const localId = hasIdInProps ? id : children;
 
   const { flash, isFlashing } = useFlash();
   const [{ isCopyAvailable }, copyToClipboard] = useCopyToClipboard();
@@ -21,10 +27,12 @@ export function IdCopy({ children, id }) {
   }
 
   return (
-    <StyledIdCopy onClick={handleCopyClick} isFlashing={isFlashing}>
-      <IdFormat>{localId}</IdFormat>
-      {isCopyAvailable && <IdCopyIcon width="15" />}
-    </StyledIdCopy>
+    <Value value={localId}>
+      <StyledIdCopy onClick={handleCopyClick} isFlashing={isFlashing}>
+        {getShortId(localId)}
+        {isCopyAvailable && <IdCopyIcon width="15" />}
+      </StyledIdCopy>
+    </Value>
   );
 }
 

@@ -19,8 +19,16 @@ export function withImageOrientation(Component) {
     useEffect(() => {
       if (isLoaded && imgRef.current) {
         setImgOrientation(getImageOrientation(imgRef.current));
+
+        if (props.onLoad) {
+          props.onLoad();
+        }
       }
     }, [isLoaded]);
+
+    useEffect(() => {
+      setIsLoaded(false);
+    }, [props.src]);
 
     return (
       <Component
@@ -28,8 +36,9 @@ export function withImageOrientation(Component) {
         imgOrientation={imgOrientation}
         imgRef={imgRef}
         onLoad={() => {
-          props.onLoad && props.onLoad();
-          setIsLoaded(true);
+          if (!isLoaded) {
+            setIsLoaded(true);
+          }
         }}
       />
     );
@@ -37,6 +46,7 @@ export function withImageOrientation(Component) {
 
   WithImageOrientation.propTypes = {
     onLoad: PropTypes.func,
+    src: PropTypes.string,
   };
 
   return WithImageOrientation;

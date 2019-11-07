@@ -35,12 +35,16 @@ export class Slider extends Component {
     if (!children) {
       return "";
     }
-    const cloneChildren = React.Children.map(children, (child, index) =>
-      React.cloneElement(child, {
-        onClick: this.handleClick.bind(this, index),
-        active: activeItemIndex === index,
-      })
-    );
+    const cloneChildren = React.Children.map(children, (child, index) => {
+      const childKey = child.key || index;
+
+      return React.cloneElement(child, {
+        onClick: () => {
+          this.handleClick(index, childKey);
+        },
+        active: activeItemIndex === childKey,
+      });
+    });
 
     return visibility ? (
       <StyledFrame height={this.props.height}>
@@ -62,11 +66,11 @@ export class Slider extends Component {
     );
   }
 
-  handleClick(index) {
+  handleClick(index, childKey) {
     const visibleElementsNum = calculateVisibleElementsNum(this.props.height);
     const backItemsNum =
       index + visibleElementsNum - this.props.children.length + 1;
-    this.setState({ activeItemIndex: index });
+    this.setState({ activeItemIndex: childKey });
     if (this.state.topIndex + visibleElementsNum === index) {
       this.scrollDown(backItemsNum);
       if (backItemsNum > 0) {

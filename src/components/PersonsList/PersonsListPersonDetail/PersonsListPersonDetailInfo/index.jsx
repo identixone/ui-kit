@@ -5,6 +5,7 @@ import {
   PersonsListPersonDetailInfoItem,
   PersonsListPersonDetailInfoItemLabel as PersonLabel,
   PersonsListPersonDetailInfoItemValue as PersonValue,
+  PersonsListPersonDetailInfoItemIdValue as PersonIdValue,
   PersonsListPersonDetailInfoItemPhoto as PersonPhoto,
 } from "./PersonsListPersonDetailInfoItem";
 import { IdFormat } from "../../../IdFormat";
@@ -25,9 +26,9 @@ export function PersonsListPersonDetailInfo({ person }) {
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>
         <PersonLabel>ID</PersonLabel>
-        <PersonValue>
+        <PersonIdValue>
           <IdFormat>{person.idxid}</IdFormat>
-        </PersonValue>
+        </PersonIdValue>
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>
         <PersonLabel>Age</PersonLabel>
@@ -38,7 +39,7 @@ export function PersonsListPersonDetailInfo({ person }) {
         <PersonValue>{formatSex(person.sex)}</PersonValue>
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>
-        <PersonLabel>Card create</PersonLabel>
+        <PersonLabel>Card created</PersonLabel>
         <PersonValue>{formatDate(person.idxid_created)}</PersonValue>
       </PersonsListPersonDetailInfoItem>
       <PersonsListPersonDetailInfoItem>

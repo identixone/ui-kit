@@ -60,7 +60,7 @@ export function timeFormat(time) {
 function timeFormater(time, fromat) {
   const formatedTime =
     time && dayjs(time).isValid() && dayjs(time).format(fromat);
-  return formatedTime || "-";
+  return formatedTime || "—";
 }
 
 export function formatDate(date, format = "DD MMM YYYY, HH:mm:ss") {
@@ -82,7 +82,12 @@ export function dateToIso(date) {
 }
 
 export function formatSex(sex) {
-  return sex === 0 ? "male" : "female";
+  return (
+    {
+      0: "male",
+      1: "female",
+    }[sex] || null
+  );
 }
 
 export function toggleInArray(arr = [], item) {
