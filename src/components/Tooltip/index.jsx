@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
+import { useRef } from "react";
 import { usePopup } from "../../hooks/use-popup";
+
 import TooltipContainer from "./TooltipContainer";
 import TooltipInner from "./TooltipInner";
 import TooltipTitle from "./TooltipTitle";
@@ -9,21 +11,6 @@ import TooltipTitle from "./TooltipTitle";
 export function Tooltip(props) {
   const { title, children } = props;
   const tooltipTrigger = useRef(null);
-
-  useEffect(() => {
-    const { current: tooltipTriggerEl } = tooltipTrigger;
-
-    if (tooltipTriggerEl) {
-      tooltipTriggerEl.addEventListener("mouseenter", openPortal);
-      tooltipTriggerEl.addEventListener("mouseleave", closePortal);
-
-      return () => {
-        tooltipTriggerEl.removeEventListener("mouseenter", openPortal);
-        tooltipTriggerEl.removeEventListener("mouseleave", closePortal);
-      };
-    }
-  }, []);
-
   const {
     Portal,
     openPortal,
@@ -31,10 +18,13 @@ export function Tooltip(props) {
     isOpen,
     coords,
     popupInner,
+    bind,
   } = usePopup({
+    onMouseEnter: () => openPortal(),
+    onMouseLeave: () => closePortal(),
     pupupTrigger: tooltipTrigger,
     position: "right",
-    isOpen: props.isOpen,
+    initialIsOpen: props.isOpen,
   });
 
   return (
@@ -43,9 +33,12 @@ export function Tooltip(props) {
         children({
           isOpen,
           tooltipTrigger,
+          bind,
         })
       ) : (
-        <span ref={tooltipTrigger}>{children}</span>
+        <span {...bind} ref={tooltipTrigger}>
+          {children}
+        </span>
       )}
       <Portal>
         <TooltipContainer isOpen={isOpen} left={coords.left} top={coords.top}>

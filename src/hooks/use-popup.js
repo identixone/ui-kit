@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import usePortal from "react-useportal";
 
 function usePopup(params) {
-  const { position } = params;
+  const { position, initialIsOpen } = params;
 
   const {
     Portal,
@@ -12,8 +12,12 @@ function usePopup(params) {
     isOpen,
     ref,
     portalRef,
+    onMouseEnter,
+    onMouseLeave,
   } = usePortal({
-    isOpen: params.isOpen,
+    onMouseEnter: params.onMouseEnter,
+    onMouseLeave: params.onMouseLeave,
+    isOpen: initialIsOpen,
     onOpen: ({ targetEl }) => updatePopupCoords(targetEl),
     bindTo: document && document.getElementById("app-container"),
   });
@@ -72,6 +76,10 @@ function usePopup(params) {
     popupInner,
     ref,
     portalRef,
+    bind: {
+      onMouseEnter,
+      onMouseLeave,
+    },
   };
 }
 

@@ -1,45 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useRef } from "react";
 
 import { usePopup } from "../../hooks/use-popup";
-import { StyledListItemPopupQRCodeContainer } from "./StyledListItemPopupQRCodeContainer";
-
-import { Qrcode as QRCodeIcon } from "@identixone/ui-kit/src/assets/icons";
 
 import StyledListItemPopup from "./StyledListItemPopup";
 import ListItemPopupInner from "./ListItemPopupInner";
 
-export function ListItemPopup({ children }) {
-  const pupupTrigger = useRef(null);
-
+export function ListItemPopup({ children, trigger }) {
   const {
     Portal,
     openPortal,
     closePortal,
+    togglePortal,
     isOpen,
     coords,
     popupInner,
     ref,
   } = usePopup({
-    pupupTrigger,
     position: "top",
   });
 
   return (
     <React.Fragment>
-      <StyledListItemPopupQRCodeContainer>
-        <QRCodeIcon
-          data-testid="tokens-qr-code-icon"
-          ref={ref}
-          cursor="pointer"
-          width="19"
-          height="19"
-          onClick={e => {
-            openPortal(e);
-          }}
-        />
-      </StyledListItemPopupQRCodeContainer>
+      {typeof trigger === "function"
+        ? trigger({ ref, openPortal, togglePortal, closePortal })
+        : trigger}
       <Portal>
         <StyledListItemPopup
           data-testid="list-item-popup-container"
@@ -50,7 +35,6 @@ export function ListItemPopup({ children }) {
           <ListItemPopupInner ref={popupInner}>
             {typeof children === "function"
               ? children({
-                  pupupTrigger: pupupTrigger,
                   onTriggerCloseClick: closePortal,
                 })
               : children}
@@ -63,4 +47,5 @@ export function ListItemPopup({ children }) {
 
 ListItemPopup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  trigger: PropTypes.object,
 };
