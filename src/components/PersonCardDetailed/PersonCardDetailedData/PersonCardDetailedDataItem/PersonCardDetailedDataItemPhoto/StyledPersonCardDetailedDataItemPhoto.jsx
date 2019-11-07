@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledPersonsListPersonDetailInfoItemPhoto = styled.div`
+const StyledPersonCardDetailedDataItemPhoto = styled.div`
   position: relative;
   overflow: hidden;
   width: 160px;
@@ -8,3 +8,5 @@ export const StyledPersonsListPersonDetailInfoItemPhoto = styled.div`
   border-radius: 4px;
   margin-bottom: 10px;
 `;
+
+export { StyledPersonCardDetailedDataItemPhoto };

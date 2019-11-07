@@ -45,11 +45,13 @@ function ListLayoutList({
             >
               {items.map(renderItem)}
             </StyledListLayoutList>
-            <ListLayoutListPagination
-              totalCount={totalCount}
-              pagination={pagination}
-              setPagination={setPagination}
-            />
+            {pagination && (
+              <ListLayoutListPagination
+                totalCount={totalCount}
+                pagination={pagination}
+                setPagination={setPagination}
+              />
+            )}
           </React.Fragment>
         )
       ) : (
