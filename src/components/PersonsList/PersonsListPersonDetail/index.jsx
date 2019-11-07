@@ -31,55 +31,57 @@ function PersonsListPersonDetail({
       isPersonNotExists={isPersonNotExists}
       data-testid="persons-list-person-detail"
     >
-      <PersonCardDetailed.Data>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Photo</PersonLabel>
-          <PersonValue>
-            <PersonPhoto
-              src={person.initial_photo || noimageid}
-              facesize={formatFaceSize(person.initial_facesize)}
-            />
-          </PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>ID</PersonLabel>
-          <PersonIdValue>
-            <IdFormat>{person.idxid}</IdFormat>
-          </PersonIdValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Age</PersonLabel>
-          <PersonValue>{person.age}</PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Sex</PersonLabel>
-          <PersonValue>{formatSex(person.sex)}</PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Card created</PersonLabel>
-          <PersonValue>{formatDate(person.idxid_created)}</PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Place of first entry</PersonLabel>
-          <PersonValue>{person.idxid_source.name}</PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Total existing entries</PersonLabel>
-          <PersonValue isZeroEmpty={true}>{person.total}</PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Exact entries</PersonLabel>
-          <PersonValue isZeroEmpty={true}>{person.exact}</PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>HA entries</PersonLabel>
-          <PersonValue isZeroEmpty={true}>{person.ha}</PersonValue>
-        </PersonCardDetailed.DataItem>
-        <PersonCardDetailed.DataItem>
-          <PersonLabel>Junk entries</PersonLabel>
-          <PersonValue isZeroEmpty={true}>{person.junk}</PersonValue>
-        </PersonCardDetailed.DataItem>
-      </PersonCardDetailed.Data>
+      {person && !isPersonNotExists && (
+        <PersonCardDetailed.Data>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Photo</PersonLabel>
+            <PersonValue>
+              <PersonPhoto
+                src={person.initial_photo || noimageid}
+                facesize={formatFaceSize(person.initial_facesize)}
+              />
+            </PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>ID</PersonLabel>
+            <PersonIdValue>
+              <IdFormat>{person.idxid}</IdFormat>
+            </PersonIdValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Age</PersonLabel>
+            <PersonValue>{person.age}</PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Sex</PersonLabel>
+            <PersonValue>{formatSex(person.sex)}</PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Card created</PersonLabel>
+            <PersonValue>{formatDate(person.idxid_created)}</PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Place of first entry</PersonLabel>
+            <PersonValue>{person.idxid_source.name}</PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Total existing entries</PersonLabel>
+            <PersonValue isZeroEmpty={true}>{person.total}</PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Exact entries</PersonLabel>
+            <PersonValue isZeroEmpty={true}>{person.exact}</PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>HA entries</PersonLabel>
+            <PersonValue isZeroEmpty={true}>{person.ha}</PersonValue>
+          </PersonCardDetailed.DataItem>
+          <PersonCardDetailed.DataItem>
+            <PersonLabel>Junk entries</PersonLabel>
+            <PersonValue isZeroEmpty={true}>{person.junk}</PersonValue>
+          </PersonCardDetailed.DataItem>
+        </PersonCardDetailed.Data>
+      )}
     </StyledPersonsListPersonDetail>
   );
 }
