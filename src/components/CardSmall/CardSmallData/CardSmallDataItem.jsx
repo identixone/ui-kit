@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PersonsListPersonDataItem = styled.p`
+const CardSmallDataItem = styled.p`
   font-size: 13px;
   margin-top: 0;
   white-space: nowrap; /* Запрещаем перенос строк */
@@ -18,4 +18,4 @@ const PersonsListPersonDataItem = styled.p`
   }
 `;
 
-export default PersonsListPersonDataItem;
+export { CardSmallDataItem };

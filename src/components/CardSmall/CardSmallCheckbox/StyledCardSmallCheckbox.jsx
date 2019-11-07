@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledPersonsListPersonCheckbox = styled.label`
+const StyledCardSmallCheckbox = styled.label`
   position: absolute;
   left: 5px;
   top: 5px;
@@ -11,4 +11,4 @@ const StyledPersonsListPersonCheckbox = styled.label`
   }};
 `;
 
-export default StyledPersonsListPersonCheckbox;
+export { StyledCardSmallCheckbox };
