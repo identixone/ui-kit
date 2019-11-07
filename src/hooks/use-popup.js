@@ -27,7 +27,7 @@ function usePopup(params) {
     left: 0,
   });
 
-  const savedTarget = useRef();
+  const savedTarget = useRef(null);
   let popupInner = useRef(null);
 
   function updatePopupCoords(trargetEl) {
