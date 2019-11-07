@@ -3,20 +3,56 @@ import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
 import usePortal from "react-useportal";
 
-function usePopup(props) {
-  const { pupupTrigger, position } = props;
-  const popupInner = useRef();
+let savedTargetEl = null;
+function usePopup(params) {
+  const { position } = params;
 
-  const { Portal, openPortal, closePortal, isOpen } = usePortal({
-    isOpen: props.isOpen,
-    onOpen: updatePopupCoords,
+  const {
+    Portal,
+    openPortal,
+    closePortal,
+    togglePortal,
+    isOpen,
+    ref,
+    portalRef,
+  } = usePortal({
+    isOpen: params.isOpen,
+    onOpen: ({ targetEl }) => {
+      updatePopupCoords(targetEl);
+    },
     bindTo: document && document.getElementById("app-container"),
   });
 
   const [coords, setCoords] = useState({
-    top: null,
-    left: null,
+    top: 0,
+    left: 0,
   });
+  let popupInner = useRef();
+
+  function updatePopupCoords(trargetEl) {
+    if (trargetEl.current) {
+      savedTargetEl = trargetEl.current;
+    }
+    const { current: pupupTriggerEl } = trargetEl;
+    const target = pupupTriggerEl || savedTargetEl;
+    const { left, top, width } = target.getBoundingClientRect();
+    const innerHeight = popupInner.current.offsetHeight;
+
+    switch (position) {
+      case "right":
+        setCoords({
+          top: top + window.scrollY - innerHeight / 2,
+          left: left + width + 10,
+        });
+        break;
+      case "top":
+        setCoords({
+          top: top + window.scrollY - 5,
+          left: left - 5,
+        });
+        break;
+    }
+  }
 
   useEffect(() => {
     window.addEventListener("resize", updatePopupCoords);
@@ -26,38 +62,17 @@ function usePopup(props) {
     };
   }, []);
 
-  useEffect(() => {
-    updatePopupCoords();
-  }, [props.isOpen]);
-
-  function setPopupCoords(pupupTriggerEl) {
-    const { left, top, width } = pupupTriggerEl.getBoundingClientRect();
-    const innerHeight = popupInner.current.offsetHeight;
-
-    switch (position) {
-      case "right":
-        setCoords({
-          top: top + window.scrollY - innerHeight / 2,
-          left: left + width + 10,
-        });
-
-        break;
-      case "top":
-        setCoords({
-          top: top + window.scrollY - 5,
-          left: left - 5,
-        });
-
-        break;
-    }
-  }
-
-  function updatePopupCoords() {
-    const { current: pupupTriggerEl } = pupupTrigger;
-    setPopupCoords(pupupTriggerEl);
-  }
-
-  return { Portal, openPortal, closePortal, isOpen, coords, popupInner };
+  return {
+    Portal,
+    openPortal,
+    closePortal,
+    togglePortal,
+    isOpen,
+    coords,
+    popupInner,
+    ref,
+    portalRef,
+  };
 }
 
 usePopup.propTypes = {
