@@ -14,12 +14,12 @@ export function Tooltip(props) {
     const { current: tooltipTriggerEl } = tooltipTrigger;
 
     if (tooltipTriggerEl) {
-      tooltipTriggerEl.addEventListener("mouseenter", handleTriggerHover);
-      tooltipTriggerEl.addEventListener("mouseleave", handleTriggerLeave);
+      tooltipTriggerEl.addEventListener("mouseenter", openPortal);
+      tooltipTriggerEl.addEventListener("mouseleave", closePortal);
 
       return () => {
-        tooltipTriggerEl.removeEventListener("mouseenter", handleTriggerHover);
-        tooltipTriggerEl.removeEventListener("mouseleave", handleTriggerLeave);
+        tooltipTriggerEl.removeEventListener("mouseenter", openPortal);
+        tooltipTriggerEl.removeEventListener("mouseleave", closePortal);
       };
     }
   }, []);
@@ -36,14 +36,6 @@ export function Tooltip(props) {
     position: "right",
     isOpen: initialOpen,
   });
-
-  function handleTriggerHover(e) {
-    openPortal(e);
-  }
-
-  function handleTriggerLeave(e) {
-    closePortal(e);
-  }
 
   return (
     <React.Fragment>

@@ -51,7 +51,7 @@ export function ListItemPopup({ children }) {
             {typeof children === "function"
               ? children({
                   pupupTrigger: pupupTrigger,
-                  handleTriggerCloseClick: closePortal,
+                  onTriggerCloseClick: closePortal,
                 })
               : children}
           </ListItemPopupInner>
