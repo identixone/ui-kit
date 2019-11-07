@@ -5,6 +5,7 @@ export * from "./ButtonToggle";
 export * from "./ButtonLink";
 export * from "./ButtonToggleCalendar";
 export * from "./ByPhoto";
+export * from "./CardSmall";
 export * from "./CopyItem";
 export * from "./DateTimeFilter";
 export * from "./DeleteSure";

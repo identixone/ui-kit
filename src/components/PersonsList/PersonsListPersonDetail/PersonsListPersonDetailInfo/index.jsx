@@ -11,6 +11,7 @@ import {
 import { IdFormat } from "../../../IdFormat";
 
 import { formatSex, formatDate, formatFaceSize } from "../../../../utils";
+import { noimageid } from "../../../../assets/images";
 
 export function PersonsListPersonDetailInfo({ person }) {
   return (
@@ -19,7 +20,7 @@ export function PersonsListPersonDetailInfo({ person }) {
         <PersonLabel>Photo</PersonLabel>
         <PersonValue>
           <PersonPhoto
-            src={person.initial_photo}
+            src={person.initial_photo || noimageid}
             facesize={formatFaceSize(person.initial_facesize)}
           />
         </PersonValue>

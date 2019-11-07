@@ -12,6 +12,7 @@ import { PlaylistAdd, Trash } from "../../../assets/icons";
 
 import { get } from "lodash-es";
 import { colors } from "../../../themes/colors";
+import { noimageid } from "../../../assets/images";
 
 function PersonsListPerson({
   person,
@@ -66,7 +67,7 @@ function PersonsListPerson({
       onClick={handleListItemClick}
       onMouseOver={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
-      img={person.initial_photo}
+      img={person.initial_photo || noimageid}
     >
       {!isAddingMode && (
         <CardSmall.Checkbox
