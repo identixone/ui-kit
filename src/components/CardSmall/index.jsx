@@ -19,6 +19,8 @@ function CardSmall(props) {
     className,
   } = props;
 
+  const hasImg = Object.prototype.hasOwnProperty.call(props, "img");
+
   return (
     <ThemeProvider theme={{ theme }}>
       <StyledCardSmall
@@ -27,10 +29,9 @@ function CardSmall(props) {
         data-testid={testId}
         onMouseOver={onMouseOver}
         onMouseLeave={onMouseLeave}
+        hasImg={hasImg}
       >
-        {Object.prototype.hasOwnProperty.call(props, "img") ? (
-          <CardSmallImage src={props.img} />
-        ) : null}
+        {hasImg ? <CardSmallImage src={props.img} /> : null}
 
         {children}
       </StyledCardSmall>

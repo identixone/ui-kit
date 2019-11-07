@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { colors } from "../../themes/colors";
+import { CardSmallData } from "./index";
 
 const themes = {
   light: {
@@ -12,6 +13,18 @@ const themes = {
     textColor: colors.whiteSimple,
   },
 };
+
+function getStyles({ hasPhoto }) {
+  return (
+    hasPhoto &&
+    css`
+      ${CardSmallData} {
+        position: absolute;
+        padding-left: 99px;
+      }
+    `
+  );
+}
 
 const StyledCardSmall = styled.li`
   width: 278px;
@@ -28,6 +41,8 @@ const StyledCardSmall = styled.li`
   &:not(:last-of-type) {
     margin-bottom: 20px;
   }
+
+  ${getStyles}
 `;
 
 export { StyledCardSmall };
