@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { useRef } from "react";
-import { usePopup } from "../../hooks/use-popup";
+import { usePositionPopup } from "../../hooks/use-position-popup.js";
 
 import TooltipContainer from "./TooltipContainer";
 import TooltipInner from "./TooltipInner";
 import TooltipTitle from "./TooltipTitle";
 
-export function Tooltip(props) {
+function Tooltip(props) {
   const { title, children } = props;
   const tooltipTrigger = useRef(null);
   const {
@@ -19,7 +19,7 @@ export function Tooltip(props) {
     coords,
     popupInner,
     bind,
-  } = usePopup({
+  } = usePositionPopup({
     onMouseEnter: () => openPortal(),
     onMouseLeave: () => closePortal(),
     pupupTrigger: tooltipTrigger,
@@ -56,3 +56,5 @@ Tooltip.propTypes = {
   isOpen: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
+
+export { Tooltip, TooltipContainer };

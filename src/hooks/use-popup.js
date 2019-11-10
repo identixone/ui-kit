@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import usePortal from "react-useportal";
 
 function usePopup(params) {
-  const { position, initialIsOpen } = params;
+  const { initialIsOpen } = params;
 
   const {
     Portal,
@@ -18,19 +18,21 @@ function usePopup(params) {
     onMouseEnter: params.onMouseEnter,
     onMouseLeave: params.onMouseLeave,
     isOpen: initialIsOpen,
-    onOpen: ({ targetEl }) => updatePopupCoords(targetEl),
+    onOpen: ({ targetEl }) => updatePopupParams(targetEl),
     bindTo: document && document.getElementById("app-container"),
   });
 
-  const [coords, setCoords] = useState({
+  const [targetParams, setTargetParams] = useState({
     top: 0,
     left: 0,
+    width: 0,
+    height: 0,
   });
 
   const savedTarget = useRef(null);
   let popupInner = useRef(null);
 
-  function updatePopupCoords(trargetEl) {
+  function updatePopupParams(trargetEl) {
     const { current: pupupTriggerEl } = trargetEl;
 
     if (pupupTriggerEl) {
@@ -38,31 +40,22 @@ function usePopup(params) {
     }
     const target = pupupTriggerEl || savedTarget.current;
     if (target) {
-      const { left, top, width } = target.getBoundingClientRect();
-      const innerHeight = popupInner.current.offsetHeight;
+      const { left, top, width, height } = target.getBoundingClientRect();
 
-      switch (position) {
-        case "right":
-          setCoords({
-            top: top + window.scrollY - innerHeight / 2,
-            left: left + width + 10,
-          });
-          break;
-        case "top":
-          setCoords({
-            top: top + window.scrollY - 5,
-            left: left - 5,
-          });
-          break;
-      }
+      setTargetParams({
+        top: top,
+        left: left,
+        width,
+        height,
+      });
     }
   }
 
   useEffect(() => {
-    window.addEventListener("resize", updatePopupCoords);
+    window.addEventListener("resize", updatePopupParams);
 
     return () => {
-      window.removeEventListener("resize", updatePopupCoords);
+      window.removeEventListener("resize", updatePopupParams);
     };
   }, []);
 
@@ -72,7 +65,7 @@ function usePopup(params) {
     closePortal,
     togglePortal,
     isOpen,
-    coords,
+    targetParams,
     popupInner,
     ref,
     portalRef,

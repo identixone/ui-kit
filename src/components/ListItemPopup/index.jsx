@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { usePopup } from "../../hooks/use-popup";
+import { usePositionPopup } from "../../hooks/use-position-popup.js";
 
 import StyledListItemPopup from "./StyledListItemPopup";
 import ListItemPopupInner from "./ListItemPopupInner";
 
-export function ListItemPopup({ children, trigger }) {
+function ListItemPopup({
+  "data-testid": testId,
+  className,
+  children,
+  trigger,
+}) {
   const {
     Portal,
     openPortal,
@@ -16,7 +21,7 @@ export function ListItemPopup({ children, trigger }) {
     coords,
     popupInner,
     ref,
-  } = usePopup({
+  } = usePositionPopup({
     position: "top",
   });
 
@@ -24,10 +29,16 @@ export function ListItemPopup({ children, trigger }) {
     <React.Fragment>
       {typeof trigger === "function"
         ? trigger({ ref, openPortal, togglePortal, closePortal })
-        : trigger}
+        : React.cloneElement(trigger, {
+            ref,
+            openPortal,
+            togglePortal,
+            closePortal,
+          })}
       <Portal>
         <StyledListItemPopup
-          data-testid="list-item-popup-container"
+          data-testid={testId}
+          className={className}
           isOpen={isOpen}
           left={coords.left}
           top={coords.top}
@@ -46,6 +57,14 @@ export function ListItemPopup({ children, trigger }) {
 }
 
 ListItemPopup.propTypes = {
+  "data-testid": PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  trigger: PropTypes.object,
+  trigger: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
+
+ListItemPopup.defaultProps = {
+  "data-testid": "list-item-popup-container",
+};
+
+export { ListItemPopup, StyledListItemPopup };
