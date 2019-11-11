@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import { useRef } from "react";
 import { usePositionPopup } from "../../hooks/use-position-popup.js";
 
-import TooltipContainer from "./TooltipContainer";
-import TooltipInner from "./TooltipInner";
-import TooltipTitle from "./TooltipTitle";
+import { StyledTooltipContainer } from "./StyledTooltipContainer";
+import { TooltipInner } from "./TooltipInner";
+import { TooltipTitle } from "./TooltipTitle";
 
 function Tooltip(props) {
   const { title, children, "data-testid": testId, className } = props;
@@ -29,19 +29,15 @@ function Tooltip(props) {
 
   return (
     <React.Fragment>
-      {typeof children === "function" ? (
-        children({
-          isOpen,
-          tooltipTrigger,
-          bind,
-        })
-      ) : (
-        <span {...bind} ref={tooltipTrigger}>
-          {children}
-        </span>
-      )}
+      {typeof children === "function"
+        ? children({
+            isOpen,
+            tooltipTrigger,
+            bind,
+          })
+        : React.cloneElement(children, { ...bind, ref: tooltipTrigger })}
       <Portal>
-        <TooltipContainer
+        <StyledTooltipContainer
           data-testid={testId}
           className={className}
           isOpen={isOpen}
@@ -51,7 +47,7 @@ function Tooltip(props) {
           <TooltipInner ref={popupInner}>
             <TooltipTitle>{title}</TooltipTitle>
           </TooltipInner>
-        </TooltipContainer>
+        </StyledTooltipContainer>
       </Portal>
     </React.Fragment>
   );
@@ -69,4 +65,4 @@ Tooltip.defaultProps = {
   "data-testid": "tooltip",
 };
 
-export { Tooltip, TooltipContainer };
+export { Tooltip, StyledTooltipContainer };

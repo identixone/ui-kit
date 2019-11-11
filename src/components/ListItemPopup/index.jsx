@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import { usePositionPopup } from "../../hooks/use-position-popup.js";
 
-import StyledListItemPopup from "./StyledListItemPopup";
-import ListItemPopupInner from "./ListItemPopupInner";
+import { StyledListItemPopup } from "./StyledListItemPopup";
+import { ListItemPopupInner } from "./ListItemPopupInner";
 
 function ListItemPopup({
   "data-testid": testId,
@@ -25,16 +25,14 @@ function ListItemPopup({
     position: "top",
   });
 
+  const triggerProps = { ref, openPortal, togglePortal, closePortal };
+  const childrenProps = { closePortal };
+
   return (
     <React.Fragment>
       {typeof trigger === "function"
-        ? trigger({ ref, openPortal, togglePortal, closePortal })
-        : React.cloneElement(trigger, {
-            ref,
-            openPortal,
-            togglePortal,
-            closePortal,
-          })}
+        ? trigger(triggerProps)
+        : React.cloneElement(trigger, triggerProps)}
       <Portal>
         <StyledListItemPopup
           data-testid={testId}
@@ -45,10 +43,8 @@ function ListItemPopup({
         >
           <ListItemPopupInner ref={popupInner}>
             {typeof children === "function"
-              ? children({
-                  onTriggerCloseClick: closePortal,
-                })
-              : children}
+              ? children(childrenProps)
+              : React.cloneElement(children, childrenProps)}
           </ListItemPopupInner>
         </StyledListItemPopup>
       </Portal>
