@@ -27,6 +27,7 @@ function PersonsListPerson({
   isPersonsAddingToList,
   isPersonsDeletingFromList,
   className,
+  "data-testid": testId,
 }) {
   const [isMouseOver, setIsMouseOver] = useState(false);
 
@@ -68,6 +69,7 @@ function PersonsListPerson({
       onMouseOver={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
       img={person.initial_photo || noimageid}
+      data-testid={testId}
     >
       {!isAddingMode && (
         <CardSmall.Checkbox
@@ -139,10 +141,12 @@ PersonsListPerson.propTypes = {
   isPersonsDeletingFromList: PropTypes.bool.isRequired,
   isPersonsAddingToList: PropTypes.bool.isRequired,
   className: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 PersonsListPerson.defaultProps = {
   person: {},
+  "data-testid": "persons-list-person",
 };
 
 const StyledPersonListPerson = StyledCardSmall;
