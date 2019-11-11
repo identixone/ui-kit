@@ -9,7 +9,7 @@ import TooltipInner from "./TooltipInner";
 import TooltipTitle from "./TooltipTitle";
 
 function Tooltip(props) {
-  const { title, children } = props;
+  const { title, children, "data-testid": testId, className } = props;
   const tooltipTrigger = useRef(null);
   const {
     Portal,
@@ -41,7 +41,13 @@ function Tooltip(props) {
         </span>
       )}
       <Portal>
-        <TooltipContainer isOpen={isOpen} left={coords.left} top={coords.top}>
+        <TooltipContainer
+          data-testid={testId}
+          className={className}
+          isOpen={isOpen}
+          left={coords.left}
+          top={coords.top}
+        >
           <TooltipInner ref={popupInner}>
             <TooltipTitle>{title}</TooltipTitle>
           </TooltipInner>
@@ -52,9 +58,15 @@ function Tooltip(props) {
 }
 
 Tooltip.propTypes = {
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   isOpen: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+};
+
+Tooltip.defaultProps = {
+  "data-testid": "tooltip",
 };
 
 export { Tooltip, TooltipContainer };

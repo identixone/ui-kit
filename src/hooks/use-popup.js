@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import usePortal from "react-useportal";
 
 function usePopup(params) {
-  const { initialIsOpen } = params;
-
   const {
     Portal,
     openPortal,
@@ -17,7 +15,7 @@ function usePopup(params) {
   } = usePortal({
     onMouseEnter: params.onMouseEnter,
     onMouseLeave: params.onMouseLeave,
-    isOpen: initialIsOpen,
+    isOpen: params.initialIsOpen,
     onOpen: ({ targetEl }) => updatePopupParams(targetEl),
     bindTo: document && document.getElementById("app-container"),
   });
@@ -30,24 +28,26 @@ function usePopup(params) {
   });
 
   const savedTarget = useRef(null);
-  let popupInner = useRef(null);
+  const popupInner = useRef(null);
 
-  function updatePopupParams(trargetEl) {
-    const { current: pupupTriggerEl } = trargetEl;
+  function updatePopupParams(targetEl) {
+    if (isOpen) {
+      const { current: popupTriggerEl } = targetEl;
 
-    if (pupupTriggerEl) {
-      savedTarget.current = pupupTriggerEl;
-    }
-    const target = pupupTriggerEl || savedTarget.current;
-    if (target) {
-      const { left, top, width, height } = target.getBoundingClientRect();
+      if (popupTriggerEl) {
+        savedTarget.current = popupTriggerEl;
+      }
+      const target = savedTarget.current;
+      if (target) {
+        const { left, top, width, height } = target.getBoundingClientRect();
 
-      setTargetParams({
-        top: top,
-        left: left,
-        width,
-        height,
-      });
+        setTargetParams({
+          top,
+          left,
+          width,
+          height,
+        });
+      }
     }
   }
 

@@ -64,7 +64,7 @@ ListItemPopup.propTypes = {
 };
 
 ListItemPopup.defaultProps = {
-  "data-testid": "list-item-popup-container",
+  "data-testid": "list-item-popup",
 };
 
 export { ListItemPopup, StyledListItemPopup };
