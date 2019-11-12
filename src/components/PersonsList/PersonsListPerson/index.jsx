@@ -26,6 +26,7 @@ function PersonsListPerson({
   onChange,
   isPersonsAddingToList,
   isPersonsDeletingFromList,
+  keyDeleteBy,
   className,
   "data-testid": testId,
 }) {
@@ -38,10 +39,10 @@ function PersonsListPerson({
   function handleDeleteButtonClick() {
     deletePersonsFromList({
       listId: personsListId,
-      persons: [person.idxid],
+      persons: [person[keyDeleteBy]],
       meta: {
         listId: personsListId,
-        persons: [person.idxid],
+        persons: [person[keyDeleteBy]],
       },
     });
   }
@@ -140,12 +141,14 @@ PersonsListPerson.propTypes = {
   mode: PropTypes.string,
   isPersonsDeletingFromList: PropTypes.bool.isRequired,
   isPersonsAddingToList: PropTypes.bool.isRequired,
+  keyDeleteBy: PropTypes.string,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };
 
 PersonsListPerson.defaultProps = {
   person: {},
+  keyDeleteBy: "idxid",
   "data-testid": "persons-list-person",
 };
 
