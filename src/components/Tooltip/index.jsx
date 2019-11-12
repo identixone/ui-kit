@@ -44,7 +44,7 @@ function Tooltip(props) {
           left={coords.left}
           top={coords.top}
         >
-          <TooltipInner ref={popupInner}>
+          <TooltipInner data-testid="tooltip-inner" ref={popupInner}>
             <TooltipTitle>{title}</TooltipTitle>
           </TooltipInner>
         </StyledTooltipContainer>

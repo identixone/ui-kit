@@ -31,23 +31,21 @@ function usePopup(params) {
   const popupInner = useRef(null);
 
   function updatePopupParams(targetEl) {
-    if (isOpen) {
-      const { current: popupTriggerEl } = targetEl;
+    const { current: popupTriggerEl } = targetEl;
 
-      if (popupTriggerEl) {
-        savedTarget.current = popupTriggerEl;
-      }
-      const target = savedTarget.current;
-      if (target) {
-        const { left, top, width, height } = target.getBoundingClientRect();
+    if (popupTriggerEl) {
+      savedTarget.current = popupTriggerEl;
+    }
+    const target = savedTarget.current;
+    if (target) {
+      const { left, top, width, height } = target.getBoundingClientRect();
 
-        setTargetParams({
-          top,
-          left,
-          width,
-          height,
-        });
-      }
+      setTargetParams({
+        top,
+        left,
+        width,
+        height,
+      });
     }
   }
 

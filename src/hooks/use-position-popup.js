@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import usePopup from "./use-popup.js";
+import { usePopup } from "./use-popup.js";
 
 function usePositionPopup(params) {
   const { position } = params;
@@ -13,7 +13,9 @@ function usePositionPopup(params) {
 
   function updatePopupCoords() {
     const { left, top, width } = targetParams;
-    const innerHeight = popupInner.current.offsetHeight;
+    const innerHeight = popupInner.current
+      ? popupInner.current.offsetHeight
+      : 0;
 
     switch (position) {
       case "right":
