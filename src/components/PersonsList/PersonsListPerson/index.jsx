@@ -16,17 +16,15 @@ import { noimageid } from "../../../assets/images";
 
 function PersonsListPerson({
   person,
-  personsListId,
   onClick,
-  addPersonsToList,
-  deletePersonsFromList,
+  onPersonDelete,
+  onPersonAdd,
   isSelected,
   isActive,
   mode,
   onChange,
   isPersonsAddingToList,
   isPersonsDeletingFromList,
-  keyDeleteBy,
   className,
   "data-testid": testId,
 }) {
@@ -37,27 +35,12 @@ function PersonsListPerson({
   }
 
   function handleDeleteButtonClick() {
-    deletePersonsFromList({
-      listId: personsListId,
-      persons: [person[keyDeleteBy]],
-      meta: {
-        listId: personsListId,
-        persons: [person[keyDeleteBy]],
-      },
-    });
+    onPersonDelete(person);
   }
 
   function handleAddButtonClick(e) {
     e.stopPropagation();
-
-    addPersonsToList({
-      persons: [person.idxid],
-      listId: personsListId,
-      meta: {
-        listId: personsListId,
-        person: person,
-      },
-    });
+    onPersonAdd(person);
   }
 
   const isAddingMode = mode === "add";
@@ -132,23 +115,20 @@ function PersonsListPerson({
 PersonsListPerson.propTypes = {
   person: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  onPersonDelete: PropTypes.func.isRequired,
+  onPersonAdd: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isActive: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  addPersonsToList: PropTypes.func.isRequired,
-  deletePersonsFromList: PropTypes.func.isRequired,
-  personsListId: PropTypes.number.isRequired,
   mode: PropTypes.string,
   isPersonsDeletingFromList: PropTypes.bool.isRequired,
   isPersonsAddingToList: PropTypes.bool.isRequired,
-  keyDeleteBy: PropTypes.string,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };
 
 PersonsListPerson.defaultProps = {
   person: {},
-  keyDeleteBy: "idxid",
   "data-testid": "persons-list-person",
 };
 
