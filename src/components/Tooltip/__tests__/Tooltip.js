@@ -26,11 +26,11 @@ describe("Tooltip tests", () => {
     return getDefaultTooltip(props);
   }
 
-  test("Tooltip have 'blue' mode style", () => {});
-
-  test("Tooltip action must been called", () => {
+  test("Tooltip trigger open and close popup", () => {
     const { getByTestId } = renderTooltip();
     fireEvent.mouseEnter(getByTestId("tooltip-trigger-content"));
     expect(getByTestId("tooltip-inner")).toBeVisible();
+    fireEvent.mouseLeave(getByTestId("tooltip-trigger-content"));
+    expect(getByTestId("tooltip-inner")).not.toBeVisible();
   });
 });
