@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { colors } from "../../../../../themes/colors";
+import { colors } from "../../../../themes/colors";
 
-export const PersonsListPersonDetailInfoItemLabel = styled.span`
+const PersonCardDetailedDataItemLabel = styled.span`
   display: inline-block;
   width: 94px;
   min-width: 94px;
@@ -10,3 +10,5 @@ export const PersonsListPersonDetailInfoItemLabel = styled.span`
   font-size: 13px;
   color: ${colors.brownGray};
 `;
+
+export { PersonCardDetailedDataItemLabel };

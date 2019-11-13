@@ -10,7 +10,6 @@ const StyledUploadPlace = styled.div`
   position: relative;
   overflow: hidden;
   outline: none;
-}
 `;
 
 export default StyledUploadPlace;

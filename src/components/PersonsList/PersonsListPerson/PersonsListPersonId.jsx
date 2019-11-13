@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { colors } from "../../../../themes/index";
+import { colors } from "../../../themes/colors";
 
 function getStyles({ isActive }) {
   return (
@@ -12,11 +12,11 @@ function getStyles({ isActive }) {
   );
 }
 
-const PersonsListPersonDataId = styled.span`
+const PersonsListPersonId = styled.span`
   padding-left: 2px;
   padding-right: 2px;
 
   ${getStyles}
 `;
 
-export { PersonsListPersonDataId };
+export { PersonsListPersonId };
