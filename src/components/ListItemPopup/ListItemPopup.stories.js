@@ -10,7 +10,7 @@ storiesOf("ListItemPopup", module).add("default", () => {
     <ListItemPopup
       trigger={({ ref, openPortal }) => (
         <QRCodeIcon
-          data-testid="tokens-qr-code-icon"
+          data-testid="qr-code-icon"
           ref={ref}
           cursor="pointer"
           width="19"
@@ -22,7 +22,7 @@ storiesOf("ListItemPopup", module).add("default", () => {
       {({ closePortal }) => (
         <React.Fragment>
           <QRCodeIcon
-            data-testid="tokens-qr-code-icon-inside"
+            data-testid="qr-code-icon-inside"
             width="19"
             height="19"
             onClick={closePortal}
