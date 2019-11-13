@@ -20,7 +20,7 @@ describe("ListItemPopup tests", () => {
       <ListItemPopup
         trigger={({ ref, openPortal }) => (
           <QRCodeIcon
-            data-testid="tokens-qr-code-icon"
+            data-testid="qr-code-icon"
             ref={ref}
             cursor="pointer"
             width="19"
@@ -32,13 +32,12 @@ describe("ListItemPopup tests", () => {
         {({ closePortal }) => (
           <React.Fragment>
             <QRCodeIcon
-              data-testid="tokens-qr-code-icon-inside"
+              data-testid="qr-code-icon-inside"
               width="19"
               height="19"
               onClick={closePortal}
             />
             <span data-testid="list-item-popup-content">
-              {" "}
               Popup content example
             </span>
           </React.Fragment>
@@ -53,9 +52,9 @@ describe("ListItemPopup tests", () => {
 
   test("ListItemPopup trigger open and close popup", () => {
     const { getByTestId } = renderListItemPopup();
-    fireEvent.click(getByTestId("tokens-qr-code-icon"));
+    fireEvent.click(getByTestId("qr-code-icon"));
     expect(getByTestId("list-item-popup-content")).toBeVisible();
-    fireEvent.click(getByTestId("tokens-qr-code-icon-inside"));
+    fireEvent.click(getByTestId("qr-code-icon-inside"));
     expect(getByTestId("list-item-popup-content")).not.toBeVisible();
   });
 });

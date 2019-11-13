@@ -27,7 +27,7 @@ storiesOf("ListItemPopup", module).add("default", () => {
             height="19"
             onClick={closePortal}
           />
-          <span> Popup content example</span>
+          <span>Popup content example</span>
         </React.Fragment>
       )}
     </ListItemPopup>
