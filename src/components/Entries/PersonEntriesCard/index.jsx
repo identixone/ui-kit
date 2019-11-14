@@ -33,7 +33,11 @@ function PersonEntriesCard({
         src={person.initial_photo}
       />
 
-      {hasReinit && <PersonEntriesCardReinit>RE</PersonEntriesCardReinit>}
+      {hasReinit && (
+        <PersonEntriesCardReinit data-testid="person-entries-card-re">
+          RE
+        </PersonEntriesCardReinit>
+      )}
 
       <EntryCardInfo>
         <EntryCardInfoColumn>
