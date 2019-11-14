@@ -35,7 +35,6 @@ export * from "./PageWrapper";
 export * from "./PhotoBased";
 export * from "./PersonsList";
 export * from "./PersonCardDetailed";
-export * from "./Popup";
 export * from "./PopupConfirm";
 export * from "./RouteSection";
 export * from "./Search";
