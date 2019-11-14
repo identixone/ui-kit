@@ -10,4 +10,4 @@ const ListItemPopupInner = styled.div`
   position: relative;
 `;
 
-export default ListItemPopupInner;
+export { ListItemPopupInner };

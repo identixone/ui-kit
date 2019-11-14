@@ -35,4 +35,4 @@ const TooltipInner = styled.div`
   }
 `;
 
-export default TooltipInner;
+export { TooltipInner };
