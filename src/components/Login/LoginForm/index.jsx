@@ -6,8 +6,8 @@ import { usePrevious } from "react-use";
 
 import { object, string } from "yup";
 
-import LoginFormWrapper from "./LoginFormWrapper";
-import StyledLoginForm from "./StyledLoginForm";
+import { StyledLoginForm } from "./StyledLoginForm";
+import LoginFormForm from "./LoginFormForm";
 
 import LoginFormLogo from "./LoginFormLogo";
 import LoginFormTilte from "./LoginFormTitle";
@@ -19,7 +19,6 @@ import LoginFormInput from "./LoginFormInput";
 import { FormField } from "../../form/components";
 
 import { withFormik } from "formik";
-
 import { isEmpty } from "lodash-es";
 
 const ERROR_EMPTY_FIELDS = "Required fields are empty";
@@ -34,6 +33,8 @@ function LoginFormComponent({
   setErrors,
   submitForm,
   resetForm,
+  className,
+  "data-testid": testId,
 }) {
   const [stateAuthError, setStateAuthError] = useState(null);
   const [authErrorResetTimerId, setAuthErrorResetTimerId] = useState(null);
@@ -86,10 +87,10 @@ function LoginFormComponent({
   }
 
   return (
-    <LoginFormWrapper>
+    <StyledLoginForm className={className}>
       {logoSrc && <LoginFormLogo src={logoSrc} />}
       {title && <LoginFormTilte>{title}</LoginFormTilte>}
-      <StyledLoginForm onSubmit={handleFormSubmit} data-testid="login-form">
+      <LoginFormForm onSubmit={handleFormSubmit} data-testid={testId}>
         <LoginFormFields>
           <FormField
             name="username"
@@ -118,14 +119,16 @@ function LoginFormComponent({
           </LoginFormError>
         </LoginFormFields>
         <LoginFormButton type="submit">Login</LoginFormButton>
-      </StyledLoginForm>
-    </LoginFormWrapper>
+      </LoginFormForm>
+    </StyledLoginForm>
   );
 }
 
 LoginFormComponent.propTypes = {
   title: PropTypes.string,
   logoSrc: PropTypes.string,
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
   login: PropTypes.func.isRequired,
   isLogging: PropTypes.bool.isRequired,
   authError: PropTypes.object,
@@ -135,6 +138,11 @@ LoginFormComponent.propTypes = {
   submitForm: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   submitCount: PropTypes.number.isRequired,
+};
+
+LoginFormComponent.defaultProps = {
+  title: PropTypes.string,
+  "data-testid": "login-form",
 };
 
 const LoginForm = withFormik({

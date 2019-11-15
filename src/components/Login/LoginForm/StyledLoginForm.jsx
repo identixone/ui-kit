@@ -1,15 +1,12 @@
 import styled from "styled-components";
 
-import { StyledFormField } from "../../form/components";
-
-const StyledLoginForm = styled.form`
-  text-align: center;
-
-  ${StyledFormField} {
-    &:not(:last-of-type) {
-      margin-bottom: 20px;
-    }
-  }
+const StyledLoginForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 63px;
+  position: relative;
+  top: -5px;
 `;
 
-export default StyledLoginForm;
+export { StyledLoginForm };
