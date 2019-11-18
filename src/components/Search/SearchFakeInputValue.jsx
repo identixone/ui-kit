@@ -9,7 +9,7 @@ import styled from "styled-components";
 export const SearchFakeInputValue = styled.span`
   position: absolute;
   left: 54px;
-  font-size: ${props => (props.fontSize ? props.fontSize : 20)}px;
+  font-size: 20px;
   color: rgb(67, 67, 67);
   pointer-events: none;
 `;

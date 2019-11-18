@@ -14,21 +14,19 @@ function Search({
   innerRef,
   className,
   iconSize,
-  fontSize,
   ...restProps
 }) {
   return (
     <StyledSearch className={className}>
       <SearchIcon size={iconSize} />
       <SearchInput
-        fontSize={fontSize}
         data-testid={restProps["data-testid"]}
         ref={innerRef}
         placeholder={placeholder ? placeholder : undefined}
         onChange={onChange}
         value={value}
       />
-      <SearchFakeInputValue fontSize={fontSize}>{value}</SearchFakeInputValue>
+      <SearchFakeInputValue>{value}</SearchFakeInputValue>
       {value && (
         <SearchClearButton
           size={iconSize}
@@ -47,7 +45,6 @@ Search.propTypes = {
   onChange: PropTypes.func,
   innerRef: PropTypes.object,
   iconSize: PropTypes.number,
-  fontSize: PropTypes.number,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };

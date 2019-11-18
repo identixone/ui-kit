@@ -8,9 +8,9 @@ import PageFiltersListSearchInput from "./PageFiltersListSearchInput";
 export class PageFiltersListSearch extends React.Component {
   static propTypes = {
     className: PropTypes.string,
-    type: PropTypes.string,
     setSearchQuery: PropTypes.func.isRequired,
     searchQuery: PropTypes.string.isRequired,
+    iconSize: PropTypes.string,
     placeholder: PropTypes.string,
     "data-testid": PropTypes.string,
   };
@@ -27,31 +27,18 @@ export class PageFiltersListSearch extends React.Component {
     this.props.setSearchQuery(value);
   };
 
-  getTypeProps() {
-    switch (this.props.type) {
-      case "small":
-        return {
-          iconSize: 15,
-          className: `smallInput ${this.props.className}`,
-          fontSize: 16,
-        };
-      default:
-        return {};
-    }
-  }
-
   render() {
-    const { searchQuery, placeholder, className } = this.props;
+    const { searchQuery, placeholder, className, iconSize } = this.props;
 
     return (
       <PageFiltersListSearchInput
         className={className}
+        iconSize={iconSize}
         data-testid={this.props["data-testid"]}
         innerRef={this.inputRef}
         value={searchQuery}
         inputPlaceholder={placeholder ? placeholder : undefined}
         onChange={this.handleChange}
-        {...this.getTypeProps()}
       />
     );
   }
