@@ -20,7 +20,7 @@ function EntryShortCard({ entry, onClick, onDelete }) {
   const isInitialShow = Boolean(entry.initial_photo);
   const isDeleteble = !entry.deleted;
 
-  const mode = entry.accepted ? "accepted" : "declined";
+  const mode = entry.accepted ? "accepted" : "denied";
   const direction =
     {
       0: "Enter",
