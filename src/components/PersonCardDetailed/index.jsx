@@ -64,6 +64,7 @@ PersonCardDetailed.defaultProps = {
 };
 
 export * from "./PersonCardDetailedData";
+export * from "./PersonCardDetailedActions";
 export {
   PersonCardDetailed,
   StyledPersonCardDetailed,
