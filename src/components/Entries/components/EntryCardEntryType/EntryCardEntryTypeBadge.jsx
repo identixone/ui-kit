@@ -14,7 +14,7 @@ const color = theme("mode", {
   nm: colors.gray,
   det: colors.slate,
   accepted: colors.green,
-  declined: colors.red,
+  denied: colors.red,
 });
 
 const EntryCardEntryTypeBadge = styled(UIBadge).attrs({ color })`
