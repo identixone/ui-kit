@@ -10,7 +10,7 @@ export const SearchInput = styled.input.attrs({
   width: 100%;
   background-color: inherit;
   margin-right: 8px;
-  font-size: 20px;
+  font-size: ${props => (props.fontSize ? props.fontSize : 20)}px;
   color: rgb(67, 67, 67);
 
   &::placeholder {
