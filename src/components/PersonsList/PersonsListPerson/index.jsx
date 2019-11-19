@@ -31,7 +31,7 @@ function PersonsListPerson({
   const [isMouseOver, setIsMouseOver] = useState(false);
 
   function handleListItemClick() {
-    onClick(person.idxid);
+    onClick(person);
   }
 
   function handleDeleteButtonClick() {
