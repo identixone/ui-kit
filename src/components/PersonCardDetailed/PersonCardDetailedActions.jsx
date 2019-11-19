@@ -5,6 +5,7 @@ import { StyledButton } from "../Button";
 const PersonCardDetailedActions = styled.div`
   ${StyledButton} {
     width: 100%;
+    text-align: center;
 
     &:not(:last-child) {
       margin-bottom: 11px;
