@@ -7,11 +7,11 @@ import { StyledEntryCardEntryType } from "./StyledEntryCardEntryType";
 import { EntryCardEntryTypeTitle } from "./EntryCardEntryTypeTitle";
 import { EntryCardEntryTypeBadge } from "./EntryCardEntryTypeBadge";
 
-function EntryCardEntryType({ title, type, className }) {
+function EntryCardEntryType({ title, type, theme, className }) {
   const hasTitle = Boolean(title);
 
   return (
-    <ThemeProvider theme={{ mode: type }}>
+    <ThemeProvider theme={{ mode: theme }}>
       <StyledEntryCardEntryType className={className}>
         {hasTitle && <EntryCardEntryTypeTitle>{title}</EntryCardEntryTypeTitle>}
         <EntryCardEntryTypeBadge>{type}</EntryCardEntryTypeBadge>
@@ -22,6 +22,7 @@ function EntryCardEntryType({ title, type, className }) {
 
 EntryCardEntryType.propTypes = {
   type: PropTypes.string.isRequired,
+  theme: PropTypes.string,
   title: PropTypes.string,
   className: PropTypes.string,
 };

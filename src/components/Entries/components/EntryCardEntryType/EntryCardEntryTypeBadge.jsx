@@ -23,7 +23,6 @@ const EntryCardEntryTypeBadge = styled(UIBadge).attrs({ color })`
   line-height: 23px;
   text-transform: lowercase;
   border-radius: 3px;
-  width: 85px;
   height: 26px;
   display: block;
   box-sizing: border-box;
