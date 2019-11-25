@@ -22,8 +22,12 @@ const RANGE = [
     title: "Last 7 days",
   },
   {
-    from: moment().startOf("week"),
-    to: moment().endOf("week"),
+    from: moment()
+      .startOf("week")
+      .add(1, "days"),
+    to: moment()
+      .endOf("week")
+      .add(1, "days"),
     title: "Current week",
   },
   {
