@@ -9,10 +9,9 @@ import { EntryCardEntryTypeBadge } from "./EntryCardEntryTypeBadge";
 
 function EntryCardEntryType({ title, type, mode, className }) {
   const hasTitle = Boolean(title);
-  const themeMode = mode || type;
 
   return (
-    <ThemeProvider theme={{ mode: themeMode }}>
+    <ThemeProvider theme={{ mode: mode }}>
       <StyledEntryCardEntryType className={className}>
         {hasTitle && <EntryCardEntryTypeTitle>{title}</EntryCardEntryTypeTitle>}
         <EntryCardEntryTypeBadge>{type}</EntryCardEntryTypeBadge>
