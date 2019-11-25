@@ -22,8 +22,8 @@ const RANGE = [
     title: "Last 7 days",
   },
   {
-    from: moment().startOf("week"),
-    to: moment().endOf("week"),
+    from: moment().startOf("isoWeek"),
+    to: moment().endOf("isoWeek"),
     title: "Current week",
   },
   {
