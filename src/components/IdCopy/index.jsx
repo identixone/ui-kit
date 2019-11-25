@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { useCopyToClipboard } from "../../hooks";
 import { useFlash } from "../Flash";
+import { useEffect } from "react";
 
 import { StyledIdCopy } from "./StyledIdCopy";
 import { IdCopyIcon } from "./IdCopyIcon";
@@ -18,13 +19,18 @@ export function IdCopy(props) {
   const localId = hasIdInProps ? id : children;
 
   const { flash, isFlashing } = useFlash();
-  const [{ isCopyAvailable }, copyToClipboard] = useCopyToClipboard();
+  const [{ isCopyAvailable, isCopied }, copyToClipboard] = useCopyToClipboard();
 
   function handleCopyClick(ev) {
     ev.stopPropagation();
-    flash();
     copyToClipboard(localId);
   }
+
+  useEffect(() => {
+    if (isCopied) {
+      flash();
+    }
+  }, [isCopied]);
 
   return (
     <Value value={localId}>
