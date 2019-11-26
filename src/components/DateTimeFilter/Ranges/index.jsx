@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import StyledRanges from "./StyledRanges";
 import StyledRange from "./StyledRange";
 import StyledRangeHeader from "./StyledRangeHeader";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const RANGE = [
   {
@@ -52,42 +52,40 @@ const RANGE = [
   },
 ];
 
-class Ranges extends Component {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    t: PropTypes.func.isRequired,
-  };
+function Ranges({ onChange }) {
+  const { t } = useTranslation();
 
-  render() {
-    const { t } = this.props;
-    return (
-      <StyledRanges>
-        <span>
-          <StyledRangeHeader>{t("Ranges:")} </StyledRangeHeader>
-        </span>
-        <div>
-          {RANGE.map((item, index) => {
-            return (
-              <StyledRange
-                key={index}
-                data-id="0"
-                onClick={this.handleClick.bind(this, item.from, item.to)}
-              >
-                {t(item.title)}
-              </StyledRange>
-            );
-          })}
-        </div>
-      </StyledRanges>
-    );
+  function handleClick(startDate, endDate) {
+    onChange({ startDate, endDate });
   }
 
-  handleClick(startDate, endDate) {
-    this.props.onChange({ startDate, endDate });
-  }
+  return (
+    <StyledRanges>
+      <span>
+        <StyledRangeHeader>{t("Ranges")}: </StyledRangeHeader>
+      </span>
+      <div>
+        {RANGE.map((item, index) => {
+          return (
+            <StyledRange
+              key={index}
+              data-id="0"
+              onClick={() => handleClick(item.from, item.to)}
+            >
+              {t(`datetime:${item.title}`)}
+            </StyledRange>
+          );
+        })}
+      </div>
+    </StyledRanges>
+  );
 }
 
-export default withTranslation()(Ranges);
+Ranges.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
+
+export default Ranges;
 
 function setStartDayTime(date) {
   return date.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });

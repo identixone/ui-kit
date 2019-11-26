@@ -12,7 +12,7 @@ function I18nProvider({ children, appLocales }) {
   const resources = merge(appLocales, locales);
   i18n.use(LanguageDetector).init({
     resources: resources,
-    lng: localStorage.getItem("lng") || "en",
+    lng: localStorage.getItem("lng"),
     fallbackLng: "en",
     interpolation: {
       escapeValue: false,

@@ -1,5 +1,5 @@
 export const en = {
-  translation: {
+  datetime: {
     From: "From",
     To: "To",
     YYYY: "YYYY",
@@ -7,7 +7,7 @@ export const en = {
     DD: "DD",
     HH: "HH",
     SS: "SS",
-    "Ranges:": "Ranges:",
+    Ranges: "Ranges",
     Today: "Today",
     Yesterday: "Yesterday",
     "Last 7 days": "Last 7 days",

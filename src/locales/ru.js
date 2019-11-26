@@ -1,5 +1,5 @@
 export const ru = {
-  translation: {
+  datetime: {
     From: "От",
     To: "До",
     YYYY: "ГГГГ",
@@ -7,7 +7,7 @@ export const ru = {
     DD: "ДД",
     HH: "ЧЧ",
     SS: "СС",
-    "Ranges:": "Диапазоны:",
+    Ranges: "Диапазоны",
     Today: "Сегодня",
     Yesterday: "Вчера",
     "Last 7 days": "Последние 7 дней",
