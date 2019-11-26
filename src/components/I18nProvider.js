@@ -2,29 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import i18n from "i18next";
-import { merge } from "lodash-es";
 import { I18nextProvider } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 import locales from "../locales";
 
-function I18nProvider({ children, appLocales }) {
-  const resources = merge(appLocales, locales);
+function I18nProvider({ children }) {
   i18n.use(LanguageDetector).init({
-    resources: resources,
-    lng: localStorage.getItem("lng"),
+    resources: locales,
+    lng: localStorage.getItem("lng") || "en",
     fallbackLng: "en",
+    defaultNS: "translation",
     interpolation: {
       escapeValue: false,
     },
   });
 
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  return <I18nextProvider i18n={i18n}>{children()}</I18nextProvider>;
 }
 
 I18nProvider.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element.isRequired]).isRequired,
-  appLocales: PropTypes.object,
+  children: PropTypes.func.isRequired,
 };
 
 export default I18nProvider;
