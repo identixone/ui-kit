@@ -7,6 +7,7 @@ import moment from "moment";
 
 import { withFormik } from "formik";
 import { object, number } from "yup";
+import { withTranslation } from "react-i18next";
 
 import Ranges from "./Ranges";
 import DateTimeFields from "./DateTimeFields";
@@ -83,6 +84,7 @@ export class EntriesDatetimeFilter extends Component {
     endDate: PropTypes.object,
     values: PropTypes.object,
     setErrors: PropTypes.func,
+    t: PropTypes.func,
     errors: PropTypes.object,
     isApplying: PropTypes.bool,
     defaultStartDateData: PropTypes.object,
@@ -256,7 +258,7 @@ export class EntriesDatetimeFilter extends Component {
 
   render() {
     const { isOpen, isApplying } = this.state;
-    const { startDate, endDate, values } = this.props;
+    const { startDate, endDate, values, t } = this.props;
     const isHaveNoValues = isEmpty(values);
 
     return (
@@ -293,21 +295,21 @@ export class EntriesDatetimeFilter extends Component {
                     data-testid="apply"
                     buttonTheme="dark"
                   >
-                    Apply
+                    {t("Apply")}
                   </StyledDatetimeButton>
                   <StyledDatetimeButton
                     onClick={this.handleClear}
                     disabled={isHaveNoValues}
                     size="medium"
                   >
-                    Clear
+                    {t("Clear")}
                   </StyledDatetimeButton>
                   <StyledDatetimeButton
                     onClick={this.handleReset}
                     disabled={!isApplying}
                     size="medium"
                   >
-                    Reset
+                    {t("Reset")}
                   </StyledDatetimeButton>
                 </StyledDateTimeForm>
               </StyledEntriesDatetimeFilterRow>
@@ -428,7 +430,7 @@ export default withFormik({
         });
     }
   },
-})(EntriesDatetimeFilter);
+})(withTranslation()(EntriesDatetimeFilter));
 
 function formatValue(value, format) {
   return value === ""

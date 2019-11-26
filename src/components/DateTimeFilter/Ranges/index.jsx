@@ -4,6 +4,7 @@ import moment from "moment";
 import StyledRanges from "./StyledRanges";
 import StyledRange from "./StyledRange";
 import StyledRangeHeader from "./StyledRangeHeader";
+import { withTranslation } from "react-i18next";
 
 const RANGE = [
   {
@@ -51,16 +52,18 @@ const RANGE = [
   },
 ];
 
-export default class Ranges extends Component {
+class Ranges extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   };
 
   render() {
+    const { t } = this.props;
     return (
       <StyledRanges>
         <span>
-          <StyledRangeHeader>Ranges: </StyledRangeHeader>
+          <StyledRangeHeader>{t("Ranges:")} </StyledRangeHeader>
         </span>
         <div>
           {RANGE.map((item, index) => {
@@ -70,7 +73,7 @@ export default class Ranges extends Component {
                 data-id="0"
                 onClick={this.handleClick.bind(this, item.from, item.to)}
               >
-                {item.title}
+                {t(item.title)}
               </StyledRange>
             );
           })}
@@ -83,6 +86,8 @@ export default class Ranges extends Component {
     this.props.onChange({ startDate, endDate });
   }
 }
+
+export default withTranslation()(Ranges);
 
 function setStartDayTime(date) {
   return date.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
