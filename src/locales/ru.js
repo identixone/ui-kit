@@ -1,5 +1,5 @@
 export const ru = {
-  datetime: {
+  translation: {
     From: "От",
     To: "До",
     YYYY: "ГГГГ",

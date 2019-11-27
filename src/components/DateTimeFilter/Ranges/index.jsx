@@ -72,7 +72,7 @@ function Ranges({ onChange }) {
               data-id="0"
               onClick={() => handleClick(item.from, item.to)}
             >
-              {t(`datetime:${item.title}`)}
+              {t(`${item.title}`)}
             </StyledRange>
           );
         })}

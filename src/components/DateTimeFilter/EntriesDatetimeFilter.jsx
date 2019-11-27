@@ -295,21 +295,21 @@ export class EntriesDatetimeFilter extends Component {
                     data-testid="apply"
                     buttonTheme="dark"
                   >
-                    {t("datetime:Apply")}
+                    {t("Apply")}
                   </StyledDatetimeButton>
                   <StyledDatetimeButton
                     onClick={this.handleClear}
                     disabled={isHaveNoValues}
                     size="medium"
                   >
-                    {t("datetime:Clear")}
+                    {t("Clear")}
                   </StyledDatetimeButton>
                   <StyledDatetimeButton
                     onClick={this.handleReset}
                     disabled={!isApplying}
                     size="medium"
                   >
-                    {t("datetime:Reset")}
+                    {t("Reset")}
                   </StyledDatetimeButton>
                 </StyledDateTimeForm>
               </StyledEntriesDatetimeFilterRow>

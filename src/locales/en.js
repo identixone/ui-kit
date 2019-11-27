@@ -1,5 +1,5 @@
 export const en = {
-  datetime: {
+  translation: {
     From: "From",
     To: "To",
     YYYY: "YYYY",

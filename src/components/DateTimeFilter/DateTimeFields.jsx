@@ -28,7 +28,7 @@ function DateTimeFields(props) {
                     data-type="year"
                     max="999"
                     min="1"
-                    placeholder={t("datetime:YYYY")}
+                    placeholder={t("YYYY")}
                     onChange={handleChange.bind(this, props)}
                     onBlur={handleBlur.bind(this, props)}
                     ref={setInputRef}
@@ -48,7 +48,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="month"
-                  placeholder={t("datetime:MM")}
+                  placeholder={t("MM")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -67,7 +67,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="day"
-                  placeholder={t("datetime:DD")}
+                  placeholder={t("DD")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -88,7 +88,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="hour"
-                  placeholder={t("datetime:HH")}
+                  placeholder={t("HH")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -107,7 +107,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="minute"
-                  placeholder={t("datetime:MM")}
+                  placeholder={t("MM")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -126,7 +126,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="second"
-                  placeholder={t("datetime:SS")}
+                  placeholder={t("SS")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -173,7 +173,7 @@ function DateTimeFields(props) {
                     data-type="year"
                     max="999"
                     min="1"
-                    placeholder={t("datetime:YYYY")}
+                    placeholder={t("YYYY")}
                     onChange={handleChange.bind(this, props)}
                     onBlur={handleBlur.bind(this, props)}
                     ref={setInputRef}
@@ -193,7 +193,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="month"
-                  placeholder={t("datetime:MM")}
+                  placeholder={t("MM")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -212,7 +212,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="day"
-                  placeholder={t("datetime:DD")}
+                  placeholder={t("DD")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -233,7 +233,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="hour"
-                  placeholder={t("datetime:HH")}
+                  placeholder={t("HH")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -252,7 +252,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="minute"
-                  placeholder={t("datetime:MM")}
+                  placeholder={t("MM")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
@@ -271,7 +271,7 @@ function DateTimeFields(props) {
                   type="text"
                   maxLength="2"
                   data-type="second"
-                  placeholder={t("datetime:SS")}
+                  placeholder={t("SS")}
                   onChange={handleChange.bind(this, props)}
                   onBlur={handleBlur.bind(this, props)}
                   ref={setInputRef}
