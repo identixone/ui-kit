@@ -7,6 +7,7 @@ import moment from "moment";
 
 import { withFormik } from "formik";
 import { object, number } from "yup";
+import { withTranslation } from "react-i18next";
 
 import Ranges from "./Ranges";
 import DateTimeFields from "./DateTimeFields";
@@ -18,6 +19,7 @@ import StyledEntriesDatetime from "./StyledEntriesDatetime";
 import StyledEntriesDatetimeContainer from "./StyledEntriesDatetimeContainer";
 import { CalendarAlt } from "../../assets/icons";
 import { ButtonToggleCalendar } from "../ButtonToggleCalendar";
+import { resources } from "./DateTimeFilter.resources.js";
 
 const resetValues = {
   yearFrom: "",
@@ -83,6 +85,8 @@ export class EntriesDatetimeFilter extends Component {
     endDate: PropTypes.object,
     values: PropTypes.object,
     setErrors: PropTypes.func,
+    t: PropTypes.func.isRequired,
+    i18n: PropTypes.object.isRequired,
     errors: PropTypes.object,
     isApplying: PropTypes.bool,
     defaultStartDateData: PropTypes.object,
@@ -100,6 +104,14 @@ export class EntriesDatetimeFilter extends Component {
       millisecond: "000",
     },
   };
+
+  constructor(props) {
+    super(props);
+
+    const { i18n } = props;
+    i18n.addResourceBundle("en", "DateTimeFilter", resources.en);
+    i18n.addResourceBundle("ru", "DateTimeFilter", resources.ru);
+  }
 
   state = {
     startDate: this.props.startDate,
@@ -256,7 +268,7 @@ export class EntriesDatetimeFilter extends Component {
 
   render() {
     const { isOpen, isApplying } = this.state;
-    const { startDate, endDate, values } = this.props;
+    const { startDate, endDate, values, t } = this.props;
     const isHaveNoValues = isEmpty(values);
 
     return (
@@ -293,21 +305,21 @@ export class EntriesDatetimeFilter extends Component {
                     data-testid="apply"
                     buttonTheme="dark"
                   >
-                    Apply
+                    {t("Apply")}
                   </StyledDatetimeButton>
                   <StyledDatetimeButton
                     onClick={this.handleClear}
                     disabled={isHaveNoValues}
                     size="medium"
                   >
-                    Clear
+                    {t("Clear")}
                   </StyledDatetimeButton>
                   <StyledDatetimeButton
                     onClick={this.handleReset}
                     disabled={!isApplying}
                     size="medium"
                   >
-                    Reset
+                    {t("Reset")}
                   </StyledDatetimeButton>
                 </StyledDateTimeForm>
               </StyledEntriesDatetimeFilterRow>
@@ -428,7 +440,7 @@ export default withFormik({
         });
     }
   },
-})(EntriesDatetimeFilter);
+})(withTranslation()(EntriesDatetimeFilter));
 
 function formatValue(value, format) {
   return value === ""
