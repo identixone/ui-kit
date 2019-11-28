@@ -15,6 +15,10 @@ export class PageFiltersListSearch extends React.Component {
     "data-testid": PropTypes.string,
   };
 
+  static defaultProps = {
+    placeholder: "Start enter name...",
+  };
+
   inputRef = React.createRef();
 
   componentDidMount() {
@@ -37,7 +41,7 @@ export class PageFiltersListSearch extends React.Component {
         data-testid={this.props["data-testid"]}
         innerRef={this.inputRef}
         value={searchQuery}
-        inputPlaceholder={placeholder ? placeholder : undefined}
+        placeholder={placeholder ? placeholder : undefined}
         onChange={this.handleChange}
       />
     );
