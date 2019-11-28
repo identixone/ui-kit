@@ -28,4 +28,5 @@ I18nProvider.propTypes = {
   ]).isRequired,
 };
 
-export { I18nProvider, withTranslation } from "react-i18next";
+export { withTranslation } from "react-i18next";
+export { I18nProvider };
