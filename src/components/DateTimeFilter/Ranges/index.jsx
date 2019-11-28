@@ -53,7 +53,7 @@ const RANGE = [
 ];
 
 function Ranges({ onChange }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("DateTimeFilter");
 
   function handleClick(startDate, endDate) {
     onChange({ startDate, endDate });
@@ -62,7 +62,7 @@ function Ranges({ onChange }) {
   return (
     <StyledRanges>
       <span>
-        <StyledRangeHeader>{t("DateTimeFilter:Ranges")}: </StyledRangeHeader>
+        <StyledRangeHeader>{t("Ranges")}: </StyledRangeHeader>
       </span>
       <div>
         {RANGE.map((item, index) => {
