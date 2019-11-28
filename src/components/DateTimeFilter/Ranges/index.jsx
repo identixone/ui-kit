@@ -62,7 +62,7 @@ function Ranges({ onChange }) {
   return (
     <StyledRanges>
       <span>
-        <StyledRangeHeader>{t("Ranges")}: </StyledRangeHeader>
+        <StyledRangeHeader>{t("DateTimeFilter:Ranges")}: </StyledRangeHeader>
       </span>
       <div>
         {RANGE.map((item, index) => {

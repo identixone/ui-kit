@@ -19,6 +19,7 @@ import StyledEntriesDatetime from "./StyledEntriesDatetime";
 import StyledEntriesDatetimeContainer from "./StyledEntriesDatetimeContainer";
 import { CalendarAlt } from "../../assets/icons";
 import { ButtonToggleCalendar } from "../ButtonToggleCalendar";
+import { resources } from "./DeleteSureButton.resources.js";
 
 const resetValues = {
   yearFrom: "",
@@ -85,6 +86,7 @@ export class EntriesDatetimeFilter extends Component {
     values: PropTypes.object,
     setErrors: PropTypes.func,
     t: PropTypes.func,
+    i18n: PropTypes.object,
     errors: PropTypes.object,
     isApplying: PropTypes.bool,
     defaultStartDateData: PropTypes.object,
@@ -117,6 +119,12 @@ export class EntriesDatetimeFilter extends Component {
       this.inputsRefs[ref.tabIndex] = ref;
     }
   };
+
+  componentDidMount() {
+    const { i18n } = this.props;
+    i18n.addResourceBundle("en", "DateTimeFilter", resources.en);
+    i18n.addResourceBundle("ru", "DateTimeFilter", resources.ru);
+  }
 
   componentDidUpdate(prevProps) {
     Object.keys(this.props.errors).forEach(key => {
