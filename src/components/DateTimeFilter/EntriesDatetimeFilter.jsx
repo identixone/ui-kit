@@ -19,7 +19,7 @@ import StyledEntriesDatetime from "./StyledEntriesDatetime";
 import StyledEntriesDatetimeContainer from "./StyledEntriesDatetimeContainer";
 import { CalendarAlt } from "../../assets/icons";
 import { ButtonToggleCalendar } from "../ButtonToggleCalendar";
-import { resources } from "./DeleteSureButton.resources.js";
+import { resources } from "./DateTimeFilter.resources.js";
 
 const resetValues = {
   yearFrom: "",
