@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useTranslation } from "../../hooks";
+
 import StyledDeleteSureButton from "./StyledDeleteSureButton";
 import { colors } from "../../themes/colors";
 
 import { DeleteSure } from "../DeleteSure";
+
+import { resources } from "./DeleteSureButton.resources.js";
 
 function DeleteSureButton({
   onDelete,
@@ -15,6 +19,14 @@ function DeleteSureButton({
   deleteText,
   sureText,
 }) {
+  const { t, i18n } = useTranslation();
+
+  i18n.addResourceBundle("en", "DeleteSureButton", resources.en);
+  i18n.addResourceBundle("ru", "DeleteSureButton", resources.ru);
+
+  const textSure = sureText || t("DeleteSureButton:Sure");
+  const textDelete = deleteText || t("DeleteSureButton:Delete");
+
   return (
     <DeleteSure onDelete={onDelete}>
       {({ isSure, handleClick, handleMouseLeave }) => (
@@ -28,7 +40,7 @@ function DeleteSureButton({
           isDisabled={isDisabled}
           data-testid="delete-button"
         >
-          {isSure ? sureText : deleteText}
+          {isSure ? textSure : textDelete}
         </StyledDeleteSureButton>
       )}
     </DeleteSure>
