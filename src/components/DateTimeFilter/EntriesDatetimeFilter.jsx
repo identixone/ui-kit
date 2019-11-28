@@ -38,6 +38,16 @@ const resetValues = {
   msTo: "",
 };
 
+const startDateData = {
+  year: "2016",
+  month: 0,
+  day: 1,
+  hour: "0",
+  minute: "0",
+  second: "0",
+  millisecond: "000",
+};
+
 export const config = {
   yearFrom: { max: 9999, min: 1 },
   monthFrom: { max: 12, maxDependedValue: 1 },
@@ -94,15 +104,7 @@ export class EntriesDatetimeFilter extends Component {
 
   static defaultProps = {
     onChange: () => {},
-    defaultStartDateData: {
-      year: "2016",
-      month: 0,
-      day: 1,
-      hour: "0",
-      minute: "0",
-      second: "0",
-      millisecond: "000",
-    },
+    defaultStartDateData: startDateData,
   };
 
   constructor(props) {
@@ -380,7 +382,7 @@ export default withFormik({
     msTo: number().max(config.msTo.max, "error"),
   }),
   handleSubmit: (values, { props }) => {
-    const { defaultStartDateData } = props;
+    const { defaultStartDateData = startDateData } = props;
     const {
       yearFrom,
       monthFrom,
