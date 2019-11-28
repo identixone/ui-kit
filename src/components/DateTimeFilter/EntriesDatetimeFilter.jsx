@@ -105,6 +105,14 @@ export class EntriesDatetimeFilter extends Component {
     },
   };
 
+  constructor(props) {
+    super(props);
+
+    const { i18n } = props;
+    i18n.addResourceBundle("en", "DateTimeFilter", resources.en);
+    i18n.addResourceBundle("ru", "DateTimeFilter", resources.ru);
+  }
+
   state = {
     startDate: this.props.startDate,
     endDate: this.props.endDate,
@@ -119,12 +127,6 @@ export class EntriesDatetimeFilter extends Component {
       this.inputsRefs[ref.tabIndex] = ref;
     }
   };
-
-  componentDidMount() {
-    const { i18n } = this.props;
-    i18n.addResourceBundle("en", "DateTimeFilter", resources.en);
-    i18n.addResourceBundle("ru", "DateTimeFilter", resources.ru);
-  }
 
   componentDidUpdate(prevProps) {
     Object.keys(this.props.errors).forEach(key => {
