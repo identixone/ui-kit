@@ -9,6 +9,7 @@ import { colors } from "../../themes/colors";
 import { DeleteSure } from "../DeleteSure";
 
 import { resources } from "./DeleteSureButton.resources.js";
+import { isUndefined } from "lodash-es";
 
 function DeleteSureButton({
   onDelete,
@@ -24,8 +25,12 @@ function DeleteSureButton({
   i18n.addResourceBundle("en", "DeleteSureButton", resources.en);
   i18n.addResourceBundle("ru", "DeleteSureButton", resources.ru);
 
-  const textSure = sureText || t("DeleteSureButton:Sure");
-  const textDelete = deleteText || t("DeleteSureButton:Delete");
+  const textSure = isUndefined(sureText)
+    ? t("DeleteSureButton:Sure")
+    : sureText;
+  const textDelete = isUndefined(deleteText)
+    ? t("DeleteSureButton:Delete")
+    : deleteText;
 
   return (
     <DeleteSure onDelete={onDelete}>
