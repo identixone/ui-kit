@@ -12,6 +12,8 @@ function DeleteSureButton({
   size,
   isDisabled,
   className,
+  deleteText,
+  sureText,
 }) {
   return (
     <DeleteSure onDelete={onDelete}>
@@ -26,7 +28,7 @@ function DeleteSureButton({
           isDisabled={isDisabled}
           data-testid="delete-button"
         >
-          {isSure ? "Sure?" : "Delete"}
+          {isSure ? sureText : deleteText}
         </StyledDeleteSureButton>
       )}
     </DeleteSure>
@@ -43,6 +45,8 @@ DeleteSureButton.propTypes = {
   isDisabled: PropTypes.bool,
   deleteColor: PropTypes.string,
   className: PropTypes.string,
+  deleteText: PropTypes.string,
+  sureText: PropTypes.string,
 };
 
 export { DeleteSureButton, StyledDeleteSureButton };
