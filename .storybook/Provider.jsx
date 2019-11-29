@@ -1,12 +1,14 @@
 import React from "react";
 
-import { GloalStyles } from "../src/components";
+import { GloalStyles, I18nProvider } from "../src/components";
 
 const ProviderWrapper = ({ children }) => (
-  <div style={{ padding: "0 15px", width: 940 }}>
-    <GloalStyles />
-    {children}
-  </div>
+  <I18nProvider>
+    <div style={{ padding: "0 15px", width: 940 }}>
+      <GloalStyles />
+      {children}
+    </div>
+  </I18nProvider>
 );
 
 export const withProvider = story => (
