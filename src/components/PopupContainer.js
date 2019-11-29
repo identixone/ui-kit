@@ -9,7 +9,7 @@ function getStyles({ isOpen }) {
         visibility: hidden;
       `
     : css`
-        overflow: hidden;
+        overflow: visible;
       `;
 }
 
