@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Frame = styled.div`
   overflow: hidden;
   height: ${props => props.height}px;
-  /* margin-top: -36px; */
+  width: 100%;
 `;
 
 export default Frame;

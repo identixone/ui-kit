@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useTranslation } from "../../hooks";
+
 import StyledDeleteSureButton from "./StyledDeleteSureButton";
 import { colors } from "../../themes/colors";
 
 import { DeleteSure } from "../DeleteSure";
+
+import { resources } from "./DeleteSureButton.resources.js";
+import { isUndefined } from "lodash-es";
 
 function DeleteSureButton({
   onDelete,
@@ -12,7 +17,21 @@ function DeleteSureButton({
   size,
   isDisabled,
   className,
+  deleteText,
+  sureText,
 }) {
+  const { t, i18n } = useTranslation();
+
+  i18n.addResourceBundle("en", "DeleteSureButton", resources.en);
+  i18n.addResourceBundle("ru", "DeleteSureButton", resources.ru);
+
+  const textSure = isUndefined(sureText)
+    ? t("DeleteSureButton:Sure")
+    : sureText;
+  const textDelete = isUndefined(deleteText)
+    ? t("DeleteSureButton:Delete")
+    : deleteText;
+
   return (
     <DeleteSure onDelete={onDelete}>
       {({ isSure, handleClick, handleMouseLeave }) => (
@@ -26,7 +45,7 @@ function DeleteSureButton({
           isDisabled={isDisabled}
           data-testid="delete-button"
         >
-          {isSure ? "Sure?" : "Delete"}
+          {isSure ? textSure : textDelete}
         </StyledDeleteSureButton>
       )}
     </DeleteSure>
@@ -43,6 +62,8 @@ DeleteSureButton.propTypes = {
   isDisabled: PropTypes.bool,
   deleteColor: PropTypes.string,
   className: PropTypes.string,
+  deleteText: PropTypes.string,
+  sureText: PropTypes.string,
 };
 
 export { DeleteSureButton, StyledDeleteSureButton };

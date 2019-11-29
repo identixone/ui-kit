@@ -31,7 +31,6 @@ export const colors = {
   grayRedDark: "#dedede",
   grayRedMiddle: "#ccc",
   brownSimple: "#AC3D03",
-  orangeSimple: "#f89406",
   black: "#000",
 
   blueWhite: "#e4e9eb",
@@ -50,6 +49,9 @@ export const colors = {
   darkBlack: "#222",
 
   bloodOrange: "#ef5305",
+  orangeSimple: "#f89406",
+  orangeDark: "#fabf29",
+
   red: "#dc0909",
   green: "#008000",
 };

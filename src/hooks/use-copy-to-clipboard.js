@@ -1,12 +1,32 @@
-import { useCopyToClipboard as ruUseCopyToClipboard } from "react-use";
+import { useState } from "react";
 
-function useCopyToClipboard(...args) {
-  const isCopyAvailable =
-    document.queryCommandSupported && document.queryCommandSupported("copy");
+const isCopyAvailable =
+  document.queryCommandSupported && document.queryCommandSupported("copy");
 
-  const [state, copyToClipboard] = ruUseCopyToClipboard(...args);
+function useCopyToClipboard() {
+  const [isCopied, setIsCopied] = useState(false);
 
-  return [{ ...state, isCopyAvailable }, copyToClipboard];
+  const copyToClipboard = text => {
+    setIsCopied(false);
+
+    setTimeout(() => {
+      if (typeof text == "string" || typeof text == "number") {
+        const element = document.createElement("textarea"); // create textarea HTML element
+        element.value = text; // add the text to be copied to the element
+        document.body.appendChild(element); // add element to DOM
+        element.select(); // select the text
+        document.execCommand("copy"); // execute copy command
+        document.body.removeChild(element); // remove element from DOM
+        setIsCopied(true);
+      } else {
+        console.error(
+          `Cannot copy typeof ${typeof text} to clipboard, must be a valid string or number.`
+        );
+      }
+    });
+  };
+
+  return [{ isCopied, isCopyAvailable }, copyToClipboard];
 }
 
 export { useCopyToClipboard };

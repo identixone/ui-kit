@@ -2,11 +2,11 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { object, boolean } from "@storybook/addon-knobs";
 
-import { PersonsListPersonDetail } from "./index.jsx";
+import { PersonsListPersonDetail } from "./index";
 
 import { personMock } from "../../../../test/__mocks__";
 
-storiesOf("PersonsListPersonDetail", module).add("default", () => {
+storiesOf("Persons Lists| PersonDetail", module).add("default", () => {
   const person = object("Person", personMock);
 
   const isLoading = boolean("isLoading", false);

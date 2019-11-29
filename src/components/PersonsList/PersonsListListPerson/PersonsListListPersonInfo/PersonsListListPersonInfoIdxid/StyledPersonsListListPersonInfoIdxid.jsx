@@ -9,7 +9,7 @@ export const StyledPersonsListListPersonInfoIdxid = styled.span`
 
   span {
     color: ${colors.black};
-    background-color: #fabf29;
+    background-color: ${colors.orangeDark};
     padding: 0 2px;
   }
 `;

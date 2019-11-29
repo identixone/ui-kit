@@ -21,11 +21,26 @@ export function LazyImage({
     }
   }, [isLoaded]);
 
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src]);
+
   function handleImageLoaded() {
     if (!isLoaded) {
       setIsLoaded(true);
     }
   }
+
+  /**
+   * Случай, когда изображение берется из кэша
+   */
+  useEffect(() => {
+    if (imgRef && imgRef.current) {
+      if (!isLoaded && imgRef.current.complete) {
+        setIsLoaded(true);
+      }
+    }
+  }, [imgRef]);
 
   return (
     <StyledLazyImage className={className} isImageLoaded={isLoaded}>

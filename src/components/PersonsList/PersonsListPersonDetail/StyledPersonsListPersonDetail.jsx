@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-import { ListLayoutDetailed } from "../../ListLayout/ListLayoutDetailed/index";
+import { PersonCardDetailed } from "../../PersonCardDetailed/index";
 
-export const StyledPersonsListPersonDetail = styled(ListLayoutDetailed)`
+export const StyledPersonsListPersonDetail = styled(PersonCardDetailed)`
   min-height: 502px;
   width: 334px;
-  display: flex;
-  flex-direction: column;
 `;

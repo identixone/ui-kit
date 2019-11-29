@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider } from "styled-components";
-import { upperFirst } from "lodash-es";
 
 import { useTimeout } from "../../../hooks";
+import { useEffect } from "react";
 
 import { FiltersUploadPhoto } from "../FiltersUploadPhoto";
-
 import StyledByPhotoSearchPlace from "./StyledByPhotoSearchPlace";
 import { TextDrag } from "../../Text/TextDrag";
 import StyledByPhotoSearchPlaceGray from "./StyledByPhotoSearchPlaceGray";
 import StyledPlaceColor from "../StyledPlaceColor";
 import StyledRoundButtonColor from "../StyledRoundButtonColor";
 import StyledByPhotoSearchRoundButton from "./StyledByPhotoSearchRoundButton";
-
 import { AngleRight, Times } from "../../../assets/icons";
 
-const ERROR_CLEAR_TIMER = 5000;
+import { get, upperFirst } from "lodash-es";
+import { ThemeProvider } from "styled-components";
+
+import { ERROR_CLEAR_TIMER, DEFAULT_ERROR_MESSAGE } from "./constants.js";
 
 function ByPhotoSearch({
   personSearchResult,
@@ -29,11 +29,6 @@ function ByPhotoSearch({
   const { setUseTimeout, resetUseTimeout } = useTimeout(ERROR_CLEAR_TIMER);
   const hasResults = personSearchResult || error;
 
-  function handleClearResult() {
-    clearResult();
-    resetUseTimeout();
-  }
-
   useEffect(() => {
     if (hasDropped && hasResults) {
       onUploadEnd();
@@ -43,6 +38,17 @@ function ByPhotoSearch({
     }
   }, [hasDropped, personSearchResult, error]);
 
+  function handleClearResult() {
+    clearResult();
+    resetUseTimeout();
+  }
+
+  const errorMessage = get(
+    error,
+    "data.photo.detail",
+    get(error, "data.detail", DEFAULT_ERROR_MESSAGE)
+  );
+
   function renderContent() {
     return hasResults ? (
       error ? (
@@ -50,7 +56,7 @@ function ByPhotoSearch({
           <StyledByPhotoSearchPlace>
             Error {error.status}
           </StyledByPhotoSearchPlace>
-          <span>{error.data.detail || "No person found in database"}</span>
+          <span>{errorMessage}</span>
         </div>
       ) : (
         <div data-testid="search-person-message">

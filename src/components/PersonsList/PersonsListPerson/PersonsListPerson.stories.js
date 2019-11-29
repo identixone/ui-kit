@@ -7,7 +7,7 @@ import { PersonsListPerson } from "./index";
 
 import { personMock } from "../../../../test/__mocks__";
 
-storiesOf("PersonsListPerson", module)
+storiesOf("Persons Lists|PersonsListPerson", module)
   .add("default", () => {
     const person = object("Person", personMock);
 
@@ -20,6 +20,7 @@ storiesOf("PersonsListPerson", module)
             isSelected={isSelected}
             isActive={boolean("is active", false)}
             onChange={({ target: { checked } }) => setIsSelected(checked)}
+            onClick={action("onClick")}
             person={person}
             deletePersonsFromList={action("deletePersonsFromList")}
           />
@@ -40,6 +41,7 @@ storiesOf("PersonsListPerson", module)
           isSelected={isSelected}
           isActive={boolean("is active", false)}
           onChange={({ target: { checked } }) => setIsSelected(checked)}
+          onClick={action("onClick")}
           person={person}
           deletePersonsFromList={action("deletePersonsFromList")}
           mode="add"

@@ -1,103 +1,99 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import { StyledPersonsListPerson } from "./StyledPersonsListPerson";
-import PersonsListPersonActionButton, {
-  PersonsListPersonActionButtonIcon,
-} from "./PersonsListPersonActionButton";
-import PersonsListPersonCheckbox from "./PersonsListPersonCheckbox";
-import PersonsListPersonData from "./PersonsListPersonData";
-import { PersonsListPersonPhoto } from "./PersonsListPersonPhoto";
+import { useState } from "react";
 
-import { PopupConfirm } from "../../PopupConfirm/index";
-
+import { PersonsListPersonId } from "./PersonsListPersonId";
+import { PopupConfirm } from "../../PopupConfirm";
+import { CardSmall, StyledCardSmall } from "../../CardSmall";
+import { IdFormat } from "../../IdFormat";
+import { Value } from "../../Value";
 import { PlaylistAdd, Trash } from "../../../assets/icons";
 
 import { get } from "lodash-es";
+import { colors } from "../../../themes/colors";
+import { noimageid } from "../../../assets/images";
 
 function PersonsListPerson({
   person,
-  personsListId,
   onClick,
-  addPersonsToList,
-  deletePersonsFromList,
+  onPersonDelete,
+  onPersonAdd,
   isSelected,
   isActive,
   mode,
   onChange,
   isPersonsAddingToList,
   isPersonsDeletingFromList,
+  className,
+  "data-testid": testId,
 }) {
   const [isMouseOver, setIsMouseOver] = useState(false);
 
   function handleListItemClick() {
-    onClick(person.idxid);
+    onClick(person);
   }
 
   function handleDeleteButtonClick() {
-    deletePersonsFromList({
-      listId: personsListId,
-      persons: [person.idxid],
-      meta: {
-        listId: personsListId,
-        persons: [person.idxid],
-      },
-    });
+    onPersonDelete(person);
   }
 
   function handleAddButtonClick(e) {
     e.stopPropagation();
-
-    addPersonsToList({
-      persons: [person.idxid],
-      listId: personsListId,
-      meta: {
-        listId: personsListId,
-        person: person,
-      },
-    });
+    onPersonAdd(person);
   }
 
   const isAddingMode = mode === "add";
 
   return (
-    <StyledPersonsListPerson
-      isActive={isActive}
+    <CardSmall
+      className={className}
+      theme={isActive ? "dark" : "light"}
       onClick={handleListItemClick}
-      data-testid="persons-list-person"
       onMouseOver={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
+      img={person.initial_photo || noimageid}
+      data-testid={testId}
     >
-      <PersonsListPersonPhoto src={person.initial_photo} />
       {!isAddingMode && (
-        <PersonsListPersonCheckbox
+        <CardSmall.Checkbox
           name={person.idxid}
           value={isSelected}
           onChange={onChange}
-          isHidden={!isMouseOver && !isSelected}
+          isHidden={!isMouseOver && !isSelected && !isActive}
           data-testid={`persons-list-person-select-${person.idxid}`}
         />
       )}
-      <PersonsListPersonData
-        idxid={person.idxid}
-        source={get(person, "idxid_source.name", "-")}
-      />
+
+      <CardSmall.Data idxid={person.idxid}>
+        <CardSmall.DataItem>
+          ID{" "}
+          <PersonsListPersonId isActive={isActive}>
+            <IdFormat>{person.idxid}</IdFormat>
+          </PersonsListPersonId>
+        </CardSmall.DataItem>
+        <CardSmall.DataItem>
+          Place of first entry:
+          <br />{" "}
+          <b>
+            <Value>{get(person, "idxid_source.name", "-")}</Value>
+          </b>
+        </CardSmall.DataItem>
+      </CardSmall.Data>
+
       {isAddingMode ? (
-        <PersonsListPersonActionButton
+        <CardSmall.Button
           data-testid="persons-list-add-person"
           onClick={handleAddButtonClick}
           isHidden={false}
           isDisabled={isPersonsAddingToList}
-          mode={mode}
         >
-          <PersonsListPersonActionButtonIcon>
-            <PlaylistAdd size="24" />
-          </PersonsListPersonActionButtonIcon>
-        </PersonsListPersonActionButton>
+          <PlaylistAdd size="24" color={colors.greenish} />
+        </CardSmall.Button>
       ) : (
         <PopupConfirm onConfirm={handleDeleteButtonClick}>
           {({ togglePopup }) => (
-            <PersonsListPersonActionButton
+            <CardSmall.Button
               data-testid="persons-list-remove-person"
               onClick={e => {
                 e.stopPropagation();
@@ -107,33 +103,35 @@ function PersonsListPerson({
               isDisabled={isPersonsDeletingFromList}
               mode={mode}
             >
-              <PersonsListPersonActionButtonIcon>
-                <Trash size="16" />
-              </PersonsListPersonActionButtonIcon>
-            </PersonsListPersonActionButton>
+              <Trash size="16" color={colors.bloodOrange} />
+            </CardSmall.Button>
           )}
         </PopupConfirm>
       )}
-    </StyledPersonsListPerson>
+    </CardSmall>
   );
 }
 
 PersonsListPerson.propTypes = {
   person: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
+  onPersonDelete: PropTypes.func.isRequired,
+  onPersonAdd: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isActive: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  addPersonsToList: PropTypes.func.isRequired,
-  deletePersonsFromList: PropTypes.func.isRequired,
-  personsListId: PropTypes.number.isRequired,
   mode: PropTypes.string,
   isPersonsDeletingFromList: PropTypes.bool.isRequired,
   isPersonsAddingToList: PropTypes.bool.isRequired,
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 PersonsListPerson.defaultProps = {
   person: {},
+  "data-testid": "persons-list-person",
 };
 
-export { PersonsListPerson, StyledPersonsListPerson };
+const StyledPersonListPerson = StyledCardSmall;
+
+export { PersonsListPerson, StyledPersonListPerson };
