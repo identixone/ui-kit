@@ -1,51 +1,63 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { withPageFiltersListContext } from "../PageFiltersListContext";
+import { useEffect, useRef } from "react";
+import { useTranslation } from "../../hooks";
 
 import PageFiltersListSearchInput from "./PageFiltersListSearchInput";
+import { withPageFiltersListContext } from "../PageFiltersListContext";
 
-export class PageFiltersListSearch extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    setSearchQuery: PropTypes.func.isRequired,
-    searchQuery: PropTypes.string.isRequired,
-    iconSize: PropTypes.string,
-    placeholder: PropTypes.string,
-    "data-testid": PropTypes.string,
-  };
+import { resources } from "./PageFiltersListSearch.resources.js";
+import { isUndefined } from "lodash-es";
 
-  static defaultProps = {
-    placeholder: "Start enter name...",
-  };
+function PageFiltersListSearch({
+  setSearchQuery,
+  "data-testid": testId,
+  searchQuery,
+  placeholder,
+  className,
+  iconSize,
+}) {
+  const inputRef = useRef();
+  const { t, i18n } = useTranslation("PageFiltersListSearch");
 
-  inputRef = React.createRef();
-
-  componentDidMount() {
-    if (this.inputRef.current) {
-      this.inputRef.current.focus();
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
+  }, []);
+
+  function handleChange({ target: { value } }) {
+    setSearchQuery(value);
   }
 
-  handleChange = ({ target: { value } }) => {
-    this.props.setSearchQuery(value);
-  };
+  i18n.addResourceBundle("en", "PageFiltersListSearch", resources.en);
+  i18n.addResourceBundle("ru", "PageFiltersListSearch", resources.ru);
 
-  render() {
-    const { searchQuery, placeholder, className, iconSize } = this.props;
+  const textPlaceholder = isUndefined(placeholder)
+    ? t("placeholder")
+    : placeholder;
 
-    return (
-      <PageFiltersListSearchInput
-        className={className}
-        iconSize={iconSize}
-        data-testid={this.props["data-testid"]}
-        innerRef={this.inputRef}
-        value={searchQuery}
-        placeholder={placeholder ? placeholder : undefined}
-        onChange={this.handleChange}
-      />
-    );
-  }
+  return (
+    <PageFiltersListSearchInput
+      className={className}
+      iconSize={iconSize}
+      data-testid={testId}
+      innerRef={inputRef}
+      value={searchQuery}
+      placeholder={textPlaceholder}
+      onChange={handleChange}
+    />
+  );
 }
+
+PageFiltersListSearch.propTypes = {
+  className: PropTypes.string,
+  setSearchQuery: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  iconSize: PropTypes.string,
+  placeholder: PropTypes.string,
+  "data-testid": PropTypes.string,
+};
 
 export default withPageFiltersListContext(PageFiltersListSearch);
