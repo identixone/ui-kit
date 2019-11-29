@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { useEffect, useRef } from "react";
-import { useTranslation } from "../../hooks";
+import { useTranslation } from "../../../hooks";
 
 import PageFiltersListSearchInput from "./PageFiltersListSearchInput";
 import { withPageFiltersListContext } from "../PageFiltersListContext";
