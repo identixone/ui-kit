@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import { useEffect, useRef } from "react";
 import { useTranslation } from "../../../hooks";
+import { withPageFiltersListContext } from "../PageFiltersListContext";
 
 import PageFiltersListSearchInput from "./PageFiltersListSearchInput";
-import { withPageFiltersListContext } from "../PageFiltersListContext";
 
 import { resources } from "./PageFiltersListSearch.resources.js";
 import { isUndefined } from "lodash-es";

@@ -1,6 +1,6 @@
 export const resources = {
   ru: {
-    placeholder: "Начните вводить имя...",
+    placeholder: "Начните вводить название...",
   },
   en: {
     placeholder: "Start enter name...",
