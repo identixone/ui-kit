@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { toggleInArray } from "../utils/helpers";
+import { noop } from "lodash-es";
 
 const TabsContext = React.createContext({
   activeTab: null,
@@ -70,10 +71,12 @@ class Tabs extends Component {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
     defaultActiveTab: PropTypes.string,
     disabledTabs: PropTypes.array,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
     disabledTabs: [],
+    onChange: noop,
   };
 
   static TabBar = TabBar;
@@ -81,6 +84,12 @@ class Tabs extends Component {
 
   static TabPanes = TabPanes;
   static TabPane = TabPane;
+
+  componentDidUpdate(_, prevState) {
+    if (prevState !== this.state) {
+      this.props.onChange(this.state);
+    }
+  }
 
   openTab = tabName => {
     this.setState(({ disabledTabs }) => ({

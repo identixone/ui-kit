@@ -7,8 +7,10 @@ import PageFiltersListSearchInput from "./PageFiltersListSearchInput";
 
 export class PageFiltersListSearch extends React.Component {
   static propTypes = {
+    className: PropTypes.string,
     setSearchQuery: PropTypes.func.isRequired,
     searchQuery: PropTypes.string.isRequired,
+    iconSize: PropTypes.string,
     placeholder: PropTypes.string,
     "data-testid": PropTypes.string,
   };
@@ -26,10 +28,12 @@ export class PageFiltersListSearch extends React.Component {
   };
 
   render() {
-    const { searchQuery, placeholder } = this.props;
+    const { searchQuery, placeholder, className, iconSize } = this.props;
 
     return (
       <PageFiltersListSearchInput
+        className={className}
+        iconSize={iconSize}
         data-testid={this.props["data-testid"]}
         innerRef={this.inputRef}
         value={searchQuery}

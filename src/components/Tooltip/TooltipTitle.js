@@ -4,4 +4,4 @@ const TooltipTitle = styled.p`
   margin: 0;
 `;
 
-export default TooltipTitle;
+export { TooltipTitle };

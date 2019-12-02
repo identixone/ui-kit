@@ -1,76 +1,66 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useState, useEffect, useContext } from "react";
 
-import { Popup } from "../Popup";
-import { ListItemsContext } from "../WithCurrentOpenItem/ListItemsContext";
+import { usePositionPopup } from "../../hooks/use-position-popup.js";
 
-import StyledListItemPopup from "./StyledListItemPopup";
-import ListItemPopupInner from "./ListItemPopupInner";
+import { StyledListItemPopup } from "./StyledListItemPopup";
+import { ListItemPopupInner } from "./ListItemPopupInner";
 
-export function ListItemPopup({ initialOpen, pupupTrigger, id, children }) {
-  const [isOpen, setIsOpen] = useState(initialOpen);
+function ListItemPopup({
+  "data-testid": testId,
+  className,
+  children,
+  trigger,
+}) {
+  const {
+    Portal,
+    openPortal,
+    closePortal,
+    togglePortal,
+    isOpen,
+    coords,
+    popupInner,
+    ref,
+  } = usePositionPopup({
+    position: "top",
+  });
 
-  const { currentOpenItem, setCurrentOpenItem } = useContext(ListItemsContext);
-
-  function handleTriggerOpenClick() {
-    setCurrentOpenItem(id);
-  }
-
-  function handleTriggerCloseClick() {
-    setCurrentOpenItem(null);
-  }
-
-  useEffect(() => {
-    const { current: pupupTriggerEl } = pupupTrigger;
-
-    if (pupupTriggerEl) {
-      pupupTriggerEl.addEventListener("click", handleTriggerOpenClick);
-      return () => {
-        pupupTriggerEl.removeEventListener("click", handleTriggerOpenClick);
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    setIsOpen(currentOpenItem === id);
-  }, [id, currentOpenItem]);
+  const triggerProps = { ref, openPortal, togglePortal, closePortal };
+  const childrenProps = { closePortal };
 
   return (
-    <Popup
-      position="top"
-      isOpen={isOpen}
-      pupupTrigger={pupupTrigger}
-      triggerContent={children}
-      render={({ isOpen, left, top, popupInner }) => (
+    <React.Fragment>
+      {typeof trigger === "function"
+        ? trigger(triggerProps)
+        : React.cloneElement(trigger, triggerProps)}
+      <Portal>
         <StyledListItemPopup
-          data-testid="list-item-popup-container"
+          data-testid={testId}
+          className={className}
           isOpen={isOpen}
-          left={left}
-          top={top}
+          left={coords.left}
+          top={coords.top}
         >
           <ListItemPopupInner ref={popupInner}>
             {typeof children === "function"
-              ? children({
-                  isOpen,
-                  pupupTrigger: pupupTrigger,
-                  handleTriggerCloseClick: handleTriggerCloseClick,
-                })
-              : children}
+              ? children(childrenProps)
+              : React.cloneElement(children, childrenProps)}
           </ListItemPopupInner>
         </StyledListItemPopup>
-      )}
-    />
+      </Portal>
+    </React.Fragment>
   );
 }
 
 ListItemPopup.propTypes = {
+  "data-testid": PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  initialOpen: PropTypes.bool,
-  id: PropTypes.number,
-  pupupTrigger: PropTypes.object,
+  trigger: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
 
 ListItemPopup.defaultProps = {
-  initialOpen: false,
+  "data-testid": "list-item-popup",
 };
+
+export { ListItemPopup, StyledListItemPopup };

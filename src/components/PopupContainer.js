@@ -1,12 +1,23 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+function getStyles({ isOpen }) {
+  return !isOpen
+    ? css`
+        opacity: 0;
+        overflow: visible;
+        height: 0;
+        visibility: hidden;
+      `
+    : css`
+        overflow: hidden;
+      `;
+}
 
 export const PopupContainer = styled.div`
   position: absolute;
+  z-index: 2;
   left: ${({ left }) => `${left}px`};
   top: ${({ top }) => `${top}px`};
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  overflow: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  height: ${({ isOpen }) => (isOpen ? "auto" : 0)};
-  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  z-index: 2;
+
+  ${getStyles}
 `;

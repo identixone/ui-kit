@@ -29,6 +29,7 @@ function Search({
       <SearchFakeInputValue>{value}</SearchFakeInputValue>
       {value && (
         <SearchClearButton
+          size={iconSize}
           onClick={() => {
             onChange({ target: { value: "" } });
           }}

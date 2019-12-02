@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+import { noop } from "lodash-es";
+
 const StepperContext = React.createContext({
   activeStepIndex: null,
+  goToStep: noop,
+  reset: noop,
 });
 
 const withStepperContext = WrappedComponent => {
@@ -36,13 +40,11 @@ function Stepper({ onStepChanges, onReset, initialActiveStepIndex, children }) {
     onStepChanges(activeStepIndex);
   }, [activeStepIndex]);
 
+  const sharedState = { activeStepIndex, goToStep, reset };
+
   return (
-    <StepperContext.Provider value={{ activeStepIndex }}>
-      {children({
-        activeStepIndex,
-        goToStep,
-        reset: reset,
-      })}
+    <StepperContext.Provider value={sharedState}>
+      {children(sharedState)}
     </StepperContext.Provider>
   );
 }
@@ -58,8 +60,8 @@ Stepper.propTypes = {
 };
 
 Stepper.defaultProps = {
-  onStepChanges: () => {},
-  onReset: () => {},
+  onStepChanges: noop,
+  onReset: noop,
   initialActiveStepIndex: 1,
 };
 
@@ -67,4 +69,4 @@ Stepper.Step = withStepperContext(({ id, children, activeStepIndex }) => {
   return id === activeStepIndex ? children : null;
 });
 
-export { Stepper };
+export { Stepper, StepperContext, withStepperContext };

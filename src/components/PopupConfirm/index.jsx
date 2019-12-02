@@ -15,7 +15,7 @@ function PopupConfirm({
 }) {
   const [openPopup, closePopup, isPopupOpen, Portal, togglePopup] = usePortal({
     onOpen({ portal, targetEl }) {
-      const { top, left } = targetEl.getBoundingClientRect();
+      const { top, left } = targetEl.current.getBoundingClientRect();
 
       /**
        * Так сделано, потому что нужно отрисовать
