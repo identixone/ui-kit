@@ -4,7 +4,6 @@ import { PopupContainer } from "../PopupContainer";
 
 const StyledListItemPopup = styled(PopupContainer)`
   transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
-  overflow: visible;
 `;
 
 export { StyledListItemPopup };
