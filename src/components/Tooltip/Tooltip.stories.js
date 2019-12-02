@@ -8,9 +8,5 @@ const tooltipTitle = text("Tooltip title", "Test tooltip text");
 const tooltipText = text("Tooltip text", "Text with Tooltip");
 
 storiesOf("Tooltip", module).add("default", () => {
-  return (
-    <Tooltip title={tooltipTitle}>
-      <span>{tooltipText}</span>
-    </Tooltip>
-  );
+  return <Tooltip title={tooltipTitle}>{tooltipText}</Tooltip>;
 });

@@ -4,7 +4,6 @@ function getStyles({ isOpen }) {
   return !isOpen
     ? css`
         opacity: 0;
-        overflow: visible;
         visibility: hidden;
       `
     : css``;
