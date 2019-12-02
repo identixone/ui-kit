@@ -35,7 +35,11 @@ function Tooltip(props) {
             tooltipTrigger,
             bind,
           })
-        : React.cloneElement(children, { ...bind, ref: tooltipTrigger })}
+        : React.createElement(
+            "span",
+            { ...bind, ref: tooltipTrigger },
+            children
+          )}
       <Portal>
         <StyledTooltipContainer
           data-testid={testId}
