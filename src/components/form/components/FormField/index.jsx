@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { FastField, Field } from "formik";
+import { useField, useFormikContext } from "formik";
 
 import StyledFormField from "./StyledFormField";
 import { FormLabel, FormLabelTitle } from "../FormLabel";
@@ -18,10 +18,10 @@ function FormField(props) {
     label,
     render,
     name,
+    type,
     component,
     tip,
     direction,
-    isFast,
     tag,
     showError,
     disabled,
@@ -31,98 +31,92 @@ function FormField(props) {
     valuePlaceholder,
   } = props;
 
-  const FormikField = isFast ? FastField : Field;
+  const [field, { touched, error }] = useField({ name, type });
+  const { setFieldValue } = useFormikContext();
+
+  const hasError = Boolean(touched && error);
+
+  const onChange = ev => {
+    if (ev.type) {
+      field.onChange(ev);
+    } else {
+      setFieldValue(field.name, ev);
+    }
+  };
+
+  const FormComponent = component;
+
+  const formComponentProps = {
+    ...field,
+    hasError,
+    onChange,
+    disabled,
+    placeholder,
+    valuePlaceholder,
+  };
+
+  const getFormComponent = () => {
+    return component ? (
+      <FormComponent {...formComponentProps} />
+    ) : render ? (
+      render(formComponentProps)
+    ) : (
+      ""
+    );
+  };
+
+  const getFormFieldTip = () => {
+    return (
+      tip && (
+        <Tooltip title={tip}>
+          <FormFieldIcon>
+            <InfoCircle size="16" />
+          </FormFieldIcon>
+        </Tooltip>
+      )
+    );
+  };
+
+  const getFormFieldTag = () => {
+    return tag && <FormFieldTag>{tag}</FormFieldTag>;
+  };
+
+  const getFormError = () => {
+    return hasError && showError ? (
+      <FormFieldError data-testid={`field-error-${name}`}>
+        {error}
+      </FormFieldError>
+    ) : null;
+  };
 
   return (
-    <FormikField
-      name={name}
-      render={({ field, form: { touched, errors, setFieldValue } }) => {
-        const hasError = Boolean(touched[name] && errors[name]);
-
-        const onChange = ev => {
-          if (ev.type) {
-            field.onChange(ev);
-          } else {
-            setFieldValue(field.name, ev);
-          }
-        };
-
-        const FormComponent = component;
-
-        const formComponentProps = {
-          ...field,
-          hasError,
-          onChange,
-          disabled,
-          placeholder,
-          valuePlaceholder,
-        };
-
-        const getFormComponent = () => {
-          return component ? (
-            <FormComponent {...formComponentProps} />
-          ) : render ? (
-            render(formComponentProps)
-          ) : (
-            ""
-          );
-        };
-
-        const getFormFieldTip = () => {
-          return (
-            tip && (
-              <Tooltip title={tip}>
-                <FormFieldIcon>
-                  <InfoCircle size="16" />
-                </FormFieldIcon>
-              </Tooltip>
-            )
-          );
-        };
-
-        const getFormFieldTag = () => {
-          return tag && <FormFieldTag>{tag}</FormFieldTag>;
-        };
-
-        const getFormError = () => {
-          return hasError && showError ? (
-            <FormFieldError data-testid={`field-error-${name}`}>
-              {errors[name]}
-            </FormFieldError>
-          ) : null;
-        };
-
-        return (
-          <StyledFormField className={className}>
-            {label ? (
-              <React.Fragment>
-                <FormLabel
-                  htmlFor={name ? name : undefined}
-                  direction={direction}
-                  disabled={disabled}
-                  height={height}
-                >
-                  <FormLabelTitle>
-                    {label}
-                    {getFormFieldTip()}
-                    {getFormFieldTag()}
-                  </FormLabelTitle>
-                  {getFormComponent()}
-                </FormLabel>
-                {getFormError()}
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {getFormFieldTip()}
-                {getFormFieldTag()}
-                {getFormComponent()}
-                {getFormError()}
-              </React.Fragment>
-            )}
-          </StyledFormField>
-        );
-      }}
-    />
+    <StyledFormField className={className}>
+      {label ? (
+        <React.Fragment>
+          <FormLabel
+            htmlFor={name ? name : undefined}
+            direction={direction}
+            disabled={disabled}
+            height={height}
+          >
+            <FormLabelTitle>
+              {label}
+              {getFormFieldTip()}
+              {getFormFieldTag()}
+            </FormLabelTitle>
+            {getFormComponent()}
+          </FormLabel>
+          {getFormError()}
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          {getFormFieldTip()}
+          {getFormFieldTag()}
+          {getFormComponent()}
+          {getFormError()}
+        </React.Fragment>
+      )}
+    </StyledFormField>
   );
 }
 
@@ -134,7 +128,6 @@ FormField.propTypes = {
   direction: PropTypes.oneOf(["row", "column"]),
   render: PropTypes.func,
   component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  isFast: PropTypes.bool,
   showError: PropTypes.bool,
   disabled: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -144,11 +137,14 @@ FormField.propTypes = {
    */
   placeholder: PropTypes.string,
   valuePlaceholder: PropTypes.string,
+  /**
+   * Тип поля для формика
+   */
+  type: PropTypes.string,
 };
 
 FormField.defaultProps = {
   direction: "row",
-  isFast: true,
   showError: true,
 };
 

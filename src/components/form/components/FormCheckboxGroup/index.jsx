@@ -23,7 +23,7 @@ function FormCheckboxGroup({ groupName, render, options, value, onChange }) {
                   key={value}
                   label={label}
                   name={value}
-                  value={selected.includes(value)}
+                  checked={selected.includes(value)}
                   onChange={selectedListProps.handleCheckboxChange}
                   groupName={groupName}
                 />

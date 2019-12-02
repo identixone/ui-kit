@@ -5,14 +5,15 @@ import { StyledFormSwitch } from "./StyledFormSwitch";
 import FormSwitchLabel from "./FormSwitchLabel";
 import FormSwitchCheckbox from "./FormSwitchCheckbox";
 
-function FormSwitch({ onChange, name, value, size, theme, className }) {
+function FormSwitch({ onChange, name, checked, size, theme, className }) {
   return (
     <StyledFormSwitch size={size} className={className}>
       <FormSwitchCheckbox
         id={name}
         type="checkbox"
         name={name}
-        checked={value}
+        value={checked}
+        checked={checked}
         onChange={onChange}
         size={size}
         data-testid={name}
@@ -20,7 +21,7 @@ function FormSwitch({ onChange, name, value, size, theme, className }) {
       <FormSwitchLabel
         htmlFor={name ? name : undefined}
         size={size}
-        checked={value}
+        checked={checked}
         theme={theme}
       />
     </StyledFormSwitch>
@@ -29,7 +30,7 @@ function FormSwitch({ onChange, name, value, size, theme, className }) {
 
 FormSwitch.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
+  checked: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   size: PropTypes.oneOf(["s", "m"]),
   theme: PropTypes.oneOf(["blue", "dark-gray"]),
