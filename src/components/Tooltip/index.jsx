@@ -46,7 +46,7 @@ function Tooltip(props) {
           className={className}
           isOpen={isOpen}
           left={coords.left}
-          top={coords.top}
+          top={coords.top - 10}
         >
           <TooltipInner data-testid="tooltip-inner" ref={popupInner}>
             <TooltipTitle>{title}</TooltipTitle>
