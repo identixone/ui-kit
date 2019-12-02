@@ -37,7 +37,7 @@ storiesOf("Basic UI|CardSmall", module)
           {(isSelected || theme === "dark" || isMouseOver) && (
             <CardSmall.Checkbox
               name={personMock.idxid}
-              value={isSelected}
+              checked={isSelected}
               onChange={() => setIsSelected(!isSelected)}
             />
           )}

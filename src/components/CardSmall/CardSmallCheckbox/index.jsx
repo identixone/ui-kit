@@ -5,7 +5,7 @@ import { FormCheckbox } from "../../form";
 
 import { StyledCardSmallCheckbox } from "./StyledCardSmallCheckbox";
 
-function CardSmallCheckbox({ name, onChange, value, isHidden }) {
+function CardSmallCheckbox({ name, onChange, checked, isHidden }) {
   return (
     <StyledCardSmallCheckbox
       htmlFor={name}
@@ -17,7 +17,7 @@ function CardSmallCheckbox({ name, onChange, value, isHidden }) {
       <FormCheckbox
         name={name}
         onChange={onChange}
-        value={value}
+        checked={checked}
         checkboxTheme="dark"
         size="large"
       />
@@ -27,7 +27,7 @@ function CardSmallCheckbox({ name, onChange, value, isHidden }) {
 
 CardSmallCheckbox.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
+  checked: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   isHidden: PropTypes.bool.isRequired,
 };

@@ -22,7 +22,7 @@ function ListLayoutListItem({
         <ListLayoutListItemCheckbox
           name={item}
           onChange={onChange}
-          value={selected}
+          checked={selected}
         />
       )}
       <ListLayoutListItemText to={to}>{children}</ListLayoutListItemText>
