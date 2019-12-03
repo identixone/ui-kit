@@ -10,15 +10,13 @@ function FormCheckbox({
   onChange,
   onBlur,
   name,
-  value,
+  checked,
   disabled,
   className,
   checkboxTheme,
   size,
   ...restProps
 }) {
-  const checked = Boolean(value);
-
   return (
     <StyledFormCheckbox
       disabled={disabled}
@@ -34,6 +32,7 @@ function FormCheckbox({
         name={name}
         type="checkbox"
         checked={checked}
+        value={checked}
         onChange={onChange}
         onBlur={onBlur}
         disabled={disabled}
@@ -46,7 +45,7 @@ function FormCheckbox({
 FormCheckbox.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
-  value: PropTypes.bool.isRequired,
+  checked: PropTypes.bool.isRequired,
   name: PropTypes.string,
   disabled: PropTypes.bool,
   className: PropTypes.string,

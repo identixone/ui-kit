@@ -9,7 +9,7 @@ import { StyledFormCheckboxGroupItem } from "./StyledFormCheckboxGroupItem";
 function FormCheckboxGroupItem({
   label,
   name,
-  value,
+  checked,
   onChange,
   groupName,
   className,
@@ -21,7 +21,7 @@ function FormCheckboxGroupItem({
         <FormLabelTitle>{label}</FormLabelTitle>
         <FormCheckbox
           name={name}
-          value={value}
+          checked={checked}
           onChange={onChange}
           data-testid={props["data-testid"] || `${groupName}-${name}`}
         />
@@ -34,7 +34,7 @@ FormCheckboxGroupItem.propTypes = {
   groupName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-  value: PropTypes.bool,
+  checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   "data-testid": PropTypes.string,
   className: PropTypes.string,
