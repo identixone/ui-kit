@@ -21,7 +21,7 @@ function usePositionPopup(params) {
       case "right":
         setCoords({
           top: top + window.scrollY - innerHeight / 2,
-          left: left + width + 10,
+          left: left + width,
         });
         break;
       case "top":

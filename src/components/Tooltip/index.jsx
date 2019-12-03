@@ -29,24 +29,26 @@ function Tooltip(props) {
 
   return (
     <React.Fragment>
-      {typeof children === "function"
-        ? children({
-            isOpen,
-            tooltipTrigger,
-            bind,
-          })
-        : React.createElement(
-            "span",
-            { ...bind, ref: tooltipTrigger },
-            children
-          )}
+      {typeof children === "function" ? (
+        children({
+          isOpen,
+          tooltipTrigger,
+          bind,
+        })
+      ) : children.type ? (
+        React.cloneElement(children, { ...bind, ref: tooltipTrigger })
+      ) : (
+        <span {...bind} ref={tooltipTrigger}>
+          {children}
+        </span>
+      )}
       <Portal>
         <StyledTooltipContainer
           data-testid={testId}
           className={className}
           isOpen={isOpen}
           left={coords.left}
-          top={coords.top - 10}
+          top={coords.top}
         >
           <TooltipInner data-testid="tooltip-inner" ref={popupInner}>
             <TooltipTitle>{title}</TooltipTitle>
