@@ -12,7 +12,7 @@ function usePositionPopup(params) {
   });
 
   function updatePopupCoords() {
-    const { left, top, width } = targetParams;
+    const { left, top, width, height } = targetParams;
     const innerHeight = popupInner.current
       ? popupInner.current.offsetHeight
       : 0;
@@ -20,7 +20,7 @@ function usePositionPopup(params) {
     switch (position) {
       case "right":
         setCoords({
-          top: top + window.scrollY - innerHeight / 2,
+          top: top + window.scrollY - innerHeight / 2 + height / 2,
           left: left + width + 10,
         });
         break;
@@ -38,6 +38,7 @@ function usePositionPopup(params) {
   }, [targetParams]);
 
   return {
+    popupInner,
     ...usePopupParams,
     coords,
   };
