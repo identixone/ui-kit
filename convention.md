@@ -46,6 +46,7 @@ AwesomeComponent
 ├── ... # другие дочерние компоненты
 ├── AwesomeComponentContext.js # файл с конекстом компонента
 ├── AwesomeComponent.stories.js # файл со `stories` компонента
+├── AwesomeComponent.resources.js # файл с переводами строк компонента
 └── index.jsx # индексный файл с логикой и экспортом компонента
 ```
 
@@ -61,6 +62,7 @@ import PropTypes from "prop-types";
 // Импорт hocs, hooks
 import { usePrevious, useState } from "react";
 import { useUpdateEffect } from "react-use";
+import { useTranslation } from "react-i18n";
 
 // Импорт контекстов
 import { SomeLibContext } from "some-lib";
@@ -76,6 +78,7 @@ import { SomeIcon } from "icons";
 import { brandColor } from "colors";
 import { brandImage } from "images";
 import { isEqual } from "lodash-es";
+import { resources } from "./AwesomeComponent.resources.js"
 
 /** деструктуризация пропсов
  * в API компонента обязательно должен быть `data-testid` и `className` пропсы
@@ -87,6 +90,11 @@ function AwesomeComponent({
   prop2,
   children,
 }) {
+  const { t, i18n } = useTranslation();
+  // подключение переводов для компонента ns - `AwesomeComponent`
+  i18n.addResourceBundle("en", "AwesomeComponent", resources.en);
+  i18n.addResourceBundle("ru", "AwesomeComponent", resources.ru);
+ 
   // использование hooks
   const [some, setSome] = useState(false);
   const prevSome = usePrevious(some);
@@ -125,6 +133,7 @@ function AwesomeComponent({
       <AwesomeComponentChild onClick={handleChildClick} src={brandImage}>
         {children(someSharedState)}
       </AwesomeComponentChild>
+      <p>{t("AwesomeComponent:title")}</p>
     </StyledAwesomeComponent>
   );
 }
