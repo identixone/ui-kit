@@ -34,8 +34,8 @@ function ButtonToggle({ children, icon, mode, onChange, onCrossClick }) {
         </StyledButtonToggle>
         {isOpen && (
           <React.Fragment>
-            <ButtonMiddle mode={mode}>{children}</ButtonMiddle>
-            <ButtonClose onClick={handleCrossClick} mode={mode}>
+            <ButtonMiddle>{children}</ButtonMiddle>
+            <ButtonClose onClick={handleCrossClick}>
               <Times size="16" />
             </ButtonClose>
           </React.Fragment>
