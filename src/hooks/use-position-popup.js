@@ -20,7 +20,7 @@ function usePositionPopup(params) {
     switch (position) {
       case "right":
         setCoords({
-          top: top + window.scrollY - innerHeight / 2 - height / 2,
+          top: top + window.scrollY - innerHeight / 2 + height / 2,
           left: left + width + 10,
         });
         break;
@@ -38,6 +38,7 @@ function usePositionPopup(params) {
   }, [targetParams]);
 
   return {
+    popupInner,
     ...usePopupParams,
     coords,
   };
