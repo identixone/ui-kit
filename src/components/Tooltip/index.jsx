@@ -29,13 +29,19 @@ function Tooltip(props) {
 
   return (
     <React.Fragment>
-      {typeof children === "function"
-        ? children({
-            isOpen,
-            tooltipTrigger,
-            bind,
-          })
-        : React.cloneElement(children, { ...bind, ref: tooltipTrigger })}
+      {typeof children === "function" ? (
+        children({
+          isOpen,
+          tooltipTrigger,
+          bind,
+        })
+      ) : children.type ? (
+        React.cloneElement(children, { ...bind, ref: tooltipTrigger })
+      ) : (
+        <span {...bind} ref={tooltipTrigger}>
+          {children}
+        </span>
+      )}
       <Portal>
         <StyledTooltipContainer
           data-testid={testId}
