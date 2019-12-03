@@ -35,10 +35,10 @@ const RANGE = [
   {
     from: moment()
       .subtract(1, "weeks")
-      .startOf("week"),
+      .startOf("isoWeek"),
     to: moment()
       .subtract(1, "weeks")
-      .endOf("week"),
+      .endOf("isoWeek"),
     title: "Previous week",
   },
   {

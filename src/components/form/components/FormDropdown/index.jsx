@@ -41,14 +41,6 @@ class FormDropdown extends Component {
     placeholder: "",
   };
 
-  static Option = ({ children, isHighlighted, ...restProps }) => {
-    return (
-      <FormDropdownOption {...restProps} isHighlighted={isHighlighted}>
-        {children}
-      </FormDropdownOption>
-    );
-  };
-
   inputRef = React.createRef();
 
   state = {
@@ -159,7 +151,10 @@ class FormDropdown extends Component {
         ...getItemProps({
           id: `${name}-${filteredChild.props.value}`,
           "data-testid": `${name}-${filteredChild.props.value}`,
-          item: filteredChild.props,
+          item: {
+            label: filteredChild.props.label,
+            value: filteredChild.props.value,
+          },
           key: index,
           index,
           isSelected:
@@ -301,5 +296,7 @@ class FormDropdown extends Component {
     );
   }
 }
+
+FormDropdown.Option = FormDropdownOption;
 
 export { FormDropdown, StyledFormDropdown };
