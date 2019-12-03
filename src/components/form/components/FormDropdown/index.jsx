@@ -41,14 +41,6 @@ class FormDropdown extends Component {
     placeholder: "",
   };
 
-  static Option = ({ children, isHighlighted, ...restProps }) => {
-    return (
-      <FormDropdownOption {...restProps} isHighlighted={isHighlighted}>
-        {children}
-      </FormDropdownOption>
-    );
-  };
-
   inputRef = React.createRef();
 
   state = {
@@ -304,5 +296,7 @@ class FormDropdown extends Component {
     );
   }
 }
+
+FormDropdown.Option = FormDropdownOption;
 
 export { FormDropdown, StyledFormDropdown };
