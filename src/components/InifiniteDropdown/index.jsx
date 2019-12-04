@@ -12,14 +12,15 @@ function InifiniteDropdown({
   options,
   fetchOptions,
   isFetching,
-  placeholder,
   totalCount,
   limit,
+  placeholder,
   "data-testid": testId,
   name,
   className,
   renderItem,
   withSearch,
+  width,
 }) {
   const [isListEnds, setIsListEnds] = useState(false);
 
@@ -61,8 +62,9 @@ function InifiniteDropdown({
           name={name}
           onInputChange={handleSearch}
           listRef={scrollerRef}
-          placeholder={isFetching ? "Loading..." : placeholder}
+          placeholder={placeholder}
           renderItem={renderItem}
+          width={width}
         />
       )}
     </InfiniteScroll>
@@ -85,6 +87,7 @@ InifiniteDropdown.propTypes = {
   className: PropTypes.string,
   renderItem: PropTypes.func,
   withSearch: PropTypes.bool,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 InifiniteDropdown.defaultProps = {

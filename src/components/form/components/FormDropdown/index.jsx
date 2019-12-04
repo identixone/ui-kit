@@ -41,10 +41,6 @@ function FormDropdown({
     }
   }, [value]);
 
-  useEffect(() => {
-    setPreselected(selected);
-  }, [selected]);
-
   const inputRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const prevInputValue = usePrevious(inputValue);
@@ -54,10 +50,8 @@ function FormDropdown({
     }
   }, [inputValue]);
 
-  function getHighlighted() {
-    if (!selected) return 0;
-
-    const selectedOptionIndex = value
+  function getHighlighted(selected) {
+    const selectedOptionIndex = selected
       ? searchInList(options, inputValue, ["label"]).findIndex(
           item => item.value === selected.value
         )
@@ -66,12 +60,16 @@ function FormDropdown({
     return selectedOptionIndex > 0 ? selectedOptionIndex : 0;
   }
 
-  function handleStateChange(changes, helpers) {
+  function handleStateChange(changes, stateAndHelpers) {
     if (changes.isOpen && inputRef.current) {
       inputRef.current.focus();
     }
 
-    onStateChange(changes, helpers);
+    if (value === undefined) {
+      setPreselected(stateAndHelpers.selectedItem);
+    }
+
+    onStateChange(changes, stateAndHelpers);
   }
 
   function stateReducer(state, changes) {
@@ -94,11 +92,6 @@ function FormDropdown({
     }
 
     switch (changes.type) {
-      case Downshift.stateChangeTypes.controlledPropUpdatedSelectedItem:
-        return {
-          ...changes,
-          highlightedIndex: getHighlighted(),
-        };
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.keyDownArrowDown:
         return {
@@ -109,7 +102,12 @@ function FormDropdown({
               : state.selectedItem,
         };
       default:
-        return changes;
+        return {
+          ...changes,
+          highlightedIndex: changes.selectedItem
+            ? getHighlighted(changes.selectedItem)
+            : state.highlightedIndex,
+        };
     }
   }
 
