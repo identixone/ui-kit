@@ -55,6 +55,8 @@ function FormDropdown({
   }, [inputValue]);
 
   function getHighlighted() {
+    if (!selected) return 0;
+
     const selectedOptionIndex = value
       ? searchInList(options, inputValue, ["label"]).findIndex(
           item => item.value === selected.value
