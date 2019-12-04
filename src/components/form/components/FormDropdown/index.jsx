@@ -13,7 +13,7 @@ import FormDropdownInputWrapper from "./FormDropdownInputWrapper";
 import FormDropdownInput from "./FormDropdownInput";
 
 import { searchInList } from "../../../../utils/helpers";
-import { identity } from "lodash-es";
+import { identity, property as prop, isEqual, get } from "lodash-es";
 
 class FormDropdown extends Component {
   static propTypes = {
@@ -22,7 +22,6 @@ class FormDropdown extends Component {
     withSearch: PropTypes.bool,
     disabled: PropTypes.bool,
     options: PropTypes.array,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
     onStateChange: PropTypes.func,
     onChange: PropTypes.func.isRequired,
     onInputChange: PropTypes.func,
@@ -30,6 +29,7 @@ class FormDropdown extends Component {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     className: PropTypes.string,
     placeholder: PropTypes.string,
+    renderItem: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -39,31 +39,62 @@ class FormDropdown extends Component {
     onChange: identity,
     onInputChange: identity,
     placeholder: "",
+    renderItem: prop("label"),
+    options: [],
   };
 
-  inputRef = React.createRef();
+  constructor(props) {
+    super(props);
 
-  state = {
-    inputValue: "",
-    // Нужно для того, чтобы в контроле показывать
-    // хайлатед по стрелкам элемент в дропдауне с поиском
-    preselectedItem: this.props.value,
-  };
+    const value =
+      typeof this.props.value !== "object"
+        ? this.props.options.find(option => option.value === this.props.value)
+        : this.props.value;
 
-  componentDidMount() {
-    if (!this.props.value && this.props.withSearch && this.props.options) {
-      this.setState({ preselectedItem: this.props.options[0] });
-    }
+    this.state = {
+      inputValue: "",
+
+      selectedValue: value,
+      // Нужно для того, чтобы в контроле показывать
+      // хайлатед по стрелкам элемент в дропдауне с поиском
+      preselectedItem: value,
+      /**
+       * Нужно сохранить значние для того,
+       * чтобы отобразить его в селекте, даже если
+       * его нет в options
+       */
+      rawValue: this.props.value,
+    };
+
+    this.inputRef = React.createRef();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.value !== this.props.value && this.props.withSearch) {
-      this.setState({ preselectedItem: this.props.value });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.value && nextProps.value !== prevState.rawValue) {
+      if (typeof nextProps.value !== "object") {
+        const newValue = nextProps.options.find(
+          option => option.value === nextProps.value
+        );
+
+        return {
+          selectedValue: newValue,
+          preselectedItem: newValue,
+          rawValue: nextProps.value,
+        };
+      } else {
+        return {
+          selectedValue: nextProps.value,
+          preselectedItem: nextProps.value,
+          rawValue: nextProps.value,
+        };
+      }
     }
+
+    return null;
   }
 
   handleStateChange = (changes, helpers) => {
-    const { options, children } = this.props;
+    const { options } = this.props;
 
     if (changes.isOpen && this.inputRef.current) {
       this.inputRef.current.focus();
@@ -75,17 +106,7 @@ class FormDropdown extends Component {
       changes.type === Downshift.stateChangeTypes.keyDownArrowUp ||
       changes.type === Downshift.stateChangeTypes.keyDownArrowDown
     ) {
-      if (options) {
-        preselectedItem = options[changes.highlightedIndex];
-      } else {
-        const preselectedChild = React.Children.toArray(children)[
-          changes.highlightedIndex
-        ];
-
-        preselectedItem = {
-          label: preselectedChild.props.label,
-        };
-      }
+      preselectedItem = options[changes.highlightedIndex];
     }
 
     if (changes.selectedItem !== undefined) {
@@ -137,79 +158,43 @@ class FormDropdown extends Component {
     }
   };
 
-  createOptionsFromChildren(
-    children,
-    { getItemProps, highlightedIndex, selectedItem }
-  ) {
-    const { inputValue } = this.state;
-    const { name } = this.props;
-
-    return searchInList(React.Children.toArray(children), inputValue, [
-      "props.label",
-    ]).map((filteredChild, index) =>
-      React.cloneElement(filteredChild, {
-        ...getItemProps({
-          id: `${name}-${filteredChild.props.value}`,
-          "data-testid": `${name}-${filteredChild.props.value}`,
-          item: {
-            label: filteredChild.props.label,
-            value: filteredChild.props.value,
-          },
-          key: index,
-          index,
-          isSelected:
-            selectedItem && selectedItem.label === filteredChild.props.label,
-          isHighlighted: highlightedIndex === index,
-        }),
-      })
-    );
-  }
-
   createOptionsFromPropsOptions(
     options,
     { getItemProps, highlightedIndex, selectedItem }
   ) {
-    const { inputValue } = this.state;
-    const { name } = this.props;
+    const { name, renderItem } = this.props;
 
-    return searchInList(options, inputValue, ["label"]).map((item, index) => (
+    return options.map((item, index) => (
       <FormDropdown.Option
-        key={index}
+        key={item.value}
         {...getItemProps({
+          key: item.value,
           id: `${name}-${item.value}`,
           "data-testid": `${name}-${item.value}`,
-          key: index,
-          index,
           item,
-          isSelected: selectedItem === item,
+          index,
+          isSelected: isEqual(selectedItem, item),
           isHighlighted: highlightedIndex === index,
         })}
       >
-        {item.label}
+        {renderItem(item)}
       </FormDropdown.Option>
     ));
   }
 
   getFilteredItems() {
-    const { children, options } = this.props;
+    const { options } = this.props;
     const { inputValue } = this.state;
 
-    if (options) {
-      return searchInList(options, inputValue, ["label"]);
-    } else {
-      return searchInList(React.Children.toArray(children), inputValue, [
-        "props.label",
-      ]).map(filteredChild => ({ label: filteredChild.props.label }));
-    }
+    return searchInList(options, inputValue, ["label"]);
   }
 
   get highlightedIndex() {
-    const { value } = this.props;
-
     const filteredItems = this.getFilteredItems();
+    const { selectedValue } = this.state;
 
-    const selectedOptionIndex = value
-      ? filteredItems.findIndex(item => item.label === value.label)
+    const selectedOptionIndex = selectedValue
+      ? filteredItems.findIndex(item => item.value === selectedValue.value)
       : 0;
 
     return selectedOptionIndex > 0 ? selectedOptionIndex : 0;
@@ -219,9 +204,7 @@ class FormDropdown extends Component {
     const {
       options,
       onChange,
-      value,
       withSearch,
-      children,
       listRef,
       width,
       disabled,
@@ -229,11 +212,11 @@ class FormDropdown extends Component {
       placeholder,
       name,
     } = this.props;
-    const { preselectedItem, inputValue } = this.state;
+    const { preselectedItem, inputValue, selectedValue } = this.state;
 
     return (
       <Downshift
-        selectedItem={value}
+        selectedItem={selectedValue}
         itemToString={item => (item ? item.label : "")}
         stateReducer={this.stateReducer}
         defaultHighlightedIndex={this.highlightedIndex}
@@ -252,14 +235,10 @@ class FormDropdown extends Component {
             getMenuProps,
           } = stateAndHelpers;
 
-          const optionsEls = options
-            ? this.createOptionsFromPropsOptions(options, stateAndHelpers)
-            : this.createOptionsFromChildren(children, stateAndHelpers);
-
-          const preselectLabel = preselectedItem
-            ? preselectedItem.label
-            : placeholder;
-          const selectLabel = selectedItem ? selectedItem.label : placeholder;
+          const optionsEls = this.createOptionsFromPropsOptions(
+            options,
+            stateAndHelpers
+          );
 
           return (
             <StyledFormDropdown
@@ -269,7 +248,11 @@ class FormDropdown extends Component {
               <FormDropdownControl
                 {...getToggleButtonProps({ disabled, "data-testid": name })}
               >
-                {withSearch ? preselectLabel : selectLabel}
+                {get(
+                  withSearch ? preselectedItem : selectedItem,
+                  "label",
+                  placeholder
+                )}
               </FormDropdownControl>
               <FormDropdownMenu
                 {...getMenuProps({ isOpen }, { suppressRefError: true })}
