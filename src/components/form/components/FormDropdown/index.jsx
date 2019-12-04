@@ -38,6 +38,7 @@ function FormDropdown({
   useEffect(() => {
     if (value !== undefined) {
       setSelected(value);
+      setPreselected(value);
     }
   }, [value]);
 
@@ -104,9 +105,10 @@ function FormDropdown({
       default:
         return {
           ...changes,
-          highlightedIndex: changes.selectedItem
-            ? getHighlighted(changes.selectedItem)
-            : state.highlightedIndex,
+          highlightedIndex:
+            changes.selectedItem || selected
+              ? getHighlighted(changes.selectedItem || selected)
+              : changes.highlightedIndex || state.highlightedIndex,
         };
     }
   }
@@ -120,7 +122,7 @@ function FormDropdown({
       stateReducer={stateReducer}
       onChange={onChange}
       onStateChange={handleStateChange}
-      defaultHighlightedIndex={getHighlighted()}
+      defaultHighlightedIndex={getHighlighted(selected)}
     >
       {({
         isOpen,
