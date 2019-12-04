@@ -58,7 +58,7 @@ function PersonsListPerson({
       {!isAddingMode && (
         <CardSmall.Checkbox
           name={person.idxid}
-          value={isSelected}
+          checked={isSelected}
           onChange={onChange}
           isHidden={!isMouseOver && !isSelected && !isActive}
           data-testid={`persons-list-person-select-${person.idxid}`}
