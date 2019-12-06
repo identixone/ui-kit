@@ -7,6 +7,7 @@ node_modules/
 
 # Build
 /dist/
+/docs/
 
 # ENV file
 .env
@@ -16,3 +17,4 @@ nginx.env
 
 # Tests
 coverage/
+
