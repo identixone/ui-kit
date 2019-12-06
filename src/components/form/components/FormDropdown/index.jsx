@@ -160,7 +160,7 @@ function FormDropdown({
                   )}
                   {searchInList(options, inputValue, ["label"]).map(
                     (item, index) => (
-                      <FormDropdown.Option
+                      <FormDropdownOption
                         key={item.value}
                         {...getItemProps({
                           key: item.value,
@@ -173,7 +173,7 @@ function FormDropdown({
                         })}
                       >
                         {renderItem(item)}
-                      </FormDropdown.Option>
+                      </FormDropdownOption>
                     )
                   )}
                 </React.Fragment>
