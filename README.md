@@ -28,7 +28,7 @@ ReactDOM.render(<Button>Click me!</Button>, mountNode);
 
 ## 🔗 Links
 
-- [Storybook](https://identixone.github.io/ui-kit/)
+- [Storybook](https://identixone-ui.netlify.com/)
 
 ## 🚗 Roadmap
 
