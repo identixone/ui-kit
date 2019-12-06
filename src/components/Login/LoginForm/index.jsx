@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+
+import { useState, useEffect, useRef } from "react";
+import { usePrevious } from "react-use";
 
 import { object, string } from "yup";
 
-import LoginFormWrapper from "./LoginFormWrapper";
-import StyledLoginForm from "./StyledLoginForm";
+import { StyledLoginForm } from "./StyledLoginForm";
+import LoginFormForm from "./LoginFormForm";
 
 import LoginFormLogo from "./LoginFormLogo";
 import LoginFormTilte from "./LoginFormTitle";
@@ -16,131 +19,138 @@ import LoginFormInput from "./LoginFormInput";
 import { FormField } from "../../form/components";
 
 import { withFormik } from "formik";
-
 import { isEmpty } from "lodash-es";
 
-export class LoginFormComponent extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    logoSrc: PropTypes.string,
-    login: PropTypes.func.isRequired,
-    isLogging: PropTypes.bool.isRequired,
-    authError: PropTypes.object,
-    values: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    setErrors: PropTypes.func.isRequired,
-    submitForm: PropTypes.func.isRequired,
-    resetForm: PropTypes.func.isRequired,
-    submitCount: PropTypes.number.isRequired,
-  };
+const ERROR_EMPTY_FIELDS = "Required fields are empty";
 
-  usernameInputRef = React.createRef();
+function LoginFormComponent({
+  title,
+  logoSrc,
+  isLogging,
+  authError,
+  values,
+  errors,
+  setErrors,
+  submitForm,
+  resetForm,
+  className,
+  submitCount,
+  "data-testid": testId,
+}) {
+  const [stateAuthError, setStateAuthError] = useState(null);
+  const [authErrorResetTimerId, setAuthErrorResetTimerId] = useState(null);
+  const usernameInputRef = useRef();
+  const prevStateAuthError = usePrevious(stateAuthError);
+  const prevValues = usePrevious(values);
+  const prevIsLogging = usePrevious(isLogging);
 
-  state = {
-    authError: null,
-    authErrorResetTimerId: null,
-  };
-
-  componentDidMount() {
-    if (this.usernameInputRef.current) {
-      this.usernameInputRef.current.focus();
+  useEffect(() => {
+    if (usernameInputRef.current) {
+      usernameInputRef.current.focus();
     }
-  }
+  }, []);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevProps.authError && this.props.authError) {
-      this.setAuthError(this.props.authError);
-      return;
-    }
+  useEffect(() => {
+    if (authError) {
+      setStateAuthError(authError);
+    } else {
+      if (
+        prevStateAuthError !== ERROR_EMPTY_FIELDS &&
+        !isEmpty(errors) &&
+        !authErrorResetTimerId
+      ) {
+        setStateAuthError(ERROR_EMPTY_FIELDS);
+      }
 
-    if (
-      prevState.authError !== "Required fields are empty" &&
-      !isEmpty(this.props.errors)
-    ) {
-      this.setAuthError("Required fields are empty");
-    }
+      if (stateAuthError && prevStateAuthError !== stateAuthError) {
+        setAuthErrorResetTimerId(setTimeout(clearAuthError, 2000));
+      }
 
-    if (prevState.authError !== this.state.authError && this.state.authError) {
-      this.setState({
-        authErrorResetTimerId: setTimeout(this.clearAuthError, 2000),
-      });
-    }
+      if (values !== prevValues) {
+        setErrors({});
+      }
 
-    if (this.props.values !== prevProps.values) {
-      this.props.setErrors({});
-    }
-
-    if (prevProps.isLogging && !this.props.isLogging) {
-      this.props.resetForm();
-      if (this.usernameInputRef.current) {
-        this.usernameInputRef.current.focus();
+      if (prevIsLogging && !isLogging) {
+        resetForm();
+        if (usernameInputRef.current) {
+          usernameInputRef.current.focus();
+        }
       }
     }
+  }, [authError, errors, submitCount, stateAuthError]);
+
+  function clearAuthError() {
+    clearTimeout(authErrorResetTimerId);
+
+    setStateAuthError(null);
+    setAuthErrorResetTimerId(null);
   }
 
-  setAuthError(authError) {
-    this.setState({
-      authError,
-    });
-  }
-
-  clearAuthError = () => {
-    clearTimeout(this.state.authErrorResetTimerId);
-
-    this.setState({ authError: null, authErrorResetTimerId: null });
-  };
-
-  handleFormSubmit = ev => {
+  function handleFormSubmit(ev) {
     ev.preventDefault();
-    this.props.submitForm();
-  };
-
-  render() {
-    const { logoSrc, title } = this.props;
-
-    return (
-      <LoginFormWrapper>
-        {logoSrc && <LoginFormLogo src={logoSrc} />}
-        {title && <LoginFormTilte>{title}</LoginFormTilte>}
-        <StyledLoginForm
-          onSubmit={this.handleFormSubmit}
-          data-testid="login-form"
-        >
-          <LoginFormFields>
-            <FormField
-              name="username"
-              showError={false}
-              render={props => (
-                <LoginFormInput
-                  {...props}
-                  placeholder="USERNAME"
-                  ref={this.usernameInputRef}
-                />
-              )}
-            />
-            <FormField
-              name="password"
-              showError={false}
-              render={props => (
-                <LoginFormInput
-                  {...props}
-                  placeholder="PASSWORD"
-                  type="password"
-                />
-              )}
-            />
-            <LoginFormError data-testid="login-form-error">
-              {this.state.authError}
-            </LoginFormError>
-          </LoginFormFields>
-          <LoginFormButton type="submit">Login</LoginFormButton>
-        </StyledLoginForm>
-      </LoginFormWrapper>
-    );
+    submitForm();
   }
+
+  return (
+    <StyledLoginForm className={className}>
+      {logoSrc && <LoginFormLogo src={logoSrc} />}
+      {title && <LoginFormTilte>{title}</LoginFormTilte>}
+      <LoginFormForm onSubmit={handleFormSubmit} data-testid={testId}>
+        <LoginFormFields>
+          <FormField
+            name="username"
+            showError={false}
+            render={props => (
+              <LoginFormInput
+                {...props}
+                placeholder="USERNAME"
+                ref={usernameInputRef}
+              />
+            )}
+          />
+          <FormField
+            name="password"
+            showError={false}
+            render={props => (
+              <LoginFormInput
+                {...props}
+                placeholder="PASSWORD"
+                type="password"
+              />
+            )}
+          />
+          <LoginFormError data-testid="login-form-error">
+            {stateAuthError}
+          </LoginFormError>
+        </LoginFormFields>
+        <LoginFormButton type="submit">Login</LoginFormButton>
+      </LoginFormForm>
+    </StyledLoginForm>
+  );
 }
 
-export const LoginForm = withFormik({
+LoginFormComponent.propTypes = {
+  title: PropTypes.string,
+  logoSrc: PropTypes.string,
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
+  login: PropTypes.func.isRequired,
+  isLogging: PropTypes.bool.isRequired,
+  authError: PropTypes.object,
+  values: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  setErrors: PropTypes.func.isRequired,
+  submitForm: PropTypes.func.isRequired,
+  resetForm: PropTypes.func.isRequired,
+  submitCount: PropTypes.number.isRequired,
+};
+
+LoginFormComponent.defaultProps = {
+  title: PropTypes.string,
+  "data-testid": "login-form",
+};
+
+const LoginForm = withFormik({
   mapPropsToValues: function() {
     return { username: "", password: "" };
   },
@@ -154,3 +164,5 @@ export const LoginForm = withFormik({
     props.login(values);
   },
 })(LoginFormComponent);
+
+export { LoginForm, LoginFormComponent };

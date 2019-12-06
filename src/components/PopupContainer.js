@@ -4,13 +4,9 @@ function getStyles({ isOpen }) {
   return !isOpen
     ? css`
         opacity: 0;
-        overflow: visible;
-        height: 0;
         visibility: hidden;
       `
-    : css`
-        overflow: hidden;
-      `;
+    : css``;
 }
 
 export const PopupContainer = styled.div`
