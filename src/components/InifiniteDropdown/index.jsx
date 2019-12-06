@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useListFetch } from "../../hooks";
 
-import { InfiniteScroll, FormDropdown } from "../index";
+import { InfiniteScroll } from "../index";
+import { FormDropdown } from "../form/components";
 
 function InifiniteDropdown({
   value,
