@@ -9,11 +9,11 @@ import { useListFetch } from "../../hooks";
 import { ListLayout, ListLayoutList } from "./index.jsx";
 
 import {
-  PersonsListListPerson,
-  PersonsListPerson,
-  PersonsListPersonDetail,
-  personsListsSearchTypes,
-} from "../PersonsList";
+  PersonsGroupListPerson,
+  PersonsGroupPerson,
+  PersonsGroupPersonDetail,
+  personsGroupsSearchTypes,
+} from "../PersonsGroup";
 
 import { Search } from "../Search";
 import { Button } from "../Button";
@@ -133,7 +133,7 @@ storiesOf("List Layout", module)
         fetchList: action("Fetch list"),
       });
 
-      const [searchType, setSearchType] = useState(personsListsSearchTypes[0]);
+      const [searchType, setSearchType] = useState(personsGroupsSearchTypes[0]);
 
       function handleSearchChange({ target: { value } }) {
         setSearchQuery(value);
@@ -207,7 +207,7 @@ storiesOf("List Layout", module)
                 )}
               </SelectableList>
 
-              <PersonsListListPerson
+              <PersonsGroupListPerson
                 person={personMock}
                 searchType={searchType}
                 onSearchTypeChange={setSearchType}
@@ -238,7 +238,7 @@ storiesOf("List Layout", module)
         fetchList: action("Fetch list"),
       });
 
-      const [searchType, setSearchType] = useState(personsListsSearchTypes[0]);
+      const [searchType, setSearchType] = useState(personsGroupsSearchTypes[0]);
 
       function handleSearchChange({ target: { value } }) {
         setSearchQuery(value);
@@ -312,7 +312,7 @@ storiesOf("List Layout", module)
                 )}
               </SelectableList>
 
-              <PersonsListListPerson
+              <PersonsGroupListPerson
                 person={personMock}
                 searchType={searchType}
                 onSearchTypeChange={setSearchType}
@@ -400,7 +400,7 @@ storiesOf("List Layout", module)
                     setPagination={setPagination}
                     columns={2}
                     renderItem={person => (
-                      <PersonsListPerson
+                      <PersonsGroupPerson
                         key={person.idxid}
                         onChange={handleCheckboxChange}
                         onClick={setDetailed}
@@ -410,7 +410,7 @@ storiesOf("List Layout", module)
                     )}
                   />
 
-                  <PersonsListPersonDetail
+                  <PersonsGroupPersonDetail
                     person={persons.find(person => person.idxid === detailed)}
                   />
                 </React.Fragment>
