@@ -22,7 +22,6 @@ storiesOf("Persons Groups|PersonsGroupPerson", module)
             onChange={({ target: { checked } }) => setIsSelected(checked)}
             onClick={action("onClick")}
             person={person}
-            deletePersonsFromList={action("deletePersonsFromList")}
           />
         </div>
       );
@@ -43,7 +42,6 @@ storiesOf("Persons Groups|PersonsGroupPerson", module)
           onChange={({ target: { checked } }) => setIsSelected(checked)}
           onClick={action("onClick")}
           person={person}
-          deletePersonsFromList={action("deletePersonsFromList")}
           mode="add"
         />
       );

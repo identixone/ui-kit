@@ -29,7 +29,7 @@ function PersonsGroupPersonDetail({
       personIdxid={personIdxid}
       isLoading={isLoading}
       isPersonNotExists={isPersonNotExists}
-      data-testid="persons-list-person-detail"
+      data-testid="persons-group-person-detail"
     >
       {person && !isPersonNotExists && (
         <PersonCardDetailed.Data>

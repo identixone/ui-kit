@@ -24,7 +24,7 @@ function PersonsGroupPerson({
   mode,
   onChange,
   isPersonsAddingToList,
-  isPersonsDeletingFromList,
+  isPersonsDeletingFromGroup,
   className,
   "data-testid": testId,
 }) {
@@ -61,7 +61,7 @@ function PersonsGroupPerson({
           checked={isSelected}
           onChange={onChange}
           isHidden={!isMouseOver && !isSelected && !isActive}
-          data-testid={`persons-list-person-select-${person.idxid}`}
+          data-testid={`persons-group-person-select-${person.idxid}`}
         />
       )}
 
@@ -83,7 +83,7 @@ function PersonsGroupPerson({
 
       {isAddingMode ? (
         <CardSmall.Button
-          data-testid="persons-list-add-person"
+          data-testid="persons-group-add-person"
           onClick={handleAddButtonClick}
           isHidden={false}
           isDisabled={isPersonsAddingToList}
@@ -94,13 +94,13 @@ function PersonsGroupPerson({
         <PopupConfirm onConfirm={handleDeleteButtonClick}>
           {({ togglePopup }) => (
             <CardSmall.Button
-              data-testid="persons-list-remove-person"
+              data-testid="persons-group-remove-person"
               onClick={e => {
                 e.stopPropagation();
                 togglePopup(e);
               }}
               isHidden={!isMouseOver}
-              isDisabled={isPersonsDeletingFromList}
+              isDisabled={isPersonsDeletingFromGroup}
               mode={mode}
             >
               <Trash size="16" color={colors.bloodOrange} />
@@ -121,7 +121,7 @@ PersonsGroupPerson.propTypes = {
   isActive: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   mode: PropTypes.string,
-  isPersonsDeletingFromList: PropTypes.bool.isRequired,
+  isPersonsDeletingFromGroup: PropTypes.bool.isRequired,
   isPersonsAddingToList: PropTypes.bool.isRequired,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
@@ -129,7 +129,7 @@ PersonsGroupPerson.propTypes = {
 
 PersonsGroupPerson.defaultProps = {
   person: {},
-  "data-testid": "persons-list-person",
+  "data-testid": "persons-group-person",
 };
 
 const StyledPersonListPerson = StyledCardSmall;
