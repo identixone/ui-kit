@@ -34,6 +34,7 @@ function LoginFormComponent({
   submitForm,
   resetForm,
   className,
+  submitCount,
   "data-testid": testId,
 }) {
   const [stateAuthError, setStateAuthError] = useState(null);
@@ -53,7 +54,11 @@ function LoginFormComponent({
     if (authError) {
       setStateAuthError(authError);
     } else {
-      if (prevStateAuthError !== ERROR_EMPTY_FIELDS && !isEmpty(errors)) {
+      if (
+        prevStateAuthError !== ERROR_EMPTY_FIELDS &&
+        !isEmpty(errors) &&
+        !authErrorResetTimerId
+      ) {
         setStateAuthError(ERROR_EMPTY_FIELDS);
       }
 
@@ -72,7 +77,7 @@ function LoginFormComponent({
         }
       }
     }
-  }, [authError]);
+  }, [authError, errors, submitCount, stateAuthError]);
 
   function clearAuthError() {
     clearTimeout(authErrorResetTimerId);

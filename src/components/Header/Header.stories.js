@@ -40,8 +40,8 @@ storiesOf("Header", module).add("default", () => {
     },
     {
       id: 3,
-      title: "Persons lists",
-      to: "/persons-lists",
+      title: "Persons groups",
+      to: "/persons-groups",
     },
     {
       id: 4,
