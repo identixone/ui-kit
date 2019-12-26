@@ -7,6 +7,7 @@ import { CardSmallImage } from "./CardSmallImage";
 import { CardSmallData, CardSmallDataItem } from "./CardSmallData";
 import { CardSmallButton } from "./CardSmallButton";
 import { CardSmallCheckbox } from "./CardSmallCheckbox";
+import { CardSmallTitle } from "./CardSmallTitle";
 
 function CardSmall(props) {
   const {
@@ -19,7 +20,7 @@ function CardSmall(props) {
     className,
   } = props;
 
-  const hasImg = Object.prototype.hasOwnProperty.call(props, "img");
+  const hasPhoto = Object.prototype.hasOwnProperty.call(props, "img");
 
   return (
     <ThemeProvider theme={{ theme }}>
@@ -29,9 +30,9 @@ function CardSmall(props) {
         data-testid={testId}
         onMouseOver={onMouseOver}
         onMouseLeave={onMouseLeave}
-        hasImg={hasImg}
+        hasPhoto={hasPhoto}
       >
-        {hasImg ? <CardSmallImage src={props.img} /> : null}
+        {hasPhoto ? <CardSmallImage src={props.img} /> : null}
 
         {children}
       </StyledCardSmall>
@@ -58,6 +59,7 @@ CardSmall.defaultProps = {
   theme: "light",
 };
 
+CardSmall.Title = CardSmallTitle;
 CardSmall.Data = CardSmallData;
 CardSmall.DataItem = CardSmallDataItem;
 CardSmall.Button = CardSmallButton;
@@ -67,6 +69,7 @@ export {
   CardSmall,
   StyledCardSmall,
   CardSmallImage,
+  CardSmallTitle,
   CardSmallData,
   CardSmallButton,
   CardSmallDataItem,

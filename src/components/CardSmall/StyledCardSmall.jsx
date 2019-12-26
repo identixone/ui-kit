@@ -20,7 +20,7 @@ function getStyles({ hasPhoto }) {
     css`
       ${CardSmallData} {
         position: absolute;
-        padding-left: 99px;
+        padding-left: 109px;
       }
     `
   );

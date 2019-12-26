@@ -15,6 +15,7 @@ import { colors } from "../../../themes/colors";
 import { noimageid } from "../../../assets/images";
 
 function PersonsGroupPerson({
+  title,
   person,
   onClick,
   onPersonDelete,
@@ -66,6 +67,7 @@ function PersonsGroupPerson({
       )}
 
       <CardSmall.Data idxid={person.idxid}>
+        {title && <CardSmall.Title>{title}</CardSmall.Title>}
         <CardSmall.DataItem>
           ID{" "}
           <PersonsGroupPersonId isActive={isActive}>
@@ -125,6 +127,7 @@ PersonsGroupPerson.propTypes = {
   isPersonsAddingToList: PropTypes.bool.isRequired,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
+  title: PropTypes.string,
 };
 
 PersonsGroupPerson.defaultProps = {
