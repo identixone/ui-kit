@@ -6,6 +6,7 @@ const EntryCardPhotoTitle = styled.p`
   text-transform: uppercase;
   writing-mode: vertical-lr;
   margin: 0;
+  width: 19px;
 `;
 
 export { EntryCardPhotoTitle };
