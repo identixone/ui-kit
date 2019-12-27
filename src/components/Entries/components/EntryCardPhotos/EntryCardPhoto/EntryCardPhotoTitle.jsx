@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+// a fixed width is needed for correct work in firefox (width equals line-height)
 const EntryCardPhotoTitle = styled.p`
   font-size: 13px;
   transform: rotate(-180deg);
