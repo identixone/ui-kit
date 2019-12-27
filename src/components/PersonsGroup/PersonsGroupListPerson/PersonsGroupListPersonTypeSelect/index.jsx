@@ -12,7 +12,7 @@ export function PersonsGroupListPersonTypeSelect({ onChange, type }) {
   return (
     <StyledPersonsGroupListPersonTypeSelect>
       <PersonsGroupListPersonTypeSelectLabel htmlFor="search-type">
-        Show lists with
+        Show groups with
       </PersonsGroupListPersonTypeSelectLabel>
       <PersonsGroupListPersonTypeSelectDropdownWrapper>
         <PersonsGroupListPersonTypeSelectDropdown
