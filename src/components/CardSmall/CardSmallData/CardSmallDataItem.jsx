@@ -3,6 +3,7 @@ import styled from "styled-components";
 const CardSmallDataItem = styled.p`
   font-size: 13px;
   margin-top: 0;
+  margin-bottom: 0;
   white-space: nowrap; /* Запрещаем перенос строк */
   overflow: hidden; /* Обрезаем все, что не помещается в область */
   text-overflow: ellipsis; /* Добавляем многоточие */
