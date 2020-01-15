@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 import "../resources/styles/fonts.css";
 
-export const GloalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   html {
     height: 100%;
   }
