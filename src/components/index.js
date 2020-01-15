@@ -52,5 +52,5 @@ export * from "./Value";
 export * from "./ValueSpan";
 export * from "./FaceSize";
 export * from "./PopupContainer";
-export * from "./GloalStyles";
+export * from "./GlobalStyles";
 export * from "./I18nProvider";
