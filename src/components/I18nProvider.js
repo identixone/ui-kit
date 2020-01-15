@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import i18n from "i18next";
 import { I18nextProvider } from "react-i18next";
 
 import locales from "../locales";
@@ -24,6 +25,10 @@ I18nProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]).isRequired,
+};
+
+I18nProvider.defaultProps = {
+  i18n,
 };
 
 export { withTranslation } from "react-i18next";
