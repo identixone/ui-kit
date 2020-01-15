@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledFormMultiSelect = styled.div`
   position: relative;
+  width: ${({ width }) => (width ? `${width}px` : "100%")};
 
   &:after {
     content: "";

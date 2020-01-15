@@ -90,4 +90,20 @@ function generateSourcesStats(count) {
   return [...new Array(count)].map(sourceStatsBuilder);
 }
 
-export { userBuilder, sourceBuilder, generateSources, generateSourcesStats };
+const optionBuilder = build("Option").fields({
+  label: getRandomName(),
+  value: incrementingId(),
+});
+
+function generateOptions(count) {
+  return [...new Array(count)].map(optionBuilder);
+}
+
+export {
+  userBuilder,
+  sourceBuilder,
+  generateSources,
+  generateSourcesStats,
+  optionBuilder,
+  generateOptions,
+};

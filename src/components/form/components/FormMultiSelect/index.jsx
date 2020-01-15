@@ -36,9 +36,12 @@ class FormMultiSelect extends React.Component {
     selected: this.props.value || [],
     inputValue: "",
     isOpen: false,
+    isMenuUp: false,
   };
 
+  selectRef = React.createRef();
   inputRef = React.createRef();
+  menuRef = React.createRef();
   tagsRef = React.createRef();
 
   stateReducer = (_, changes) => {
@@ -80,6 +83,27 @@ class FormMultiSelect extends React.Component {
 
     if (prevState.inputValue !== this.state.inputValue && !this.state.isOpen) {
       this.setState({ isOpen: true });
+    }
+
+    const actualMenuRef = this.props.menuRef || this.menuRef;
+
+    if (
+      !prevState.isOpen &&
+      this.state.isOpen &&
+      this.selectRef &&
+      this.selectRef.current &&
+      actualMenuRef &&
+      actualMenuRef.current
+    ) {
+      const selectEl = this.selectRef.current;
+      const menuEl = actualMenuRef.current;
+
+      const isMenuUp =
+        selectEl.getBoundingClientRect().top -
+          menuEl.getBoundingClientRect().height >=
+        0;
+
+      this.setState({ isMenuUp });
     }
   }
 
@@ -143,12 +167,12 @@ class FormMultiSelect extends React.Component {
       options,
       width,
       placeholder,
-      menuRef,
+      menuRef = this.menuRef,
       name,
       isLoading,
       className,
     } = this.props;
-    const { selected, inputValue, isOpen } = this.state;
+    const { selected, inputValue, isOpen, isMenuUp } = this.state;
 
     return (
       <Downshift
@@ -173,6 +197,7 @@ class FormMultiSelect extends React.Component {
             <StyledFormMultiSelect
               {...getRootProps({ width, isLoading })}
               className={className}
+              ref={this.selectRef}
             >
               <FormMultiSelectTags
                 ref={this.tagsRef}
@@ -206,11 +231,12 @@ class FormMultiSelect extends React.Component {
                       {
                         isOpen,
                         isLoading,
+                        isUp: isMenuUp,
                       },
                       // https://github.com/downshift-js/downshift/issues/604#issuecomment-456574976
                       { suppressRefError: true }
                     )}
-                    ref={menuRef}
+                    ref={menuRef || this.menuRef}
                   >
                     {isOpen &&
                       searchInList(
