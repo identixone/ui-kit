@@ -8,10 +8,10 @@ const boxBackgroundColor = theme("mode", {
   red: colors.middlePink,
 });
 
-const ButtonMiddle = styled(Button).attrs({
+const ButtonMiddle = styled(Button).attrs(() => ({
   isRounded: false,
   buttonTheme: "reset",
-})`
+}))`
   color: #fff;
   background-color: ${boxBackgroundColor};
   min-width: 155px;

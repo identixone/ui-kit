@@ -3,9 +3,9 @@ import styled from "styled-components";
 import Button from "../../../../../Button";
 import colors from "../../../../../../themes/colors";
 
-const FormMultiSelectTagsItemCross = styled(Button).attrs({
+const FormMultiSelectTagsItemCross = styled(Button).attrs(() => ({
   buttonTheme: "reset",
-})`
+}))`
   margin-left: 4px;
   padding: 0;
   padding-top: 1px;

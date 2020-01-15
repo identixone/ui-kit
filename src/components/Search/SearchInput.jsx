@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const SearchInput = styled.input.attrs({
+export const SearchInput = styled.input.attrs(() => ({
   type: "search",
   spellCheck: "false",
-})`
+}))`
   outline: none;
   border: none;
   padding: 0;

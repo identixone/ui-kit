@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Spinner } from "../../components/Spinner";
 
-const RouteSectionSpinner = styled(Spinner).attrs({ height: 40 })`
+const RouteSectionSpinner = styled(Spinner).attrs(() => ({ height: 40 }))`
   text-align: center;
   display: flex;
   height: 100%;

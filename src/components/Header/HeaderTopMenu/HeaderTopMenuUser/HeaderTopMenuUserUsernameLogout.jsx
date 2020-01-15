@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import Button from "../../../Button";
 
-export const HeaderTopMenuUserUsernameLogout = styled(Button).attrs({
+export const HeaderTopMenuUserUsernameLogout = styled(Button).attrs(() => ({
   buttonTheme: "reset",
-})`
+}))`
   font-size: 15px;
   line-height: 15px;
   color: #222;
