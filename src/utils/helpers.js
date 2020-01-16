@@ -192,3 +192,22 @@ export function mapFiltersToGetParams(filters) {
 
   return mapDataToGetParams(transformedFilters);
 }
+
+export function getStringShort(
+  string,
+  maxLength = 10,
+  firstPartCount,
+  lastPartCount
+) {
+  const defaultPartCount = Math.floor((maxLength - 3) / 2);
+  const { length: stringLength } = string;
+
+  if (stringLength < maxLength) {
+    return string;
+  }
+
+  return `${string.slice(
+    0,
+    firstPartCount || defaultPartCount
+  )}...${string.slice(-(lastPartCount || defaultPartCount), stringLength)}`;
+}
