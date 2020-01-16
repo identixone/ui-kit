@@ -4,7 +4,7 @@ export const StyledListLayoutList = styled.ul`
   padding-left: 0;
   margin: 0;
   list-style-type: none;
-  min-height: 350px;
+  min-height: 220px;
   display: grid;
   grid-template-columns: repeat(
     auto-fill,

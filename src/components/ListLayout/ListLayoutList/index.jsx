@@ -39,7 +39,7 @@ function ListLayoutList({
           <React.Fragment>
             {actions && actions}
             <StyledListLayoutList
-              rerf={listRef}
+              ref={listRef}
               columns={columns}
               className={className}
             >
