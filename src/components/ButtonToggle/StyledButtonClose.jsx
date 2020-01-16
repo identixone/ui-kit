@@ -10,7 +10,7 @@ const boxBackgroundColor = theme("mode", {
   red: colors.darkestPink,
 });
 
-const ButtonClose = styled(Button).attrs({ buttonTheme: "reset" })`
+const ButtonClose = styled(Button).attrs(() => ({ buttonTheme: "reset" }))`
   border-radius: 0 3px 3px 0;
   margin-right: 10px;
   border: none;

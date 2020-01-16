@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import Button from "../../../Button";
 
-const FormDropdownControl = styled(Button).attrs({
+const FormDropdownControl = styled(Button).attrs(() => ({
   buttonTheme: "reset",
-})`
+}))`
   height: 30px;
   background: #f3f3f3;
   color: #555;

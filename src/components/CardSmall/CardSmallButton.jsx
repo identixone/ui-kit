@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import { Button } from "../Button";
 
-const CardSmallButton = styled(Button).attrs({
+const CardSmallButton = styled(Button).attrs(() => ({
   buttonTheme: "reset",
-})`
+}))`
   width: 24px;
   height: 24px;
   position: absolute;

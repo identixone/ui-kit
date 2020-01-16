@@ -17,7 +17,7 @@ const color = theme("mode", {
   denied: colors.red,
 });
 
-const EntryCardEntryTypeBadge = styled(UIBadge).attrs({ color })`
+const EntryCardEntryTypeBadge = styled(UIBadge).attrs(() => ({ color }))`
   font-size: 17px;
   font-weight: 300;
   line-height: 23px;

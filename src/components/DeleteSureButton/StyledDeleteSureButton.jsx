@@ -13,7 +13,7 @@ function getHoverStyles({ isDisabled }) {
     : ``;
 }
 
-const DeleteSureButton = styled(Button).attrs({ buttonTheme: "reset" })`
+const DeleteSureButton = styled(Button).attrs(() => ({ buttonTheme: "reset" }))`
   background-color: ${colors.blueWhite};
   min-width: 105px;
 

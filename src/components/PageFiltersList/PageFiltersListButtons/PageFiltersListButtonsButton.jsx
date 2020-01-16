@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import Button from "../../Button";
 
-export const PageFiltersListButtonsButton = styled(Button).attrs({
+export const PageFiltersListButtonsButton = styled(Button).attrs(() => ({
   buttonTheme: "ghost",
-})`
+}))`
   width: 30px;
   height: 30px;
   display: flex;

@@ -8,7 +8,9 @@ const boxBackgroundColor = theme("mode", {
   red: colors.simplePink,
 });
 
-const StyledButtonToggle = styled(Button).attrs({ buttonTheme: "lighter" })`
+const StyledButtonToggle = styled(Button).attrs(() => ({
+  buttonTheme: "lighter",
+}))`
   color: ${props => props.isActive && colors.whiteSimple};
   border-radius: ${props => (props.isActive ? "3px 0 0 3px" : "3px")};
   background-color: ${props => props.isActive && boxBackgroundColor};

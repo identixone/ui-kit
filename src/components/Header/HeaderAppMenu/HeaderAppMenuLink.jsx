@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export const HeaderAppMenuLink = styled(NavLink).attrs({
+export const HeaderAppMenuLink = styled(NavLink).attrs(() => ({
   activeStyle: { fontWeight: 700 },
-})`
+}))`
   font-weight: 200;
   color: #222;
   text-decoration: none;

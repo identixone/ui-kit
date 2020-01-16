@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const HeaderTopMenuLinksLink = styled.a.attrs({ target: "_blank" })`
+export const HeaderTopMenuLinksLink = styled.a.attrs(() => ({
+  target: "_blank",
+}))`
   color: #000;
   text-decoration: none;
   font-size: 13px;
