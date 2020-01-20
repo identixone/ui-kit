@@ -4,7 +4,7 @@ import { select, boolean } from "@storybook/addon-knobs";
 
 import { useState } from "react";
 
-import { FormCheckbox } from "../index";
+import { FormCheckbox } from "./index";
 
 storiesOf("Form Components| FormCheckbox", module).add("default", () => {
   const checkboxTheme = select("Checkbox theme", ["light", "dark"], "light");
