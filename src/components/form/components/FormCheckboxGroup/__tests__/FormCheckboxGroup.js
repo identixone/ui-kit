@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
+import { FormCheckboxGroup } from "../index";
+
 import { fireEvent } from "@testing-library/react";
-
-import { FormCheckboxGroup } from "../FormCheckboxGroup";
-
-import { generateOptions } from "../../../../../test/generate";
-import { render } from "../../../../../test/utils";
+import { render } from "../../../../../../test/utils";
+import { generateOptions } from "../../../../../../test/generate";
 
 const options = generateOptions(3);
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import { fireEvent } from "@testing-library/react";
-import { render } from "../../../../../test/utils";
+import { FormCheckbox } from "../index";
 
-import { FormCheckbox } from "../FormCheckbox";
+import { fireEvent } from "@testing-library/react";
+import { render } from "../../../../../../test/utils";
 
 function renderFormCheckbox() {
   function FormCheckboxWrapper() {
