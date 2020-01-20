@@ -11,8 +11,8 @@ function FormCheckboxGroupItem({
   name,
   checked,
   onChange,
-  groupName,
   className,
+  groupName,
   ...props
 }) {
   return (
@@ -31,7 +31,7 @@ function FormCheckboxGroupItem({
 }
 
 FormCheckboxGroupItem.propTypes = {
-  groupName: PropTypes.string.isRequired,
+  groupName: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   checked: PropTypes.bool.isRequired,
