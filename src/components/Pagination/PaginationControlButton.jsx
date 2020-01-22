@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { PaginationButton } from "./PaginationButton";
 
 import { colors } from "../../themes/colors";
 
-export const PaginationControlButton = styled(PaginationButton).attrs(() => ({
+const PaginationControlButton = styled(PaginationButton).attrs(() => ({
   fit: "square",
 }))`
   display: flex;
@@ -14,5 +14,14 @@ export const PaginationControlButton = styled(PaginationButton).attrs(() => ({
   color: ${colors.slate};
   background-color: ${colors.iceBlue};
   /* Сделано для того, чтобы пагинация не прыгала при появлении/пропалдании стрелок */
-  visibility: ${({ hidden }) => (hidden ? "hidden" : "visible")};
+  ${({ isHidden }) => {
+    return (
+      isHidden &&
+      css`
+        visibility: hidden;
+      `
+    );
+  }}
 `;
+
+export { PaginationControlButton };

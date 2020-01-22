@@ -1,36 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import StyledPagination from "./StyledPagination.jsx";
-import StyledPaginationPages from "./StyledPaginationPages.jsx";
-import { PaginationPageButton } from "./PaginationPageButton";
-import { PaginationControlButton } from "./PaginationControlButton";
-import ThreePoint from "./ThreePoint.jsx";
-
-import { BoxRightArrow, BoxLeftArrow } from "../../assets/icons";
-
-const THREE_POINT = "...";
-const END_LIMIT_PADDINGNUM = 3;
-
+import { useState, useEffect } from "react";
 import { usePagination } from "../../hooks";
 
-export function Pagination(props) {
-  const {
-    visibleRange,
-    nearStartBorderNum,
-    offset,
-    limit,
-    simplePaginationLimit,
-    totalCount,
-    isVisible,
-    className,
-  } = props;
+import { StyledPagination } from "./StyledPagination";
+import { PaginationPages } from "./PaginationPages";
+import { PaginationPageButton } from "./PaginationPageButton";
+import { PaginationControlButton } from "./PaginationControlButton";
+import { PaginationDots } from "./PaginationDots";
+import { BoxRightArrow, BoxLeftArrow } from "../../assets/icons";
+
+const DOTS = "...";
+const END_LIMIT_PADDINGNUM = 3;
+
+function Pagination({
+  visibleRange,
+  nearStartBorderNum,
+  offset,
+  limit,
+  simplePaginationLimit,
+  totalCount,
+  className,
+  onChange,
+  "data-testid": testId,
+}) {
   const {
     paginationState,
     handlePaginationNext,
     handlePaginationPrev,
     handleChangePagination,
-  } = usePagination(props);
+  } = usePagination({
+    offset,
+    limit,
+    onChange,
+    totalCount,
+  });
 
   const [paginationList, setPaginationList] = useState([]);
 
@@ -48,8 +53,8 @@ export function Pagination(props) {
     }
   }
 
-  function getThreePoint(index) {
-    return <ThreePoint key={index}>{THREE_POINT}</ThreePoint>;
+  function getDots(index) {
+    return <PaginationDots key={index}>{DOTS}</PaginationDots>;
   }
 
   function handleSelectPagin(event) {
@@ -91,7 +96,7 @@ export function Pagination(props) {
     const limitPadding = END_LIMIT_PADDINGNUM;
 
     if (selectedPageNum + limitPadding < fullPaginationLength) {
-      paginationList.push(THREE_POINT);
+      paginationList.push(DOTS);
       paginationList.push(fullPaginationLength);
     }
   }
@@ -100,37 +105,36 @@ export function Pagination(props) {
     const { selectedPageNum } = paginationState;
 
     if (selectedPageNum > nearStartBorderNum) {
-      paginationList.unshift(THREE_POINT);
+      paginationList.unshift(DOTS);
       paginationList.unshift(1);
     }
   }
 
-  useEffect(() => {
-    updatePaginationList();
-  }, [limit, totalCount, offset]);
+  useEffect(updatePaginationList, [limit, totalCount, offset]);
+
   const {
     isPrevPaginationButtonActive,
     isNextPaginationButtonActive,
   } = paginationState;
   const selectedPaginationNumber = paginationState.selectedPageNum;
-  const isPaginationShow = paginationList.length > 1 && isVisible;
+  const isPaginationShow = paginationList.length > 1;
 
   return (
     isPaginationShow && (
-      <StyledPagination data-testid="pagination" className={className}>
+      <StyledPagination data-testid={testId} className={className}>
         <PaginationControlButton
           data-testid="pagination-button-prev"
           onClick={handlePaginationPrev}
-          hidden={!isPrevPaginationButtonActive}
+          isHidden={!isPrevPaginationButtonActive}
         >
           <BoxLeftArrow size="12" />
         </PaginationControlButton>
 
-        <StyledPaginationPages>
+        <PaginationPages>
           {paginationList.map((item, index) => {
-            const isThreePoint = item === THREE_POINT;
-            return isThreePoint ? (
-              getThreePoint(index)
+            const isDots = item === DOTS;
+            return isDots ? (
+              getDots(index)
             ) : (
               <PaginationPageButton
                 key={`${item} + "_paginationList"`}
@@ -143,12 +147,12 @@ export function Pagination(props) {
               </PaginationPageButton>
             );
           })}
-        </StyledPaginationPages>
+        </PaginationPages>
 
         <PaginationControlButton
           data-testid="pagination-button-next"
           onClick={handlePaginationNext}
-          hidden={!isNextPaginationButtonActive}
+          isHidden={!isNextPaginationButtonActive}
         >
           <BoxRightArrow size="11" />
         </PaginationControlButton>
@@ -158,17 +162,15 @@ export function Pagination(props) {
 }
 
 Pagination.propTypes = {
-  isVisible: PropTypes.bool,
   totalCount: PropTypes.number,
   limit: PropTypes.number,
   offset: PropTypes.number,
   simplePaginationLimit: PropTypes.number,
   visibleRange: PropTypes.number.isRequired,
   nearStartBorderNum: PropTypes.number.isRequired,
-  isPrevPaginationButtonActive: PropTypes.bool,
-  isNextPaginationButtonActive: PropTypes.bool,
-  selectedPageNum: PropTypes.number,
   className: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  "data-testid": PropTypes.string,
 };
 
 Pagination.defaultProps = {
@@ -177,4 +179,7 @@ Pagination.defaultProps = {
   offset: 0,
   limit: 20,
   simplePaginationLimit: 6,
+  "data-testid": "pagination",
 };
+
+export { Pagination, StyledPagination };
