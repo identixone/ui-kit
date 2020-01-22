@@ -20,7 +20,6 @@ export function PageFiltersListPagination({
   return (
     <StyledPageFiltersListPagination>
       <Pagination
-        isVisible={true}
         limit={limit}
         totalCount={totalCount}
         offset={offset}
