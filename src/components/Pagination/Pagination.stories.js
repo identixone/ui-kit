@@ -21,7 +21,6 @@ storiesOf("Structures| Pagination", module).add("default", () => {
       <StyledWrapper>
         <Pagination
           totalCount={totalCount}
-          isVisible={true}
           offset={offset}
           limit={limit}
           onChange={({ offset }) => setOffset(offset)}
