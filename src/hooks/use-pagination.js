@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useUpdateEffect } from "react-use";
 
-import PropTypes from "prop-types";
-
 const calculateSelectedPage = (offset, limit) => {
   return offset / limit + 1 || 1;
 };
@@ -38,7 +36,9 @@ export const usePagination = props => {
     });
     const newOffset = limit * (value - 1);
     if (newOffset !== offset) {
-      onChange({ offset: newOffset });
+      if (onChange) {
+        onChange({ offset: newOffset });
+      }
     }
   }
 
@@ -68,11 +68,4 @@ export const usePagination = props => {
     handlePaginationNext,
     handlePaginationPrev,
   };
-};
-
-usePagination.propTypes = {
-  totalCount: PropTypes.number,
-  limit: PropTypes.number,
-  offset: PropTypes.number,
-  onChange: PropTypes.func.isRequired,
 };

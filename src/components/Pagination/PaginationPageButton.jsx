@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { PaginationButton, getActiveStyles } from "./PaginationButton";
 import { colors } from "../../themes/colors";
 
-export const PaginationPageButton = styled(PaginationButton)`
+const PaginationPageButton = styled(PaginationButton)`
   border-radius: 2px;
   height: 26px;
   min-width: 17px;
@@ -19,3 +19,5 @@ export const PaginationPageButton = styled(PaginationButton)`
     margin-right: 8px;
   }
 `;
+
+export { PaginationPageButton };

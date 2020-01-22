@@ -20,7 +20,6 @@ describe("Pagination tests", () => {
     nearStartBorderNum: 5,
     offset: 0,
     limit: 20,
-    count: 100,
     totalCount: 100,
     onChange: handleChangePaginationMock,
   };
@@ -41,7 +40,6 @@ describe("Pagination tests", () => {
 
   test("Pagination is hiding after first render when have items less than established limit(20)", () => {
     const { queryByTestId } = renderPagination({
-      count: 10,
       totalCount: 10,
     });
     expect(queryByTestId("pagination")).not.toBeInTheDocument();
@@ -69,7 +67,6 @@ describe("Pagination tests", () => {
 
   test("Pagination action must been called with correct offset(prev page offset)", () => {
     const { getByTestId } = renderPagination({
-      count: 100,
       offset: 20,
       totalCount: 100,
     });
