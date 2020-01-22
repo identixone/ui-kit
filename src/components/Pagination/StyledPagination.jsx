@@ -6,4 +6,4 @@ const StyledPagination = styled.nav`
   justify-content: space-between;
 `;
 
-export default StyledPagination;
+export { StyledPagination };

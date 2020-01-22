@@ -4,7 +4,9 @@ import Button from "../../../Button";
 
 import { FormUneditableFieldStyles } from "../FormUneditableField/StyledFormUneditableField";
 
-const InputToggleButton = styled(Button).attrs({ buttonTheme: "reset" })`
+const InputToggleButton = styled(Button).attrs(() => ({
+  buttonTheme: "reset",
+}))`
   ${FormUneditableFieldStyles}
 
   text-decoration: underline dotted;

@@ -13,7 +13,7 @@ import FormMultiSelectOption from "./FormMultiSelectMenu/FormMultiSelectOption";
 import FormMultiSelectTags from "./FormMultiSelectTags";
 import FormMultiSelectTagsItem from "./FormMultiSelectTags/FormMultiSelectTagsItem";
 
-import { searchInList } from "../../../../utils/helpers";
+import { searchInList, getStringShort } from "../../../../utils/helpers";
 import { some } from "lodash-es";
 
 const BACKSPACE_KEY_CODE = 8;
@@ -266,7 +266,7 @@ class FormMultiSelect extends React.Component {
                                 disabled: item.disabled,
                               })}
                             >
-                              {item.label || item}
+                              {getStringShort(item.label || item, 20)}
                             </FormMultiSelectOption>
                           );
                         })}

@@ -4,17 +4,19 @@ import { Button } from "../Button";
 
 import { colors } from "../../themes/colors";
 
-export function getActiveStyles() {
+function getActiveStyles() {
   return css`
     color: ${colors.whiteSimple};
     background-color: ${colors.grayBlueLight};
   `;
 }
 
-export const PaginationButton = styled(Button).attrs(() => ({
+const PaginationButton = styled(Button).attrs(() => ({
   buttonTheme: "reset",
 }))`
   &:hover {
     ${getActiveStyles}
   }
 `;
+
+export { PaginationButton, getActiveStyles };
