@@ -61,6 +61,22 @@ function FormDropdown({
     return selectedOptionIndex > 0 ? selectedOptionIndex : 0;
   }
 
+  function getNextSelectedOnArrow(options, changes) {
+    const intendToHighlight = options[changes.highlightedIndex];
+    const isArrowDown =
+      changes.type === Downshift.stateChangeTypes.keyDownArrowDown;
+
+    const nextAvailableOption =
+      options[changes.highlightedIndex + (isArrowDown ? 1 : -1)];
+
+    // Логика пропуска disabled options
+    return !intendToHighlight.disabled
+      ? intendToHighlight
+      : nextAvailableOption
+      ? nextAvailableOption
+      : options[0];
+  }
+
   function handleStateChange(changes, stateAndHelpers) {
     if (changes.isOpen && inputRef.current) {
       inputRef.current.focus();
@@ -92,12 +108,6 @@ function FormDropdown({
       setPreselected(options[changes.highlightedIndex]);
     }
 
-    const isArrowDown =
-      changes.type === Downshift.stateChangeTypes.keyDownArrowDown;
-
-    const nextAvailableOption =
-      options[changes.highlightedIndex + (isArrowDown ? 1 : -1)];
-
     switch (changes.type) {
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.keyDownArrowDown:
@@ -105,11 +115,7 @@ function FormDropdown({
           ...changes,
           selectedItem:
             !withSearch && changes.highlightedIndex !== undefined
-              ? !options[changes.highlightedIndex].disabled
-                ? options[changes.highlightedIndex]
-                : nextAvailableOption
-                ? nextAvailableOption
-                : options[0]
+              ? getNextSelectedOnArrow(options, changes)
               : state.selectedItem,
         };
       default:
