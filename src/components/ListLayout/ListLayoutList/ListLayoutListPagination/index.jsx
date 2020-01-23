@@ -19,7 +19,6 @@ export function ListLayoutListPagination({
 
   return (
     <StyledListLayoutListPagination
-      isVisible={true}
       limit={limit}
       offset={offset}
       totalCount={totalCount}

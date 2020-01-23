@@ -70,7 +70,7 @@ ListLayoutList.propTypes = {
   actions: PropTypes.element,
   pagination: PropTypes.object.isRequired,
   setPagination: PropTypes.func.isRequired,
-  columns: PropTypes.oneOf(1, 2),
+  columns: PropTypes.oneOf([1, 2]),
   className: PropTypes.string,
   isLoading: PropTypes.bool,
 };
