@@ -5,4 +5,4 @@ const FormDropdownInputWrapper = styled.li`
   margin-top: 3px;
 `;
 
-export default FormDropdownInputWrapper;
+export { FormDropdownInputWrapper };

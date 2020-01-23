@@ -7,6 +7,11 @@ import { action } from "@storybook/addon-actions";
 import { InifiniteDropdown } from "./index.jsx";
 import { generateSourcesStats } from "../../../test/generate";
 
+function isEven(n) {
+  n = Number(n);
+  return n === 0 || !!(n && !(n % 2));
+}
+
 storiesOf("Basic UI|InifiniteDropdown", module)
   .add("default", () => {
     const options = generateSourcesStats(10).map(option => ({
@@ -32,11 +37,6 @@ storiesOf("Basic UI|InifiniteDropdown", module)
       value: option.id,
     }));
     const isFetching = boolean("is fetching", false);
-
-    function isEven(n) {
-      n = Number(n);
-      return n === 0 || !!(n && !(n % 2));
-    }
 
     return (
       <InifiniteDropdown

@@ -1,17 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import Downshift from "downshift";
+import { useEffect, useRef, useState } from "react";
 import { usePrevious } from "react-use";
 
-import StyledFormDropdown from "./StyledFormDropdown";
-import FormDropdownControl from "./FormDropdownControl";
-
-import FormDropdownMenu from "./FormDropdownMenu";
-import FormDropdownOption from "./FormDropdownOption";
-
-import FormDropdownInputWrapper from "./FormDropdownInputWrapper";
-import FormDropdownInput from "./FormDropdownInput";
+import Downshift from "downshift";
+import { StyledFormDropdown } from "./StyledFormDropdown";
+import { FormDropdownControl } from "./FormDropdownControl";
+import { FormDropdownMenu } from "./FormDropdownMenu";
+import { FormDropdownOption } from "./FormDropdownOption";
+import { FormDropdownInputWrapper } from "./FormDropdownInputWrapper";
+import { FormDropdownInput } from "./FormDropdownInput";
 
 import { searchInList } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";
@@ -32,6 +31,7 @@ function FormDropdown({
   placeholder,
   disabled,
   className,
+  "data-testid": testId,
 }) {
   const [preselected, setPreselected] = useState(value);
   const [selected, setSelected] = useState(value);
@@ -92,6 +92,12 @@ function FormDropdown({
       setPreselected(options[changes.highlightedIndex]);
     }
 
+    const isArrowDown =
+      changes.type === Downshift.stateChangeTypes.keyDownArrowDown;
+
+    const nextAvailableOption =
+      options[changes.highlightedIndex + (isArrowDown ? 1 : -1)];
+
     switch (changes.type) {
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.keyDownArrowDown:
@@ -99,7 +105,11 @@ function FormDropdown({
           ...changes,
           selectedItem:
             !withSearch && changes.highlightedIndex !== undefined
-              ? options[changes.highlightedIndex]
+              ? !options[changes.highlightedIndex].disabled
+                ? options[changes.highlightedIndex]
+                : nextAvailableOption
+                ? nextAvailableOption
+                : options[0]
               : state.selectedItem,
         };
       default:
@@ -108,7 +118,9 @@ function FormDropdown({
           highlightedIndex:
             changes.selectedItem || selected
               ? getHighlighted(changes.selectedItem || selected)
-              : changes.highlightedIndex || state.highlightedIndex,
+              : changes.highlightedIndex !== undefined
+              ? changes.highlightedIndex
+              : state.highlightedIndex,
         };
     }
   }
@@ -137,9 +149,20 @@ function FormDropdown({
         getItemProps,
       }) => {
         return (
-          <StyledFormDropdown {...getRootProps({ width, disabled, className })}>
+          <StyledFormDropdown
+            {...getRootProps({
+              width,
+              disabled,
+              className,
+              "data-testid": testId,
+            })}
+          >
             <FormDropdownControl
-              {...getToggleButtonProps({ disabled, "data-testid": name })}
+              {...getToggleButtonProps({
+                disabled,
+                "data-testid": name,
+                isOpen,
+              })}
             >
               {get(
                 withSearch ? preselected : selectedItem,
@@ -170,6 +193,7 @@ function FormDropdown({
                           index,
                           isSelected: isEqual(selectedItem, item),
                           isHighlighted: highlightedIndex === index,
+                          disabled: Boolean(item.disabled),
                         })}
                       >
                         {renderItem(item)}
@@ -199,8 +223,9 @@ FormDropdown.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
   placeholder: PropTypes.string,
-  renderItem: PropTypes.string.isRequired,
+  renderItem: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
+  "data-testid": PropTypes.string,
 };
 
 FormDropdown.defaultProps = {
@@ -212,6 +237,7 @@ FormDropdown.defaultProps = {
   placeholder: "",
   renderItem: prop("label"),
   options: [],
+  "data-testid": "form-dropdown",
 };
 
 FormDropdown.Option = FormDropdownOption;
