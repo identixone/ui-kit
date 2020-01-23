@@ -160,14 +160,14 @@ function FormDropdown({
               width,
               disabled,
               className,
-              "data-testid": testId,
+              "data-testid": name || testId,
             })}
           >
             <FormDropdownControl
               {...getToggleButtonProps({
                 disabled,
-                "data-testid": name,
                 isOpen,
+                "data-testid": name + "-control",
               })}
             >
               {get(
@@ -177,14 +177,22 @@ function FormDropdown({
               )}
             </FormDropdownControl>
             <FormDropdownMenu
-              {...getMenuProps({ isOpen }, { suppressRefError: true })}
+              {...getMenuProps(
+                { isOpen, "data-testid": name + "-menu" },
+                { suppressRefError: true }
+              )}
               ref={listRef}
             >
               {isOpen && (
                 <React.Fragment>
                   {withSearch && (
                     <FormDropdownInputWrapper>
-                      <FormDropdownInput {...getInputProps()} ref={inputRef} />
+                      <FormDropdownInput
+                        {...getInputProps({
+                          "data-testid": name + "-search",
+                        })}
+                        ref={inputRef}
+                      />
                     </FormDropdownInputWrapper>
                   )}
                   {searchInList(options, inputValue, ["label"]).map(
@@ -194,12 +202,12 @@ function FormDropdown({
                         {...getItemProps({
                           key: item.value,
                           id: `${name}-${item.value}`,
-                          "data-testid": `${name}-${item.value}`,
                           item,
                           index,
                           isSelected: isEqual(selectedItem, item),
                           isHighlighted: highlightedIndex === index,
                           disabled: Boolean(item.disabled),
+                          "data-testid": `${name}-${item.value}`,
                         })}
                       >
                         {renderItem(item)}
