@@ -1,36 +1,21 @@
-import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
-import StyledFormInput from "./StyledFormInput";
+const FormInput = styled.input`
+  border: 1px solid #9aa7b3;
+  border-radius: 3px;
+  padding: 2px 10px;
 
-function FormInput({
-  onChange,
-  onBlur,
-  name,
-  value,
-  placeholder,
-  type,
-  innerRef,
-  disabled,
-  className,
-  ...restProps
-}) {
-  return (
-    <StyledFormInput
-      id={name}
-      name={name}
-      type={type}
-      placeholder={placeholder ? placeholder : undefined}
-      onChange={onChange}
-      onBlur={onBlur}
-      value={value}
-      ref={innerRef}
-      disabled={disabled}
-      className={className}
-      data-testid={restProps["data-testid"]}
-    />
-  );
-}
+  &:focus {
+    outline: none;
+  }
+
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
 
 FormInput.propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -47,6 +32,9 @@ FormInput.propTypes = {
 
 FormInput.defaultProps = {
   type: "text",
+  "data-testid": "form-input",
 };
+
+const StyledFormInput = FormInput;
 
 export { FormInput, StyledFormInput };
