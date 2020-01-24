@@ -2,6 +2,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const FormInput = styled.input`
+  box-sizing: border-box;
   border: 1px solid #9aa7b3;
   border-radius: 3px;
   padding: 2px 10px;
@@ -24,7 +25,6 @@ FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "password", "email", "number"]),
-  innerRef: PropTypes.object,
   disabled: PropTypes.bool,
   "data-testid": PropTypes.string,
   className: PropTypes.string,

@@ -8,7 +8,7 @@ import { generateOptions } from "../../../../../../test/generate";
 
 const options = generateOptions(5);
 
-const dropdownName = "test-form-dropdown";
+const componentName = "test-form-dropdown";
 const optionSelector = 'li[role="option"]';
 
 const onChangeMock = jest.fn();
@@ -28,7 +28,7 @@ function renderFormDropdown(props) {
     return (
       <form data-testid="test-form">
         <FormDropdown
-          name={dropdownName}
+          name={componentName}
           options={options}
           value={value}
           onChange={(...args) => {
@@ -48,40 +48,40 @@ describe("FormDropdown tests", () => {
   test("FormDropdown menu should be visible after click on control", () => {
     const { getByTestId } = renderFormDropdown();
 
-    expect(getByTestId(`${dropdownName}-menu`)).not.toBeVisible();
+    expect(getByTestId(`${componentName}-menu`)).not.toBeVisible();
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
 
-    expect(getByTestId(`${dropdownName}-menu`)).toBeVisible();
+    expect(getByTestId(`${componentName}-menu`)).toBeVisible();
   });
 
   test("FormDropdown menu should not be visible after click on control if dropdown is disabled", () => {
     const { getByTestId } = renderFormDropdown({ disabled: true });
 
-    expect(getByTestId(`${dropdownName}-menu`)).not.toBeVisible();
+    expect(getByTestId(`${componentName}-menu`)).not.toBeVisible();
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
 
-    expect(getByTestId(`${dropdownName}-menu`)).not.toBeVisible();
+    expect(getByTestId(`${componentName}-menu`)).not.toBeVisible();
   });
 
   test("FormDropdown menu should render correct number of options", () => {
     const { getByTestId } = renderFormDropdown();
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
 
     expect(
-      getByTestId(`${dropdownName}-menu`).querySelectorAll(optionSelector)
+      getByTestId(`${componentName}-menu`).querySelectorAll(optionSelector)
     ).toHaveLength(options.length);
   });
 
   test("FormDropdown control should render selected item correctly and change onChange prop", () => {
     const { getByTestId } = renderFormDropdown();
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
-    fireEvent.click(getByTestId(`${dropdownName}-${options[0].value}`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-${options[0].value}`));
 
-    expect(getByTestId(`${dropdownName}-control`)).toHaveTextContent(
+    expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
       options[0].label
     );
 
@@ -96,12 +96,12 @@ describe("FormDropdown tests", () => {
       ),
     });
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
     fireEvent.click(
-      getByTestId(`${dropdownName}-${options[disabledOptionIndex].value}`)
+      getByTestId(`${componentName}-${options[disabledOptionIndex].value}`)
     );
 
-    expect(getByTestId(`${dropdownName}-control`)).not.toHaveTextContent(
+    expect(getByTestId(`${componentName}-control`)).not.toHaveTextContent(
       options[disabledOptionIndex].label
     );
   });
@@ -109,9 +109,9 @@ describe("FormDropdown tests", () => {
   test("FormDropdown menu should select option on keyboard arrow press", () => {
     const { getByTestId } = renderFormDropdown();
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
 
-    fireEvent.keyDown(getByTestId(`${dropdownName}-control`), {
+    fireEvent.keyDown(getByTestId(`${componentName}-control`), {
       key: "ArrowDown",
       code: 40,
     });
@@ -122,9 +122,9 @@ describe("FormDropdown tests", () => {
   test("FormDropdown with search menu should not select option on keyboard arrow press", () => {
     const { getByTestId } = renderFormDropdown({ withSearch: true });
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
 
-    fireEvent.keyDown(getByTestId(`${dropdownName}-control`), {
+    fireEvent.keyDown(getByTestId(`${componentName}-control`), {
       key: "ArrowDown",
       code: 40,
     });
@@ -137,28 +137,28 @@ describe("FormDropdown tests", () => {
       withSearch: true,
     });
 
-    fireEvent.click(getByTestId(`${dropdownName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-control`));
 
     expect(
-      getByTestId(`${dropdownName}-menu`).querySelectorAll(optionSelector)
+      getByTestId(`${componentName}-menu`).querySelectorAll(optionSelector)
     ).toHaveLength(options.length);
 
-    expect(getByTestId(`${dropdownName}-search`)).toBeVisible();
+    expect(getByTestId(`${componentName}-search`)).toBeVisible();
 
-    fireEvent.change(getByTestId(`${dropdownName}-search`), {
+    fireEvent.change(getByTestId(`${componentName}-search`), {
       target: { value: options[0].label },
     });
 
     expect(
-      getByTestId(`${dropdownName}-menu`).querySelectorAll(optionSelector)
+      getByTestId(`${componentName}-menu`).querySelectorAll(optionSelector)
     ).toHaveLength(1);
 
-    fireEvent.change(getByTestId(`${dropdownName}-search`), {
+    fireEvent.change(getByTestId(`${componentName}-search`), {
       target: { value: "" },
     });
 
     expect(
-      getByTestId(`${dropdownName}-menu`).querySelectorAll(optionSelector)
+      getByTestId(`${componentName}-menu`).querySelectorAll(optionSelector)
     ).toHaveLength(options.length);
   });
 });

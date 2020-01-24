@@ -1,56 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
+import { useRef, useState } from "react";
+
 import { FormInput } from "../FormInput";
-
 import { StyledFormInputToggle } from "./StyledFormInputToggle";
-import InputToggleButton from "./InputToggleButton";
+import { FormInputToggleButton } from "./FormInputToggleButton";
 
-class FormInputToggle extends React.Component {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    type: PropTypes.oneOf(["text", "password", "email", "number"]),
-    initialOpen: PropTypes.bool,
-    width: PropTypes.string,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-    valuePlaceholder: PropTypes.string,
-    buttonText: PropTypes.string,
-  };
+function FormInputToggle({
+  initialOpen,
+  name,
+  width,
+  value,
+  onChange,
+  onBlur,
+  disabled,
+  className,
+  type,
+  placeholder,
+  buttonText,
+  valuePlaceholder,
+  "data-testid": testId,
+}) {
+  const [isOpen, setIsOpen] = useState(initialOpen);
+  const inputRef = useRef(null);
 
-  static defaultProps = {
-    type: "text",
-    initialOpen: false,
-  };
-
-  state = {
-    isOpen: this.props.initialOpen,
-  };
-
-  togglerRef = React.createRef();
-  inputRef = React.createRef();
-
-  componentDidMount() {
-    window.addEventListener("click", this.handleWindowClick);
-  }
-
-  componentDidUpdate(_, prevState) {
-    if (this.state.isOpen && !prevState.isOpen && this.inputRef.current) {
-      this.inputRef.current.select();
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("click", this.handleWindowClick);
-  }
-
-  handleWindowClick = ev => {
-    if (!ev.target.closest(`[data-toggle="${this.props.name}"]`)) {
-      this.setState({ isOpen: false });
+  function handleWindowClick(ev) {
+    if (!ev.target.closest(`[data-toggle="${name}"]`)) {
+      setIsOpen(false);
     } else {
       /**
        * Сделано для того, чтобы, когда в тексте кнопки ссылка
@@ -58,64 +35,87 @@ class FormInputToggle extends React.Component {
        */
       ev.preventDefault();
 
-      this.setState({ isOpen: true });
+      setIsOpen(true);
     }
-  };
-
-  handleInputBlur = ev => {
-    this.setState({ isOpen: false });
-    this.props.onBlur(ev);
-  };
-
-  render() {
-    const {
-      onChange,
-      name,
-      value,
-      placeholder,
-      type,
-      width,
-      disabled,
-      className,
-      valuePlaceholder,
-      buttonText,
-    } = this.props;
-    const { isOpen } = this.state;
-
-    return (
-      <StyledFormInputToggle
-        width={width}
-        ref={this.togglerRef}
-        data-toggle={name}
-        hasValue={value && value !== 0}
-        disabled={disabled}
-        className={className}
-      >
-        {isOpen ? (
-          <FormInput
-            id={name}
-            name={name}
-            type={type}
-            placeholder={placeholder ? placeholder : undefined}
-            onChange={onChange}
-            onBlur={this.handleInputBlur}
-            value={value}
-            innerRef={this.inputRef}
-            disabled={disabled}
-            data-testid={name}
-          />
-        ) : (
-          <InputToggleButton
-            hasValue={value && value !== 0}
-            isDisabled={disabled}
-            data-testid={name}
-          >
-            {buttonText || value || valuePlaceholder}
-          </InputToggleButton>
-        )}
-      </StyledFormInputToggle>
-    );
   }
+
+  useEffect(() => {
+    window.addEventListener("click", handleWindowClick);
+
+    return () => {
+      window.removeEventListener("click", handleWindowClick);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.select();
+    }
+  }, [isOpen]);
+
+  const buttonContent = buttonText || value || valuePlaceholder;
+  const hasValue = value !== undefined && value !== null && value !== "";
+
+  return (
+    <StyledFormInputToggle
+      width={width}
+      data-toggle={name}
+      hasValue={hasValue}
+      disabled={disabled}
+      className={className}
+      data-testid={testId}
+    >
+      {isOpen ? (
+        <FormInput
+          id={name}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          onChange={onChange}
+          onBlur={ev => {
+            setIsOpen(false);
+            if (onBlur) {
+              onBlur(ev);
+            }
+          }}
+          value={hasValue ? value : ""}
+          ref={inputRef}
+          disabled={disabled}
+          data-testid={name}
+        />
+      ) : (
+        <FormInputToggleButton
+          hasContent={Boolean(buttonContent)}
+          isDisabled={disabled}
+          data-testid={name}
+        >
+          {buttonContent}
+        </FormInputToggleButton>
+      )}
+    </StyledFormInputToggle>
+  );
 }
+
+FormInputToggle.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.oneOf(["text", "password", "email", "number"]),
+  initialOpen: PropTypes.bool,
+  width: PropTypes.string,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
+  valuePlaceholder: PropTypes.string,
+  buttonText: PropTypes.string,
+  "data-testid": PropTypes.string,
+};
+
+FormInputToggle.defaultProps = {
+  type: "text",
+  initialOpen: false,
+  "data-testid": "form-input-toggle",
+};
 
 export { FormInputToggle, StyledFormInputToggle };
