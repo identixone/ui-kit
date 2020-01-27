@@ -66,14 +66,13 @@ describe("FormMultiSelect tests", () => {
     ).toHaveLength(options.length);
   });
 
-  test("FormMultiSelect menu should render correct number of options", () => {
+  test("FormMultiSelect menu should be hidden after input blur", () => {
     const { getByTestId } = renderFormMultiSelect();
 
     fireEvent.click(getByTestId(`${componentName}-input`));
+    fireEvent.blur(getByTestId(`${componentName}-input`));
 
-    expect(
-      getByTestId(`${componentName}-menu`).querySelectorAll(optionSelector)
-    ).toHaveLength(options.length);
+    expect(getByTestId(`${componentName}-menu`)).not.toBeVisible();
   });
 
   test("FormDropdown should render selected items correctly and call onChange prop", () => {
