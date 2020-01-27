@@ -5,20 +5,24 @@ import StyledFormMultiSelectTagsItem from "./StyledFormMultiSelectTagsItem";
 import FormMultiSelectTagsItemTitle from "./FormMultiSelectTagsItemTitle";
 import FormMultiSelectTagsItemCross from "./FormMultiSelectTagsItemCross";
 
-function FormMultiSelectTagsItem({ onCrossClick, title, name }) {
+function FormMultiSelectTagsItem({
+  onCrossClick,
+  title,
+  "data-testid": testId,
+}) {
   return (
-    <StyledFormMultiSelectTagsItem data-testid={`tag-${name}-${title}`}>
+    <StyledFormMultiSelectTagsItem data-testid={testId} role="tag">
       <FormMultiSelectTagsItemTitle>{title}</FormMultiSelectTagsItemTitle>
       <FormMultiSelectTagsItemCross
         onClick={onCrossClick}
-        data-testid={`tag-cross-${name}-${title}`}
+        data-testid={`${testId}-cross`}
       />
     </StyledFormMultiSelectTagsItem>
   );
 }
 
 FormMultiSelectTagsItem.propTypes = {
-  name: PropTypes.string,
+  "data-testid": PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   onCrossClick: PropTypes.func.isRequired,
 };

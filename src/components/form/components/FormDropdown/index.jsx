@@ -211,7 +211,7 @@ function FormDropdown({
                           isSelected: isEqual(selectedItem, item),
                           isHighlighted: highlightedIndex === index,
                           disabled: Boolean(item.disabled),
-                          "data-testid": `${testId}-${item.value}`,
+                          "data-testid": `${testId}-option-${item.value}`,
                         })}
                       >
                         {renderItem(item)}

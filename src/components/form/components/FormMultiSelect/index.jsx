@@ -24,12 +24,19 @@ class FormMultiSelect extends React.Component {
     placeholder: PropTypes.string,
     options: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.array.isRequired,
+    value: PropTypes.array,
     onInputChange: PropTypes.func,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     menuRef: PropTypes.object,
     isLoading: PropTypes.bool,
     className: PropTypes.string,
+    "data-testid": PropTypes.string,
+  };
+
+  static defaultProps = {
+    "data-testid": "form-multi-select",
+    options: [],
+    value: [],
   };
 
   state = {
@@ -172,7 +179,12 @@ class FormMultiSelect extends React.Component {
       isLoading,
       className,
     } = this.props;
+    let { "data-testid": testId } = this.props;
     const { selected, inputValue, isOpen, isMenuUp } = this.state;
+
+    if (name) {
+      testId = name;
+    }
 
     return (
       <Downshift
@@ -184,6 +196,7 @@ class FormMultiSelect extends React.Component {
         onInputValueChange={this.handleInputChange}
         selectedItem={selected}
         isOpen={isOpen}
+        data-testid={testId}
       >
         {({
           getItemProps,
@@ -195,48 +208,60 @@ class FormMultiSelect extends React.Component {
         }) => {
           return (
             <StyledFormMultiSelect
-              {...getRootProps({ width, isLoading })}
-              className={className}
               ref={this.selectRef}
+              {...getRootProps({
+                width,
+                isLoading,
+                className,
+                "data-testid": testId,
+              })}
             >
               <FormMultiSelectTags
                 ref={this.tagsRef}
-                data-testid={name}
                 onClick={this.handleTagsClick}
+                data-testid={`${testId}-tags`}
               >
-                {selected.map(selected => (
-                  <FormMultiSelectTagsItem
-                    name={name}
-                    key={selected.label || selected}
-                    title={selected.label || selected}
-                    onCrossClick={() => {
-                      this.removeItem(selected);
-                      this.inputRef.current.focus();
-                    }}
-                  />
-                ))}
+                {selected.map(selected => {
+                  const tagName = selected.label || selected;
+                  const tagValue = selected.value || selected;
+
+                  return (
+                    <FormMultiSelectTagsItem
+                      key={tagValue}
+                      title={tagName}
+                      data-testid={`${testId}-tag-${tagValue}`}
+                      onCrossClick={() => {
+                        this.removeItem(selected);
+                        this.inputRef.current.focus();
+                      }}
+                    />
+                  );
+                })}
                 <FormMultiSelectInputWrapper>
                   <FormMultiSelectInput
                     ref={this.inputRef}
-                    placeholder={
-                      !selected.length && placeholder ? placeholder : undefined
-                    }
                     {...getInputProps({
                       isOpen,
                       onBlur: this.handleInputBlur,
+                      placeholder:
+                        !selected.length && placeholder
+                          ? placeholder
+                          : undefined,
+                      "data-testid": `${testId}-input`,
                     })}
                   />
                   <FormMultiSelectMenu
+                    ref={menuRef || this.menuRef}
                     {...getMenuProps(
                       {
                         isOpen,
                         isLoading,
                         isUp: isMenuUp,
+                        "data-testid": `${testId}-menu`,
                       },
                       // https://github.com/downshift-js/downshift/issues/604#issuecomment-456574976
                       { suppressRefError: true }
                     )}
-                    ref={menuRef || this.menuRef}
                   >
                     {isOpen &&
                       searchInList(
@@ -253,12 +278,14 @@ class FormMultiSelect extends React.Component {
                           );
                         })
                         .map((item, index) => {
+                          const itemValue = item.value || item;
+
                           return (
                             <FormMultiSelectOption
-                              key={item.value || item}
+                              key={itemValue}
                               {...getItemProps({
-                                id: `${name}-${item.value || item}`,
-                                "data-testid": `${name}-${item.value || item}`,
+                                id: `${name}-${itemValue}`,
+                                "data-testid": `${testId}-option-${itemValue}`,
                                 index,
                                 item,
                                 isSelected: selectedItem === item,

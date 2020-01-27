@@ -75,11 +75,11 @@ describe("FormDropdown tests", () => {
     ).toHaveLength(options.length);
   });
 
-  test("FormDropdown control should render selected item correctly and change onChange prop", () => {
+  test("FormDropdown control should render selected item correctly and call onChange prop", () => {
     const { getByTestId } = renderFormDropdown();
 
     fireEvent.click(getByTestId(`${componentName}-control`));
-    fireEvent.click(getByTestId(`${componentName}-${options[0].value}`));
+    fireEvent.click(getByTestId(`${componentName}-option-${options[0].value}`));
 
     expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
       options[0].label
@@ -98,7 +98,9 @@ describe("FormDropdown tests", () => {
 
     fireEvent.click(getByTestId(`${componentName}-control`));
     fireEvent.click(
-      getByTestId(`${componentName}-${options[disabledOptionIndex].value}`)
+      getByTestId(
+        `${componentName}-option-${options[disabledOptionIndex].value}`
+      )
     );
 
     expect(getByTestId(`${componentName}-control`)).not.toHaveTextContent(
