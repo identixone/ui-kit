@@ -25,45 +25,29 @@ function FormInputToggle({
   const [isOpen, setIsOpen] = useState(initialOpen);
   const inputRef = useRef(null);
 
-  function handleWindowClick(ev) {
-    if (!ev.target.closest(`[data-toggle="${name}"]`)) {
-      setIsOpen(false);
-    } else {
-      /**
-       * Сделано для того, чтобы, когда в тексте кнопки ссылка
-       * браузер не пытался по ней перейти
-       */
-      ev.preventDefault();
-
-      setIsOpen(true);
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener("click", handleWindowClick);
-
-    return () => {
-      window.removeEventListener("click", handleWindowClick);
-    };
-  }, []);
-
   useEffect(() => {
     if (isOpen && inputRef.current) {
-      inputRef.current.select();
+      inputRef.current.focus();
     }
   }, [isOpen]);
 
   const buttonContent = buttonText || value || valuePlaceholder;
   const hasValue = value !== undefined && value !== null && value !== "";
 
+  if (name) {
+    testId = name;
+  }
+
   return (
     <StyledFormInputToggle
       width={width}
-      data-toggle={name}
       hasValue={hasValue}
-      disabled={disabled}
       className={className}
+      data-toggle={name}
       data-testid={testId}
+      onClick={() => {
+        setIsOpen(true);
+      }}
     >
       {isOpen ? (
         <FormInput
@@ -81,13 +65,13 @@ function FormInputToggle({
           value={hasValue ? value : ""}
           ref={inputRef}
           disabled={disabled}
-          data-testid={name}
+          data-testid={testId + "-input"}
         />
       ) : (
         <FormInputToggleButton
           hasContent={Boolean(buttonContent)}
           isDisabled={disabled}
-          data-testid={name}
+          data-testid={testId + "-button"}
         >
           {buttonContent}
         </FormInputToggleButton>
@@ -104,7 +88,7 @@ FormInputToggle.propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "password", "email", "number"]),
   initialOpen: PropTypes.bool,
-  width: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   className: PropTypes.string,
   valuePlaceholder: PropTypes.string,

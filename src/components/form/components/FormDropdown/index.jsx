@@ -131,6 +131,10 @@ function FormDropdown({
     }
   }
 
+  if (name) {
+    testId = name;
+  }
+
   return (
     <Downshift
       initialSelectedItem={value}
@@ -160,14 +164,14 @@ function FormDropdown({
               width,
               disabled,
               className,
-              "data-testid": name || testId,
+              "data-testid": testId,
             })}
           >
             <FormDropdownControl
               {...getToggleButtonProps({
                 disabled,
                 isOpen,
-                "data-testid": name + "-control",
+                "data-testid": testId + "-control",
               })}
             >
               {get(
@@ -178,7 +182,7 @@ function FormDropdown({
             </FormDropdownControl>
             <FormDropdownMenu
               {...getMenuProps(
-                { isOpen, "data-testid": name + "-menu" },
+                { isOpen, "data-testid": testId + "-menu" },
                 { suppressRefError: true }
               )}
               ref={listRef}
@@ -189,7 +193,7 @@ function FormDropdown({
                     <FormDropdownInputWrapper>
                       <FormDropdownInput
                         {...getInputProps({
-                          "data-testid": name + "-search",
+                          "data-testid": testId + "-search",
                         })}
                         ref={inputRef}
                       />
@@ -201,13 +205,13 @@ function FormDropdown({
                         key={item.value}
                         {...getItemProps({
                           key: item.value,
-                          id: `${name}-${item.value}`,
+                          id: `${testId}-${item.value}`,
                           item,
                           index,
                           isSelected: isEqual(selectedItem, item),
                           isHighlighted: highlightedIndex === index,
                           disabled: Boolean(item.disabled),
-                          "data-testid": `${name}-${item.value}`,
+                          "data-testid": `${testId}-${item.value}`,
                         })}
                       >
                         {renderItem(item)}

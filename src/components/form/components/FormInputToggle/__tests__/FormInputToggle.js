@@ -29,9 +29,9 @@ function renderFormInputToggle(props) {
         <FormInputToggle
           name={componentName}
           value={value}
-          onChange={(...args) => {
-            setValue(...args);
-            onChangeMock(...args);
+          onChange={ev => {
+            setValue(ev.target.value);
+            onChangeMock(ev);
           }}
           onBlur={onBlurMock}
           {...props}
@@ -44,13 +44,71 @@ function renderFormInputToggle(props) {
 }
 
 describe("FormInputToggle tests", () => {
-  test("FormInputToggle menu should be visible after click on control", () => {
+  test("FormInputToggle should hide button and render input on click", () => {
+    const { queryByTestId, getByTestId } = renderFormInputToggle();
+
+    expect(queryByTestId(`${componentName}-input`)).not.toBeInTheDocument();
+    expect(queryByTestId(`${componentName}-button`)).toBeInTheDocument();
+
+    fireEvent.click(getByTestId(componentName));
+
+    expect(queryByTestId(`${componentName}-input`)).toBeInTheDocument();
+    expect(queryByTestId(`${componentName}-button`)).not.toBeInTheDocument();
+  });
+
+  test("FormInputToggle should focus on input after render it", () => {
+    const { queryByTestId, getByTestId } = renderFormInputToggle();
+
+    fireEvent.click(getByTestId(componentName));
+
+    expect(queryByTestId(`${componentName}-input`)).toHaveFocus();
+  });
+
+  test("FormInputToggle should not hide input and render button on click inside", () => {
+    const { queryByTestId, getByTestId } = renderFormInputToggle();
+
+    fireEvent.click(getByTestId(componentName));
+    fireEvent.click(getByTestId(componentName));
+
+    expect(queryByTestId(`${componentName}-input`)).toBeInTheDocument();
+    expect(queryByTestId(`${componentName}-button`)).not.toBeInTheDocument();
+  });
+
+  test("FormInputToggle should change input value correctly", () => {
+    const { queryByTestId, getByTestId } = renderFormInputToggle();
+
+    fireEvent.click(getByTestId(componentName));
+    fireEvent.change(getByTestId(`${componentName}-input`), {
+      target: { value: "jane_doe" },
+    });
+
+    expect(queryByTestId(`${componentName}-input`)).toBeInTheDocument();
+    expect(queryByTestId(`${componentName}-button`)).not.toBeInTheDocument();
+
+    fireEvent.blur(getByTestId(`${componentName}-input`));
+
+    expect(queryByTestId(`${componentName}-button`)).toHaveTextContent(
+      "jane_doe"
+    );
+    expect(onChangeMock.mock.calls).toHaveLength(1);
+  });
+
+  test("FormInputToggle should call onBlur callback correctly", () => {
     const { getByTestId } = renderFormInputToggle();
 
-    expect(getByTestId(`${componentName}-menu`)).not.toBeVisible();
+    fireEvent.click(getByTestId(componentName));
+    fireEvent.blur(getByTestId(`${componentName}-input`));
 
-    fireEvent.click(getByTestId(`${componentName}-control`));
+    expect(onBlurMock.mock.calls).toHaveLength(1);
+  });
 
-    expect(getByTestId(`${componentName}-menu`)).toBeVisible();
+  test("FormInputToggle should hide input and render button on click outside", () => {
+    const { queryByTestId, getByTestId } = renderFormInputToggle();
+
+    fireEvent.click(getByTestId(componentName));
+    fireEvent.blur(getByTestId(`${componentName}-input`));
+
+    expect(queryByTestId(`${componentName}-input`)).not.toBeInTheDocument();
+    expect(queryByTestId(`${componentName}-button`)).toBeInTheDocument();
   });
 });
