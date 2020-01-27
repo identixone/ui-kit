@@ -5,7 +5,7 @@ import { storiesOf } from "@storybook/react";
 import { useState } from "react";
 
 import { FormCheckboxGroup } from "./index";
-import FormLabelTitle from "../FormLabel/FormLabelTitle";
+import { FormLabelTitle } from "../FormLabel";
 
 import { generateOptions } from "../../../../../test/generate";
 
