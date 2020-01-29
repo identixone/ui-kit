@@ -5,7 +5,7 @@ import { FormRangeSlider } from "../index";
 import { fireEvent } from "@testing-library/react";
 import { render } from "../../../../../../test/utils";
 
-const componentName = "test-form-dropdown";
+const componentName = "test-form-range-slider";
 
 const onChangeMock = jest.fn();
 
