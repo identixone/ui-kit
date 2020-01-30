@@ -44,10 +44,6 @@ FormCheckboxGroup.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-FormCheckboxGroup.defaultProps = {
-  "data-testid": "form-checkbox-group",
-};
-
 FormCheckboxGroup.Item = FormCheckboxGroupItem;
 
 export { FormCheckboxGroup };

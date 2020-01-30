@@ -1,5 +1,5 @@
 function getTestId(name, testId) {
-  return name || testId;
+  return testId || name;
 }
 
 export { getTestId };

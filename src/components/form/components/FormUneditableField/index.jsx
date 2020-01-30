@@ -12,6 +12,7 @@ function FormUneditableField({
   "data-testid": testId,
 }) {
   testId = getTestId(name, testId);
+
   return (
     <StyledFormUneditableField
       id={name}
@@ -29,10 +30,6 @@ FormUneditableField.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
-};
-
-FormUneditableField.defaultPropr = {
-  "data-testid": "form-uneditable-field",
 };
 
 export { FormUneditableField, StyledFormUneditableField };

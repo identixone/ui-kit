@@ -57,7 +57,6 @@ FormSwitch.propTypes = {
 FormSwitch.defaultProps = {
   size: "m",
   theme: "blue",
-  "data-testid": "form-switch",
 };
 
 export { FormSwitch, StyledFormSwitch };

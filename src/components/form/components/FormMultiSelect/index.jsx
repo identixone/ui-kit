@@ -37,7 +37,6 @@ class FormMultiSelect extends React.Component {
   static defaultProps = {
     options: [],
     value: [],
-    "data-testid": "form-multi-select",
   };
 
   state = {

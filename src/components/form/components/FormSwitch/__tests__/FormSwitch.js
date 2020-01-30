@@ -6,15 +6,16 @@ import { fireEvent } from "@testing-library/react";
 import { render } from "../../../../../../test/utils";
 
 const componentName = "test-form-switch";
+const formName = "test-form";
 
 function renderFormSwitch(props) {
   function FormSwitchWrapper() {
     const [checked, setChecked] = useState(false);
 
     return (
-      <form data-testid="test-form">
+      <form data-testid={formName}>
         <FormSwitch
-          name="test-form-switch"
+          name={componentName}
           checked={checked}
           onChange={({ target: { checked } }) => {
             setChecked(checked);
@@ -32,20 +33,20 @@ describe("FormSwitch tests", () => {
   test("FormSwitch should change value correctly", () => {
     const { getByTestId } = renderFormSwitch();
 
-    expect(getByTestId("test-form")).toHaveFormValues({
-      "test-form-switch": false,
+    expect(getByTestId(formName)).toHaveFormValues({
+      [componentName]: false,
     });
 
     fireEvent.click(getByTestId(componentName));
 
-    expect(getByTestId("test-form")).toHaveFormValues({
-      "test-form-switch": true,
+    expect(getByTestId(formName)).toHaveFormValues({
+      [componentName]: true,
     });
 
     fireEvent.click(getByTestId(componentName));
 
-    expect(getByTestId("test-form")).toHaveFormValues({
-      "test-form-switch": false,
+    expect(getByTestId(formName)).toHaveFormValues({
+      [componentName]: false,
     });
   });
 });

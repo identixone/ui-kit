@@ -255,7 +255,6 @@ FormDropdown.defaultProps = {
   placeholder: "",
   renderItem: prop("label"),
   options: [],
-  "data-testid": "form-dropdown",
 };
 
 FormDropdown.Option = FormDropdownOption;

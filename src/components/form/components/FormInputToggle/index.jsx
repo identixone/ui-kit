@@ -63,7 +63,7 @@ function FormInputToggle({
             }
           }}
           value={hasValue ? value : ""}
-          ref={inputRef}
+          innerRef={inputRef}
           disabled={disabled}
           data-testid={testId + "-input"}
         />
@@ -99,7 +99,6 @@ FormInputToggle.propTypes = {
 FormInputToggle.defaultProps = {
   type: "text",
   initialOpen: false,
-  "data-testid": "form-input-toggle",
 };
 
 export { FormInputToggle, StyledFormInputToggle };

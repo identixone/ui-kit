@@ -24,7 +24,9 @@ const StyledFormInput = styled.input`
 function FormInput(props) {
   const testId = getTestId(props.name, props["data-testid"]);
 
-  return <StyledFormInput {...props} data-testid={testId} />;
+  return (
+    <StyledFormInput {...props} data-testid={testId} ref={props.innerRef} />
+  );
 }
 
 FormInput.propTypes = {
@@ -37,11 +39,11 @@ FormInput.propTypes = {
   disabled: PropTypes.bool,
   "data-testid": PropTypes.string,
   className: PropTypes.string,
+  innerRef: PropTypes.object,
 };
 
 FormInput.defaultProps = {
   type: "text",
-  "data-testid": "form-input",
 };
 
 export { FormInput, StyledFormInput };

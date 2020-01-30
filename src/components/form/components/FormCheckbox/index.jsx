@@ -60,7 +60,6 @@ FormCheckbox.propTypes = {
 FormCheckbox.defaultProps = {
   checkboxTheme: "light",
   size: "small",
-  "data-testid": "form-checkbox",
 };
 
 export { FormCheckbox, StyledFormCheckbox };

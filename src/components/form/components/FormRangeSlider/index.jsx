@@ -86,7 +86,6 @@ FormRangeSlider.defaultProps = {
   from: 0,
   to: 99,
   withClear: false,
-  "data-testid": "form-range-slider",
 };
 
 export { FormRangeSlider, StyledFormRangeSlider };
