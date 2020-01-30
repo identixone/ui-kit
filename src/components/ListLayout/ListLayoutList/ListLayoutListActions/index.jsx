@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "../../../Button";
 
+import { resources } from "./ListLayoutListActions.resources.js";
+
 export function ListLayoutListActions({
   isSelectAvailable,
   isDeselectAvailable,
@@ -18,7 +20,10 @@ export function ListLayoutListActions({
   children,
   additional,
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  i18n.addResourceBundle("en", "ListLayoutListActions", resources.en);
+  i18n.addResourceBundle("ru", "ListLayoutListActions", resources.ru);
 
   return (
     <StyledListLayoutListActions>
