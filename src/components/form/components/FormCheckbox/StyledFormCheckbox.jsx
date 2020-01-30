@@ -18,4 +18,4 @@ const StyledFormCheckbox = styled.label`
   ${({ size }) => CheckboxSizes[size]};
 `;
 
-export default StyledFormCheckbox;
+export { StyledFormCheckbox };

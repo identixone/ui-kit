@@ -7,6 +7,8 @@ import { FormInput } from "../FormInput";
 import { StyledFormInputToggle } from "./StyledFormInputToggle";
 import { FormInputToggleButton } from "./FormInputToggleButton";
 
+import { getTestId } from "../../utils";
+
 function FormInputToggle({
   initialOpen,
   name,
@@ -15,13 +17,15 @@ function FormInputToggle({
   onChange,
   onBlur,
   disabled,
-  className,
   type,
   placeholder,
   buttonText,
   valuePlaceholder,
+  className,
   "data-testid": testId,
 }) {
+  testId = getTestId(name, testId);
+
   const [isOpen, setIsOpen] = useState(initialOpen);
   const inputRef = useRef(null);
 
@@ -33,10 +37,6 @@ function FormInputToggle({
 
   const buttonContent = buttonText || value || valuePlaceholder;
   const hasValue = value !== undefined && value !== null && value !== "";
-
-  if (name) {
-    testId = name;
-  }
 
   return (
     <StyledFormInputToggle

@@ -18,4 +18,4 @@ const FormCheckboxInput = styled.input`
   opacity: 0;
 `;
 
-export default FormCheckboxInput;
+export { FormCheckboxInput };

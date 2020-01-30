@@ -5,6 +5,8 @@ import { StyledFormSwitch } from "./StyledFormSwitch";
 import { FormSwitchLabel } from "./FormSwitchLabel";
 import { FormSwitchCheckbox } from "./FormSwitchCheckbox";
 
+import { getTestId } from "../../utils";
+
 function FormSwitch({
   name,
   size,
@@ -14,9 +16,7 @@ function FormSwitch({
   className,
   "data-testid": testId,
 }) {
-  if (name) {
-    testId = name;
-  }
+  testId = getTestId(name, testId);
 
   return (
     <StyledFormSwitch

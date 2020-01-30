@@ -33,6 +33,10 @@ function FormDropdown({
   className,
   "data-testid": testId,
 }) {
+  if (name) {
+    testId = name;
+  }
+
   const [preselected, setPreselected] = useState(value);
   const [selected, setSelected] = useState(value);
   useEffect(() => {
@@ -129,10 +133,6 @@ function FormDropdown({
               : state.highlightedIndex,
         };
     }
-  }
-
-  if (name) {
-    testId = name;
   }
 
   return (

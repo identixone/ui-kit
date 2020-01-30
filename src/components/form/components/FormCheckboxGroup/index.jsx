@@ -5,7 +5,7 @@ import { FormCheckboxGroupItem } from "./FormCheckboxGroupItem";
 
 import { SelectableList } from "../../../SelectableList";
 
-function FormCheckboxGroup({ groupName, render, options, value, onChange }) {
+function FormCheckboxGroup({ value, onChange, groupName, render, options }) {
   return (
     <SelectableList
       options={options}
@@ -42,6 +42,10 @@ FormCheckboxGroup.propTypes = {
   options: PropTypes.array.isRequired,
   value: PropTypes.array,
   onChange: PropTypes.func.isRequired,
+};
+
+FormCheckboxGroup.defaultProps = {
+  "data-testid": "form-checkbox-group",
 };
 
 FormCheckboxGroup.Item = FormCheckboxGroupItem;

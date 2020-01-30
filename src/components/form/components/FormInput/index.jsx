@@ -1,7 +1,10 @@
-import styled from "styled-components";
+import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
-const FormInput = styled.input`
+import { getTestId } from "../../utils";
+
+const StyledFormInput = styled.input`
   box-sizing: border-box;
   border: 1px solid #9aa7b3;
   border-radius: 3px;
@@ -17,6 +20,12 @@ const FormInput = styled.input`
     margin: 0;
   }
 `;
+
+function FormInput(props) {
+  const testId = getTestId(props.name, props["data-testid"]);
+
+  return <StyledFormInput {...props} data-testid={testId} />;
+}
 
 FormInput.propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -34,7 +43,5 @@ FormInput.defaultProps = {
   type: "text",
   "data-testid": "form-input",
 };
-
-const StyledFormInput = FormInput;
 
 export { FormInput, StyledFormInput };

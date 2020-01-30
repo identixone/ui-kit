@@ -7,6 +7,7 @@ import { FormRangeSliderResetButton } from "./FormRangeSliderResetButton";
 import { TimesCircle } from "../../../../assets/icons";
 
 import { round } from "lodash";
+import { getTestId } from "../../utils";
 
 function formatter(decimals) {
   return {
@@ -30,6 +31,8 @@ function FormRangeSlider({
   className,
   "data-testid": testId,
 }) {
+  testId = getTestId(name, testId);
+
   const isClearButtonHidden = Boolean(minFrom === from && maxTo === to);
 
   return (

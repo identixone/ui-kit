@@ -3,12 +3,20 @@ import PropTypes from "prop-types";
 
 import { StyledFormUneditableField } from "./StyledFormUneditableField";
 
-function FormUneditableField({ name, value, className }) {
+import { getTestId } from "../../utils";
+
+function FormUneditableField({
+  name,
+  value,
+  className,
+  "data-testid": testId,
+}) {
+  testId = getTestId(name, testId);
   return (
     <StyledFormUneditableField
       id={name}
       name={name}
-      data-testid={name}
+      data-testid={testId}
       className={className}
     >
       {value}
@@ -20,6 +28,11 @@ FormUneditableField.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
+  "data-testid": PropTypes.string,
+};
+
+FormUneditableField.defaultPropr = {
+  "data-testid": "form-uneditable-field",
 };
 
 export { FormUneditableField, StyledFormUneditableField };

@@ -15,6 +15,7 @@ import FormMultiSelectTagsItem from "./FormMultiSelectTags/FormMultiSelectTagsIt
 
 import { searchInList, getStringShort } from "../../../../utils/helpers";
 import { some } from "lodash-es";
+import { getTestId } from "../../utils";
 
 const BACKSPACE_KEY_CODE = 8;
 
@@ -34,9 +35,9 @@ class FormMultiSelect extends React.Component {
   };
 
   static defaultProps = {
-    "data-testid": "form-multi-select",
     options: [],
     value: [],
+    "data-testid": "form-multi-select",
   };
 
   state = {
@@ -179,12 +180,9 @@ class FormMultiSelect extends React.Component {
       isLoading,
       className,
     } = this.props;
-    let { "data-testid": testId } = this.props;
     const { selected, inputValue, isOpen, isMenuUp } = this.state;
 
-    if (name) {
-      testId = name;
-    }
+    const testId = getTestId(name, this.props["data-testid"]);
 
     return (
       <Downshift
