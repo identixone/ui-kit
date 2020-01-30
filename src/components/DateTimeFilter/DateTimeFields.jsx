@@ -13,7 +13,7 @@ function DateTimeFields(props) {
   return (
     <React.Fragment>
       <StyledDatetimePart>
-        <StyledDatetimeTitle>From</StyledDatetimeTitle>
+        <StyledDatetimeTitle>{t("From")}</StyledDatetimeTitle>
         <div>
           <StyledDatetimeFormFieldGroup>
             <FormField
@@ -158,7 +158,7 @@ function DateTimeFields(props) {
         </div>
       </StyledDatetimePart>
       <StyledDatetimePart>
-        <StyledDatetimeTitle>To</StyledDatetimeTitle>
+        <StyledDatetimeTitle>{t("To")}</StyledDatetimeTitle>
         <div>
           <StyledDatetimeFormFieldGroup>
             <FormField
