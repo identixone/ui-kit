@@ -7,4 +7,7 @@ const FormLabel = styled.label`
   height: ${({ height }) => (height ? `${height}px` : "25px")};
 `;
 
-export default FormLabel;
+const StyledFormLabel = FormLabel;
+
+export { FormLabelTitle } from "./FormLabelTitle";
+export { FormLabel, StyledFormLabel };

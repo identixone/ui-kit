@@ -1,34 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import StyledFormInput from "./StyledFormInput";
+import { getTestId } from "../../utils";
 
-function FormInput({
-  onChange,
-  onBlur,
-  name,
-  value,
-  placeholder,
-  type,
-  innerRef,
-  disabled,
-  className,
-  ...restProps
-}) {
+const StyledFormInput = styled.input`
+  box-sizing: border-box;
+  border: 1px solid #9aa7b3;
+  border-radius: 3px;
+  padding: 2px 10px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+function FormInput(props) {
+  const testId = getTestId(props.name, props["data-testid"]);
+
   return (
-    <StyledFormInput
-      id={name}
-      name={name}
-      type={type}
-      placeholder={placeholder ? placeholder : undefined}
-      onChange={onChange}
-      onBlur={onBlur}
-      value={value}
-      ref={innerRef}
-      disabled={disabled}
-      className={className}
-      data-testid={restProps["data-testid"]}
-    />
+    <StyledFormInput {...props} data-testid={testId} ref={props.innerRef} />
   );
 }
 
@@ -39,10 +36,10 @@ FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "password", "email", "number"]),
-  innerRef: PropTypes.object,
   disabled: PropTypes.bool,
   "data-testid": PropTypes.string,
   className: PropTypes.string,
+  innerRef: PropTypes.object,
 };
 
 FormInput.defaultProps = {

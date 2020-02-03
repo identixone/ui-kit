@@ -18,4 +18,4 @@ const FormCheckboxFlag = styled.div`
   }
 `;
 
-export default FormCheckboxFlag;
+export { FormCheckboxFlag };

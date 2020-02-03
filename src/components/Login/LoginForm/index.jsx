@@ -146,7 +146,6 @@ LoginFormComponent.propTypes = {
 };
 
 LoginFormComponent.defaultProps = {
-  title: PropTypes.string,
   "data-testid": "login-form",
 };
 

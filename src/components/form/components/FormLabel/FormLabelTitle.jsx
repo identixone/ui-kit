@@ -5,4 +5,4 @@ const FormLabelTitle = styled.span`
   cursor: pointer;
 `;
 
-export default FormLabelTitle;
+export { FormLabelTitle };
