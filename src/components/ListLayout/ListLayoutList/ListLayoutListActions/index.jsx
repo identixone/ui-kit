@@ -6,7 +6,11 @@ import { ListLayoutListActionsText } from "./ListLayoutListActionsText";
 import { ListLayoutListActionsButtons } from "./ListLayoutListActionsButtons";
 import { ListLayoutListActionsAdditional } from "./ListLayoutListActionsAdditional";
 
+import { useTranslation } from "react-i18next";
+
 import { Button } from "../../../Button";
+
+import { resources } from "./ListLayoutListActions.resources.js";
 
 export function ListLayoutListActions({
   isSelectAvailable,
@@ -16,6 +20,11 @@ export function ListLayoutListActions({
   children,
   additional,
 }) {
+  const { t, i18n } = useTranslation();
+
+  i18n.addResourceBundle("en", "ListLayoutListActions", resources.en);
+  i18n.addResourceBundle("ru", "ListLayoutListActions", resources.ru);
+
   return (
     <StyledListLayoutListActions>
       {/* span нужен для того, чтобы отображение не прыгало
@@ -29,7 +38,7 @@ export function ListLayoutListActions({
           onClick={onSelect}
           isDisabled={!isSelectAvailable}
         >
-          Select all
+          {t("Select all")}
         </Button>
         <Button
           data-testid="deselect-all"
@@ -37,7 +46,7 @@ export function ListLayoutListActions({
           onClick={onDeselect}
           isDisabled={!isDeselectAvailable}
         >
-          Deselect all
+          {t("Deselect all")}
         </Button>
       </ListLayoutListActionsButtons>
       {additional && (
