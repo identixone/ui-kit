@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-import FormCheckboxFlag from "./FormCheckboxFlag";
+import { FormCheckboxFlag } from "./FormCheckboxFlag";
 
 const smallSize = css`
   width: 22px;

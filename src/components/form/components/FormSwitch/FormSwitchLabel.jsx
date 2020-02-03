@@ -1,8 +1,10 @@
 import styled, { css } from "styled-components";
 
+import { colors } from "../../../../themes/colors";
+
 const checkedColors = {
   blue: "#34a7c1",
-  "dark-gray": "#5d7784",
+  "dark-gray": colors.gray,
 };
 const backColors = {
   blue: "#eeeeee",
@@ -34,8 +36,7 @@ const calcOffset = ({ checked, size }) => {
   return !checked ? "0px" : barWidths[size] - circleSizes[size] / 2 - 3 + "px";
 };
 
-const FormSwitchLabel = styled.label`
-  display: block;
+const FormSwitchLabel = styled.div`
   cursor: pointer;
   padding: 0;
   border: 0 solid ${({ checked }) => (checked ? "#34a7c1" : "#eeeeee")};
@@ -63,4 +64,4 @@ const FormSwitchLabel = styled.label`
   }
 `;
 
-export default FormSwitchLabel;
+export { FormSwitchLabel };

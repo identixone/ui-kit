@@ -8,4 +8,4 @@ const FormFieldGroupTitle = styled.h3`
   margin-bottom: 18px;
 `;
 
-export default FormFieldGroupTitle;
+export { FormFieldGroupTitle };

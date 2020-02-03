@@ -127,7 +127,11 @@ FormField.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   direction: PropTypes.oneOf(["row", "column"]),
   render: PropTypes.func,
-  component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  component: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.func,
+    PropTypes.elementType,
+  ]),
   showError: PropTypes.bool,
   disabled: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -2,7 +2,6 @@ export * from "./FormField";
 export * from "./FormLabel";
 export * from "./FormInput";
 export * from "./FormInputToggle";
-export * from "./FormInputTogglePlace";
 export * from "./FormSwitch";
 export * from "./FormDropdown";
 export * from "./FormCheckbox";

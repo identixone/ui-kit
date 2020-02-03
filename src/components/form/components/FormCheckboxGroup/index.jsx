@@ -5,7 +5,7 @@ import { FormCheckboxGroupItem } from "./FormCheckboxGroupItem";
 
 import { SelectableList } from "../../../SelectableList";
 
-function FormCheckboxGroup({ groupName, render, options, value, onChange }) {
+function FormCheckboxGroup({ value, onChange, groupName, render, options }) {
   return (
     <SelectableList
       options={options}
@@ -15,16 +15,16 @@ function FormCheckboxGroup({ groupName, render, options, value, onChange }) {
         return render({
           ...selectedListProps,
           checkboxes: () => {
-            const { selected } = selectedListProps;
+            const { selected, handleCheckboxChange } = selectedListProps;
 
-            return options.map(({ label, value }) => {
+            return options.map(({ label, value: optionValue }) => {
               return (
                 <FormCheckboxGroupItem
-                  key={value}
+                  key={optionValue}
                   label={label}
-                  name={value}
-                  checked={selected.includes(value)}
-                  onChange={selectedListProps.handleCheckboxChange}
+                  name={String(optionValue)}
+                  checked={selected.includes(String(optionValue))}
+                  onChange={handleCheckboxChange}
                   groupName={groupName}
                 />
               );
@@ -43,6 +43,8 @@ FormCheckboxGroup.propTypes = {
   value: PropTypes.array,
   onChange: PropTypes.func.isRequired,
 };
+
+FormCheckboxGroup.Item = FormCheckboxGroupItem;
 
 export { FormCheckboxGroup };
 

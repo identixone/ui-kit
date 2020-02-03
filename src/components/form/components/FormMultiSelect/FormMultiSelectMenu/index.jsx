@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 const FormMultiSelectMenu = styled.ul`
-  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
   list-style-type: none;
   position: absolute;
   padding-left: 0;
@@ -20,6 +19,11 @@ const FormMultiSelectMenu = styled.ul`
       : css`
           top: 85%;
         `}
+  ${({ isOpen }) =>
+    !isOpen &&
+    css`
+      visibility: hidden;
+    `}
 
   &:after {
     content: "";
