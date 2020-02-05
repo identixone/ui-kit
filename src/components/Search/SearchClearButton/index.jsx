@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { StyledSearchClearButton } from "./StyledSearchClearButton";
 import { SearchClearButtonIcon } from "./SearchClearButtonIcon";
 
-function SearchClearButton(props) {
+function SearchClearButton({ size, ...restProps }) {
   return (
-    <StyledSearchClearButton {...props} data-testid="search-clear-btn">
-      <SearchClearButtonIcon size={props.size} />
+    <StyledSearchClearButton {...restProps} data-testid="search-clear-btn">
+      <SearchClearButtonIcon size={size} />
     </StyledSearchClearButton>
   );
 }

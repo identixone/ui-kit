@@ -52,7 +52,7 @@ ButtonToggle.propTypes = {
     PropTypes.node,
   ]),
   onChange: PropTypes.func,
-  mode: PropTypes.oneOf(["redMode", "blueMode"]),
+  mode: PropTypes.oneOf(["red", "blue"]),
   icon: PropTypes.node,
 };
 

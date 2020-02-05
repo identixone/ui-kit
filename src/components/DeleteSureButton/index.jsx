@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 
 import { useTranslation } from "../../hooks";
 
-import StyledDeleteSureButton from "./StyledDeleteSureButton";
 import { colors } from "../../themes/colors";
-
-import { DeleteSure } from "../DeleteSure";
 
 import { resources } from "./DeleteSureButton.resources.js";
 import { isUndefined } from "lodash-es";
+
+import { ConfirmButton, StyledConfirmButton } from "../ConfirmButton";
 
 function DeleteSureButton({
   onDelete,
@@ -19,41 +18,37 @@ function DeleteSureButton({
   className,
   deleteText,
   sureText,
+  "data-testid": testId,
 }) {
   const { t, i18n } = useTranslation();
 
   i18n.addResourceBundle("en", "DeleteSureButton", resources.en);
   i18n.addResourceBundle("ru", "DeleteSureButton", resources.ru);
 
-  const textSure = isUndefined(sureText)
+  const confirmText = isUndefined(sureText)
     ? t("DeleteSureButton:Sure")
     : sureText;
-  const textDelete = isUndefined(deleteText)
+  const nonConfirmText = isUndefined(deleteText)
     ? t("DeleteSureButton:Delete")
     : deleteText;
 
   return (
-    <DeleteSure onDelete={onDelete}>
-      {({ isSure, handleClick, handleMouseLeave }) => (
-        <StyledDeleteSureButton
-          className={className}
-          deleteColor={deleteColor}
-          isSure={isSure}
-          onClick={handleClick}
-          onMouseLeave={handleMouseLeave}
-          size={size}
-          isDisabled={isDisabled}
-          data-testid="delete-button"
-        >
-          {isSure ? textSure : textDelete}
-        </StyledDeleteSureButton>
-      )}
-    </DeleteSure>
+    <ConfirmButton
+      onConfirm={onDelete}
+      confirmColor={deleteColor}
+      size={size}
+      isDisabled={isDisabled}
+      className={className}
+      data-testid={testId}
+    >
+      {({ isConfirm }) => (isConfirm ? confirmText : nonConfirmText)}
+    </ConfirmButton>
   );
 }
 
 DeleteSureButton.defaultProps = {
   deleteColor: colors.brownSimple,
+  "data-testid": "delete-button",
 };
 
 DeleteSureButton.propTypes = {
@@ -64,6 +59,9 @@ DeleteSureButton.propTypes = {
   className: PropTypes.string,
   deleteText: PropTypes.string,
   sureText: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
+
+const StyledDeleteSureButton = StyledConfirmButton;
 
 export { DeleteSureButton, StyledDeleteSureButton };
