@@ -1,37 +1,44 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import Button from "../../../Button";
+import { Button } from "../../../Button";
+
+import { colors } from "../../../../themes/colors";
+import { textTrimStyles } from "../../../Text/TextTrim";
 
 const FormDropdownControl = styled(Button).attrs(() => ({
   buttonTheme: "reset",
 }))`
-  height: 30px;
-  background: #f3f3f3;
-  color: #555;
-  line-height: 30px;
-  padding: 0 40px 0 15px;
+  ${textTrimStyles}
   width: 100%;
+  position: relative;
+  height: 30px;
+  background: ${colors.grayLight};
+  color: #555;
+  padding: 0 40px 0 15px;
+  /**
+    Так как расширяем кнопку
+  */
   text-align: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-size: 16px;
 
   &:after {
+    content: "";
+    display: block;
     height: 0;
     width: 0;
     position: absolute;
     top: 0;
-    right: 15px;
     bottom: 0;
+    right: 15px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid #222;
-    content: "";
-    display: block;
     margin: auto 0;
-    transform: ${({ isOpen }) => (isOpen ? "rotate(-180deg)" : "rotate(0deg)")};
+    ${({ isOpen }) =>
+      isOpen &&
+      css`
+        transform: rotate(-180deg);
+      `}
   }
 `;
 
-export default FormDropdownControl;
+export { FormDropdownControl };

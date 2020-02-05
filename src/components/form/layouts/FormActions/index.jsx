@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { StyledButton } from "../../../Button";
 
-export const FormActions = styled.div`
+const FormActions = styled.div`
   display: flex;
 
   ${StyledButton} {
@@ -16,3 +16,5 @@ export const FormActions = styled.div`
     }
   }
 `;
+
+export { FormActions };

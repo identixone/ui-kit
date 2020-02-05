@@ -5,8 +5,11 @@ const widths = {
   m: 40,
 };
 
-export const StyledFormSwitch = styled.div`
+const StyledFormSwitch = styled.label`
+  display: block;
   position: relative;
   width: ${({ size }) => widths[size] + "px"};
   user-select: none;
 `;
+
+export { StyledFormSwitch };

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledFormFieldGroup from "./StyledFormFieldGroup";
-import FormFieldGroupTitle from "./FormFieldGroupTitle";
+import { StyledFormFieldGroup } from "./StyledFormFieldGroup";
+import { FormFieldGroupTitle } from "./FormFieldGroupTitle";
 
 function FormFieldGroup({ title, children, className }) {
   return (

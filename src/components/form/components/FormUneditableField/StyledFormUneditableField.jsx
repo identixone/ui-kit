@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const FormUneditableFieldStyles = css`
+const FormUneditableFieldStyles = css`
   padding-left: 0;
   padding-right: 0;
   line-height: 16px;
@@ -10,6 +10,8 @@ export const FormUneditableFieldStyles = css`
   margin: 0;
 `;
 
-export const StyledFormUneditableField = styled.p`
+const StyledFormUneditableField = styled.p`
   ${FormUneditableFieldStyles}
 `;
+
+export { StyledFormUneditableField, FormUneditableFieldStyles };

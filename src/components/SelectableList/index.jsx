@@ -25,7 +25,7 @@ export class SelectableList extends React.Component {
     const { options } = this.props;
 
     this.setState({
-      selected: options.map(option => option.value || String(option)),
+      selected: options.map(option => String(option.value || option)),
     });
   };
 

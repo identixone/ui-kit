@@ -1,7 +1,7 @@
 export const resources = {
   ru: {
-    From: "От",
-    To: "До",
+    From: "С",
+    To: "По",
     YYYY: "ГГГГ",
     MM: "ММ",
     DD: "ДД",

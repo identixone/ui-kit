@@ -1,17 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import Downshift from "downshift";
+import { useEffect, useRef, useState } from "react";
 import { usePrevious } from "react-use";
 
-import StyledFormDropdown from "./StyledFormDropdown";
-import FormDropdownControl from "./FormDropdownControl";
-
-import FormDropdownMenu from "./FormDropdownMenu";
-import FormDropdownOption from "./FormDropdownOption";
-
-import FormDropdownInputWrapper from "./FormDropdownInputWrapper";
-import FormDropdownInput from "./FormDropdownInput";
+import Downshift from "downshift";
+import { StyledFormDropdown } from "./StyledFormDropdown";
+import { FormDropdownControl } from "./FormDropdownControl";
+import { FormDropdownMenu } from "./FormDropdownMenu";
+import { FormDropdownOption } from "./FormDropdownOption";
+import { FormDropdownInputWrapper } from "./FormDropdownInputWrapper";
+import { FormDropdownInput } from "./FormDropdownInput";
 
 import { searchInList } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";
@@ -32,7 +31,12 @@ function FormDropdown({
   placeholder,
   disabled,
   className,
+  "data-testid": testId,
 }) {
+  if (name) {
+    testId = name;
+  }
+
   const [preselected, setPreselected] = useState(value);
   const [selected, setSelected] = useState(value);
   useEffect(() => {
@@ -59,6 +63,22 @@ function FormDropdown({
       : 0;
 
     return selectedOptionIndex > 0 ? selectedOptionIndex : 0;
+  }
+
+  function getNextSelectedOnArrow(options, changes) {
+    const intendToHighlight = options[changes.highlightedIndex];
+    const isArrowDown =
+      changes.type === Downshift.stateChangeTypes.keyDownArrowDown;
+
+    const nextAvailableOption =
+      options[changes.highlightedIndex + (isArrowDown ? 1 : -1)];
+
+    // Логика пропуска disabled options
+    return !intendToHighlight.disabled
+      ? intendToHighlight
+      : nextAvailableOption
+      ? nextAvailableOption
+      : options[0];
   }
 
   function handleStateChange(changes, stateAndHelpers) {
@@ -99,7 +119,7 @@ function FormDropdown({
           ...changes,
           selectedItem:
             !withSearch && changes.highlightedIndex !== undefined
-              ? options[changes.highlightedIndex]
+              ? getNextSelectedOnArrow(options, changes)
               : state.selectedItem,
         };
       default:
@@ -108,7 +128,9 @@ function FormDropdown({
           highlightedIndex:
             changes.selectedItem || selected
               ? getHighlighted(changes.selectedItem || selected)
-              : changes.highlightedIndex || state.highlightedIndex,
+              : changes.highlightedIndex !== undefined
+              ? changes.highlightedIndex
+              : state.highlightedIndex,
         };
     }
   }
@@ -137,9 +159,20 @@ function FormDropdown({
         getItemProps,
       }) => {
         return (
-          <StyledFormDropdown {...getRootProps({ width, disabled, className })}>
+          <StyledFormDropdown
+            {...getRootProps({
+              width,
+              disabled,
+              className,
+              "data-testid": testId,
+            })}
+          >
             <FormDropdownControl
-              {...getToggleButtonProps({ disabled, "data-testid": name })}
+              {...getToggleButtonProps({
+                disabled,
+                isOpen,
+                "data-testid": testId + "-control",
+              })}
             >
               {get(
                 withSearch ? preselected : selectedItem,
@@ -148,14 +181,22 @@ function FormDropdown({
               )}
             </FormDropdownControl>
             <FormDropdownMenu
-              {...getMenuProps({ isOpen }, { suppressRefError: true })}
+              {...getMenuProps(
+                { isOpen, "data-testid": testId + "-menu" },
+                { suppressRefError: true }
+              )}
               ref={listRef}
             >
               {isOpen && (
                 <React.Fragment>
                   {withSearch && (
                     <FormDropdownInputWrapper>
-                      <FormDropdownInput {...getInputProps()} ref={inputRef} />
+                      <FormDropdownInput
+                        {...getInputProps({
+                          "data-testid": testId + "-search",
+                        })}
+                        ref={inputRef}
+                      />
                     </FormDropdownInputWrapper>
                   )}
                   {searchInList(options, inputValue, ["label"]).map(
@@ -164,12 +205,13 @@ function FormDropdown({
                         key={item.value}
                         {...getItemProps({
                           key: item.value,
-                          id: `${name}-${item.value}`,
-                          "data-testid": `${name}-${item.value}`,
+                          id: `${testId}-${item.value}`,
                           item,
                           index,
                           isSelected: isEqual(selectedItem, item),
                           isHighlighted: highlightedIndex === index,
+                          disabled: Boolean(item.disabled),
+                          "data-testid": `${testId}-option-${item.value}`,
                         })}
                       >
                         {renderItem(item)}
@@ -199,8 +241,9 @@ FormDropdown.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
   placeholder: PropTypes.string,
-  renderItem: PropTypes.string.isRequired,
+  renderItem: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
+  "data-testid": PropTypes.string,
 };
 
 FormDropdown.defaultProps = {
