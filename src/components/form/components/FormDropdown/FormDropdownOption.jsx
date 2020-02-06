@@ -22,6 +22,17 @@ const FormDropdownOption = styled.li`
         `;
   }};
 
+  ${({ isSelected }) => {
+    return (
+      isSelected &&
+      css`
+        &:before {
+          content: "*";
+        }
+      `
+    );
+  }}
+
   ${({ disabled }) => {
     return disabled
       ? css`

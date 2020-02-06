@@ -32,6 +32,7 @@ function FormDropdown({
   disabled,
   className,
   "data-testid": testId,
+  multiple,
 }) {
   if (name) {
     testId = name;
@@ -112,26 +113,79 @@ function FormDropdown({
       setPreselected(options[changes.highlightedIndex]);
     }
 
+    const hasToSelectOnArrow = !multiple && !withSearch;
+    const hasToCloseMenuOnSelect = !multiple;
+    const actualSelected = changes.selectedItem || selected;
+
     switch (changes.type) {
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.keyDownArrowDown:
         return {
           ...changes,
           selectedItem:
-            !withSearch && changes.highlightedIndex !== undefined
+            hasToSelectOnArrow && changes.highlightedIndex !== undefined
               ? getNextSelectedOnArrow(options, changes)
               : state.selectedItem,
         };
+      case Downshift.stateChangeTypes.keyDownEnter:
+      case Downshift.stateChangeTypes.clickItem:
+        if (!hasToCloseMenuOnSelect) {
+          return {
+            ...changes,
+            isOpen: state.isOpen,
+            highlightedIndex: state.highlightedIndex,
+          };
+        }
+      // eslint-disable-next-line no-fallthrough
       default:
         return {
           ...changes,
           highlightedIndex:
-            changes.selectedItem || selected
-              ? getHighlighted(changes.selectedItem || selected)
+            actualSelected && !multiple
+              ? getHighlighted(actualSelected)
               : changes.highlightedIndex !== undefined
               ? changes.highlightedIndex
               : state.highlightedIndex,
         };
+    }
+  }
+
+  function handleChange(option) {
+    if (multiple) {
+      const selectedInOptions = selected.find(
+        item => item.value === option.value
+      );
+      if (selectedInOptions) {
+        onChange(selected.filter(item => !isEqual(item, selectedInOptions)));
+      } else {
+        onChange(selected.concat(option));
+      }
+    } else {
+      onChange(option);
+    }
+  }
+
+  function getRenderedSelected(selectedItem) {
+    if (multiple) {
+      const selectedString = selectedItem.map(prop("label")).join();
+
+      if (selectedString.length > Number(width) / 10 - 10) {
+        return `${name || "Selected"}: (${selected.length})`;
+      }
+
+      return selectedItem.length ? selectedString : placeholder;
+    } else {
+      return get(withSearch ? preselected : selectedItem, "label", placeholder);
+    }
+  }
+
+  function getIsOptionSelected(option, selectedItem) {
+    if (multiple) {
+      return (
+        selectedItem.find(item => item.value === option.value) !== undefined
+      );
+    } else {
+      return isEqual(selectedItem, option);
     }
   }
 
@@ -142,7 +196,7 @@ function FormDropdown({
       inputValue={inputValue}
       itemToString={item => (item ? item.label : "")}
       stateReducer={stateReducer}
-      onChange={onChange}
+      onChange={handleChange}
       onStateChange={handleStateChange}
       defaultHighlightedIndex={getHighlighted(selected)}
     >
@@ -174,11 +228,7 @@ function FormDropdown({
                 "data-testid": testId + "-control",
               })}
             >
-              {get(
-                withSearch ? preselected : selectedItem,
-                "label",
-                placeholder
-              )}
+              {getRenderedSelected(selectedItem)}
             </FormDropdownControl>
             <FormDropdownMenu
               {...getMenuProps(
@@ -208,7 +258,7 @@ function FormDropdown({
                           id: `${testId}-${item.value}`,
                           item,
                           index,
-                          isSelected: isEqual(selectedItem, item),
+                          isSelected: getIsOptionSelected(item, selectedItem),
                           isHighlighted: highlightedIndex === index,
                           disabled: Boolean(item.disabled),
                           "data-testid": `${testId}-option-${item.value}`,
@@ -228,12 +278,18 @@ function FormDropdown({
   );
 }
 
+const optionShape = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+});
+
 FormDropdown.propTypes = {
   name: PropTypes.string,
-  value: PropTypes.object,
+  value: PropTypes.oneOfType([PropTypes.arrayOf(optionShape), optionShape]),
   withSearch: PropTypes.bool,
+  multiple: PropTypes.bool,
   disabled: PropTypes.bool,
-  options: PropTypes.array,
+  options: PropTypes.array.isRequired,
   onStateChange: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   onInputChange: PropTypes.func,
@@ -248,6 +304,7 @@ FormDropdown.propTypes = {
 
 FormDropdown.defaultProps = {
   withSearch: false,
+  multiple: false,
   disabled: false,
   onChange: identity,
   onStateChange: identity,

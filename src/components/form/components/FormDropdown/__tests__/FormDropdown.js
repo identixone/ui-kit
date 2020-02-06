@@ -21,9 +21,10 @@ afterAll(() => {
   onChangeMock.mockReset();
 });
 
-function renderFormDropdown(props) {
+function renderFormDropdown(props = {}) {
   function FormDropdownWrapper() {
-    const [value, setValue] = useState(null);
+    // eslint-disable-next-line react/prop-types
+    const [value, setValue] = useState(props.multiple ? [] : null);
 
     return (
       <form data-testid="test-form">
@@ -162,5 +163,24 @@ describe("FormDropdown tests", () => {
     expect(
       getByTestId(`${componentName}-menu`).querySelectorAll(optionSelector)
     ).toHaveLength(options.length);
+  });
+
+  test("FormDropdown should correctly handle multiple values", () => {
+    const { getByTestId } = renderFormDropdown({
+      multiple: true,
+    });
+
+    fireEvent.click(getByTestId(`${componentName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-option-${options[0].value}`));
+    fireEvent.click(getByTestId(`${componentName}-option-${options[3].value}`));
+    fireEvent.click(getByTestId(`${componentName}-option-${options[4].value}`));
+
+    expect(onChangeMock.mock.calls[0][0]).toEqual([options[0]]);
+    expect(onChangeMock.mock.calls[1][0]).toEqual([options[0], options[3]]);
+    expect(onChangeMock.mock.calls[2][0]).toEqual([
+      options[0],
+      options[3],
+      options[4],
+    ]);
   });
 });
