@@ -79,6 +79,28 @@ storiesOf("Form Components/FormDropdown", module)
 
     return <ComponentWrapper />;
   })
+  .add("multiple with search", () => {
+    const options = generateOptions(15);
+
+    function ComponentWrapper() {
+      const [selected, setSelected] = useState([]);
+
+      return (
+        <FormDropdown
+          options={options}
+          placeholder={text("placeholder", "select smth")}
+          value={selected}
+          onChange={setSelected}
+          width={number("width", 200)}
+          multiple={true}
+          withSearch={true}
+          disabled={boolean("disabled", false)}
+        />
+      );
+    }
+
+    return <ComponentWrapper />;
+  })
   .add("with custom item render", () => {
     const options = generateOptions(15);
 
