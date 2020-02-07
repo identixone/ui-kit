@@ -183,4 +183,27 @@ describe("FormDropdown tests", () => {
       options[4],
     ]);
   });
+
+  test("FormDropdown multiple should remove all selected options after default option was selected", () => {
+    const options = [
+      {
+        label: "default",
+        value: "some_default_value",
+        default: true,
+      },
+    ].concat(generateOptions(5));
+
+    const { getByTestId } = renderFormDropdown({
+      multiple: true,
+      options,
+    });
+
+    fireEvent.click(getByTestId(`${componentName}-control`));
+    fireEvent.click(getByTestId(`${componentName}-option-${options[1].value}`));
+    fireEvent.click(getByTestId(`${componentName}-option-${options[3].value}`));
+    fireEvent.click(getByTestId(`${componentName}-option-${options[4].value}`));
+    onChangeMock.mockClear();
+    fireEvent.click(getByTestId(`${componentName}-option-${options[0].value}`));
+    expect(onChangeMock.mock.calls[0][0]).toEqual([options[0]]);
+  });
 });

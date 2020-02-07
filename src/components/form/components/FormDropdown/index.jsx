@@ -129,14 +129,13 @@ function FormDropdown({
         };
       case Downshift.stateChangeTypes.keyDownEnter:
       case Downshift.stateChangeTypes.clickItem:
-        if (!hasToCloseMenuOnSelect) {
-          return {
-            ...changes,
-            isOpen: state.isOpen,
-            highlightedIndex: state.highlightedIndex,
-          };
-        }
-      // eslint-disable-next-line no-fallthrough
+        return {
+          ...changes,
+          isOpen: hasToCloseMenuOnSelect ? changes.isOpen : state.isOpen,
+          highlightedIndex: hasToCloseMenuOnSelect
+            ? changes.highlightedIndex
+            : state.highlightedIndex,
+        };
       default:
         return {
           ...changes,
@@ -151,14 +150,33 @@ function FormDropdown({
   }
 
   function handleChange(option) {
+    function isDefault(option) {
+      return Boolean(option.default);
+    }
+
+    if (isDefault(option)) {
+      if (multiple) {
+        onChange([option]);
+      } else {
+        onChange(option);
+      }
+
+      return;
+    }
+
     if (multiple) {
       const selectedInOptions = selected.find(
         item => item.value === option.value
       );
+
       if (selectedInOptions) {
-        onChange(selected.filter(item => !isEqual(item, selectedInOptions)));
+        onChange(
+          selected
+            .filter(option => !isDefault(option))
+            .filter(option => !isEqual(option, selectedInOptions))
+        );
       } else {
-        onChange(selected.concat(option));
+        onChange(selected.filter(option => !isDefault(option)).concat(option));
       }
     } else {
       onChange(option);
@@ -166,14 +184,18 @@ function FormDropdown({
   }
 
   function getRenderedSelected(selectedItem) {
-    if (multiple) {
-      const selectedString = selectedItem.map(prop("label")).join();
-
+    function processString(selectedString) {
       if (selectedString.length > Number(width) / 10 - 10) {
         return `${name || "Selected"}: (${selected.length})`;
       }
 
-      return selectedItem.length ? selectedString : placeholder;
+      return selectedString;
+    }
+
+    if (multiple) {
+      const selectedString = selectedItem.map(prop("label")).join();
+
+      return selectedItem.length ? processString(selectedString) : placeholder;
     } else {
       return get(withSearch ? preselected : selectedItem, "label", placeholder);
     }
