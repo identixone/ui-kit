@@ -10,6 +10,11 @@ const options = generateOptions(5);
 
 const componentName = "test-form-dropdown";
 const optionSelector = 'li[role="option"]';
+const defaultOption = {
+  label: "default",
+  value: "some_default_value",
+  default: true,
+};
 
 const onChangeMock = jest.fn();
 
@@ -192,13 +197,7 @@ describe("FormDropdown tests", () => {
     });
 
     test("FormDropdown multiple should remove all selected options after default option was selected", () => {
-      const options = [
-        {
-          label: "default",
-          value: "some_default_value",
-          default: true,
-        },
-      ].concat(generateOptions(5));
+      const options = [defaultOption].concat(generateOptions(5));
 
       const { getByTestId } = renderFormDropdown({
         multiple: true,
@@ -217,9 +216,9 @@ describe("FormDropdown tests", () => {
       );
       onChangeMock.mockClear();
       fireEvent.click(
-        getByTestId(`${componentName}-option-${options[0].value}`)
+        getByTestId(`${componentName}-option-${defaultOption.value}`)
       );
-      expect(onChangeMock.mock.calls[0][0]).toEqual([options[0]]);
+      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
     });
 
     test("FormDropdown multiple should render reset button and hide it if non items selected", () => {
@@ -268,13 +267,7 @@ describe("FormDropdown tests", () => {
     });
 
     test("FormDropdown multiple should reset selected to default after reset button click", () => {
-      const options = [
-        {
-          label: "default",
-          value: "some_default_value",
-          default: true,
-        },
-      ].concat(generateOptions(5));
+      const options = [defaultOption].concat(generateOptions(5));
 
       const { getByTestId } = renderFormDropdown({
         multiple: true,
@@ -294,9 +287,38 @@ describe("FormDropdown tests", () => {
       onChangeMock.mockClear();
       fireEvent.click(getByTestId(`${componentName}-reset`));
 
-      expect(onChangeMock.mock.calls[0][0]).toEqual([options[0]]);
+      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
       expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
-        options[0].label
+        defaultOption.label
+      );
+    });
+
+    test.only("FormDropdown multiple should reset selected to default after user unselects all items", () => {
+      const options = [defaultOption].concat(generateOptions(5));
+
+      const { getByTestId } = renderFormDropdown({
+        multiple: true,
+        options,
+      });
+
+      fireEvent.click(getByTestId(`${componentName}-control`));
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+      onChangeMock.mockClear();
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+
+      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
+      expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+        defaultOption.label
       );
     });
   });

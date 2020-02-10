@@ -157,12 +157,12 @@ function FormDropdown({
   }
 
   function handleChange(option) {
+    const defaultOption = options.find(isDefault);
+
     /**
      * clearSelection case
      */
     if (option === null) {
-      const defaultOption = options.find(isDefault);
-
       if (defaultOption) {
         option = defaultOption;
       } else {
@@ -187,11 +187,15 @@ function FormDropdown({
       );
 
       if (selectedInOptions) {
-        onChange(
-          selected
-            .filter(option => !isDefault(option))
-            .filter(option => !isEqual(option, selectedInOptions))
-        );
+        const changes = selected
+          .filter(option => !isDefault(option))
+          .filter(option => !isEqual(option, selectedInOptions));
+
+        if (defaultOption && changes.length === 0) {
+          onChange([defaultOption]);
+        } else {
+          onChange(changes);
+        }
       } else {
         onChange(selected.filter(option => !isDefault(option)).concat(option));
       }
