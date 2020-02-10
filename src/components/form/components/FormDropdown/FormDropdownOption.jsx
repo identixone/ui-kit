@@ -6,12 +6,22 @@ import { colors } from "../../../../themes/colors";
 
 const FormDropdownOption = styled.li`
   ${textTrimStyles}
-  color: #263238;
-  line-height: 1.5;
-  padding: 4px 15px;
+  position: relative;
+  color: ${colors.darkBlack};
+  font-size: 16px;
+  line-height: 1.63;
   transition: background-color 120ms ease-in-out;
-  ${({ isHighlighted }) => {
-    return isHighlighted
+  padding: 12px 22px 12px 36px;
+
+  &:first-child {
+    padding-top: 16px;
+  }
+  &:last-child {
+    padding-bottom: 16px;
+  }
+
+  ${({ highlighted }) => {
+    return highlighted
       ? css`
           background-color: #f5f5f5;
         `
@@ -21,17 +31,6 @@ const FormDropdownOption = styled.li`
           }
         `;
   }};
-
-  ${({ isSelected }) => {
-    return (
-      isSelected &&
-      css`
-        &:before {
-          content: "*";
-        }
-      `
-    );
-  }}
 
   ${({ disabled }) => {
     return disabled

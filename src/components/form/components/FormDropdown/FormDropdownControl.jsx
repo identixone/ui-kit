@@ -12,11 +12,12 @@ const FormDropdownControl = styled(Button).attrs(() => ({
   width: 100%;
   position: relative;
   height: 30px;
-  background: ${colors.grayLight};
-  color: #555;
+  background-color: ${colors.grayLight};
+  color: ${colors.darkBlack};
   padding: 0 40px 0 15px;
+  border-radius: 5px;
   /**
-    Так как расширяем кнопку
+    переопределяем стили кнопки
   */
   text-align: left;
 
@@ -33,11 +34,6 @@ const FormDropdownControl = styled(Button).attrs(() => ({
     border-right: 5px solid transparent;
     border-top: 5px solid #222;
     margin: auto 0;
-    ${({ isOpen }) =>
-      isOpen &&
-      css`
-        transform: rotate(-180deg);
-      `}
   }
 `;
 

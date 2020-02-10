@@ -11,11 +11,18 @@ import { FormDropdownMenu } from "./FormDropdownMenu";
 import { FormDropdownOption } from "./FormDropdownOption";
 import { FormDropdownInputWrapper } from "./FormDropdownInputWrapper";
 import { FormDropdownInput } from "./FormDropdownInput";
+import { FormDropdownResetButton } from "./FormDropdownResetButton";
+import { FormDropdownOptionSelectedIcon } from "./FormDropdownOptionSelectedIcon";
+import { Times } from "../../../../assets/icons";
 
 import { searchInList } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";
 
 const { stateChangeTypes } = Downshift;
+
+function isDefault(option) {
+  return Boolean(option.default);
+}
 
 function FormDropdown({
   value,
@@ -150,8 +157,18 @@ function FormDropdown({
   }
 
   function handleChange(option) {
-    function isDefault(option) {
-      return Boolean(option.default);
+    /**
+     * clearSelection case
+     */
+    if (option === null) {
+      const defaultOption = options.find(isDefault);
+
+      if (defaultOption) {
+        option = defaultOption;
+      } else {
+        onChange(multiple ? [] : null);
+        return;
+      }
     }
 
     if (isDefault(option)) {
@@ -228,6 +245,9 @@ function FormDropdown({
         highlightedIndex,
         inputValue,
 
+        closeMenu,
+        clearSelection,
+
         getRootProps,
         getToggleButtonProps,
         getMenuProps,
@@ -251,6 +271,19 @@ function FormDropdown({
               })}
             >
               {getRenderedSelected(selectedItem)}
+              {multiple &&
+              selectedItem.filter(option => !isDefault(option)).length ? (
+                <FormDropdownResetButton
+                  data-testid={`${testId}-reset`}
+                  onClick={e => {
+                    e.stopPropagation();
+                    clearSelection();
+                    closeMenu();
+                  }}
+                >
+                  <Times size="12" />
+                </FormDropdownResetButton>
+              ) : null}
             </FormDropdownControl>
             <FormDropdownMenu
               {...getMenuProps(
@@ -272,23 +305,30 @@ function FormDropdown({
                     </FormDropdownInputWrapper>
                   )}
                   {searchInList(options, inputValue, ["label"]).map(
-                    (item, index) => (
-                      <FormDropdownOption
-                        key={item.value}
-                        {...getItemProps({
-                          key: item.value,
-                          id: `${testId}-${item.value}`,
-                          item,
-                          index,
-                          isSelected: getIsOptionSelected(item, selectedItem),
-                          isHighlighted: highlightedIndex === index,
-                          disabled: Boolean(item.disabled),
-                          "data-testid": `${testId}-option-${item.value}`,
-                        })}
-                      >
-                        {renderItem(item)}
-                      </FormDropdownOption>
-                    )
+                    (item, index) => {
+                      const selected = getIsOptionSelected(item, selectedItem);
+
+                      return (
+                        <FormDropdownOption
+                          key={item.value}
+                          {...getItemProps({
+                            key: item.value,
+                            id: `${testId}-${item.value}`,
+                            item,
+                            index,
+                            selected,
+                            highlighted: highlightedIndex === index,
+                            disabled: Boolean(item.disabled),
+                            "data-testid": `${testId}-option-${item.value}`,
+                          })}
+                        >
+                          {selected && (
+                            <FormDropdownOptionSelectedIcon size="10" />
+                          )}
+                          {renderItem(item)}
+                        </FormDropdownOption>
+                      );
+                    }
                   )}
                 </React.Fragment>
               )}
