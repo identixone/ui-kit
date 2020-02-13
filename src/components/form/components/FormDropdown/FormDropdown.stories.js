@@ -13,7 +13,7 @@ function isEven(n) {
   return n === 0 || !!(n && !(n % 2));
 }
 
-storiesOf("Form Components| FormDropdown", module)
+storiesOf("Form Components/FormDropdown", module)
   .add("default", () => {
     const options = generateOptions(15);
 
@@ -26,6 +26,57 @@ storiesOf("Form Components| FormDropdown", module)
           placeholder={text("placeholder", "select smth")}
           value={selected}
           onChange={setSelected}
+          width={number("width", 200)}
+          withSearch={boolean("with search", false)}
+          multiple={boolean("multiple", false)}
+          disabled={boolean("disabled", false)}
+        />
+      );
+    }
+
+    return <ComponentWrapper />;
+  })
+  .add("multiple", () => {
+    const options = generateOptions(3);
+
+    function ComponentWrapper() {
+      const [selected, setSelected] = useState([]);
+
+      return (
+        <FormDropdown
+          options={options}
+          placeholder={text("placeholder", "select smth")}
+          value={selected}
+          onChange={setSelected}
+          multiple={true}
+          width={number("width", 200)}
+          withSearch={boolean("with search", false)}
+          disabled={boolean("disabled", false)}
+        />
+      );
+    }
+
+    return <ComponentWrapper />;
+  })
+  .add("multiple with default option", () => {
+    const options = [
+      {
+        label: "default",
+        value: "some_default_value",
+        default: true,
+      },
+    ].concat(generateOptions(3));
+
+    function ComponentWrapper() {
+      const [selected, setSelected] = useState([options[0]]);
+
+      return (
+        <FormDropdown
+          options={options}
+          placeholder={text("placeholder", "select smth")}
+          value={selected}
+          onChange={setSelected}
+          multiple={true}
           width={number("width", 200)}
           withSearch={boolean("with search", false)}
           disabled={boolean("disabled", false)}
@@ -48,7 +99,29 @@ storiesOf("Form Components| FormDropdown", module)
           value={selected}
           onChange={setSelected}
           width={number("width", 200)}
-          withSearch={boolean("with search", false)}
+          withSearch={true}
+          disabled={boolean("disabled", false)}
+        />
+      );
+    }
+
+    return <ComponentWrapper />;
+  })
+  .add("multiple with search", () => {
+    const options = generateOptions(15);
+
+    function ComponentWrapper() {
+      const [selected, setSelected] = useState([]);
+
+      return (
+        <FormDropdown
+          options={options}
+          placeholder={text("placeholder", "select smth")}
+          value={selected}
+          onChange={setSelected}
+          width={number("width", 200)}
+          multiple={true}
+          withSearch={true}
           disabled={boolean("disabled", false)}
         />
       );

@@ -10,6 +10,11 @@ const options = generateOptions(5);
 
 const componentName = "test-form-dropdown";
 const optionSelector = 'li[role="option"]';
+const defaultOption = {
+  label: "default",
+  value: "some_default_value",
+  default: true,
+};
 
 const onChangeMock = jest.fn();
 
@@ -21,9 +26,10 @@ afterAll(() => {
   onChangeMock.mockReset();
 });
 
-function renderFormDropdown(props) {
+function renderFormDropdown(props = {}) {
   function FormDropdownWrapper() {
-    const [value, setValue] = useState(null);
+    // eslint-disable-next-line react/prop-types
+    const [value, setValue] = useState(props.multiple ? [] : null);
 
     return (
       <form data-testid="test-form">
@@ -162,5 +168,158 @@ describe("FormDropdown tests", () => {
     expect(
       getByTestId(`${componentName}-menu`).querySelectorAll(optionSelector)
     ).toHaveLength(options.length);
+  });
+
+  describe("FormDropdown multiple", () => {
+    test("FormDropdown multiple should correctly handle multiple values", () => {
+      const { getByTestId } = renderFormDropdown({
+        multiple: true,
+      });
+
+      fireEvent.click(getByTestId(`${componentName}-control`));
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[0].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[4].value}`)
+      );
+
+      expect(onChangeMock.mock.calls[0][0]).toEqual([options[0]]);
+      expect(onChangeMock.mock.calls[1][0]).toEqual([options[0], options[3]]);
+      expect(onChangeMock.mock.calls[2][0]).toEqual([
+        options[0],
+        options[3],
+        options[4],
+      ]);
+    });
+
+    test("FormDropdown multiple should remove all selected options after default option was selected", () => {
+      const options = [defaultOption].concat(generateOptions(5));
+
+      const { getByTestId } = renderFormDropdown({
+        multiple: true,
+        options,
+      });
+
+      fireEvent.click(getByTestId(`${componentName}-control`));
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[4].value}`)
+      );
+      onChangeMock.mockClear();
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${defaultOption.value}`)
+      );
+      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
+    });
+
+    test("FormDropdown multiple should render reset button and hide it if non items selected", () => {
+      const { getByTestId, queryByTestId } = renderFormDropdown({
+        multiple: true,
+      });
+
+      expect(queryByTestId(`${componentName}-reset`)).not.toBeInTheDocument();
+
+      fireEvent.click(getByTestId(`${componentName}-control`));
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+
+      expect(queryByTestId(`${componentName}-reset`)).toBeInTheDocument();
+
+      fireEvent.click(queryByTestId(`${componentName}-reset`));
+
+      expect(queryByTestId(`${componentName}-reset`)).not.toBeInTheDocument();
+    });
+
+    test("FormDropdown multiple should reset selected to empty if non default option after reset button click", () => {
+      const placeholder = "select smth";
+      const { getByTestId } = renderFormDropdown({
+        multiple: true,
+        placeholder,
+      });
+
+      fireEvent.click(getByTestId(`${componentName}-control`));
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[4].value}`)
+      );
+      onChangeMock.mockClear();
+      fireEvent.click(getByTestId(`${componentName}-reset`));
+
+      expect(onChangeMock.mock.calls[0][0]).toEqual();
+      expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+        placeholder
+      );
+    });
+
+    test("FormDropdown multiple should reset selected to default after reset button click", () => {
+      const options = [defaultOption].concat(generateOptions(5));
+
+      const { getByTestId } = renderFormDropdown({
+        multiple: true,
+        options,
+      });
+
+      fireEvent.click(getByTestId(`${componentName}-control`));
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[4].value}`)
+      );
+      onChangeMock.mockClear();
+      fireEvent.click(getByTestId(`${componentName}-reset`));
+
+      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
+      expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+        defaultOption.label
+      );
+    });
+
+    test.only("FormDropdown multiple should reset selected to default after user unselects all items", () => {
+      const options = [defaultOption].concat(generateOptions(5));
+
+      const { getByTestId } = renderFormDropdown({
+        multiple: true,
+        options,
+      });
+
+      fireEvent.click(getByTestId(`${componentName}-control`));
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[1].value}`)
+      );
+      onChangeMock.mockClear();
+      fireEvent.click(
+        getByTestId(`${componentName}-option-${options[3].value}`)
+      );
+
+      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
+      expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+        defaultOption.label
+      );
+    });
   });
 });
