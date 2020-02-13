@@ -22,6 +22,8 @@ function InifiniteDropdown({
   renderItem,
   withSearch,
   width,
+  multiple,
+  onStateChange,
 }) {
   const [isListEnds, setIsListEnds] = useState(false);
 
@@ -66,6 +68,8 @@ function InifiniteDropdown({
           placeholder={placeholder}
           renderItem={renderItem}
           width={width}
+          multiple={multiple}
+          onStateChange={onStateChange}
         />
       )}
     </InfiniteScroll>
@@ -88,10 +92,13 @@ InifiniteDropdown.propTypes = {
   className: PropTypes.string,
   renderItem: PropTypes.func,
   withSearch: PropTypes.bool,
+  multiple: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  onStateChange: PropTypes.func,
 };
 
 InifiniteDropdown.defaultProps = {
+  multiple: false,
   limit: 10,
   "data-testid": "infinite-dropdown",
 };

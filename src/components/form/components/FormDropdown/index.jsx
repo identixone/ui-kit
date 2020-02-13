@@ -11,11 +11,18 @@ import { FormDropdownMenu } from "./FormDropdownMenu";
 import { FormDropdownOption } from "./FormDropdownOption";
 import { FormDropdownInputWrapper } from "./FormDropdownInputWrapper";
 import { FormDropdownInput } from "./FormDropdownInput";
+import { FormDropdownResetButton } from "./FormDropdownResetButton";
+import { FormDropdownOptionSelectedIcon } from "./FormDropdownOptionSelectedIcon";
+import { Times } from "../../../../assets/icons";
 
 import { searchInList } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";
 
 const { stateChangeTypes } = Downshift;
+
+function isDefault(option) {
+  return Boolean(option.default);
+}
 
 function FormDropdown({
   value,
@@ -32,6 +39,7 @@ function FormDropdown({
   disabled,
   className,
   "data-testid": testId,
+  multiple,
 }) {
   if (name) {
     testId = name;
@@ -112,26 +120,115 @@ function FormDropdown({
       setPreselected(options[changes.highlightedIndex]);
     }
 
+    const hasToSelectOnArrow = !multiple && !withSearch;
+    const hasToCloseMenuOnSelect = !multiple;
+    const actualSelected = changes.selectedItem || selected;
+
     switch (changes.type) {
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.keyDownArrowDown:
         return {
           ...changes,
           selectedItem:
-            !withSearch && changes.highlightedIndex !== undefined
+            hasToSelectOnArrow && changes.highlightedIndex !== undefined
               ? getNextSelectedOnArrow(options, changes)
               : state.selectedItem,
+        };
+      case Downshift.stateChangeTypes.keyDownEnter:
+      case Downshift.stateChangeTypes.clickItem:
+        return {
+          ...changes,
+          isOpen: hasToCloseMenuOnSelect ? changes.isOpen : state.isOpen,
+          highlightedIndex: hasToCloseMenuOnSelect
+            ? changes.highlightedIndex
+            : state.highlightedIndex,
         };
       default:
         return {
           ...changes,
           highlightedIndex:
-            changes.selectedItem || selected
-              ? getHighlighted(changes.selectedItem || selected)
+            actualSelected && !multiple
+              ? getHighlighted(actualSelected)
               : changes.highlightedIndex !== undefined
               ? changes.highlightedIndex
               : state.highlightedIndex,
         };
+    }
+  }
+
+  function handleChange(option) {
+    const defaultOption = options.find(isDefault);
+
+    /**
+     * clearSelection case
+     */
+    if (option === null) {
+      if (defaultOption) {
+        option = defaultOption;
+      } else {
+        onChange(multiple ? [] : null);
+        return;
+      }
+    }
+
+    if (isDefault(option)) {
+      if (multiple) {
+        onChange([option]);
+      } else {
+        onChange(option);
+      }
+
+      return;
+    }
+
+    if (multiple) {
+      const selectedInOptions = selected.find(
+        item => item.value === option.value
+      );
+
+      if (selectedInOptions) {
+        const changes = selected
+          .filter(option => !isDefault(option))
+          .filter(option => !isEqual(option, selectedInOptions));
+
+        if (defaultOption && changes.length === 0) {
+          onChange([defaultOption]);
+        } else {
+          onChange(changes);
+        }
+      } else {
+        onChange(selected.filter(option => !isDefault(option)).concat(option));
+      }
+    } else {
+      onChange(option);
+    }
+  }
+
+  function getRenderedSelected(selectedItem) {
+    function processString(selectedString) {
+      if (selectedString.length > Number(width) / 10 - 10) {
+        return `${name || "Selected"}: (${selected.length})`;
+      }
+
+      return selectedString;
+    }
+
+    if (multiple) {
+      const selectedString = selectedItem.map(prop("label")).join();
+
+      return selectedItem.length ? processString(selectedString) : placeholder;
+    } else {
+      return get(withSearch ? preselected : selectedItem, "label", placeholder);
+    }
+  }
+
+  function getIsOptionSelected(option, selectedItem) {
+    if (multiple) {
+      return (
+        selectedItem.find(item => item.value === option.value) !== undefined
+      );
+    } else {
+      return isEqual(selectedItem, option);
     }
   }
 
@@ -142,7 +239,7 @@ function FormDropdown({
       inputValue={inputValue}
       itemToString={item => (item ? item.label : "")}
       stateReducer={stateReducer}
-      onChange={onChange}
+      onChange={handleChange}
       onStateChange={handleStateChange}
       defaultHighlightedIndex={getHighlighted(selected)}
     >
@@ -151,6 +248,9 @@ function FormDropdown({
         selectedItem,
         highlightedIndex,
         inputValue,
+
+        closeMenu,
+        clearSelection,
 
         getRootProps,
         getToggleButtonProps,
@@ -174,11 +274,20 @@ function FormDropdown({
                 "data-testid": testId + "-control",
               })}
             >
-              {get(
-                withSearch ? preselected : selectedItem,
-                "label",
-                placeholder
-              )}
+              {getRenderedSelected(selectedItem)}
+              {multiple &&
+              selectedItem.filter(option => !isDefault(option)).length ? (
+                <FormDropdownResetButton
+                  data-testid={`${testId}-reset`}
+                  onClick={e => {
+                    e.stopPropagation();
+                    clearSelection();
+                    closeMenu();
+                  }}
+                >
+                  <Times size="12" />
+                </FormDropdownResetButton>
+              ) : null}
             </FormDropdownControl>
             <FormDropdownMenu
               {...getMenuProps(
@@ -200,23 +309,30 @@ function FormDropdown({
                     </FormDropdownInputWrapper>
                   )}
                   {searchInList(options, inputValue, ["label"]).map(
-                    (item, index) => (
-                      <FormDropdownOption
-                        key={item.value}
-                        {...getItemProps({
-                          key: item.value,
-                          id: `${testId}-${item.value}`,
-                          item,
-                          index,
-                          isSelected: isEqual(selectedItem, item),
-                          isHighlighted: highlightedIndex === index,
-                          disabled: Boolean(item.disabled),
-                          "data-testid": `${testId}-option-${item.value}`,
-                        })}
-                      >
-                        {renderItem(item)}
-                      </FormDropdownOption>
-                    )
+                    (item, index) => {
+                      const selected = getIsOptionSelected(item, selectedItem);
+
+                      return (
+                        <FormDropdownOption
+                          key={item.value}
+                          {...getItemProps({
+                            key: item.value,
+                            id: `${testId}-${item.value}`,
+                            item,
+                            index,
+                            selected,
+                            highlighted: highlightedIndex === index,
+                            disabled: Boolean(item.disabled),
+                            "data-testid": `${testId}-option-${item.value}`,
+                          })}
+                        >
+                          {selected && (
+                            <FormDropdownOptionSelectedIcon size="10" />
+                          )}
+                          {renderItem(item)}
+                        </FormDropdownOption>
+                      );
+                    }
                   )}
                 </React.Fragment>
               )}
@@ -228,12 +344,18 @@ function FormDropdown({
   );
 }
 
+const optionShape = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+});
+
 FormDropdown.propTypes = {
   name: PropTypes.string,
-  value: PropTypes.object,
+  value: PropTypes.oneOfType([PropTypes.arrayOf(optionShape), optionShape]),
   withSearch: PropTypes.bool,
+  multiple: PropTypes.bool,
   disabled: PropTypes.bool,
-  options: PropTypes.array,
+  options: PropTypes.array.isRequired,
   onStateChange: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   onInputChange: PropTypes.func,
@@ -248,6 +370,7 @@ FormDropdown.propTypes = {
 
 FormDropdown.defaultProps = {
   withSearch: false,
+  multiple: false,
   disabled: false,
   onChange: identity,
   onStateChange: identity,

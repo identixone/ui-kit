@@ -8,20 +8,19 @@ const FormDropdownMenu = styled.ul`
   padding-left: 0;
   margin: 0;
   position: absolute;
-  top: 35px;
+  top: 100%;
   width: 100%;
   max-height: 260px;
-  border-radius: 0 0 3px 3px;
-  border: 1px solid ${colors.grayLight};
-  border-top: 0 ${colors.whiteSimple};
   background-color: ${colors.whiteSimple};
-  box-shadow: 0px 10px 50px 0px rgba(180, 182, 183, 0.4);
   overflow-y: auto;
-  z-index: 6;
+  z-index: 3;
+  border-radius: 4px;
+  box-shadow: 0 0 80px 0 #a2b6bd33;
+
   ${({ isOpen }) =>
     !isOpen &&
     css`
-      visibility: hidden;
+      display: none;
     `}
 `;
 

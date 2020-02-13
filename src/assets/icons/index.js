@@ -3,6 +3,7 @@ export {
   Eye,
   EyeSlash,
   Camera,
+  Check,
   Video,
   VideoSlash,
   User,

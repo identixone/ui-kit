@@ -11,7 +11,9 @@ const FormInputToggleButton = styled(Button).attrs(() => ({
 }))`
   ${FormUneditableFieldStyles}
   /* 11px - смещение инпута влево */
-  width: calc(100% - 11px);
+  /* текст переносится на другую строку */
+  /* width: calc(100% - 11px); */
+  width: 100%;
   text-decoration: underline dotted;
   border-bottom: 1px dotted
     ${({ hasContent }) => (hasContent ? "transparent" : colors.black)};
