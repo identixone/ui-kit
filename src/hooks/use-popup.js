@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import usePortal from "react-useportal";
+import { noop } from "lodash-es";
 
 function usePopup(params) {
   const {
@@ -13,9 +14,9 @@ function usePopup(params) {
     onMouseEnter,
     onMouseLeave,
   } = usePortal({
-    onMouseEnter: params.onMouseEnter,
-    onMouseLeave: params.onMouseLeave,
-    isOpen: params.initialIsOpen,
+    onMouseEnter: params.onMouseEnter || noop,
+    onMouseLeave: params.onMouseLeave || noop,
+    isOpen: params.initialIsOpen || false,
     onOpen: ({ targetEl }) => updatePopupParams(targetEl),
     bindTo: document && document.getElementById("app-container"),
   });
