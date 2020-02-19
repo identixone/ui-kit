@@ -17,7 +17,13 @@ function usePopup(params) {
     onMouseEnter: params.onMouseEnter || noop,
     onMouseLeave: params.onMouseLeave || noop,
     isOpen: params.initialIsOpen || false,
-    onOpen: ({ targetEl }) => updatePopupParams(targetEl),
+    onOpen: ({ targetEl }) => {
+      updatePopupParams(targetEl);
+
+      if (params.onOpen) {
+        params.onOpen(targetEl);
+      }
+    },
     bindTo: document && document.getElementById("app-container"),
   });
 

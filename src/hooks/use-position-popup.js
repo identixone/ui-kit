@@ -1,18 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePopup } from "./use-popup.js";
 
 function usePositionPopup(params) {
   const { position } = params;
 
-  const { targetParams, popupInner, ...usePopupParams } = usePopup(params);
+  const { popupInner, ...usePopupParams } = usePopup({
+    ...params,
+    onOpen: updatePopupCoords,
+  });
 
   const [coords, setCoords] = useState({
     top: 0,
     left: 0,
   });
 
-  function updatePopupCoords() {
-    const { left, top, width, height } = targetParams;
+  function updatePopupCoords(target) {
+    const { left, top, width, height } = target.current.getBoundingClientRect();
     const innerHeight = popupInner.current
       ? popupInner.current.offsetHeight
       : 0;
@@ -30,12 +33,14 @@ function usePositionPopup(params) {
           left: left - 5,
         });
         break;
+      case "bottom":
+        setCoords({
+          top: top + height + window.scrollY,
+          left: left,
+        });
+        break;
     }
   }
-
-  useEffect(() => {
-    updatePopupCoords();
-  }, [targetParams]);
 
   return {
     popupInner,
