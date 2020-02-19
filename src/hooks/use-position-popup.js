@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePopup } from "./use-popup.js";
 
 function usePositionPopup(params) {
   const { position } = params;
 
-  const { popupInner, ...usePopupParams } = usePopup({
+  const { popupInner, targetParams, ...usePopupParams } = usePopup({
     ...params,
     onOpen: updatePopupCoords,
   });
@@ -15,7 +15,11 @@ function usePositionPopup(params) {
   });
 
   function updatePopupCoords(target) {
-    const { left, top, width, height } = target.current.getBoundingClientRect();
+    const { left, top, width, height } =
+      target && target.current
+        ? target.current.getBoundingClientRect()
+        : targetParams;
+
     const innerHeight = popupInner.current
       ? popupInner.current.offsetHeight
       : 0;
@@ -49,8 +53,11 @@ function usePositionPopup(params) {
     }
   }
 
+  useEffect(updatePopupCoords, [targetParams]);
+
   return {
     popupInner,
+    targetParams,
     ...usePopupParams,
     coords,
   };
