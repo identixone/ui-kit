@@ -15,7 +15,7 @@ import { FormDropdownResetButton } from "./FormDropdownResetButton";
 import { FormDropdownOptionSelectedIcon } from "./FormDropdownOptionSelectedIcon";
 import { Times } from "../../../../assets/icons";
 
-import { searchInList } from "../../../../utils/helpers";
+import { searchInList, capitalize } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";
 
 const { stateChangeTypes } = Downshift;
@@ -211,7 +211,7 @@ function FormDropdown({
   function getRenderedSelected(selectedItem) {
     function processString(selectedString) {
       if (selectedString.length > Number(width) / 10 - 10) {
-        return `${name || "Selected"}: (${selected.length})`;
+        return `${name ? capitalize(name) : "Selected"}: ${selected.length}`;
       }
 
       return selectedString;
