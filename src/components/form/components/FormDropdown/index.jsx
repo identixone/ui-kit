@@ -24,6 +24,10 @@ function isDefault(option) {
   return Boolean(option.default);
 }
 
+function isSingle(option) {
+  return Boolean(option.single);
+}
+
 function FormDropdown({
   value,
   options,
@@ -157,26 +161,26 @@ function FormDropdown({
   }
 
   function handleChange(option) {
-    const defaultOption = options.find(isDefault);
+    const defaultOptions = options.filter(isDefault);
+    const hasDefault = Boolean(defaultOptions.length);
 
     /**
      * clearSelection case
      */
     if (option === null) {
-      if (defaultOption) {
-        option = defaultOption;
+      if (hasDefault) {
+        onChange(multiple ? defaultOptions : defaultOptions[0]);
       } else {
         onChange(multiple ? [] : null);
-        return;
       }
+      return;
     }
 
-    if (isDefault(option)) {
-      if (multiple) {
-        onChange([option]);
-      } else {
-        onChange(option);
-      }
+    /**
+     *  single selected case
+     */
+    if (isSingle(option) && multiple) {
+      onChange([option]);
 
       return;
     }
@@ -188,16 +192,16 @@ function FormDropdown({
 
       if (selectedInOptions) {
         const changes = selected
-          .filter(option => !isDefault(option))
+          .filter(option => !isSingle(option))
           .filter(option => !isEqual(option, selectedInOptions));
 
-        if (defaultOption && changes.length === 0) {
-          onChange([defaultOption]);
+        if (hasDefault && changes.length === 0) {
+          onChange(defaultOptions);
         } else {
           onChange(changes);
         }
       } else {
-        onChange(selected.filter(option => !isDefault(option)).concat(option));
+        onChange(selected.filter(option => !isSingle(option)).concat(option));
       }
     } else {
       onChange(option);
@@ -214,7 +218,7 @@ function FormDropdown({
     }
 
     if (multiple) {
-      const selectedString = selectedItem.map(prop("label")).join();
+      const selectedString = selectedItem.map(prop("label")).join(", ");
 
       return selectedItem.length ? processString(selectedString) : placeholder;
     } else {
@@ -276,7 +280,9 @@ function FormDropdown({
             >
               {getRenderedSelected(selectedItem)}
               {multiple &&
-              selectedItem.filter(option => !isDefault(option)).length ? (
+              (!selectedItem.every(isDefault) ||
+                selectedItem.filter(isDefault).length !==
+                  options.filter(isDefault).length) ? (
                 <FormDropdownResetButton
                   data-testid={`${testId}-reset`}
                   onClick={e => {
