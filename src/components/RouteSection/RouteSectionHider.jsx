@@ -9,7 +9,7 @@ const centeredStyles = css`
 
   > ${StyledNoticeContainer} {
     position: relative;
-    top: -34px;
+    top: -24px;
   }
 `;
 /**
@@ -22,7 +22,7 @@ const RouteSectionHider = styled.div`
   flex: 100%;
   flex-direction: column;
   padding-bottom: 30px;
-  padding-top: 34px;
+  padding-top: 24px;
 
   ${({ isCentered }) => isCentered && centeredStyles}
 `;
