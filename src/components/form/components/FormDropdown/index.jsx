@@ -44,6 +44,7 @@ function FormDropdown({
   className,
   "data-testid": testId,
   multiple,
+  renderSelected,
 }) {
   if (name) {
     testId = name;
@@ -209,6 +210,10 @@ function FormDropdown({
   }
 
   function getRenderedSelected(selectedItem) {
+    if (typeof renderSelected === "function") {
+      return renderSelected(selectedItem);
+    }
+
     function processString(selectedString) {
       if (selectedString.length > Number(width) / 10 - 10) {
         return `${name ? capitalize(name) : "Selected"}: ${selected.length}`;
@@ -372,6 +377,7 @@ FormDropdown.propTypes = {
   renderItem: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
   "data-testid": PropTypes.string,
+  renderSelected: PropTypes.func,
 };
 
 FormDropdown.defaultProps = {
