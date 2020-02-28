@@ -35,14 +35,16 @@ function EntryPersonCard({
     >
       <EntryPersonCardPhoto facesize={facesizeToRender} src={entry.photo} />
 
-      <EntryCardEntryType title="Type" type={entry.conf} />
+      <EntryCardLiveness liveness={entry.liveness} />
 
       <EntryCardInfo>
-        <EntryCardLiveness liveness={entry.liveness} />
-
         <EntryCardInfoColumn>
-          <EntryCardInfoItem label="Confidence">{confidence}</EntryCardInfoItem>
-          <EntryCardInfoItem label="Detected">
+          <EntryCardInfoItem label="Confidence">
+            <EntryCardEntryType type={entry.conf}>
+              {confidence}
+            </EntryCardEntryType>
+          </EntryCardInfoItem>
+          <EntryCardInfoItem label="Person detected">
             {timeFormat(entry.created)}
           </EntryCardInfoItem>
         </EntryCardInfoColumn>

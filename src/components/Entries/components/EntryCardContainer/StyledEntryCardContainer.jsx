@@ -58,7 +58,7 @@ const StyledEntryCardContainer = styled.li`
   }
 
   ${EntryCardActions} {
-    opacity: 0;
+    opacity: 1;
   }
 
   &:hover {
