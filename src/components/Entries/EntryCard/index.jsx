@@ -44,6 +44,7 @@ function EntryCard({
   return (
     <StyledEntryCard
       data-idxid={entry.idxid}
+      data-id={entry.id}
       data-testid={testId}
       onClick={handleEntryCardClick}
       deleted={entry.deleted}

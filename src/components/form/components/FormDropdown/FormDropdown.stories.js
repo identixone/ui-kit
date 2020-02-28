@@ -86,6 +86,34 @@ storiesOf("Form Components/FormDropdown", module)
 
     return <ComponentWrapper />;
   })
+  .add("multiple with single option", () => {
+    const options = [
+      {
+        label: "single",
+        value: "some_single_value",
+        single: true,
+      },
+    ].concat(generateOptions(3));
+
+    function ComponentWrapper() {
+      const [selected, setSelected] = useState([options[0]]);
+
+      return (
+        <FormDropdown
+          options={options}
+          placeholder={text("placeholder", "select smth")}
+          value={selected}
+          onChange={setSelected}
+          multiple={true}
+          width={number("width", 200)}
+          withSearch={boolean("with search", false)}
+          disabled={boolean("disabled", false)}
+        />
+      );
+    }
+
+    return <ComponentWrapper />;
+  })
   .add("with search", () => {
     const options = generateOptions(15);
 

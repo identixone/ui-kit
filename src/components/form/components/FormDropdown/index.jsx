@@ -15,13 +15,17 @@ import { FormDropdownResetButton } from "./FormDropdownResetButton";
 import { FormDropdownOptionSelectedIcon } from "./FormDropdownOptionSelectedIcon";
 import { Times } from "../../../../assets/icons";
 
-import { searchInList } from "../../../../utils/helpers";
+import { searchInList, capitalize } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";
 
 const { stateChangeTypes } = Downshift;
 
 function isDefault(option) {
   return Boolean(option.default);
+}
+
+function isSingle(option) {
+  return Boolean(option.single);
 }
 
 function FormDropdown({
@@ -40,6 +44,7 @@ function FormDropdown({
   className,
   "data-testid": testId,
   multiple,
+  renderSelected,
 }) {
   if (name) {
     testId = name;
@@ -157,26 +162,26 @@ function FormDropdown({
   }
 
   function handleChange(option) {
-    const defaultOption = options.find(isDefault);
+    const defaultOptions = options.filter(isDefault);
+    const hasDefault = Boolean(defaultOptions.length);
 
     /**
      * clearSelection case
      */
     if (option === null) {
-      if (defaultOption) {
-        option = defaultOption;
+      if (hasDefault) {
+        onChange(multiple ? defaultOptions : defaultOptions[0]);
       } else {
         onChange(multiple ? [] : null);
-        return;
       }
+      return;
     }
 
-    if (isDefault(option)) {
-      if (multiple) {
-        onChange([option]);
-      } else {
-        onChange(option);
-      }
+    /**
+     *  single selected case
+     */
+    if (isSingle(option) && multiple) {
+      onChange([option]);
 
       return;
     }
@@ -188,16 +193,16 @@ function FormDropdown({
 
       if (selectedInOptions) {
         const changes = selected
-          .filter(option => !isDefault(option))
+          .filter(option => !isSingle(option))
           .filter(option => !isEqual(option, selectedInOptions));
 
-        if (defaultOption && changes.length === 0) {
-          onChange([defaultOption]);
+        if (hasDefault && changes.length === 0) {
+          onChange(defaultOptions);
         } else {
           onChange(changes);
         }
       } else {
-        onChange(selected.filter(option => !isDefault(option)).concat(option));
+        onChange(selected.filter(option => !isSingle(option)).concat(option));
       }
     } else {
       onChange(option);
@@ -205,16 +210,20 @@ function FormDropdown({
   }
 
   function getRenderedSelected(selectedItem) {
+    if (typeof renderSelected === "function") {
+      return renderSelected(selectedItem);
+    }
+
     function processString(selectedString) {
       if (selectedString.length > Number(width) / 10 - 10) {
-        return `${name || "Selected"}: (${selected.length})`;
+        return `${name ? capitalize(name) : "Selected"}: ${selected.length}`;
       }
 
       return selectedString;
     }
 
     if (multiple) {
-      const selectedString = selectedItem.map(prop("label")).join();
+      const selectedString = selectedItem.map(prop("label")).join(", ");
 
       return selectedItem.length ? processString(selectedString) : placeholder;
     } else {
@@ -276,7 +285,9 @@ function FormDropdown({
             >
               {getRenderedSelected(selectedItem)}
               {multiple &&
-              selectedItem.filter(option => !isDefault(option)).length ? (
+              (!selectedItem.every(isDefault) ||
+                selectedItem.filter(isDefault).length !==
+                  options.filter(isDefault).length) ? (
                 <FormDropdownResetButton
                   data-testid={`${testId}-reset`}
                   onClick={e => {
@@ -366,6 +377,7 @@ FormDropdown.propTypes = {
   renderItem: PropTypes.func.isRequired,
   isFetching: PropTypes.bool,
   "data-testid": PropTypes.string,
+  renderSelected: PropTypes.func,
 };
 
 FormDropdown.defaultProps = {

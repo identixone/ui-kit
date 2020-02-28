@@ -15,6 +15,11 @@ const defaultOption = {
   value: "some_default_value",
   default: true,
 };
+const singleOption = {
+  label: "single",
+  value: "some_single_value",
+  single: true,
+};
 
 const onChangeMock = jest.fn();
 
@@ -196,8 +201,8 @@ describe("FormDropdown tests", () => {
       ]);
     });
 
-    test("FormDropdown multiple should remove all selected options after default option was selected", () => {
-      const options = [defaultOption].concat(generateOptions(5));
+    test("FormDropdown multiple should remove all selected options after single option was selected", () => {
+      const options = [singleOption].concat(generateOptions(5));
 
       const { getByTestId } = renderFormDropdown({
         multiple: true,
@@ -216,9 +221,9 @@ describe("FormDropdown tests", () => {
       );
       onChangeMock.mockClear();
       fireEvent.click(
-        getByTestId(`${componentName}-option-${defaultOption.value}`)
+        getByTestId(`${componentName}-option-${singleOption.value}`)
       );
-      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
+      expect(onChangeMock.mock.calls[0][0]).toEqual([singleOption]);
     });
 
     test("FormDropdown multiple should render reset button and hide it if non items selected", () => {
@@ -260,7 +265,7 @@ describe("FormDropdown tests", () => {
       onChangeMock.mockClear();
       fireEvent.click(getByTestId(`${componentName}-reset`));
 
-      expect(onChangeMock.mock.calls[0][0]).toEqual();
+      expect(onChangeMock.mock.calls[0][0]).toEqual([]);
       expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
         placeholder
       );
@@ -293,7 +298,7 @@ describe("FormDropdown tests", () => {
       );
     });
 
-    test.only("FormDropdown multiple should reset selected to default after user unselects all items", () => {
+    test("FormDropdown multiple should reset selected to default after user unselects all items", () => {
       const options = [defaultOption].concat(generateOptions(5));
 
       const { getByTestId } = renderFormDropdown({

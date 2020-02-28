@@ -84,11 +84,6 @@ ShownControl.propTypes = {
   limit: PropTypes.number,
   totalCount: PropTypes.number,
   count: PropTypes.number,
-  isPrevPaginationButtonActive: PropTypes.bool,
-  isNextPaginationButtonActive: PropTypes.bool,
-  selectedPageNum: PropTypes.number,
-  handlePaginationNext: PropTypes.func.isRequired,
-  handlePaginationPrev: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   className: PropTypes.string,
 };
