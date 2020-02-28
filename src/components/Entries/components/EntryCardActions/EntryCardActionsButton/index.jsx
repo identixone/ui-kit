@@ -9,8 +9,8 @@ const EntryCardActionsButton = styled(Button).attrs(({ to, as }) => ({
   as: as || to ? ButtonLink : Button,
 }))`
   width: 115px;
-  color: ${colors.black};
-  font-size: 14px;
+  font-size: 16px;
+  color: ${colors.slate};
   font-weight: 600;
   line-height: 32px;
   padding: 0px 22px;
