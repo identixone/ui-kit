@@ -4,7 +4,6 @@ import {
   EntryCardContainer,
   EntryCardPhotos,
   StyledEntryCardPhoto,
-  StyledEntryCardEntryType,
   EntryCardInfoColumn,
   StyledEntryCardInfoItem,
   EntryCardInfoItemLabel,
@@ -12,43 +11,49 @@ import {
 } from "../components";
 
 const StyledEntryCard = styled(EntryCardContainer)`
-  height: 121px;
-  padding: 19px 10px 10px 28px;
+  height: 114px;
+  padding: 10px 16px;
   border-radius: 4px;
 
   ${EntryCardPhotos} {
-    margin-right: 30px;
+    margin-right: 25px;
   }
 
   ${StyledEntryCardPhoto} {
     &:not(:last-of-type) {
-      margin-right: 7px;
+      margin-right: 8px;
     }
   }
 
-  ${StyledEntryCardEntryType} {
-    margin-right: 30px;
-  }
-
   ${EntryCardInfoColumn} {
+    &:first-of-type {
+      ${EntryCardInfoItemLabel} {
+        width: 93px;
+      }
+    }
+
+    &:last-of-type {
+      ${EntryCardInfoItemLabel} {
+        width: 56px;
+      }
+    }
+
     &:not(:last-of-type) {
-      width: 260px;
-      margin-right: 20px;
+      width: 280px;
+      margin-right: 34px;
     }
   }
 
   ${StyledEntryCardInfoItem} {
+    height: 18px;
+
     &:not(:last-child) {
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
   }
 
-  ${EntryCardInfoItemLabel} {
-    width: 105px;
-  }
-
   ${StyledEntryCardLiveness} {
-    left: -30px;
+    left: -20px;
   }
 `;
 

@@ -4,18 +4,14 @@ import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 
 import { StyledEntryCardEntryType } from "./StyledEntryCardEntryType";
-import { EntryCardEntryTypeTitle } from "./EntryCardEntryTypeTitle";
-import { EntryCardEntryTypeBadge } from "./EntryCardEntryTypeBadge";
 
-function EntryCardEntryType({ title, type, theme, className }) {
-  const hasTitle = Boolean(title);
+function EntryCardEntryType({ type, theme, className, children }) {
   const appliedTheme = theme || type;
 
   return (
     <ThemeProvider theme={{ mode: appliedTheme }}>
       <StyledEntryCardEntryType className={className}>
-        {hasTitle && <EntryCardEntryTypeTitle>{title}</EntryCardEntryTypeTitle>}
-        <EntryCardEntryTypeBadge>{type}</EntryCardEntryTypeBadge>
+        {children}
       </StyledEntryCardEntryType>
     </ThemeProvider>
   );
@@ -24,12 +20,8 @@ function EntryCardEntryType({ title, type, theme, className }) {
 EntryCardEntryType.propTypes = {
   type: PropTypes.string.isRequired,
   theme: PropTypes.string,
-  title: PropTypes.string,
   className: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
 };
 
-export {
-  EntryCardEntryType,
-  StyledEntryCardEntryType,
-  EntryCardEntryTypeBadge,
-};
+export { EntryCardEntryType, StyledEntryCardEntryType };

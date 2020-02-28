@@ -23,7 +23,7 @@ const EntryCardActionsButton = styled(Button).attrs(
   opacity: 0.7;
 
   &:first-child {
-    border-radius: 0 0 0 5px;
+    border-radius: 2px;
   }
 
   &:not(:last-child) {
