@@ -22,7 +22,7 @@ const RouteSectionHider = styled.div`
   flex: 100%;
   flex-direction: column;
   padding-bottom: 30px;
-  padding-top: 24px;
+  padding-top: 26px;
 
   ${({ isCentered }) => isCentered && centeredStyles}
 `;

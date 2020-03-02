@@ -12,7 +12,7 @@ const FormDropdownControl = styled(Button).attrs(() => ({
   width: 100%;
   position: relative;
   height: 30px;
-  background-color: ${colors.grayLight};
+  background-color: ${colors.whiteGrayLight};
   color: ${colors.darkBlack};
   padding: 0 40px 0 15px;
   border-radius: 5px;
@@ -29,7 +29,7 @@ const FormDropdownControl = styled(Button).attrs(() => ({
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 15px;
+    right: 18px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid #222;
