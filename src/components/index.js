@@ -6,7 +6,6 @@ export * from "./ButtonLink";
 export * from "./ButtonToggleCalendar";
 export * from "./CardSmall";
 export * from "./CopyItem";
-export * from "./DateTimeFilter";
 export * from "./DeleteSure";
 export * from "./DeleteSureButton";
 export * from "./DynamicList";
