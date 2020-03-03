@@ -1,9 +1,10 @@
 import React from "react";
 import { fireEvent } from "@testing-library/react";
 
-import { render } from "../../../test/utils";
-import { Button } from "../Button/index.jsx";
-import { Stepper } from "../Stepper.js";
+import { render } from "../../../../test/utils";
+
+import { Button } from "../../Button";
+import { Stepper } from "../index";
 
 describe("Stepper tests", () => {
   const handleStepperResetMock = jest.fn();
