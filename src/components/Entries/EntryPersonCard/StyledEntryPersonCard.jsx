@@ -3,11 +3,9 @@ import styled from "styled-components";
 import {
   EntryCardContainer,
   EntryCardInfoColumn,
-  StyledEntryCardInfoItem,
   EntryCardInfoItemLabel,
   StyledEntryCardLiveness,
   EntryCardActions,
-  EntryCardPhotoFaceSize,
 } from "../components";
 
 import { colors } from "../../../themes/index";
@@ -56,19 +54,9 @@ const StyledEntryPersonCard = styled(EntryCardContainer)`
     }
   }
 
-  ${StyledEntryCardInfoItem} {
-    &:not(:last-child) {
-      margin-bottom: 6px;
-    }
-  }
-
   ${StyledEntryCardLiveness} {
     left: 120px;
     line-height: 60px;
-  }
-
-  ${EntryCardPhotoFaceSize} {
-    top: 0;
   }
 `;
 

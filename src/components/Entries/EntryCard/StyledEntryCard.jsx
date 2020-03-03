@@ -5,8 +5,8 @@ import {
   EntryCardPhotos,
   StyledEntryCardPhoto,
   EntryCardInfoColumn,
-  StyledEntryCardInfoItem,
   EntryCardInfoItemLabel,
+  EntryCardPhotoFaceSize,
   StyledEntryCardLiveness,
 } from "../components";
 
@@ -44,12 +44,8 @@ const StyledEntryCard = styled(EntryCardContainer)`
     }
   }
 
-  ${StyledEntryCardInfoItem} {
-    height: 18px;
-
-    &:not(:last-child) {
-      margin-bottom: 6px;
-    }
+  ${EntryCardPhotoFaceSize} {
+    top: -4px;
   }
 
   ${StyledEntryCardLiveness} {

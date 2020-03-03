@@ -3,7 +3,7 @@ import colors from "../themes/colors";
 
 export const FaceSize = styled.div`
   position: absolute;
-  top: -1px;
+  top: 0px;
   width: 36px;
   height: 18px;
   font-size: 11px;

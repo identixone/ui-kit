@@ -51,6 +51,11 @@ const StyledEntryCardContainer = styled.li`
 
   ${StyledEntryCardInfoItem} {
     color: ${({ theme }) => themes[theme.theme].textColor};
+    height: 18px;
+
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
   }
 
   ${StyledEntryCardLiveness} {
