@@ -1,9 +1,7 @@
 export * from "./Badge";
 export * from "./UIBadge";
 export * from "./Button";
-export * from "./ButtonToggle";
 export * from "./ButtonLink";
-export * from "./ButtonToggleCalendar";
 export * from "./CardSmall";
 export * from "./CopyItem";
 export * from "./DeleteSure";
@@ -31,7 +29,6 @@ export * from "./PageCard";
 export * from "./PageFiltersList";
 export * from "./PageLoader";
 export * from "./PageWrapper";
-export * from "./PhotoBased";
 export * from "./PersonsGroup";
 export * from "./PersonCardDetailed";
 export * from "./PopupConfirm";
