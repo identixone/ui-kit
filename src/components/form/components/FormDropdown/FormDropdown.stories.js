@@ -36,6 +36,34 @@ storiesOf("Form Components/FormDropdown", module)
 
     return <ComponentWrapper />;
   })
+  .add("with default option", () => {
+    const options = [
+      {
+        label: "default",
+        value: "some_default_value",
+        default: true,
+      },
+    ].concat(generateOptions(3));
+
+    function ComponentWrapper() {
+      const [selected, setSelected] = useState(null);
+
+      return (
+        <FormDropdown
+          options={options}
+          placeholder={text("placeholder", "select smth")}
+          value={selected}
+          onChange={setSelected}
+          width={number("width", 200)}
+          withSearch={boolean("with search", false)}
+          multiple={boolean("multiple", false)}
+          disabled={boolean("disabled", false)}
+        />
+      );
+    }
+
+    return <ComponentWrapper />;
+  })
   .add("multiple", () => {
     const options = generateOptions(3);
 
@@ -58,17 +86,22 @@ storiesOf("Form Components/FormDropdown", module)
 
     return <ComponentWrapper />;
   })
-  .add("multiple with default option", () => {
+  .add("multiple with default options", () => {
     const options = [
       {
-        label: "default",
-        value: "some_default_value",
+        label: "default1",
+        value: "some_default_value_1",
+        default: true,
+      },
+      {
+        label: "default2",
+        value: "some_default_value_2",
         default: true,
       },
     ].concat(generateOptions(3));
 
     function ComponentWrapper() {
-      const [selected, setSelected] = useState([options[0]]);
+      const [selected, setSelected] = useState([]);
 
       return (
         <FormDropdown

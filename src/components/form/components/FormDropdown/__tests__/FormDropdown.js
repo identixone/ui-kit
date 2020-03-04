@@ -175,6 +175,33 @@ describe("FormDropdown tests", () => {
     ).toHaveLength(options.length);
   });
 
+  test("FormDropdown should set default option on initial render, if value is not setted", () => {
+    const options = [defaultOption].concat(generateOptions(5));
+
+    const { getByTestId } = renderFormDropdown({
+      options,
+    });
+
+    expect(onChangeMock.mock.calls[0][0]).toEqual(defaultOption);
+    expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+      defaultOption.label
+    );
+  });
+
+  test("FormDropdown should not set default option on initial render, if value is not setted", () => {
+    const options = [defaultOption].concat(generateOptions(5));
+
+    const { getByTestId } = renderFormDropdown({
+      options,
+      value: options[1],
+    });
+
+    expect(onChangeMock.mock.calls).toHaveLength(0);
+    expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+      options[1].label
+    );
+  });
+
   describe("FormDropdown multiple", () => {
     test("FormDropdown multiple should correctly handle multiple values", () => {
       const { getByTestId } = renderFormDropdown({
@@ -324,6 +351,35 @@ describe("FormDropdown tests", () => {
       expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
       expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
         defaultOption.label
+      );
+    });
+
+    test("FormDropdown multiple should set default option on initial render, if value is not setted", () => {
+      const options = [defaultOption].concat(generateOptions(5));
+
+      const { getByTestId } = renderFormDropdown({
+        options,
+        multiple: true,
+      });
+
+      expect(onChangeMock.mock.calls[0][0]).toEqual([defaultOption]);
+      expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+        defaultOption.label
+      );
+    });
+
+    test("FormDropdown should not set default option on initial render, if value is not setted", () => {
+      const options = [defaultOption].concat(generateOptions(5));
+
+      const { getByTestId } = renderFormDropdown({
+        options,
+        multiple: true,
+        value: [options[1]],
+      });
+
+      expect(onChangeMock.mock.calls).toHaveLength(0);
+      expect(getByTestId(`${componentName}-control`)).toHaveTextContent(
+        options[1].label
       );
     });
   });
