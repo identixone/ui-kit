@@ -28,7 +28,7 @@ const StyledPersonEntriesCard = styled(EntryCardContainer)`
 
     &:last-of-type {
       ${EntryCardInfoItemLabel} {
-        width: 137px;
+        width: 161px;
       }
     }
 

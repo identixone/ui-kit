@@ -18,6 +18,7 @@ function PersonEntriesCard({
   person,
   actions,
   className,
+  entriesFoundCount,
   "data-testid": testId,
 }) {
   const hasReinit = person.reinit > 0;
@@ -69,8 +70,11 @@ function PersonEntriesCard({
           <EntryCardInfoItem isZeroEmpty={true} label="Junk entries">
             {person.junk}
           </EntryCardInfoItem>
-          <EntryCardInfoItem isZeroEmpty={true} label="Found entries">
-            {person.total}
+          <EntryCardInfoItem
+            isZeroEmpty={true}
+            label="Found with filters entries:"
+          >
+            {entriesFoundCount}
           </EntryCardInfoItem>
         </EntryCardInfoColumn>
       </EntryCardInfo>
@@ -82,6 +86,7 @@ PersonEntriesCard.propTypes = {
   person: PropTypes.object.isRequired,
   actions: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   className: PropTypes.string,
+  entriesFoundCount: PropTypes.number.isRequired,
   "data-testid": PropTypes.string,
 };
 
