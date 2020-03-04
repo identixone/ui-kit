@@ -59,6 +59,15 @@ function FormDropdown({
     }
   }, [value]);
 
+  useEffect(() => {
+    const defaultOptions = options.filter(isDefault);
+    const hasDefault = Boolean(defaultOptions.length);
+
+    if (hasDefault && (!value || (multiple && value.length === 0))) {
+      handleChange(null);
+    }
+  }, []);
+
   const inputRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const prevInputValue = usePrevious(inputValue);
