@@ -79,6 +79,7 @@ function InifiniteDropdown({
 }
 
 InifiniteDropdown.Option = FormDropdown.Option;
+InifiniteDropdown.Menu = FormDropdown.Menu;
 
 InifiniteDropdown.propTypes = {
   value: PropTypes.object.isRequired,
