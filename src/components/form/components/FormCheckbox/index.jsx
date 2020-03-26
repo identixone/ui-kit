@@ -28,6 +28,9 @@ function FormCheckbox({
       size={size}
       className={className}
       data-testid={testId}
+      onClick={e => {
+        e.stopPropagation();
+      }}
     >
       <FormCheckboxFlag checked={checked} />
       <FormCheckboxInput
