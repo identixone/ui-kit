@@ -36,6 +36,7 @@ const StyledFormCheckbox = styled.label`
 
   ${FormCheckboxCheckedIcon} {
     width: 10px;
+    height: 100%;
   }
 `;
 
