@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 const widths = {
-  s: 28,
-  m: 40,
+  m: 44,
 };
 
 const StyledFormSwitch = styled.label`
@@ -12,4 +11,4 @@ const StyledFormSwitch = styled.label`
   user-select: none;
 `;
 
-export { StyledFormSwitch };
+export { StyledFormSwitch, widths };

@@ -10,7 +10,6 @@ import { getTestId } from "../../utils";
 function FormSwitch({
   name,
   size,
-  theme,
   checked,
   onChange,
   className,
@@ -37,7 +36,6 @@ function FormSwitch({
       <FormSwitchLabel
         size={size}
         checked={checked}
-        theme={theme}
         data-testid={testId + "-label"}
       />
     </StyledFormSwitch>
@@ -49,14 +47,12 @@ FormSwitch.propTypes = {
   checked: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   size: PropTypes.oneOf(["s", "m"]),
-  theme: PropTypes.oneOf(["blue", "dark-gray"]),
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };
 
 FormSwitch.defaultProps = {
   size: "m",
-  theme: "blue",
 };
 
 export { FormSwitch, StyledFormSwitch };

@@ -1,66 +1,39 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { colors } from "../../../../themes/colors";
-
-const checkedColors = {
-  blue: "#34a7c1",
-  "dark-gray": colors.gray,
-};
-const backColors = {
-  blue: "#eeeeee",
-  "dark-gray": "#DDDDDD",
-};
+import { widths } from "./StyledFormSwitch";
 
 const circleSizes = {
-  s: 18,
-  m: 22,
-};
-
-const barHeights = {
-  s: 12,
   m: 16,
 };
 
-const barWidths = {
-  s: 28,
-  m: 40,
+const barHeights = {
+  m: 24,
 };
 
-const checkedStyles = css`
-  border-color: #34a7c1;
-  background-color: ${({ theme }) => checkedColors[theme]};
-  box-shadow: 3px 2px 18px 0 rgba(0, 0, 0, 0.2);
-`;
-
 const calcOffset = ({ checked, size }) => {
-  return !checked ? "0px" : barWidths[size] - circleSizes[size] / 2 - 3 + "px";
+  return !checked ? "4px" : widths[size] - circleSizes[size] - 4 + "px";
 };
 
 const FormSwitchLabel = styled.div`
   cursor: pointer;
-  padding: 0;
-  border: 0 solid ${({ checked }) => (checked ? "#34a7c1" : "#eeeeee")};
-  border-radius: 22px;
-  background-color: ${({ theme }) => backColors[theme]};
   height: ${({ size }) => barHeights[size] + "px"};
-  width: ${({ size }) => barWidths[size] + "px"};
+  border-radius: 20px;
+  background-color: ${({ checked }) =>
+    checked ? colors.slate : colors.grayMedium};
 
   &:before {
     content: "";
     display: block;
+    position: absolute;
+    left: ${calcOffset};
+    top: 50%;
+    transform: translateY(-50%);
     height: ${({ size }) => circleSizes[size] + "px"};
     width: ${({ size }) => circleSizes[size] + "px"};
-    margin: -3px;
-    background: #9ba7ac;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: ${calcOffset};
-    transition: left 120ms ease-in-out;
     border-radius: 50%;
-    box-shadow: 0 2px 8px 0 #aaa;
-
-    ${({ checked }) => (checked ? checkedStyles : "")}
+    background-color: ${colors.whiteSimple};
+    transition: left 120ms ease-in-out;
   }
 `;
 
