@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { FaceSize } from "../../../../FaceSize";
 
-import { colors } from "../../../../../themes/index";
+import { colors } from "../../../../../themes/colors";
 
 const EntryCardPhotoFaceSize = styled(FaceSize)`
   top: -7px;

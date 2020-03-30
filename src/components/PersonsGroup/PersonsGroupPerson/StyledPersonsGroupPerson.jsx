@@ -13,7 +13,7 @@ function getStyles({ isActive }) {
         }
       `
     : css`
-        color: ${colors.brownGray};
+        color: ${colors.grayWhite};
         background-color: ${colors.iceBlue};
 
         b {

@@ -8,7 +8,7 @@ const blueTheme = css`
 `;
 
 const grayTheme = css`
-  background-color: ${colors.brownGray};
+  background-color: ${colors.grayWhite};
   color: ${colors.whiteSimple};
 `;
 

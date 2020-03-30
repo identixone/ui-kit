@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { colors } from "../../../../themes/index";
+import { colors } from "../../../../themes/colors";
 
 export const PersonsGroupListPersonTypeSelectLabel = styled.label`
   font-size: 13px;
-  color: ${colors.brownGray};
+  color: ${colors.grayWhite};
   margin-bottom: 5px;
   display: inline-block;
 `;

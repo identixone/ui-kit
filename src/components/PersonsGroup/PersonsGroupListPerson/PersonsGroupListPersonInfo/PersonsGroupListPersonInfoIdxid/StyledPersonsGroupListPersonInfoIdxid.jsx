@@ -5,7 +5,7 @@ import { colors } from "../../../../../themes/colors";
 export const StyledPersonsGroupListPersonInfoIdxid = styled.span`
   font-size: 13px;
   line-height: 1.38;
-  color: ${colors.brownGray};
+  color: ${colors.grayWhite};
 
   span {
     color: ${colors.black};

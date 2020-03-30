@@ -35,7 +35,6 @@ export const colors = {
   grayRedMiddle: "#cccccc",
 
   brownSimple: "#AC3D03",
-  brownGray: "#aaaaaa",
 
   simpleBlue: "#4c6a95",
   middleBlue: "#42608C",

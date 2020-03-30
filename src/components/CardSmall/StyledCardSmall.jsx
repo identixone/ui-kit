@@ -6,7 +6,7 @@ import { CardSmallData } from "./index";
 const themes = {
   light: {
     backgroundColor: colors.iceBlue,
-    textColor: colors.brownGray,
+    textColor: colors.grayWhite,
   },
   dark: {
     backgroundColor: colors.slate,

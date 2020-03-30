@@ -11,7 +11,7 @@ import {
   StyledEntryCardLiveness,
 } from "../components";
 
-import { colors } from "../../../themes/index";
+import { colors } from "../../../themes/colors";
 
 const themes = {
   light: {

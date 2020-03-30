@@ -8,7 +8,7 @@ import { CardSmall } from "./index";
 
 import { personMock } from "../../../test/__mocks__";
 import { PlaylistAdd } from "../../assets/icons";
-import { colors } from "../../themes/index";
+import { colors } from "../../themes/colors";
 
 storiesOf("Basic UI|CardSmall", module)
   .add("default", () => {

@@ -8,7 +8,7 @@ const PersonCardDetailedDataItemLabel = styled.span`
   min-width: 94px;
   margin-right: 40px;
   font-size: 13px;
-  color: ${colors.brownGray};
+  color: ${colors.grayWhite};
 `;
 
 export { PersonCardDetailedDataItemLabel };
