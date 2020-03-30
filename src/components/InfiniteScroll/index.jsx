@@ -9,6 +9,7 @@ export class InfiniteScroll extends React.Component {
     isFetching: PropTypes.bool,
     children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     scrollerRef: PropTypes.object,
+    fetchOnOffset: PropTypes.number,
   };
 
   state = {
@@ -23,6 +24,8 @@ export class InfiniteScroll extends React.Component {
       const { scrollHeight } = window.document.body;
       const isScrollDown = this.state.lastScrollMenuTop < pageYOffset;
 
+      const fetchOffset = this.props.fetchOnOffset || scrollHeight * 0.9;
+
       this.setState(
         {
           lastScrollMenuTop: pageYOffset,
@@ -30,7 +33,7 @@ export class InfiniteScroll extends React.Component {
         () => {
           if (
             isScrollDown &&
-            pageYOffset + innerHeight >= scrollHeight * 0.9 &&
+            pageYOffset + innerHeight >= fetchOffset &&
             !this.props.isFetching
           ) {
             this.props.onScrollToPoint();
@@ -49,7 +52,7 @@ export class InfiniteScroll extends React.Component {
         () => {
           if (
             isScrollDown &&
-            scrollTop + height >= scrollHeight * 0.9 &&
+            scrollTop + height >= fetchOffset &&
             !this.props.isFetching
           ) {
             this.props.onScrollToPoint();
