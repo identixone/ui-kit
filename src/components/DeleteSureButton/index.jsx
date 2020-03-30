@@ -19,6 +19,7 @@ function DeleteSureButton({
   className,
   deleteText,
   sureText,
+  color,
 }) {
   const { t, i18n } = useTranslation();
 
@@ -36,6 +37,7 @@ function DeleteSureButton({
     <DeleteSure onDelete={onDelete}>
       {({ isSure, handleClick, handleMouseLeave }) => (
         <StyledDeleteSureButton
+          color={color}
           className={className}
           deleteColor={deleteColor}
           isSure={isSure}
@@ -54,10 +56,12 @@ function DeleteSureButton({
 
 DeleteSureButton.defaultProps = {
   deleteColor: colors.brownSimple,
+  color: colors.blueWhite,
 };
 
 DeleteSureButton.propTypes = {
   onDelete: PropTypes.func.isRequired,
+  color: colors.string,
   size: PropTypes.string,
   isDisabled: PropTypes.bool,
   deleteColor: PropTypes.string,

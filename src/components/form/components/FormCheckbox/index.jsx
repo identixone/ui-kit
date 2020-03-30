@@ -11,6 +11,7 @@ function FormCheckbox({
   checked,
   onChange,
   onBlur,
+  onClick,
   name,
   disabled,
   checkboxTheme,
@@ -28,6 +29,7 @@ function FormCheckbox({
       size={size}
       className={className}
       data-testid={testId}
+      onClick={onClick}
     >
       <FormCheckboxFlag checked={checked} />
       <FormCheckboxInput
@@ -48,6 +50,7 @@ function FormCheckbox({
 FormCheckbox.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
+  onClick: PropTypes.func,
   checked: PropTypes.bool.isRequired,
   name: PropTypes.string,
   disabled: PropTypes.bool,

@@ -13,7 +13,11 @@ import FormMultiSelectOption from "./FormMultiSelectMenu/FormMultiSelectOption";
 import FormMultiSelectTags from "./FormMultiSelectTags";
 import FormMultiSelectTagsItem from "./FormMultiSelectTags/FormMultiSelectTagsItem";
 
-import { searchInList, getStringShort } from "../../../../utils/helpers";
+import {
+  searchInList,
+  getStringShort,
+  hasProperty,
+} from "../../../../utils/helpers";
 import { some } from "lodash-es";
 import { getTestId } from "../../utils";
 
@@ -275,7 +279,12 @@ class FormMultiSelect extends React.Component {
                           );
                         })
                         .map((item, index) => {
-                          const itemValue = item.value || item;
+                          const itemValue = hasProperty(item, "value")
+                            ? item.value
+                            : item;
+                          const itemLabel = hasProperty(item, "label")
+                            ? item.label
+                            : item;
 
                           return (
                             <FormMultiSelectOption
@@ -290,7 +299,7 @@ class FormMultiSelect extends React.Component {
                                 disabled: item.disabled,
                               })}
                             >
-                              {getStringShort(item.label || item, 20)}
+                              {getStringShort(itemLabel, 20)}
                             </FormMultiSelectOption>
                           );
                         })}
