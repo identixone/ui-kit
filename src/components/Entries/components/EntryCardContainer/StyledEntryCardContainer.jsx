@@ -2,10 +2,7 @@ import styled, { css } from "styled-components";
 
 import { EntryCardActions } from "../EntryCardActions";
 import { StyledEntryCardPhoto } from "../EntryCardPhotos";
-import {
-  StyledEntryCardEntryType,
-  EntryCardEntryTypeBadge,
-} from "../EntryCardEntryType";
+import { StyledEntryCardEntryType } from "../EntryCardEntryType";
 import { StyledEntryCardInfoItem } from "../EntryCardInfoItem";
 import { StyledEntryCardLiveness } from "../EntryCardLiveness";
 
@@ -13,8 +10,8 @@ import { colors } from "../../../../themes/index";
 
 const themes = {
   light: {
-    backgroundColor: colors.whiteGray,
-    textColor: colors.black,
+    backgroundColor: colors.whiteGrayLight,
+    textColor: colors.darkBlack,
     livenessColor: colors.gray,
   },
   dark: {
@@ -38,7 +35,6 @@ const StyledEntryCardContainer = styled.li`
   display: flex;
   align-items: flex-start;
   position: relative;
-  overflow: hidden;
   box-sizing: border-box;
   line-height: 18px;
   background-color: ${({ theme }) => themes[theme.theme].backgroundColor};
@@ -50,15 +46,16 @@ const StyledEntryCardContainer = styled.li`
   }
 
   ${StyledEntryCardEntryType} {
-    color: ${({ theme }) => themes[theme.theme].textColor};
-  }
-
-  ${EntryCardEntryTypeBadge} {
     border-color: ${({ theme }) => themes[theme.theme].badgeBorderColor};
   }
 
   ${StyledEntryCardInfoItem} {
     color: ${({ theme }) => themes[theme.theme].textColor};
+    height: 18px;
+
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
   }
 
   ${StyledEntryCardLiveness} {

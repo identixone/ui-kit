@@ -4,10 +4,12 @@ import styled from "styled-components";
 
 import { EntryCardInfoItemLabel } from "./EntryCardInfoItemLabel";
 import { EntryCardInfoItemValue } from "./EntryCardInfoItemValue";
+import { textTrimStyles } from "../../../Text/TextTrim";
 
 const StyledEntryCardInfoItem = styled.div`
-  display: flex;
   line-height: 18px;
+
+  ${textTrimStyles}
 `;
 
 function EntryCardInfoItem({ children, label, isZeroEmpty, className }) {
@@ -17,7 +19,7 @@ function EntryCardInfoItem({ children, label, isZeroEmpty, className }) {
         children
       ) : (
         <React.Fragment>
-          <EntryCardInfoItemLabel>{label}</EntryCardInfoItemLabel>
+          <EntryCardInfoItemLabel>{label}:</EntryCardInfoItemLabel>
           <EntryCardInfoItemValue isZeroEmpty={isZeroEmpty}>
             {children}
           </EntryCardInfoItemValue>
