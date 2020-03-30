@@ -20,7 +20,6 @@ FormInput.propTypes = {
   onBlur: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "password", "email", "number"]),
   disabled: PropTypes.bool,
   "data-testid": PropTypes.string,
