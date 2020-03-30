@@ -5,6 +5,7 @@ export const colors = {
   whiteGrayDark: "#f2f2f2",
   whiteBlue: "#f2f6fa",
   whiteYellow: "#f8f8ee",
+
   /* for types of records */
   navyBlue: "#1e8ab9",
   darkBlue: "#1A5D7B",
@@ -13,13 +14,15 @@ export const colors = {
   greenish: "#3f9655",
   lightYellow: "#ffc228",
   lightRed: "#f65502",
+
+  slate: "#3b4b5a",
   gray: "#5d7784",
-  graySimpleLight: "#ddd",
-  graySimple: "#bbb",
-  grayWhite: "#aaa",
+  grayMedium: "#dadada",
+  graySimpleLight: "#dddddd",
+  graySimple: "#bbbbbb",
+  grayWhite: "#aaaaaa",
   grayMiddle: "#6a6e71",
   grayLight: "#f3f3f3",
-  slate: "#3b4b5a",
   grayBlueLight: "#6b7d86",
   grayBlueLight2: "#e2e5e8",
   grayBlueMiddle: "#bec9ce",
@@ -27,30 +30,31 @@ export const colors = {
   grayBlueDarkLight: "#798990",
   grayBlueDark: "#687d90",
   grayBlueDark2: "#ebf0f2",
-  grayRedLight: "#eee",
+  grayRedLight: "#eeeeee",
   grayRedDark: "#dedede",
-  grayRedMiddle: "#ccc",
-  brownSimple: "#AC3D03",
-  black: "#000",
+  grayRedMiddle: "#cccccc",
 
+  brownSimple: "#AC3D03",
+  brownGray: "#aaaaaa",
+
+  simpleBlue: "#4c6a95",
+  middleBlue: "#42608C",
   blueWhite: "#e4e9eb",
   blueGray: "#6a8694",
-  brownGray: "#aaaaaa",
   veryLightBlue: "#e4e9ec",
-
   darkestBlue: "#2e4669",
-  middleBlue: "#42608C",
-  simpleBlue: "#4c6a95",
   iceBlue: "#f0f1f2",
 
   darkestPink: "#b6245e",
   middlePink: "#be2c66",
   simplePink: "#d2477e",
-  darkBlack: "#222",
 
   bloodOrange: "#ef5305",
   orangeSimple: "#f89406",
   orangeDark: "#fabf29",
+
+  black: "#000000",
+  darkBlack: "#222222",
 
   red: "#dc0909",
   green: "#008000",

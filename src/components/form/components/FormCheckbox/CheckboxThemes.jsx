@@ -9,7 +9,7 @@ const lightTheme = css`
     if (disabled) {
       return css`
         background-color: ${colors.grayLight};
-        border-color: #dadada;
+        border-color: ${colors.grayMedium};
       `;
     }
 
@@ -40,7 +40,7 @@ const darkTheme = css`
     if (disabled) {
       return css`
         background-color: ${colors.grayLight};
-        border-color: #dadada;
+        border-color: ${colors.grayMedium};
       `;
     }
 
@@ -58,7 +58,7 @@ const darkTheme = css`
 
     return css`
       background-color: ${colors.whiteSimple};
-      border-color: #dadada;
+      border-color: ${colors.grayMedium};
 
       &:hover {
         background-color: #f2f5f7;

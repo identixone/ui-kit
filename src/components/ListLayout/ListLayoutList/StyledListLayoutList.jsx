@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { colors } from "../../../themes/colors";
+
 export const StyledListLayoutList = styled.ul`
   padding-left: 0;
   margin: 0;
@@ -18,6 +20,6 @@ export const StyledListLayoutList = styled.ul`
   }
 
   &:not(:first-child) {
-    border-top: 1px solid #dadada;
+    border-top: 1px solid ${colors.grayMedium};
   }
 `;
