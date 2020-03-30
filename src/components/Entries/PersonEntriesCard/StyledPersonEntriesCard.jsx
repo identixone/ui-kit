@@ -5,6 +5,7 @@ import {
   EntryCardInfo,
   EntryCardInfoColumn,
   EntryCardInfoItemLabel,
+  EntryCardActions,
 } from "../components";
 
 import { colors } from "../../../themes/colors";
@@ -36,6 +37,10 @@ const StyledPersonEntriesCard = styled(EntryCardContainer)`
       width: 260px;
       margin-right: 55px;
     }
+  }
+
+  ${EntryCardActions} {
+    opacity: 1;
   }
 `;
 
