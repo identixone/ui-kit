@@ -3,7 +3,6 @@ export {
   Eye,
   EyeSlash,
   Camera,
-  Check,
   Video,
   VideoSlash,
   User,
@@ -45,5 +44,6 @@ export {
   PlaylistAddCheck,
 } from "@styled-icons/material";
 
+export { default as Check } from "./Check";
 export { default as Sync } from "./Sync";
 export { default as Asterisk } from "./Asterisk";
