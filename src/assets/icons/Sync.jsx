@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { SyncAlt } from "styled-icons/fa-solid/SyncAlt";
+import { SyncAlt } from "@styled-icons/fa-solid/SyncAlt";
 import { spin } from "../animations";
 
 const SyncIcon = styled(SyncAlt)`

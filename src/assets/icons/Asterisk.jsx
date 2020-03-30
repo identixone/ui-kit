@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { Asterisk } from "styled-icons/fa-solid/Asterisk";
+import { Asterisk } from "@styled-icons/fa-solid/Asterisk";
 import { spin } from "../animations";
 
 const AsteriskIcon = styled(Asterisk)`

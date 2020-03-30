@@ -25,25 +25,25 @@ export {
   Qrcode,
   Ban,
   Trash,
-} from "styled-icons/fa-solid";
+} from "@styled-icons/fa-solid";
 
 export {
   RightArrow as BoxRightArrow,
   LeftArrow as BoxLeftArrow,
-} from "styled-icons/boxicons-solid";
+} from "@styled-icons/boxicons-solid";
 
 export {
   TimesCircle,
   ArrowAltCircleDown,
   ArrowAltCircleRight,
-} from "styled-icons/fa-regular";
+} from "@styled-icons/fa-regular";
 
 export {
   KeyboardArrowRight,
   KeyboardArrowLeft,
   PlaylistAdd,
   PlaylistAddCheck,
-} from "styled-icons/material";
+} from "@styled-icons/material";
 
 export { default as Sync } from "./Sync";
 export { default as Asterisk } from "./Asterisk";
