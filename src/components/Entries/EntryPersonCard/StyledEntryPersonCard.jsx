@@ -2,13 +2,10 @@ import styled from "styled-components";
 
 import {
   EntryCardContainer,
-  StyledEntryCardEntryType,
-  EntryCardInfo,
   EntryCardInfoColumn,
-  StyledEntryCardInfoItem,
   EntryCardInfoItemLabel,
-  EntryCardInfoItemValue,
   StyledEntryCardLiveness,
+  EntryCardActions,
 } from "../components";
 
 import { colors } from "../../../themes/index";
@@ -23,50 +20,43 @@ const themes = {
 };
 
 const StyledEntryPersonCard = styled(EntryCardContainer)`
-  height: 130px;
-  padding: 15px 0 10px 48px;
+  height: 100px;
+  max-width: 890px;
   background-color: ${({ theme }) => themes[theme].backgroundColor};
+  align-items: center;
+  padding: 0;
 
   &:not(:last-child) {
     border-bottom: 1px solid #f1f1f1;
   }
 
-  ${StyledEntryCardEntryType} {
-    margin-right: 70px;
-  }
-
-  ${EntryCardInfo} {
-    padding-top: 8px;
+  ${EntryCardActions} {
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   ${EntryCardInfoColumn} {
+    &:first-of-type {
+      ${EntryCardInfoItemLabel} {
+        width: 114px;
+      }
+    }
+
+    &:last-of-type {
+      ${EntryCardInfoItemLabel} {
+        width: 123px;
+      }
+    }
+
     &:not(:last-of-type) {
-      width: 160px;
-      margin-right: 60px;
+      width: 260px;
+      margin-right: 54px;
     }
-  }
-
-  ${StyledEntryCardInfoItem} {
-    flex-direction: column;
-
-    &:not(:last-child) {
-      margin-bottom: 14px;
-    }
-  }
-
-  ${EntryCardInfoItemLabel} {
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  ${EntryCardInfoItemValue} {
-    font-weight: 300;
   }
 
   ${StyledEntryCardLiveness} {
-    left: -60px;
+    left: 120px;
+    line-height: 60px;
   }
 `;
 

@@ -402,5 +402,6 @@ FormDropdown.defaultProps = {
 };
 
 FormDropdown.Option = FormDropdownOption;
+FormDropdown.Menu = FormDropdownMenu;
 
 export { FormDropdown, StyledFormDropdown };

@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import Slidee from "./Slidee";
 import StyledFrame from "./StyledFrame";
 
-const ITEM_HEIGHT = 129;
-
 export class Slider extends Component {
   static propTypes = {
     height: PropTypes.number,
+    totalItemHeight: PropTypes.number,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
     onUpdateSliderRef: PropTypes.func,
     visibility: PropTypes.bool,
@@ -15,6 +14,7 @@ export class Slider extends Component {
 
   static defaultProps = {
     height: 516,
+    totalItemHeight: 129,
     visibility: false,
   };
 
@@ -27,6 +27,70 @@ export class Slider extends Component {
     super(props);
     this.slidee = React.createRef();
     this.scrollPosition = 0;
+  }
+
+  handleClick(index, childKey) {
+    const { topIndex } = this.state;
+    const { height, totalItemHeight } = this.props;
+    const visibleElementsNum = calculateVisibleElementsNum(
+      height,
+      totalItemHeight
+    );
+    const backItemsNum =
+      index + visibleElementsNum - this.props.children.length + 1;
+
+    this.setState({ activeItemIndex: childKey });
+
+    /**
+     * Клик по нижнему видимому элементу
+     * приводит к скорллу слайдера вниз
+     */
+    if (topIndex + visibleElementsNum === index) {
+      this.scrollDown(backItemsNum);
+
+      if (backItemsNum > 0) {
+        this.setState({
+          topIndex: topIndex + (visibleElementsNum - backItemsNum),
+        });
+      } else {
+        this.setState({ topIndex: topIndex + visibleElementsNum });
+      }
+    } else if (topIndex > 0 && topIndex === index) {
+      /**
+       * Клик по верхнему видимому элементу
+       * приводит к скорллу слайдера вверх
+       */
+      this.scrollUp();
+      const newTopIndex = topIndex - visibleElementsNum;
+      this.setState({ topIndex: newTopIndex > 0 ? newTopIndex : 0 });
+    }
+  }
+
+  scrollDown(backItemsNum) {
+    const { height, totalItemHeight } = this.props;
+    let stepSize = calculateStepSize(height, totalItemHeight);
+
+    if (backItemsNum > 0) {
+      stepSize = stepSize - backItemsNum * totalItemHeight;
+    }
+
+    this.setState({ translateFrom: -this.scrollPosition });
+    this.setState({ translateTo: -(this.scrollPosition + stepSize) });
+
+    this.scrollPosition += stepSize;
+  }
+
+  scrollUp() {
+    const { height, totalItemHeight } = this.props;
+    const stepSize = calculateStepSize(height, totalItemHeight);
+    this.setState({ translateFrom: -this.scrollPosition });
+    const translateTo = -(this.scrollPosition - stepSize);
+    this.setState({ translateTo: translateTo > 0 ? 0 : translateTo });
+    this.scrollPosition -= stepSize;
+
+    if (this.scrollPosition < 0) {
+      this.scrollPosition = 0;
+    }
   }
 
   render() {
@@ -61,59 +125,14 @@ export class Slider extends Component {
           {cloneChildren}
         </Slidee>
       </StyledFrame>
-    ) : (
-      ""
-    );
-  }
-
-  handleClick(index, childKey) {
-    const visibleElementsNum = calculateVisibleElementsNum(this.props.height);
-    const backItemsNum =
-      index + visibleElementsNum - this.props.children.length + 1;
-    this.setState({ activeItemIndex: childKey });
-    if (this.state.topIndex + visibleElementsNum === index) {
-      this.scrollDown(backItemsNum);
-      if (backItemsNum > 0) {
-        this.setState({
-          topIndex: this.state.topIndex + (visibleElementsNum - backItemsNum),
-        });
-      } else {
-        this.setState({ topIndex: this.state.topIndex + visibleElementsNum });
-      }
-    } else if (this.state.topIndex > 0 && this.state.topIndex === index) {
-      this.scrollUp();
-      const topIndex = this.state.topIndex - visibleElementsNum;
-      this.setState({ topIndex: topIndex > 0 ? topIndex : 0 });
-    }
-  }
-
-  scrollDown(backItemsNum) {
-    let stepSize = calculateStepSize(this.props.height);
-    if (backItemsNum > 0) {
-      stepSize = stepSize - backItemsNum * ITEM_HEIGHT;
-    }
-
-    this.setState({ translateFrom: -this.scrollPosition });
-    this.setState({ translateTo: -(this.scrollPosition + stepSize) });
-    this.scrollPosition += stepSize;
-  }
-
-  scrollUp() {
-    const stepSize = calculateStepSize(this.props.height);
-    this.setState({ translateFrom: -this.scrollPosition });
-    const translateTo = -(this.scrollPosition - stepSize);
-    this.setState({ translateTo: translateTo > 0 ? 0 : translateTo });
-    this.scrollPosition -= stepSize;
-    if (this.scrollPosition < 0) {
-      this.scrollPosition = 0;
-    }
+    ) : null;
   }
 }
 
-function calculateVisibleElementsNum(height) {
-  return Math.floor(height / ITEM_HEIGHT);
+function calculateVisibleElementsNum(height, itemHeight) {
+  return Math.floor(height / itemHeight);
 }
 
-function calculateStepSize(height) {
-  return calculateVisibleElementsNum(height) * ITEM_HEIGHT;
+function calculateStepSize(height, itemHeight) {
+  return calculateVisibleElementsNum(height, itemHeight) * itemHeight;
 }

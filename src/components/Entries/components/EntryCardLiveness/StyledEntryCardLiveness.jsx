@@ -7,7 +7,7 @@ const StyledEntryCardLiveness = styled.p`
   position: absolute;
   bottom: 0;
   font-size: 75px;
-  line-height: 22px;
+  line-height: 32px;
   font-weight: 700;
   letter-spacing: -4px;
   color: ${colors.gray};

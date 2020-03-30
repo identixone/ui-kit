@@ -40,7 +40,7 @@ export const config = {
   entryType: {
     new: { short: "New", scshort: "new", full: "New person" },
     reinit: { short: "Reinit", scshort: "reinit", full: "Reinitialised" },
-    exact: { short: "Exact", scshort: "exact", full: "Exact result" },
+    exact: { short: "Exact", scshort: "exact", full: "Exact" },
     ha: { short: "HA", scshort: "HA", full: "High accuracy" },
     junk: { short: "Junk", scshort: "junk", full: "Junk result" },
     nm: { short: "NM", scshort: "NM", full: "No matches" },
@@ -63,6 +63,4 @@ export const config = {
   phup: 0, // photo upload form state
   phupmode: "Search", // photo upload form mode
   phuptimeouts: [], // for phup statuses
-  //createmode: <div id="uploadnotice"><span>Create persona mode</span>drag and drop file (.jpg, .png) or click to select</div>,
-  //searchmode: <div id="uploadnotice"><span>Search persona mode</span>drag and drop file (.jpg, .png) or click to select</div>
 };

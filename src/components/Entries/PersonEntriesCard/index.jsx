@@ -69,9 +69,6 @@ function PersonEntriesCard({
           <EntryCardInfoItem isZeroEmpty={true} label="Junk entries">
             {person.junk}
           </EntryCardInfoItem>
-          <EntryCardInfoItem isZeroEmpty={true} label="Found entries">
-            {person.total}
-          </EntryCardInfoItem>
         </EntryCardInfoColumn>
       </EntryCardInfo>
     </StyledPersonEntriesCard>
