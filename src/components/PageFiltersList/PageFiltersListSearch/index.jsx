@@ -43,7 +43,7 @@ function PageFiltersListSearch({
       className={className}
       iconSize={iconSize}
       data-testid={testId}
-      innerRef={inputRef}
+      ref={inputRef}
       value={searchQuery}
       placeholder={textPlaceholder}
       onChange={handleChange}
