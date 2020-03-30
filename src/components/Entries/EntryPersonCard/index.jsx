@@ -30,6 +30,7 @@ function EntryPersonCard({
       deleted={entry.deleted}
       actions={actions}
       className={className}
+      data-id={entry.id}
       data-testid={testId}
       theme={theme}
     >
