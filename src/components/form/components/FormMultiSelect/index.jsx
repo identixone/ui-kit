@@ -2,16 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Downshift from "downshift";
-
-import StyledFormMultiSelect from "./StyledFormMultiSelect";
-import FormMultiSelectInput from "./FormMultiSelectInput";
-import FormMultiSelectInputWrapper from "./FormMultiSelectInputWrapper";
-
-import FormMultiSelectMenu from "./FormMultiSelectMenu";
-import FormMultiSelectOption from "./FormMultiSelectMenu/FormMultiSelectOption";
-
-import FormMultiSelectTags from "./FormMultiSelectTags";
-import FormMultiSelectTagsItem from "./FormMultiSelectTags/FormMultiSelectTagsItem";
+import { StyledFormMultiSelect } from "./StyledFormMultiSelect";
+import { FormMultiSelectInput } from "./FormMultiSelectInput";
+import { FormMultiSelectInputWrapper } from "./FormMultiSelectInputWrapper";
+import { FormMultiSelectMenu } from "./FormMultiSelectMenu";
+import { FormMultiSelectOption } from "./FormMultiSelectMenu/FormMultiSelectOption";
+import { FormMultiSelectTags } from "./FormMultiSelectTags";
+import { FormMultiSelectTagsItem } from "./FormMultiSelectTags/FormMultiSelectTagsItem";
 
 import {
   searchInList,

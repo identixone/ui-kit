@@ -1,21 +1,16 @@
 import styled from "styled-components";
 
-const FormMultiSelectTagsItem = styled.li`
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #444;
-  background: #fff;
-  white-space: nowrap;
-  overflow: hidden;
+import { colors } from "../../../../../../themes/colors";
+
+const StyledFormMultiSelectTagsItem = styled.li`
+  padding: 4px 6px;
+  background-color: ${colors.whiteSimple};
   cursor: pointer;
-  border-radius: 6px;
-  max-width: 150px;
-  margin-bottom: 8px;
+  border-radius: 2px;
+  max-width: 180px;
   position: relative;
-  padding-right: 20px;
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
+  display: flex;
+  align-items: center;
 `;
 
-export default FormMultiSelectTagsItem;
+export { StyledFormMultiSelectTagsItem };

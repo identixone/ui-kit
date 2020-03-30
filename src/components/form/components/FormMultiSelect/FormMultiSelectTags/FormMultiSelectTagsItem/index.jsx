@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledFormMultiSelectTagsItem from "./StyledFormMultiSelectTagsItem";
-import FormMultiSelectTagsItemTitle from "./FormMultiSelectTagsItemTitle";
-import FormMultiSelectTagsItemCross from "./FormMultiSelectTagsItemCross";
+import { StyledFormMultiSelectTagsItem } from "./StyledFormMultiSelectTagsItem";
+import { FormMultiSelectTagsItemTitle } from "./FormMultiSelectTagsItemTitle";
+import { FormMultiSelectTagsItemRemoveButton } from "./FormMultiSelectTagsItemRemoveButton";
+import { TimesDelete } from "../../../../../../assets/icons";
 
 function FormMultiSelectTagsItem({
   onCrossClick,
@@ -13,10 +14,12 @@ function FormMultiSelectTagsItem({
   return (
     <StyledFormMultiSelectTagsItem data-testid={testId} role="tag">
       <FormMultiSelectTagsItemTitle>{title}</FormMultiSelectTagsItemTitle>
-      <FormMultiSelectTagsItemCross
+      <FormMultiSelectTagsItemRemoveButton
         onClick={onCrossClick}
         data-testid={`${testId}-cross`}
-      />
+      >
+        <TimesDelete size={16} />
+      </FormMultiSelectTagsItemRemoveButton>
     </StyledFormMultiSelectTagsItem>
   );
 }
@@ -27,4 +30,4 @@ FormMultiSelectTagsItem.propTypes = {
   onCrossClick: PropTypes.func.isRequired,
 };
 
-export default FormMultiSelectTagsItem;
+export { FormMultiSelectTagsItem };

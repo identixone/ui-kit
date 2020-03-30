@@ -18,4 +18,4 @@ const StyledFormMultiSelect = styled.div`
   }
 `;
 
-export default StyledFormMultiSelect;
+export { StyledFormMultiSelect };

@@ -39,4 +39,4 @@ const FormMultiSelectMenu = styled.ul`
   }
 `;
 
-export default FormMultiSelectMenu;
+export { FormMultiSelectMenu };

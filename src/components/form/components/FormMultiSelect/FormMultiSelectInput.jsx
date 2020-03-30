@@ -7,12 +7,12 @@ const FormMultiSelectInput = styled.input`
   outline: none;
   display: inline-block;
   font-weight: 600;
-  line-height: 30px;
   color: #444;
+  padding-left: 3px;
+
   ::placeholder {
     color: #444;
   }
-  padding-left: 3px;
 `;
 
-export default FormMultiSelectInput;
+export { FormMultiSelectInput };

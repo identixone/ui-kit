@@ -17,4 +17,4 @@ const FormMultiSelectOption = styled.li`
   }};
 `;
 
-export default FormMultiSelectOption;
+export { FormMultiSelectOption };

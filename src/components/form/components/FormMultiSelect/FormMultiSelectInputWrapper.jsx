@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const FormMultiSelectInput = styled.li`
+const FormMultiSelectInputWrapper = styled.li`
   margin-bottom: 8px;
   width: 130px;
   overflow: visible;
 `;
 
-export default FormMultiSelectInput;
+export { FormMultiSelectInputWrapper };
