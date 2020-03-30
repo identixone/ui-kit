@@ -32,7 +32,7 @@ storiesOf("Form Components| FormCheckboxGroup", module).add("default", () => {
             <div>
               <FormCheckboxGroup.Item
                 name="test-group-select-all"
-                label={<strong>Select all</strong>}
+                label="Select all"
                 data-testid="test-group-select-all"
                 checked={selectableProps.isAllSelected}
                 onChange={({ target }) => {
@@ -45,7 +45,7 @@ storiesOf("Form Components| FormCheckboxGroup", module).add("default", () => {
               />
               <FormCheckboxGroup.Item
                 name="test-group-deselect-all"
-                label={<strong>Deselect all</strong>}
+                label="Deselect all"
                 data-testid="test-group-deselect-all"
                 checked={selectableProps.isAllDeselected}
                 onChange={({ target }) => {
