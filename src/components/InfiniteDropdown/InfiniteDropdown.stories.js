@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import { InifiniteDropdown } from "./index.jsx";
+import { InfiniteDropdown } from "./index.jsx";
 import { generateSourcesStats } from "../../../test/generate";
 
 function isEven(n) {
@@ -12,7 +12,7 @@ function isEven(n) {
   return n === 0 || !!(n && !(n % 2));
 }
 
-storiesOf("Basic UI|InifiniteDropdown", module)
+storiesOf("Basic UI|InfiniteDropdown", module)
   .add("default", () => {
     const options = generateSourcesStats(10).map(option => ({
       label: option.name,
@@ -21,7 +21,7 @@ storiesOf("Basic UI|InifiniteDropdown", module)
     const isFetching = boolean("is fetching", false);
 
     return (
-      <InifiniteDropdown
+      <InfiniteDropdown
         options={options}
         fetchOptions={action("fetch items")}
         isFetching={isFetching}
@@ -39,7 +39,7 @@ storiesOf("Basic UI|InifiniteDropdown", module)
     const isFetching = boolean("is fetching", false);
 
     return (
-      <InifiniteDropdown
+      <InfiniteDropdown
         options={options}
         fetchOptions={action("fetch items")}
         isFetching={isFetching}

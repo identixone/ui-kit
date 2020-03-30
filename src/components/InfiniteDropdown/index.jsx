@@ -7,7 +7,7 @@ import { useListFetch } from "../../hooks";
 import { InfiniteScroll } from "../index";
 import { FormDropdown } from "../form/components";
 
-function InifiniteDropdown({
+function InfiniteDropdown({
   value,
   onChange,
   options,
@@ -78,10 +78,10 @@ function InifiniteDropdown({
   );
 }
 
-InifiniteDropdown.Option = FormDropdown.Option;
-InifiniteDropdown.Menu = FormDropdown.Menu;
+InfiniteDropdown.Option = FormDropdown.Option;
+InfiniteDropdown.Menu = FormDropdown.Menu;
 
-InifiniteDropdown.propTypes = {
+InfiniteDropdown.propTypes = {
   value: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   fetchOptions: PropTypes.func.isRequired,
@@ -101,10 +101,10 @@ InifiniteDropdown.propTypes = {
   renderSelected: PropTypes.func,
 };
 
-InifiniteDropdown.defaultProps = {
+InfiniteDropdown.defaultProps = {
   multiple: false,
   limit: 10,
   "data-testid": "infinite-dropdown",
 };
 
-export { InifiniteDropdown };
+export { InfiniteDropdown };

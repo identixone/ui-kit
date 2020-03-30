@@ -17,7 +17,7 @@ export * from "./Header";
 export * from "./IdCopy";
 export * from "./IdFormat";
 export * from "./InfiniteScroll";
-export * from "./InifiniteDropdown";
+export * from "./InfiniteDropdown";
 export * from "./ImageCentered";
 export * from "./LazyImage";
 export * from "./ListItemPopup";
