@@ -56,8 +56,8 @@ function renderFormCheckboxGroup() {
   return render(<FormCheckboxGroupWrapper />);
 }
 
-describe("FormCheckbox tests", () => {
-  test("FormCheckbox should change checked state by click", () => {
+describe("FormCheckboxGroup tests", () => {
+  test("FormCheckboxGroup should change checked state by click", () => {
     const { getByTestId } = renderFormCheckboxGroup();
 
     expect(getByTestId("test-form")).toHaveFormValues({

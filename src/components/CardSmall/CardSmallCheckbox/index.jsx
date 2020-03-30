@@ -14,13 +14,7 @@ function CardSmallCheckbox({ name, onChange, checked, isHidden }) {
       }}
       isHidden={isHidden}
     >
-      <FormCheckbox
-        name={name}
-        onChange={onChange}
-        checked={checked}
-        checkboxTheme="dark"
-        size="large"
-      />
+      <FormCheckbox name={name} onChange={onChange} checked={checked} />
     </StyledCardSmallCheckbox>
   );
 }

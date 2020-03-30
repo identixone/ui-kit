@@ -2,36 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { StyledFormCheckbox } from "./StyledFormCheckbox";
-import { FormCheckboxFlag } from "./FormCheckboxFlag";
+import { FormCheckboxCheckedIcon } from "./FormCheckboxCheckedIcon";
 import { FormCheckboxInput } from "./FormCheckboxInput";
 
 import { getTestId } from "../../utils";
 
-function FormCheckbox({
-  checked,
-  onChange,
-  onBlur,
-  onClick,
-  name,
-  disabled,
-  checkboxTheme,
-  size,
-  className,
-  "data-testid": testId,
-}) {
-  testId = getTestId(name, testId);
+function FormCheckbox(props) {
+  const {
+    checked,
+    onChange,
+    onBlur,
+    onClick,
+    name,
+    disabled,
+    className,
+  } = props;
+  const testId = getTestId(props.name, props["data-testid"]);
 
   return (
     <StyledFormCheckbox
       disabled={disabled}
       htmlFor={name}
-      checkboxTheme={checkboxTheme}
-      size={size}
       className={className}
       data-testid={testId}
       onClick={onClick}
     >
-      <FormCheckboxFlag checked={checked} />
+      {checked && <FormCheckboxCheckedIcon />}
       <FormCheckboxInput
         id={name}
         name={name}
@@ -54,15 +50,8 @@ FormCheckbox.propTypes = {
   checked: PropTypes.bool.isRequired,
   name: PropTypes.string,
   disabled: PropTypes.bool,
-  checkboxTheme: PropTypes.oneOf(["light", "dark"]),
-  size: PropTypes.oneOf(["small", "large"]),
   className: PropTypes.string,
   "data-testid": PropTypes.string,
-};
-
-FormCheckbox.defaultProps = {
-  checkboxTheme: "light",
-  size: "small",
 };
 
 export { FormCheckbox, StyledFormCheckbox };
