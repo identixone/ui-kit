@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { number, boolean } from "@storybook/addon-knobs";
+import { number } from "@storybook/addon-knobs";
 
 import { useState } from "react";
 
@@ -19,7 +19,6 @@ storiesOf("Form Components| FormRangeSlider", module).add("default", () => {
           minFrom={number("min from", 0)}
           minTo={number("min from", 99)}
           width={number("width", 200)}
-          withClear={boolean("with clear", false)}
         />
       </div>
     );

@@ -52,12 +52,11 @@ describe("FormRangeSlider tests", () => {
     ).toHaveTextContent(99);
   });
 
-  test("FormRangeSlider should render clear button corretly", () => {
-    const { getByTestId } = renderFormRangeSlider({
-      withClear: true,
-    });
-
-    expect(getByTestId(`${componentName}-clear`)).not.toBeVisible();
+  /**
+   * TODO: Подумать как написать этот тест
+   */
+  test.skip("FormRangeSlider should change value correctly", () => {
+    const { getByTestId } = renderFormRangeSlider();
 
     /**
      * реализация тестирования drag and drop
@@ -75,7 +74,5 @@ describe("FormRangeSlider tests", () => {
       clientX: 1,
       clientY: 0,
     });
-
-    expect(getByTestId(`${componentName}-clear`)).toBeVisible();
   });
 });
