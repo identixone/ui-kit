@@ -311,10 +311,9 @@ function FormDropdown({
             </FormDropdownControl>
             <FormDropdownMenu
               {...getMenuProps(
-                { isOpen, "data-testid": testId + "-menu" },
+                { isOpen, "data-testid": testId + "-menu", ref: listRef },
                 { suppressRefError: true }
               )}
-              ref={listRef}
             >
               {isOpen && (
                 <React.Fragment>
@@ -323,8 +322,8 @@ function FormDropdown({
                       <FormDropdownInput
                         {...getInputProps({
                           "data-testid": testId + "-search",
+                          ref: inputRef,
                         })}
-                        ref={inputRef}
                       />
                     </FormDropdownInputWrapper>
                   )}
