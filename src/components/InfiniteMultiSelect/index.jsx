@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useInfiniteMenu } from "../../hooks";
 
 import { InfiniteScroll } from "../InfiniteScroll";
-import { FormMultiSelect } from "../components/form";
+import { FormMultiSelect } from "../form/components";
 
 function InfiniteMultiSelect({
   name,
