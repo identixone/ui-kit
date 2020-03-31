@@ -64,6 +64,7 @@ Button.propTypes = {
     "disabled",
     "outline",
     "outline-accent",
+    "green",
   ]),
 
   // Проперти добавлено для того, чтобы в FF не показывать аутлайн (работает только через !important)

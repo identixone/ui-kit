@@ -122,6 +122,12 @@ const warningTheme = css`
   background-color: #ac3d03;
 `;
 
+const greenTheme = css`
+  color: ${colors.whiteSimple};
+  background-color: ${colors.lightGreen};
+  ${getPseudoForShadow}
+`;
+
 const outlineTheme = css`
   color: ${colors.slate};
   border: 1px solid ${colors.slate};
@@ -184,4 +190,5 @@ export default {
   "light-gray": lighterGrayTheme,
   outline: outlineTheme,
   "outline-accent": outlineAccentTheme,
+  green: greenTheme,
 };
