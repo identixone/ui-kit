@@ -56,6 +56,10 @@ class FormMultiSelect extends React.Component {
   tagsRef = React.createRef();
 
   stateReducer = (_, changes) => {
+    if (changes.type === Downshift.stateChangeTypes.changeInput) {
+      this.setState({ inputValue: changes.inputValue });
+    }
+
     switch (changes.type) {
       case Downshift.stateChangeTypes.keyDownEnter:
       case Downshift.stateChangeTypes.clickItem:
@@ -116,6 +120,10 @@ class FormMultiSelect extends React.Component {
 
       this.setState({ isMenuUp });
     }
+
+    if (prevState.inputValue !== this.state.inputValue) {
+      this.props.onInputChange(this.state.inputValue);
+    }
   }
 
   removeItem = item => {
@@ -139,14 +147,6 @@ class FormMultiSelect extends React.Component {
   handleChange = option => {
     this.addItem(option);
     this.setState({ inputValue: "", isOpen: true });
-  };
-
-  handleInputChange = inputValue => {
-    const { onInputChange } = this.props;
-
-    this.setState({ inputValue }, () => {
-      onInputChange && onInputChange(inputValue);
-    });
   };
 
   handleInputBlur = () => {
@@ -194,7 +194,6 @@ class FormMultiSelect extends React.Component {
         stateReducer={this.stateReducer}
         defaultHighlightedIndex={0}
         inputValue={inputValue}
-        onInputValueChange={this.handleInputChange}
         selectedItem={selected}
         isOpen={isOpen}
         data-testid={testId}
@@ -313,5 +312,8 @@ class FormMultiSelect extends React.Component {
     );
   }
 }
+
+FormMultiSelect.Menu = FormMultiSelectMenu;
+FormMultiSelect.Option = FormMultiSelectOption;
 
 export { FormMultiSelect, StyledFormMultiSelect };
