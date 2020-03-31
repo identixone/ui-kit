@@ -1,54 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useEffect } from "react";
-
-import { Button } from "../Button";
 import { StyledPageCard } from "./StyledPageCard";
 import { PageCardButtons } from "./PageCardButtons";
 
-import { Check, ArrowLeft } from "../../assets/icons";
-
-function PageCard({
-  children,
-  withButtons,
-  isLoading,
-  onDone,
-  onBack,
-  className,
-  fetchError,
-}) {
-  useEffect(() => {
-    if (fetchError && onBack) {
-      onBack();
-    }
-  }, [fetchError]);
-
+function PageCard({ children, className, buttons, "data-testid": testId }) {
   return (
-    <StyledPageCard className={className}>
-      {withButtons && (
-        <PageCardButtons>
-          <Button
-            fit="square"
-            size="large"
-            buttonTheme="dark"
-            onClick={onBack}
-            data-testid="page-card-back-button"
-          >
-            <ArrowLeft size="16" />
-          </Button>
-          <Button
-            fit="square"
-            size="large"
-            buttonTheme="green"
-            onClick={onDone}
-            isDisabled={isLoading}
-            data-testid="page-card-update-button"
-          >
-            <Check size="14" />
-          </Button>
-        </PageCardButtons>
-      )}
+    <StyledPageCard className={className} data-testid={testId}>
+      {buttons && <PageCardButtons>{buttons}</PageCardButtons>}
       {children}
     </StyledPageCard>
   );
@@ -56,12 +15,9 @@ function PageCard({
 
 PageCard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
-  withButtons: PropTypes.bool,
-  onDone: PropTypes.func,
-  onBack: PropTypes.func,
-  isLoading: PropTypes.bool,
-  fetchError: PropTypes.object,
+  buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   className: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 export { PageCard, StyledPageCard };
