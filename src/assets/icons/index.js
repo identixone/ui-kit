@@ -29,6 +29,7 @@ export {
 export {
   RightArrow as BoxRightArrow,
   LeftArrow as BoxLeftArrow,
+  Pencil as BoxPencil,
 } from "@styled-icons/boxicons-solid";
 
 export {
