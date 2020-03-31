@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useListFetch } from "./use-list-fetch";
 
 function useInfiniteMenu({ limit, hasNext, fetchOptions }) {
-  const [isListEnds, setIsListEnds] = useState(hasNext);
+  const [isListEnds, setIsListEnds] = useState(!hasNext);
 
   const { pagination, setPagination, setFetchParams } = useListFetch({
     fetchList: params => {
@@ -12,7 +12,7 @@ function useInfiniteMenu({ limit, hasNext, fetchOptions }) {
   });
 
   useEffect(() => {
-    setIsListEnds(hasNext);
+    setIsListEnds(!hasNext);
   }, [hasNext]);
 
   function searchOptions(value) {
