@@ -7,11 +7,9 @@ import StyledFormField from "./StyledFormField";
 import { FormLabel, FormLabelTitle } from "../FormLabel";
 
 import { Tooltip } from "../../../Tooltip";
-import FormFieldIcon from "./FormFieldIcon";
+import { FormFieldIcon } from "./FormFieldIcon";
 import FormFieldTag from "./FormFieldTag";
 import FormFieldError from "./FormFieldError";
-
-import { InfoCircle } from "../../../../assets/icons";
 
 function FormField(props) {
   const {
@@ -69,9 +67,7 @@ function FormField(props) {
     return (
       tip && (
         <Tooltip title={tip}>
-          <FormFieldIcon>
-            <InfoCircle size="16" />
-          </FormFieldIcon>
+          <FormFieldIcon size={14} />
         </Tooltip>
       )
     );

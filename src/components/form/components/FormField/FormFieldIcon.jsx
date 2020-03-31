@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-const FormFieldIcon = styled.span`
-  display: inline-block;
-  margin-left: 5px;
-  color: #aeb9be;
+import { InfoCircle } from "../../../../assets/icons";
+
+import { colors } from "../../../../themes/colors";
+
+const FormFieldIcon = styled(InfoCircle)`
+  align-self: flex-start;
+  color: ${colors.grayMedium};
+  margin-left: 2px;
 `;
 
-export default FormFieldIcon;
+export { FormFieldIcon };

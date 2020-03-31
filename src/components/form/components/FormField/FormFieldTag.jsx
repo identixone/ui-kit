@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
+import { colors } from "../../../../themes/colors";
+
 const FormFieldTag = styled.span`
   display: inline-block;
+  align-self: center;
   margin-left: 6px;
   padding: 0 5px;
   font-size: 13px;
+  line-height: 1.5;
   font-weight: 700;
-  color: #fff;
+  color: ${colors.whiteSimple};
+  background-color: ${colors.grayMedium};
   border-radius: 3px;
-  background-color: #aeb9be;
 `;
 
 export default FormFieldTag;
