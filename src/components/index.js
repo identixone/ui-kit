@@ -18,6 +18,7 @@ export * from "./IdCopy";
 export * from "./IdFormat";
 export * from "./InfiniteScroll";
 export * from "./InfiniteDropdown";
+export * from "./InfiniteMultiSelect";
 export * from "./ImageCentered";
 export * from "./LazyImage";
 export * from "./ListItemPopup";

@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useState, useEffect } from "react";
-import { useListFetch } from "../../hooks";
+import { useInfiniteMenu } from "../../hooks";
 
 import { InfiniteScroll } from "../index";
 import { FormDropdown } from "../form/components";
@@ -13,7 +12,7 @@ function InfiniteDropdown({
   options,
   fetchOptions,
   isFetching,
-  totalCount,
+  hasNext,
   limit,
   placeholder,
   "data-testid": testId,
@@ -26,35 +25,15 @@ function InfiniteDropdown({
   onStateChange,
   renderSelected,
 }) {
-  const [isListEnds, setIsListEnds] = useState(false);
-
-  const { pagination, setPagination, setFetchParams } = useListFetch({
-    fetchList: params => {
-      fetchOptions({ ...params, meta: { clearList: params.offset === 0 } });
-    },
-    pagination: { limit, offset: 0 },
+  const { searchOptions, fetchNext } = useInfiniteMenu({
+    limit,
+    hasNext,
+    isFetching,
+    fetchOptions,
   });
 
-  useEffect(() => {
-    setIsListEnds(pagination.offset + pagination.limit > totalCount);
-  }, [options]);
-
-  function handleSearch(value) {
-    setFetchParams({
-      q: value,
-      offset: 0,
-    });
-  }
-
   return (
-    <InfiniteScroll
-      onScrollToPoint={() => {
-        if (!isListEnds) {
-          setPagination({ offset: pagination.offset + pagination.limit });
-        }
-      }}
-      isFetching={isFetching}
-    >
+    <InfiniteScroll onScrollToPoint={fetchNext} isFetching={isFetching}>
       {({ scrollerRef }) => (
         <FormDropdown
           className={className}
@@ -64,7 +43,7 @@ function InfiniteDropdown({
           onChange={onChange}
           data-testid={testId}
           name={name}
-          onInputChange={handleSearch}
+          onInputChange={searchOptions}
           listRef={scrollerRef}
           placeholder={placeholder}
           renderItem={renderItem}
@@ -88,7 +67,7 @@ InfiniteDropdown.propTypes = {
   options: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   placeholder: PropTypes.string,
-  totalCount: PropTypes.number.isRequired,
+  hasNext: PropTypes.bool.isRequired,
   limit: PropTypes.number.isRequired,
   "data-testid": PropTypes.string,
   name: PropTypes.string,
