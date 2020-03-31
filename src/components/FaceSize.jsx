@@ -3,9 +3,9 @@ import colors from "../themes/colors";
 
 export const FaceSize = styled.div`
   position: absolute;
-  opacity: 0.9;
-  top: -1px;
-  width: 35px;
+  top: 0px;
+  width: 36px;
+  height: 18px;
   font-size: 11px;
   font-weight: 600;
   text-align: center;

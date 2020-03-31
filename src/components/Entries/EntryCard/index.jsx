@@ -70,16 +70,18 @@ function EntryCard({
         />
       </EntryCardPhotos>
 
-      <EntryCardEntryType title="Type" type={entry.conf} />
-
       <EntryCardInfo>
         <EntryCardLiveness liveness={entry.liveness} />
 
         <EntryCardInfoColumn>
+          <EntryCardInfoItem label="Confidence">
+            <EntryCardEntryType type={entry.conf}>
+              {confidence}
+            </EntryCardEntryType>
+          </EntryCardInfoItem>
           <EntryCardInfoItem label="ID">
             <IdCopy id={entry.idxid} />
           </EntryCardInfoItem>
-          <EntryCardInfoItem label="Confidence">{confidence}</EntryCardInfoItem>
           <EntryCardInfoItem label="Detected">
             {timeFormat(entry.created)}
           </EntryCardInfoItem>

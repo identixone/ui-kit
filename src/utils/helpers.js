@@ -221,3 +221,23 @@ export function capitalize(s) {
 export function hasProperty(obj, property) {
   return Object.prototype.hasOwnProperty.call(obj, property);
 }
+
+export function isSameDate(d1, d2) {
+  if (!d1 || !d2) return false;
+
+  try {
+    return new Date(d1).getTime() === new Date(d2).getTime();
+  } catch (e) {
+    console.log(e);
+
+    return false;
+  }
+}
+
+export function isValidDate(date, format) {
+  if (format) {
+    return dayjs(date, format).format(format) === date;
+  }
+
+  return dayjs(date).isValid();
+}

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 const EntryCardPhotoTitle = styled.p`
-  font-size: 13px;
   transform: rotate(-180deg);
-  text-transform: uppercase;
   writing-mode: vertical-lr;
   margin: 0;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
 `;
 
 export { EntryCardPhotoTitle };

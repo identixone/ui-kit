@@ -6,6 +6,7 @@ const EntryCardActions = styled.div`
   right: 0;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 `;
 
 export { EntryCardActions };

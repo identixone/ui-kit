@@ -2,51 +2,45 @@ import styled from "styled-components";
 
 import {
   EntryCardContainer,
-  EntryCardActions,
-  EntryCardActionsButton,
   EntryCardInfo,
   EntryCardInfoColumn,
-  StyledEntryCardInfoItem,
   EntryCardInfoItemLabel,
-  EntryCardInfoItemValue,
+  EntryCardActions,
 } from "../components";
 
+import { colors } from "../../../themes/colors";
+
 const StyledPersonEntriesCard = styled(EntryCardContainer)`
-  background-color: transparent;
   border-radius: 4px;
+  background-color: ${colors.whiteSimple};
+  box-shadow: 0px 0px 80px rgba(162, 182, 189, 0.2);
   overflow: hidden;
-  box-shadow: 0px 0px 30px 0px rgba(162, 182, 189, 0.25);
 
   ${EntryCardInfo} {
-    padding: 20px 20px 20px 40px;
+    padding: 18px 18px 18px 60px;
   }
 
   ${EntryCardInfoColumn} {
-    &:not(:last-of-type) {
-      width: 305px;
-      margin-right: 48px;
+    &:first-of-type {
+      ${EntryCardInfoItemLabel} {
+        width: 122px;
+      }
     }
-  }
 
-  ${StyledEntryCardInfoItem} {
-    line-height: 22px;
-  }
+    &:last-of-type {
+      ${EntryCardInfoItemLabel} {
+        width: 161px;
+      }
+    }
 
-  ${EntryCardInfoItemLabel} {
-    width: 157px;
-    font-weight: 600;
-  }
-
-  ${EntryCardInfoItemValue} {
-    font-weight: 300;
+    &:not(:last-of-type) {
+      width: 260px;
+      margin-right: 55px;
+    }
   }
 
   ${EntryCardActions} {
     opacity: 1;
-  }
-
-  ${EntryCardActionsButton} {
-    line-height: 32px;
   }
 `;
 
