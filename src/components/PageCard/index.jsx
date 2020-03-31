@@ -12,15 +12,15 @@ import { Check, ArrowLeft } from "../../assets/icons";
 function PageCard({
   children,
   withButtons,
-  onUpdate,
   isLoading,
-  onBackButtonClick,
+  onDone,
+  onBack,
   className,
   fetchError,
 }) {
   useEffect(() => {
-    if (fetchError && onBackButtonClick) {
-      onBackButtonClick();
+    if (fetchError && onBack) {
+      onBack();
     }
   }, [fetchError]);
 
@@ -33,7 +33,7 @@ function PageCard({
             fit="square"
             size="large"
             buttonTheme="dark"
-            onClick={onBackButtonClick}
+            onClick={onBack}
             data-testid="page-card-back-button"
           >
             <ArrowLeft size="16" />
@@ -42,7 +42,7 @@ function PageCard({
             fit="square"
             size="large"
             buttonTheme="green"
-            onClick={onUpdate}
+            onClick={onDone}
             isDisabled={isLoading}
             data-testid="page-card-update-button"
           >
@@ -57,9 +57,9 @@ function PageCard({
 PageCard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   withButtons: PropTypes.bool,
-  onUpdate: PropTypes.func,
+  onDone: PropTypes.func,
+  onBack: PropTypes.func,
   isLoading: PropTypes.bool,
-  onBackButtonClick: PropTypes.func,
   fetchError: PropTypes.object,
   className: PropTypes.string,
 };
