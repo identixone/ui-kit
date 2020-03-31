@@ -22,9 +22,8 @@ export class InfiniteScroll extends React.Component {
     if (target === window.document) {
       const { pageYOffset, innerHeight } = window;
       const { scrollHeight } = window.document.body;
-      const isScrollDown = this.state.lastScrollMenuTop < pageYOffset;
-
       const fetchOffset = this.props.fetchOnOffset || scrollHeight * 0.9;
+      const isScrollDown = this.state.lastScrollMenuTop < pageYOffset;
 
       this.setState(
         {
@@ -42,6 +41,7 @@ export class InfiniteScroll extends React.Component {
       );
     } else {
       const { scrollTop, scrollHeight } = target;
+      const fetchOffset = this.props.fetchOnOffset || scrollHeight * 0.9;
       const { height } = target.getBoundingClientRect();
       const isScrollDown = this.state.lastScrollMenuTop < scrollTop;
 
