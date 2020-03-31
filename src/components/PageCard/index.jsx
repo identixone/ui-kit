@@ -1,70 +1,67 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledPageCard from "./StyledPageCard";
-import PageCardButtons from "./PageCardButtons";
-import PageCardButton from "./PageCardButton";
-import PageCardTitle from "./PageCardTitle";
+import { useEffect } from "react";
 
-import { Sync, ArrowLeft } from "../../assets/icons";
+import { Button } from "../Button";
+import { StyledPageCard } from "./StyledPageCard";
+import { PageCardButtons } from "./PageCardButtons";
 
-class PageCard extends React.Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
-    withButtons: PropTypes.bool,
-    onUpdate: PropTypes.func,
-    title: PropTypes.string,
-    titleColor: PropTypes.string,
-    isLoading: PropTypes.bool,
-    onBackButtonClick: PropTypes.func,
-    fetchError: PropTypes.object,
-    className: PropTypes.string,
-  };
+import { Check, ArrowLeft } from "../../assets/icons";
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.fetchError && this.props.fetchError) {
-      this.props.onBackButtonClick();
+function PageCard({
+  children,
+  withButtons,
+  onUpdate,
+  isLoading,
+  onBackButtonClick,
+  className,
+  fetchError,
+}) {
+  useEffect(() => {
+    if (fetchError && onBackButtonClick) {
+      onBackButtonClick();
     }
-  }
+  }, [fetchError]);
 
-  render() {
-    const {
-      children,
-      withButtons,
-      onUpdate,
-      title,
-      titleColor,
-      isLoading,
-      onBackButtonClick,
-      className,
-    } = this.props;
-
-    return (
-      <StyledPageCard className={className}>
-        {title && (
-          <PageCardTitle titleColor={titleColor} data-testid="page-card-title">
-            {title}
-          </PageCardTitle>
-        )}
-        {children}
-        {withButtons && (
-          <PageCardButtons>
-            <PageCardButton buttonTheme="dark" onClick={onBackButtonClick}>
-              <ArrowLeft size="16" />
-            </PageCardButton>
-            <PageCardButton
-              buttonTheme="lighter"
-              onClick={onUpdate}
-              isDisabled={isLoading}
-              data-testid="page-card-update-button"
-            >
-              <Sync size="16" isSpin={isLoading} />
-            </PageCardButton>
-          </PageCardButtons>
-        )}
-      </StyledPageCard>
-    );
-  }
+  return (
+    <StyledPageCard className={className}>
+      {children}
+      {withButtons && (
+        <PageCardButtons>
+          <Button
+            fit="square"
+            size="large"
+            buttonTheme="dark"
+            onClick={onBackButtonClick}
+            data-testid="page-card-back-button"
+          >
+            <ArrowLeft size="16" />
+          </Button>
+          <Button
+            fit="square"
+            size="large"
+            buttonTheme="green"
+            onClick={onUpdate}
+            isDisabled={isLoading}
+            data-testid="page-card-update-button"
+          >
+            <Check size="14" />
+          </Button>
+        </PageCardButtons>
+      )}
+    </StyledPageCard>
+  );
 }
+
+PageCard.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  withButtons: PropTypes.bool,
+  onUpdate: PropTypes.func,
+  isLoading: PropTypes.bool,
+  onBackButtonClick: PropTypes.func,
+  fetchError: PropTypes.object,
+  className: PropTypes.string,
+};
 
 export { PageCard, StyledPageCard };
