@@ -26,7 +26,6 @@ function PageCard({
 
   return (
     <StyledPageCard className={className}>
-      {children}
       {withButtons && (
         <PageCardButtons>
           <Button
@@ -50,6 +49,7 @@ function PageCard({
           </Button>
         </PageCardButtons>
       )}
+      {children}
     </StyledPageCard>
   );
 }
