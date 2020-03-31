@@ -37,7 +37,6 @@ function FormMultiSelect(props) {
     name,
   } = props;
   const testId = getTestId(name, props["data-testid"]);
-  console.log(testId);
   const [selected, setSelected] = useState(value);
   const prevSelected = usePrevious(selected);
   const [inputValue, setInputValue] = useState("");
