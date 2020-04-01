@@ -45,6 +45,7 @@ export {
   PlaylistAddCheck,
 } from "@styled-icons/material";
 
+export { default as Pencil } from "./Pencil";
 export { default as TimesDelete } from "./TimesDelete";
 export { default as Check } from "./Check";
 export { default as Sync } from "./Sync";
