@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function useRedirectOnError({ error, redirect }) {
+function useRedirectOnError(error, redirect) {
   useEffect(() => {
     if (error && redirect) {
       redirect();
