@@ -5,11 +5,12 @@ import { colors } from "../../../../../../themes/colors";
 
 const FormMultiSelectTagsItemTitle = styled.span`
   font-size: 12px;
+  line-height: 20px;
   color: ${colors.darkBlack};
   ${textTrimStyles}
 
   &:not(:last-child) {
-    margin-right: 8px;
+    margin-right: 4px;
   }
 `;
 

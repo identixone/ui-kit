@@ -46,8 +46,9 @@ function FormMultiSelect(props) {
 
   useEffect(() => {
     const input = inputRef.current;
+
     function handleKeyDown(ev) {
-      if (ev.keyCode === BACKSPACE_KEY_CODE && inputValue === "") {
+      if (ev.keyCode === BACKSPACE_KEY_CODE && ev.target.value === "") {
         // Удаляем последний элемент
         setSelected(selected => selected.slice(0, selected.length - 1));
         setIsOpen(false);

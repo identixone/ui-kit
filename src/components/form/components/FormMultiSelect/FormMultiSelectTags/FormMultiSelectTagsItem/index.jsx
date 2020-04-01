@@ -18,7 +18,7 @@ function FormMultiSelectTagsItem({
         onClick={onCrossClick}
         data-testid={`${testId}-cross`}
       >
-        <TimesDelete size={16} />
+        <TimesDelete size={12} />
       </FormMultiSelectTagsItemRemoveButton>
     </StyledFormMultiSelectTagsItem>
   );

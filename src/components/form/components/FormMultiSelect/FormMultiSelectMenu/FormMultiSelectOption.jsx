@@ -1,20 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+import { colors } from "../../../../../themes/colors";
+
+function getStyles({ isHighlighted }) {
+  if (isHighlighted) {
+    return css`
+      background-color: ${colors.whiteGrayLight};
+    `;
+  }
+}
 
 const FormMultiSelectOption = styled.li`
   font-size: 16px;
-  line-height: 1.5;
-  padding: 4px 23px;
+  line-height: 26px;
+  padding: 6px 18px;
   cursor: pointer;
-  background-color: ${({ isHighlighted }) => {
-    if (isHighlighted) return "#3b4b5a";
-
-    return "#fff";
-  }};
-  color: ${({ isHighlighted }) => {
-    if (isHighlighted) return "#fff";
-
-    return "#263238";
-  }};
+  color: ${colors.darkBlack};
+  ${getStyles}
 `;
 
 export { FormMultiSelectOption };
