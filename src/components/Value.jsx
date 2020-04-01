@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 
-import { isNotEmpty } from "../utils/helpers";
+import { isNotEmpty, hasProperty } from "../utils/helpers";
 
 export function Value(props) {
-  const hasValueInProps = Object.prototype.hasOwnProperty.call(props, "value");
+  const hasValueInProps = hasProperty(props, "value");
 
   const { children, defaultValue, isZeroEmpty, value } = props;
   const valueToCheck = hasValueInProps ? value : children;

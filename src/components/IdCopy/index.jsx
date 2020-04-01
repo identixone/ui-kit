@@ -9,10 +9,12 @@ import { StyledIdCopy } from "./StyledIdCopy";
 import { IdCopyIcon } from "./IdCopyIcon";
 import { Value } from "../Value";
 
+import { hasProperty } from "../../utils/helpers";
+
 const getShortId = id => id.split("-")[4];
 
 export function IdCopy(props) {
-  const hasIdInProps = Object.prototype.hasOwnProperty.call(props, "id");
+  const hasIdInProps = hasProperty(props, "id");
 
   const { children, id } = props;
 

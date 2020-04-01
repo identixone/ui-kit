@@ -9,6 +9,8 @@ import { CardSmallButton } from "./CardSmallButton";
 import { CardSmallCheckbox } from "./CardSmallCheckbox";
 import { CardSmallTitle } from "./CardSmallTitle";
 
+import { hasProperty } from "../../utils/helpers";
+
 function CardSmall(props) {
   const {
     theme,
@@ -20,7 +22,7 @@ function CardSmall(props) {
     className,
   } = props;
 
-  const hasPhoto = Object.prototype.hasOwnProperty.call(props, "img");
+  const hasPhoto = hasProperty(props, "img");
 
   return (
     <ThemeProvider theme={{ theme }}>
