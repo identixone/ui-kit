@@ -31,6 +31,8 @@ export function useListFetch({
   searchQuery: initialSearchQuery = "",
   clearList = true,
   searchQueryHook = useSearchQuery,
+  fetchOnInitial = true,
+  onFetchParamsChange,
 }) {
   if (!(fetchList instanceof Function)) {
     console.warn("You did not specify fetchList function");
@@ -69,6 +71,14 @@ export function useListFetch({
   }
 
   useDeepCompareEffect(() => {
+    if (onFetchParamsChange) {
+      onFetchParamsChange(prevFetchParams, fetchParams);
+    }
+
+    if (prevFetchParams === undefined && !fetchOnInitial) {
+      return;
+    }
+
     const hasDebounce = prevFetchParams && prevFetchParams.q !== fetchParams.q;
 
     if (fetchParams.q !== searchQuery) {
@@ -92,6 +102,10 @@ export function useListFetch({
     setFetchParams({ limit: pagination.limit, offset: pagination.offset });
   }, [pagination]);
 
+  function changeOffset(offset) {
+    setPagination({ ...pagination, offset });
+  }
+
   return {
     pagination,
     setPagination,
@@ -104,5 +118,8 @@ export function useListFetch({
     setSearchQuery,
 
     fetchListWithParams,
+
+    offset: pagination.offset,
+    changeOffset,
   };
 }
