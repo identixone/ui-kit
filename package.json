@@ -70,6 +70,7 @@
     "nouislider": "^14.2.0",
     "nouislider-react": "^3.3.7",
     "rc-notification": "^4.0.0",
+    "react-datepicker": "^2.14.1",
     "react-dropzone": "^10.2.2",
     "react-i18next": "^11.3.4",
     "react-qr-svg": "^2.2.1",
