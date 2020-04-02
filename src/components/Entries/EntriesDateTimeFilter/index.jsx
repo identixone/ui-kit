@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { useState, useRef, useMemo } from "react";
 import { useUpdateEffect } from "react-use";
-import { usePositionPopup } from "@identixone/ui-kit/src/hooks";
+import { usePositionPopup } from "../../../hooks";
 
 import { EntriesDateTimeFilterPopup } from "./EntriesDateTimeFilterPopup";
 import { EntriesDateTimeFilterTabs } from "./EntriesDateTimeFilterTabs";
@@ -12,7 +12,7 @@ import { EntriesDateTimeFilterControl } from "./EntriesDateTimeFilterControl";
 import { EntriesDateTimeFilterError } from "./EntriesDateTimeFilterError";
 import { EntriesDateTimeFilterTotalTime } from "./EntriesDateTimeFilterTotalTime";
 import { EntriesDateTimeFilterResetButton } from "./EntriesDateTimeFilterResetButton";
-import { Times } from "@identixone/ui-kit/src/assets/icons";
+import { Times } from "../../../assets/icons";
 
 import { identity } from "lodash-es";
 import dayjs from "dayjs";

@@ -2,7 +2,7 @@ import React from "react";
 
 import { useContext } from "react";
 
-import { TabsContext } from "@identixone/ui-kit/src/components/Tabs";
+import { TabsContext } from "../../../../../components/Tabs";
 
 import { StyledEntriesDateTimeFilterTabsTabbar } from "./StyledEntriesDateTimeFilterTabsTabbar";
 import { EntriesDateTimeFilterTabsTabbarButton } from "./EntriesDateTimeFilterTabsTabbarButton";

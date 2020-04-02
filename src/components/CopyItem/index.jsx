@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { useEffect } from "react";
-import { useCopyToClipboard } from "@identixone/ui-kit/src/hooks";
-import { useFlash } from "@identixone/ui-kit/src/components/Flash";
+import { useCopyToClipboard } from "../../hooks";
+import { useFlash } from "../Flash";
 
 import { StyledCopyItem } from "./StyledCopyItem";
 import { CopyItemIcon } from "./CopyItemIcon";

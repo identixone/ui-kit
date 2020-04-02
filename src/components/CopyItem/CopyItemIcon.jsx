@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { Clone } from "@identixone/ui-kit/src/assets/icons";
-import { colors } from "@identixone/ui-kit/src/themes/colors";
+import { Clone } from "../../assets/icons";
+import { colors } from "../../themes/colors";
 
 const CopyItemIcon = styled(Clone)`
   color: ${colors.grayMedium};

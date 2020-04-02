@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import { Button } from "@identixone/ui-kit/src/components/Button";
-import { colors } from "@identixone/ui-kit/src/themes/colors";
+import { Button } from "../../../../Button";
+import { colors } from "../../../../../themes/colors";
 
 const EntriesDateTimeFilterTabsTabbarButton = styled(Button).attrs(() => ({
   buttonTheme: "reset",

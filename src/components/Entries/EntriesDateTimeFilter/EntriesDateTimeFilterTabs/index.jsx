@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Tabs } from "@identixone/ui-kit/src/components/Tabs";
+import { Tabs } from "../../../Tabs";
 import { EntriesDateTimeFilterTabsTabbar } from "./EntriesDateTimeFilterTabsTabbar";
 import { EntriesDateTimeFilterTabsInner } from "./EntriesDateTimeFilterTabsInner";
 import { EntriesDateTimeFilterAbsolute } from "../EntriesDateTimeFilterAbsolute";

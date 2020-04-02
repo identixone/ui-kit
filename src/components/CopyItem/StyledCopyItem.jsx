@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { Flash } from "@identixone/ui-kit/src/components/Flash";
+import { Flash } from "../Flash";
 
-import { colors } from "@identixone/ui-kit/src/themes/colors";
+import { colors } from "../../themes/colors";
 
 const StyledCopyItem = styled(Flash)`
   cursor: pointer;

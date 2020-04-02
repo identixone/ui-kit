@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { colors } from "@identixone/ui-kit/src/themes/colors";
-import { PopupContainer } from "@identixone/ui-kit/src/components/PopupContainer";
+import { colors } from "../../../themes/colors";
+import { PopupContainer } from "../../PopupContainer";
 
 const EntriesDateTimeFilterPopup = styled(PopupContainer)`
   background-color: ${colors.whiteSimple};

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "@identixone/ui-kit/src/themes/colors";
+import { colors } from "../../../../../themes/colors";
 
 const EntriesDateTimeFilterDateTimeInputLabel = styled.label`
   display: inline-block;
