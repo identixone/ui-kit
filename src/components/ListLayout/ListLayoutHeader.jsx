@@ -6,6 +6,6 @@ export const ListLayoutHeader = styled.header`
   align-items: center;
 
   &:not(:last-child) {
-    margin-bottom: 13px;
+    margin-bottom: 24px;
   }
 `;

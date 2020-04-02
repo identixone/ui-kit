@@ -7,7 +7,6 @@ function getStyles({ level }) {
     1: css`
       font-size: 44px;
       line-height: 60px;
-      font-weight: 300;
       letter-spacing: -0.5px;
     `,
     2: css`
