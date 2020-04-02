@@ -8,6 +8,7 @@ const StyledSearch = styled.div`
   display: flex;
   align-items: center;
   padding: 12px 16px;
+  padding-right: 30px;
   height: 48px;
   border-radius: 8px;
   background-color: ${colors.whiteGrayLight};

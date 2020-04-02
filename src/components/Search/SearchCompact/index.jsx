@@ -9,8 +9,9 @@ import {
 
 import { colors } from "../../../themes/index.js";
 
-const SearchCompact = styled(Search)`
+const SearchCompact = styled(Search).attrs(() => ({ isCompact: true }))`
   padding: 3px 8px;
+  padding-right: 30px;
   height: 30px;
 
   ${SearchIcon} {

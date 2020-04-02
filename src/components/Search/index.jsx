@@ -6,6 +6,8 @@ import { SearchInput } from "./SearchInput";
 import { SearchFakeInputValue } from "./SearchFakeInputValue";
 import { SearchIcon } from "./SearchIcon";
 import { SearchCompact } from "./SearchCompact";
+import { SearchClearButton } from "./SearchClearButton";
+import { TimesDelete, TimesDeleteBold } from "../../assets/icons";
 
 function Search({
   value,
@@ -14,6 +16,7 @@ function Search({
   innerRef,
   className,
   "data-testid": testId,
+  isCompact,
 }) {
   return (
     <StyledSearch className={className}>
@@ -26,6 +29,19 @@ function Search({
         value={value}
       />
       <SearchFakeInputValue>{value}</SearchFakeInputValue>
+      {value && (
+        <SearchClearButton
+          onClick={() => {
+            onChange({ target: { value: "" } });
+          }}
+        >
+          {isCompact ? (
+            <TimesDeleteBold size={12} />
+          ) : (
+            <TimesDelete size={24} />
+          )}
+        </SearchClearButton>
+      )}
     </StyledSearch>
   );
 }
@@ -37,6 +53,7 @@ Search.propTypes = {
   innerRef: PropTypes.object,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
+  isCompact: PropTypes.bool,
 };
 
 Search.defaultProps = {
