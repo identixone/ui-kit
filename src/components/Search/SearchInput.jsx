@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const SearchInput = styled.input.attrs(() => ({
+import { colors } from "../../themes/colors";
+
+const SearchInput = styled.input.attrs(() => ({
   type: "search",
   spellCheck: "false",
 }))`
@@ -9,15 +11,15 @@ export const SearchInput = styled.input.attrs(() => ({
   padding: 0;
   width: 100%;
   background-color: inherit;
-  margin-right: 8px;
-  font-size: 20px;
-  color: rgb(67, 67, 67);
 
   &::placeholder {
-    color: rgba(67, 67, 67, 0.6);
+    font-weight: 300;
+    color: ${colors.gray};
   }
 
   &::-webkit-search-cancel-button {
     display: none;
   }
 `;
+
+export { SearchInput };

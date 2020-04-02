@@ -6,10 +6,10 @@ import styled from "styled-components";
  * например, выделять цветом только его часть
  */
 
-export const SearchFakeInputValue = styled.span`
+const SearchFakeInputValue = styled.span`
   position: absolute;
-  left: 54px;
-  font-size: 20px;
-  color: rgb(67, 67, 67);
+  left: 55px;
   pointer-events: none;
 `;
+
+export { SearchFakeInputValue };

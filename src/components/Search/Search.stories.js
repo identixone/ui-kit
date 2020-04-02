@@ -1,28 +1,39 @@
 import React from "react";
+
+import { useState } from "react";
+
 import { storiesOf } from "@storybook/react";
 
 import { Search } from "./index.jsx";
 
-storiesOf("Search", module).add("default", () => {
-  class SearchValueWrapper extends React.Component {
-    state = {
-      value: "",
-    };
+storiesOf("Search", module)
+  .add("default", () => {
+    function SearchWrapper() {
+      const [value, setValue] = useState("");
 
-    handleChange = ({ target: { value } }) => {
-      this.setState({ value });
-    };
-
-    render() {
       return (
         <Search
-          value={this.state.value}
-          onChange={this.handleChange}
+          value={value}
+          onChange={({ target: { value } }) => setValue(value)}
           placeholder="Start enter name..."
         />
       );
     }
-  }
 
-  return <SearchValueWrapper />;
-});
+    return <SearchWrapper />;
+  })
+  .add("compact", () => {
+    function SearchWrapper() {
+      const [value, setValue] = useState("");
+
+      return (
+        <Search.Compact
+          value={value}
+          onChange={({ target: { value } }) => setValue(value)}
+          placeholder="Start enter name..."
+        />
+      );
+    }
+
+    return <SearchWrapper />;
+  });

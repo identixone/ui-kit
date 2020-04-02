@@ -5,7 +5,7 @@ import { StyledSearch } from "./StyledSearch";
 import { SearchInput } from "./SearchInput";
 import { SearchFakeInputValue } from "./SearchFakeInputValue";
 import { SearchIcon } from "./SearchIcon";
-import { SearchClearButton } from "./SearchClearButton";
+import { SearchCompact } from "./SearchCompact";
 
 function Search({
   value,
@@ -13,28 +13,19 @@ function Search({
   placeholder,
   innerRef,
   className,
-  iconSize,
-  ...restProps
+  "data-testid": testId,
 }) {
   return (
     <StyledSearch className={className}>
-      <SearchIcon size={iconSize} />
+      <SearchIcon size={24} />
       <SearchInput
-        data-testid={restProps["data-testid"]}
+        data-testid={testId}
         ref={innerRef}
         placeholder={placeholder ? placeholder : undefined}
         onChange={onChange}
         value={value}
       />
       <SearchFakeInputValue>{value}</SearchFakeInputValue>
-      {value && (
-        <SearchClearButton
-          size={iconSize}
-          onClick={() => {
-            onChange({ target: { value: "" } });
-          }}
-        />
-      )}
     </StyledSearch>
   );
 }
@@ -44,14 +35,21 @@ Search.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   innerRef: PropTypes.object,
-  iconSize: PropTypes.number,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };
 
 Search.defaultProps = {
-  iconSize: 23,
   "data-testid": "search-input",
 };
 
-export { Search, StyledSearch, SearchFakeInputValue };
+Search.Compact = SearchCompact;
+
+export {
+  Search,
+  SearchCompact,
+  StyledSearch,
+  SearchInput,
+  SearchFakeInputValue,
+  SearchIcon,
+};
