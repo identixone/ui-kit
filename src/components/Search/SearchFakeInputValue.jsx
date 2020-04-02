@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const SearchFakeInputValue = styled.span`
   position: absolute;
-  left: 55px;
+  left: 56px;
   pointer-events: none;
 `;
 
