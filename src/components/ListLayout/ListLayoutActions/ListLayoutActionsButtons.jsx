@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { StyledButton } from "../../../Button";
+import { StyledButton } from "../../Button";
 
-export const ListLayoutListActionsButtons = styled.div`
+export const ListLayoutActionsButtons = styled.div`
   display: flex;
 
   ${StyledButton} {

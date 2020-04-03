@@ -7,20 +7,26 @@ import { ListLayoutTitle } from "./ListLayoutTitle";
 import { ListLayoutButtons } from "./ListLayoutButtons";
 import { ListLayoutSearch } from "./ListLayoutSearch";
 import { ListLayoutContent } from "./ListLayoutContent";
+import { ListLayoutTop } from "./ListLayoutTop";
 
 export function ListLayout({ title, buttons, search, actions, content }) {
   const hasHeader = title || buttons;
+  const hasTop = hasHeader || search;
 
   return (
     <StyledListLayout>
-      {hasHeader && (
-        <ListLayoutHeader>
-          {title && <ListLayoutTitle level={1}>{title}</ListLayoutTitle>}
-          {buttons && <ListLayoutButtons>{buttons}</ListLayoutButtons>}
-        </ListLayoutHeader>
+      {hasTop && (
+        <ListLayoutTop>
+          {hasHeader && (
+            <ListLayoutHeader>
+              {title && <ListLayoutTitle level={1}>{title}</ListLayoutTitle>}
+              {buttons && <ListLayoutButtons>{buttons}</ListLayoutButtons>}
+            </ListLayoutHeader>
+          )}
+          {search && <ListLayoutSearch>{search}</ListLayoutSearch>}
+        </ListLayoutTop>
       )}
 
-      {search && <ListLayoutSearch>{search}</ListLayoutSearch>}
       {actions && actions}
       {content && <ListLayoutContent>{content}</ListLayoutContent>}
     </StyledListLayout>
@@ -38,3 +44,4 @@ ListLayout.propTypes = {
 export * from "./ListLayoutList";
 export * from "./ListLayoutNotice";
 export * from "./ListLayoutDetailed";
+export * from "./ListLayoutActions";

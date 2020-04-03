@@ -177,9 +177,13 @@ storiesOf("List Layout", module)
                   <ListLayoutList
                     items={options}
                     noItemsText="No items found"
-                    totalCount={optionsCount}
-                    pagination={pagination}
-                    setPagination={setPagination}
+                    pagination={
+                      <ListLayoutList.Pagination
+                        pagination={pagination}
+                        setPagination={setPagination}
+                        totalCount={optionsCount}
+                      />
+                    }
                     isLoading={isLoading}
                     actions={
                       <ListLayoutList.Actions
@@ -282,9 +286,13 @@ storiesOf("List Layout", module)
                   <ListLayoutList
                     items={options}
                     noItemsText="No items found"
-                    totalCount={optionsCount}
-                    pagination={pagination}
-                    setPagination={setPagination}
+                    pagination={
+                      <ListLayoutList.Pagination
+                        pagination={pagination}
+                        setPagination={setPagination}
+                        totalCount={optionsCount}
+                      />
+                    }
                     columns={2}
                     actions={
                       <ListLayoutList.Actions
@@ -395,9 +403,13 @@ storiesOf("List Layout", module)
                   <ListLayoutList
                     items={persons}
                     noItemsText="No items found"
-                    totalCount={optionsCount}
-                    pagination={pagination}
-                    setPagination={setPagination}
+                    pagination={
+                      <ListLayoutList.Pagination
+                        pagination={pagination}
+                        setPagination={setPagination}
+                        totalCount={optionsCount}
+                      />
+                    }
                     columns={2}
                     renderItem={person => (
                       <PersonsGroupPerson

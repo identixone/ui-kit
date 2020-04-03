@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { StyledButton } from "../../../Button";
+import { StyledButton } from "../../Button";
 
-export const ListLayoutListActionsAdditional = styled.span`
+export const ListLayoutActionsAdditional = styled.span`
   margin-left: auto;
 
   ${StyledButton} {

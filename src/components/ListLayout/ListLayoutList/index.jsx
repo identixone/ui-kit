@@ -6,9 +6,7 @@ import { StyledListLayoutList } from "./StyledListLayoutList";
 import { ListLayoutNotice } from "../ListLayoutNotice";
 import { ListLayoutListItem } from "./ListLayoutListItem";
 import { ListLayoutListPagination } from "./ListLayoutListPagination";
-import { ListLayoutListActions } from "./ListLayoutListActions";
 import { ListLayoutListSpinner } from "./ListLayoutListSpinner";
-
 import { Ban } from "../../../assets/icons";
 
 function ListLayoutList({
@@ -17,18 +15,19 @@ function ListLayoutList({
   isLoading,
   renderItem,
   noItemsText,
-  totalCount,
-  actions,
   pagination,
-  setPagination,
   columns,
   className,
-  ...restProps
+  "data-testid": testId,
+  hasNext,
 }) {
+  const isListEmpty = hasNext === false && items.length === 0;
+  const hasPagePagination = Boolean(pagination);
+
   return (
-    <ListLayoutListWrapper data-testid={restProps["data-testid"]}>
-      {!isLoading ? (
-        totalCount === 0 ? (
+    <ListLayoutListWrapper data-testid={testId}>
+      {!isLoading || !hasPagePagination ? (
+        isListEmpty ? (
           <ListLayoutNotice
             icon={<Ban size="48" />}
             data-testid="empty-list-notice"
@@ -37,7 +36,6 @@ function ListLayoutList({
           </ListLayoutNotice>
         ) : (
           <React.Fragment>
-            {actions && actions}
             <StyledListLayoutList
               ref={listRef}
               columns={columns}
@@ -45,13 +43,8 @@ function ListLayoutList({
             >
               {items.map(renderItem)}
             </StyledListLayoutList>
-            {pagination && (
-              <ListLayoutListPagination
-                totalCount={totalCount}
-                pagination={pagination}
-                setPagination={setPagination}
-              />
-            )}
+
+            {pagination}
           </React.Fragment>
         )
       ) : (
@@ -66,13 +59,12 @@ ListLayoutList.propTypes = {
   items: PropTypes.array.isRequired,
   renderItem: PropTypes.func,
   noItemsText: PropTypes.string,
-  totalCount: PropTypes.number,
-  actions: PropTypes.element,
+  hasNext: PropTypes.bool.isRequired,
   pagination: PropTypes.object.isRequired,
-  setPagination: PropTypes.func.isRequired,
   columns: PropTypes.oneOf([1, 2]),
   className: PropTypes.string,
   isLoading: PropTypes.bool,
+  "data-testid": PropTypes.string,
 };
 
 ListLayoutList.defaultProps = {
@@ -85,6 +77,11 @@ ListLayoutList.defaultProps = {
 };
 
 ListLayoutList.Item = ListLayoutListItem;
-ListLayoutList.Actions = ListLayoutListActions;
+ListLayoutList.Pagination = ListLayoutListPagination;
 
-export { ListLayoutList, StyledListLayoutList, ListLayoutListItem };
+export {
+  ListLayoutList,
+  StyledListLayoutList,
+  ListLayoutListItem,
+  ListLayoutListPagination,
+};

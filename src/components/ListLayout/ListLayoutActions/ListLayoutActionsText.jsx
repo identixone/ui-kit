@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export const ListLayoutListActionsText = styled.span`
+export const ListLayoutActionsText = styled.span`
   width: 186px;
 `;

@@ -1,18 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { StyledListLayoutListActions } from "./StyledListLayoutListActions";
-import { ListLayoutListActionsText } from "./ListLayoutListActionsText";
-import { ListLayoutListActionsButtons } from "./ListLayoutListActionsButtons";
-import { ListLayoutListActionsAdditional } from "./ListLayoutListActionsAdditional";
-
 import { useTranslation } from "react-i18next";
 
-import { Button } from "../../../Button";
+import { StyledListLayoutActions } from "./StyledListLayoutActions";
+import { ListLayoutActionsText } from "./ListLayoutActionsText";
+import { ListLayoutActionsButtons } from "./ListLayoutActionsButtons";
+import { ListLayoutActionsAdditional } from "./ListLayoutActionsAdditional";
+import { Button } from "../../Button";
 
-import { resources } from "./ListLayoutListActions.resources.js";
+import { resources } from "./ListLayoutActions.resources.js";
 
-export function ListLayoutListActions({
+export function ListLayoutActions({
   isSelectAvailable,
   isDeselectAvailable,
   onSelect,
@@ -22,16 +21,16 @@ export function ListLayoutListActions({
 }) {
   const { t, i18n } = useTranslation();
 
-  i18n.addResourceBundle("en", "ListLayoutListActions", resources.en);
-  i18n.addResourceBundle("ru", "ListLayoutListActions", resources.ru);
+  i18n.addResourceBundle("en", "ListLayoutActions", resources.en);
+  i18n.addResourceBundle("ru", "ListLayoutActions", resources.ru);
 
   return (
-    <StyledListLayoutListActions>
-      {/* span нужен для того, чтобы отображение не прыгало
+    <StyledListLayoutActions>
+      {/* ListLayoutActionsText нужен для того, чтобы отображение не прыгало
         при исчезновении children
       */}
-      <ListLayoutListActionsText>{children}</ListLayoutListActionsText>
-      <ListLayoutListActionsButtons>
+      <ListLayoutActionsText>{children}</ListLayoutActionsText>
+      <ListLayoutActionsButtons>
         <Button
           data-testid="select-all"
           buttonTheme="outline"
@@ -48,17 +47,15 @@ export function ListLayoutListActions({
         >
           {t("Deselect all")}
         </Button>
-      </ListLayoutListActionsButtons>
+      </ListLayoutActionsButtons>
       {additional && (
-        <ListLayoutListActionsAdditional>
-          {additional}
-        </ListLayoutListActionsAdditional>
+        <ListLayoutActionsAdditional>{additional}</ListLayoutActionsAdditional>
       )}
-    </StyledListLayoutListActions>
+    </StyledListLayoutActions>
   );
 }
 
-ListLayoutListActions.propTypes = {
+ListLayoutActions.propTypes = {
   isSelectAvailable: PropTypes.bool.isRequired,
   isDeselectAvailable: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,

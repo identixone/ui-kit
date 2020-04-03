@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledListLayoutListActions = styled.div`
+export const StyledListLayoutActions = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
