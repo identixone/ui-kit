@@ -13,6 +13,8 @@ const ListLayoutListItemTitle = styled.p.attrs(({ to }) => ({
   font-weight: 600;
   color: ${colors.darkBlack};
   text-decoration: none;
+  display: block;
+  width: 100%;
 `;
 
 export { ListLayoutListItemTitle };
