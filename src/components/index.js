@@ -27,7 +27,6 @@ export * from "./Login";
 export * from "./Notice";
 export * from "./notification";
 export * from "./PageCard";
-export * from "./PageFiltersList";
 export * from "./PageLoader";
 export * from "./PageWrapper";
 export * from "./PersonsGroup";
