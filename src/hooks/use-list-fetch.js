@@ -50,7 +50,7 @@ export function useListFetch({
 
   const prevFetchParams = usePrevious(fetchParams);
 
-  const debouncedFetchList = useCallback(debounce(fetchList, 500), []);
+  const debouncedFetchList = useCallback(debounce(fetchList, 500), [fetchList]);
 
   function fetchListWithParams(hasDebounce) {
     const params = { ...fetchParams, meta: { clearList, hasDebounce } };
