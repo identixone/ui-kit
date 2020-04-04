@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const SearchInput = styled.input.attrs(() => ({
   type: "search",

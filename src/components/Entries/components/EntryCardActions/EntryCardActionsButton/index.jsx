@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "../../../../Button";
 import { ButtonLink } from "../../../../ButtonLink";
 
-import colors from "../../../../../themes/colors";
+import { colors } from "../../../../../style";
 
 const EntryCardActionsButton = styled(Button).attrs(({ to, as }) => ({
   as: as || to ? ButtonLink : Button,

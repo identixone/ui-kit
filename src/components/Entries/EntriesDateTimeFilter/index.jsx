@@ -12,7 +12,7 @@ import { EntriesDateTimeFilterControl } from "./EntriesDateTimeFilterControl";
 import { EntriesDateTimeFilterError } from "./EntriesDateTimeFilterError";
 import { EntriesDateTimeFilterTotalTime } from "./EntriesDateTimeFilterTotalTime";
 import { EntriesDateTimeFilterResetButton } from "./EntriesDateTimeFilterResetButton";
-import { Times } from "../../../assets/icons";
+import { Times } from "../../icons";
 
 import { identity } from "lodash-es";
 import dayjs from "dayjs";

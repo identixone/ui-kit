@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Check } from "../../../../assets/icons";
+import { Check } from "../../../icons";
 
 const FormCheckboxCheckedIcon = styled(Check)``;
 

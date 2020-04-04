@@ -7,7 +7,7 @@ import {
   SearchInput,
 } from "../index.jsx";
 
-import { colors } from "../../../themes/index.js";
+import { colors } from "../../../style";
 
 const SearchCompact = styled(Search).attrs(() => ({ isCompact: true }))`
   padding: 3px 8px;

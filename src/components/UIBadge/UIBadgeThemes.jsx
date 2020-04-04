@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const blueTheme = css`
   background-color: ${colors.bluish};

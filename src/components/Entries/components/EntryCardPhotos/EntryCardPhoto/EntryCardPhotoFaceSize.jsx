@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { FaceSize } from "../../../../FaceSize";
 
-import { colors } from "../../../../../themes/colors";
+import { colors } from "../../../../../style";
 
 const EntryCardPhotoFaceSize = styled(FaceSize)`
   background-color: ${colors.bluish};

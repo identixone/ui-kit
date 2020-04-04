@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import BadgeThemes from "./UIBadgeThemes";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 export const UIBadge = styled.span`
   border-radius: 22.5px;

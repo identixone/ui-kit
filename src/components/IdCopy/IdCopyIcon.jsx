@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { Clone } from "../../assets/icons";
-import { colors } from "../../themes";
+import { Clone } from "../icons";
+import { colors } from "../../style";
 
 export const IdCopyIcon = styled(Clone)`
   color: ${colors.darkBlack};

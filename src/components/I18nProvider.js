@@ -4,11 +4,8 @@ import PropTypes from "prop-types";
 import i18n from "i18next";
 import { I18nextProvider } from "react-i18next";
 
-import locales from "../locales";
-
 function I18nProvider({ children, i18n }) {
   i18n.init({
-    resources: locales,
     fallbackLng: "en",
     defaultNS: "translation",
     interpolation: {

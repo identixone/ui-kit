@@ -13,7 +13,7 @@ import { FormDropdownInputWrapper } from "./FormDropdownInputWrapper";
 import { FormDropdownInput } from "./FormDropdownInput";
 import { FormDropdownResetButton } from "./FormDropdownResetButton";
 import { FormDropdownOptionSelectedIcon } from "./FormDropdownOptionSelectedIcon";
-import { Times } from "../../../../assets/icons";
+import { Times } from "../../../icons";
 
 import { searchInList, capitalize } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";

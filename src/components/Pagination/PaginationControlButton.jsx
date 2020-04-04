@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import { PaginationButton } from "./PaginationButton";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const PaginationControlButton = styled(PaginationButton).attrs(() => ({
   fit: "square",

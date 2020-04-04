@@ -9,7 +9,7 @@ import { PaginationPages } from "./PaginationPages";
 import { PaginationPageButton } from "./PaginationPageButton";
 import { PaginationControlButton } from "./PaginationControlButton";
 import { PaginationDots } from "./PaginationDots";
-import { BoxRightArrow, BoxLeftArrow } from "../../assets/icons";
+import { BoxRightArrow, BoxLeftArrow } from "../icons";
 
 const DOTS = "...";
 const END_LIMIT_PADDINGNUM = 3;

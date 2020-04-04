@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { Clone } from "../../assets/icons";
-import { colors } from "../../themes/colors";
+import { Clone } from "../icons";
+import { colors } from "../../style";
 
 const CopyItemIcon = styled(Clone)`
   color: ${colors.grayMedium};

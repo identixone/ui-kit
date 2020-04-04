@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const StyledSearch = styled.div`
   box-sizing: border-box;

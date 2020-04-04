@@ -42,7 +42,6 @@ export * from "./Slider";
 export * from "./Spinner";
 export * from "./Text";
 export * from "./Tooltip";
-export * from "./WithCurrentOpenItem";
 export * from "./Tabs";
 export * from "./Stepper";
 export * from "./Value";

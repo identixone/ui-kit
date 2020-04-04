@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Button } from "../Button";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const SearchClearButton = styled(Button).attrs(() => ({
   buttonTheme: "reset",

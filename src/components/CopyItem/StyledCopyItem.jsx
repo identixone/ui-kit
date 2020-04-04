@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Flash } from "../Flash";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const StyledCopyItem = styled(Flash)`
   cursor: pointer;

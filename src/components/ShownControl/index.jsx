@@ -4,10 +4,7 @@ import StyledShownControl from "./StyledShownControl.jsx";
 import StyledShownControlArrowRightContainer from "./StyledShownControlArrowRightContainer.jsx";
 
 import StyledShownControlButtonArrow from "./StyledShownControlButtonArrow.jsx";
-import {
-  KeyboardArrowRight,
-  KeyboardArrowLeft,
-} from "../../assets/icons/index.js";
+import { KeyboardArrowRight, KeyboardArrowLeft } from "../icons/index.js";
 
 import StyledShownControlInfoContainer from "./StyledShownControlInfoContainer.jsx";
 import StyledShownControlInfoContainerInner from "./StyledShownControlInfoContainerInner.jsx";

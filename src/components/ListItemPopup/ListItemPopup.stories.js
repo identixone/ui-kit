@@ -4,7 +4,7 @@ import { text } from "@storybook/addon-knobs";
 
 import { ListItemPopup } from "./index.jsx";
 
-import { Qrcode as QRCodeIcon } from "../../assets/icons";
+import { Qrcode as QRCodeIcon } from "../icons";
 
 import styled from "styled-components";
 

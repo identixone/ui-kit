@@ -6,7 +6,7 @@ import { storiesOf } from "@storybook/react";
 import { PageCard } from "./index.jsx";
 
 import { Button } from "../Button";
-import { ArrowLeft, Check } from "../../assets/icons";
+import { ArrowLeft, Check } from "../icons";
 
 const StyledPageCard = styled(PageCard)`
   height: 400px;

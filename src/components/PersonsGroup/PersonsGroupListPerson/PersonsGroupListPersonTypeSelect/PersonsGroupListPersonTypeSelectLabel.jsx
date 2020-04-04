@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 export const PersonsGroupListPersonTypeSelectLabel = styled.label`
   font-size: 13px;

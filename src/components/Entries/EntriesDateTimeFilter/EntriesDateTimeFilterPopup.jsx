@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../../themes/colors";
+import { colors } from "../../../style";
 import { PopupContainer } from "../../PopupContainer";
 
 const EntriesDateTimeFilterPopup = styled(PopupContainer)`

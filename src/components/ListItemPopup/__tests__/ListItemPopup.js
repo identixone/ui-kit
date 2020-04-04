@@ -3,7 +3,7 @@ import { fireEvent } from "@testing-library/react";
 
 import { render } from "../../../../test/utils";
 import { ListItemPopup } from "../index.jsx";
-import { Qrcode as QRCodeIcon } from "../../../assets/icons";
+import { Qrcode as QRCodeIcon } from "../../icons";
 
 describe("ListItemPopup tests", () => {
   const onChangeMock = jest.fn();

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 function getStyles({ level }) {
   return {

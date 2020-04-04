@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "../../hooks";
 
 import StyledDeleteSureButton from "./StyledDeleteSureButton";
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 import { DeleteSure } from "../DeleteSure";
 

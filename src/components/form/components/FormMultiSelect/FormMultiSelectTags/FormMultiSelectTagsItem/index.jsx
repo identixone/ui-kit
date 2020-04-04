@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { StyledFormMultiSelectTagsItem } from "./StyledFormMultiSelectTagsItem";
 import { FormMultiSelectTagsItemTitle } from "./FormMultiSelectTagsItemTitle";
 import { FormMultiSelectTagsItemRemoveButton } from "./FormMultiSelectTagsItemRemoveButton";
-import { TimesDelete } from "../../../../../../assets/icons";
+import { TimesDelete } from "../../../../../icons";
 
 function FormMultiSelectTagsItem({
   onCrossClick,

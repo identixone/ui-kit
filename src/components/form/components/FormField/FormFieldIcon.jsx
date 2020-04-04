@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { InfoCircle } from "../../../../assets/icons";
+import { InfoCircle } from "../../../icons";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const FormFieldIcon = styled(InfoCircle)`
   align-self: flex-start;

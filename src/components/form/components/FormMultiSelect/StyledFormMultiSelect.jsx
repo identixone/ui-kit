@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../../../themes/index";
+
+import { colors } from "../../../../style";
 
 const StyledFormMultiSelect = styled.div`
   position: relative;

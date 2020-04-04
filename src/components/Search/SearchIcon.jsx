@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { Search } from "../../assets/icons";
+import { Search } from "../icons";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const SearchIcon = styled(Search)`
   margin-right: 16px;

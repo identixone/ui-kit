@@ -8,10 +8,10 @@ import { PopupConfirm } from "../../PopupConfirm";
 import { CardSmall, StyledCardSmall } from "../../CardSmall";
 import { IdFormat } from "../../IdFormat";
 import { Value } from "../../Value";
-import { PlaylistAdd, Trash } from "../../../assets/icons";
+import { PlaylistAdd, Trash } from "../../icons";
 
 import { get } from "lodash-es";
-import { colors } from "../../../themes/colors";
+import { colors } from "../../../style";
 import { noimageid } from "../../../assets/images";
 
 function PersonsGroupPerson({

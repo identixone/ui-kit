@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const StyledEntriesDateTimeFilterError = styled.p`
   font-size: 14px;

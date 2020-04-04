@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { NavLink } from "react-router-dom";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const ListLayoutListItemTitle = styled.p.attrs(({ to }) => ({
   as: to ? NavLink : "p",

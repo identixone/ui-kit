@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { textTrimStyles } from "../../../../../Text/TextTrim";
-import { colors } from "../../../../../../themes/colors";
+import { colors } from "../../../../../../style";
 
 const FormMultiSelectTagsItemTitle = styled.span`
   font-size: 12px;

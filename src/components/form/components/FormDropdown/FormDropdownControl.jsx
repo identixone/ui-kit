@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Button } from "../../../Button";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 import { textTrimStyles } from "../../../Text/TextTrim";
 
 const FormDropdownControl = styled(Button).attrs(() => ({

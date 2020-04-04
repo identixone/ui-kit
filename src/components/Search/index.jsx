@@ -7,7 +7,7 @@ import { SearchFakeInputValue } from "./SearchFakeInputValue";
 import { SearchIcon } from "./SearchIcon";
 import { SearchCompact } from "./SearchCompact";
 import { SearchClearButton } from "./SearchClearButton";
-import { TimesDelete, TimesDeleteBold } from "../../assets/icons";
+import { TimesDelete, TimesDeleteBold } from "../icons";
 
 function Search({
   value,

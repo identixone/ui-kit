@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { Button } from "../../../../Button";
-import { colors } from "../../../../../themes/colors";
+import { colors } from "../../../../../style";
 
 const EntriesDateTimeFilterTabsTabbarButton = styled(Button).attrs(() => ({
   buttonTheme: "reset",

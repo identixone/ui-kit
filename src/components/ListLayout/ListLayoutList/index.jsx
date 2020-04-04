@@ -7,7 +7,7 @@ import { ListLayoutNotice } from "../ListLayoutNotice";
 import { ListLayoutListItem } from "./ListLayoutListItem";
 import { ListLayoutListPagination } from "./ListLayoutListPagination";
 import { ListLayoutListSpinner } from "./ListLayoutListSpinner";
-import { Ban } from "../../../assets/icons";
+import { Ban } from "../../icons";
 
 function ListLayoutList({
   listRef,

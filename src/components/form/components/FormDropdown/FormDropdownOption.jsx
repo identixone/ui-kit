@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import { textTrimStyles } from "../../../Text/TextTrim";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const FormDropdownOption = styled.li`
   ${textTrimStyles}

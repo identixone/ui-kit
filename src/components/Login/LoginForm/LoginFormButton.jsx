@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 import Button from "../../Button";
-import colors from "../../../themes/colors";
+
+import { colors } from "../../../style";
 
 const LoginFormButton = styled(Button)`
   width: 128px;

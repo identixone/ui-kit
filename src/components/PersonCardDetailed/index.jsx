@@ -9,7 +9,7 @@ import {
 } from "./PersonCardDetailedData";
 import { NoticeHero } from "../NoticeHero";
 
-import { Ban, PlaylistAddCheck } from "../../assets/icons";
+import { Ban, PlaylistAddCheck } from "../icons";
 
 function PersonCardDetailed({
   person,

@@ -3,7 +3,7 @@ import theme from "styled-theming";
 
 import { UIBadge } from "../../../UIBadge";
 
-import colors from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const color = theme("mode", {
   new: colors.navyBlue,

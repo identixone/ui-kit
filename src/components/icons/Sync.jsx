@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { SyncAlt } from "@styled-icons/fa-solid/SyncAlt";
-import { spin } from "../animations";
+import { spin } from "../../style";
 
 const SyncIcon = styled(SyncAlt)`
   animation: ${({ isSpin }) =>

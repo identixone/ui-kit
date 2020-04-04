@@ -20,7 +20,7 @@ import { Button } from "../Button";
 import { SelectableList } from "../SelectableList";
 import { UIBadge } from "../UIBadge";
 
-import { Sync } from "../../assets/icons";
+import { Sync } from "../icons";
 
 import { property as prop } from "lodash-es";
 import { personMock } from "../../../test/__mocks__";

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const FormMultiSelectInput = styled.input`
   display: inline-block;

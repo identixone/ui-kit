@@ -8,7 +8,7 @@ import {
   EntryCardActions,
 } from "../components";
 
-import { colors } from "../../../themes/colors";
+import { colors } from "../../../style";
 
 const themes = {
   light: {

@@ -6,7 +6,7 @@ import { StyledEntryCardEntryType } from "../EntryCardEntryType";
 import { StyledEntryCardInfoItem } from "../EntryCardInfoItem";
 import { StyledEntryCardLiveness } from "../EntryCardLiveness";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const themes = {
   light: {

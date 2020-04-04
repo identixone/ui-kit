@@ -7,8 +7,8 @@ import { action } from "@storybook/addon-actions";
 import { CardSmall } from "./index";
 
 import { personMock } from "../../../test/__mocks__";
-import { PlaylistAdd } from "../../assets/icons";
-import { colors } from "../../themes/colors";
+import { PlaylistAdd } from "../icons";
+import { colors } from "../../style";
 
 storiesOf("Basic UI|CardSmall", module)
   .add("default", () => {

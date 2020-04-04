@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import { FormCheckboxCheckedIcon } from "./FormCheckboxCheckedIcon";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 function getStyles({ disabled }) {
   if (disabled) {
