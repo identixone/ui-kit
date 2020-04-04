@@ -24,7 +24,7 @@ function PersonsGroupPerson({
   isActive,
   mode,
   onChange,
-  isPersonsAddingToList,
+  isPersonsAddingToGroup,
   isPersonsDeletingFromGroup,
   className,
   "data-testid": testId,
@@ -88,7 +88,7 @@ function PersonsGroupPerson({
           data-testid="persons-group-add-person"
           onClick={handleAddButtonClick}
           isHidden={false}
-          isDisabled={isPersonsAddingToList}
+          isDisabled={isPersonsAddingToGroup}
         >
           <PlaylistAdd size="24" color={colors.greenish} />
         </CardSmall.Button>
@@ -123,8 +123,8 @@ PersonsGroupPerson.propTypes = {
   isActive: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   mode: PropTypes.string,
-  isPersonsDeletingFromGroup: PropTypes.bool.isRequired,
-  isPersonsAddingToList: PropTypes.bool.isRequired,
+  isPersonsAddingToGroup: PropTypes.bool,
+  isPersonsDeletingFromGroup: PropTypes.bool,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
   title: PropTypes.string,
