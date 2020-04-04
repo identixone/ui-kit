@@ -27,7 +27,7 @@ function Search({ size, className }) {
 }
 
 Search.propTypes = {
-  size: PropTypes.number.isRequired,
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   className: PropTypes.string,
 };
 

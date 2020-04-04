@@ -22,7 +22,7 @@ function TimesDeleteBold({ size, className }) {
 }
 
 TimesDeleteBold.propTypes = {
-  size: PropTypes.number.isRequired,
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   className: PropTypes.string,
 };
 
