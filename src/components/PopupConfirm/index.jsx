@@ -59,7 +59,7 @@ PopupConfirm.propTypes = {
   title: PropTypes.string,
   okText: PropTypes.string,
   cancelText: PropTypes.string,
-  onConfirm: PropTypes.string.isRequired,
+  onConfirm: PropTypes.func.isRequired,
   portalRef: PropTypes.object,
 };
 
