@@ -16,7 +16,7 @@ export function ListLayout({ title, buttons, search, actions, content }) {
   return (
     <StyledListLayout>
       {hasTop && (
-        <ListLayoutTop>
+        <ListLayoutTop headerHeight={80} headerStickyOffset={100}>
           {hasHeader && (
             <ListLayoutHeader>
               {title && <ListLayoutTitle level={1}>{title}</ListLayoutTitle>}
