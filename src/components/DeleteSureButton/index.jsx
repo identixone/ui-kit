@@ -61,7 +61,7 @@ DeleteSureButton.defaultProps = {
 
 DeleteSureButton.propTypes = {
   onDelete: PropTypes.func.isRequired,
-  color: colors.string,
+  color: PropTypes.string,
   size: PropTypes.string,
   isDisabled: PropTypes.bool,
   deleteColor: PropTypes.string,
