@@ -8,13 +8,14 @@ import { useFlash } from "../Flash";
 import { StyledCopyItem } from "./StyledCopyItem";
 import { CopyItemIcon } from "./CopyItemIcon";
 
-function CopyItem({ children, className, "data-testid": testId }) {
+function CopyItem({ children, value, className, "data-testid": testId }) {
   const { flash, isFlashing } = useFlash();
   const [{ isCopyAvailable, isCopied }, copyToClipboard] = useCopyToClipboard();
 
   function handleCopyClick(ev) {
+    const valueToCopy = value || children;
     ev.stopPropagation();
-    copyToClipboard(children);
+    copyToClipboard(valueToCopy);
   }
 
   useEffect(() => {
@@ -38,6 +39,7 @@ function CopyItem({ children, className, "data-testid": testId }) {
 
 CopyItem.propTypes = {
   children: PropTypes.string.isRequired,
+  value: PropTypes.string,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };

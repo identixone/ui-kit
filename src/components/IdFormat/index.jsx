@@ -1,26 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import { useLocalId } from "./hooks";
 
 import { Value } from "../Value";
 
-import { hasProperty } from "../../utils/helpers";
-
-const getShortId = id => id.split("-")[4];
-
-export function IdFormat(props) {
-  const hasIdInProps = hasProperty(props, "id");
-
-  const { id, children } = props;
-  const idToCompare = hasIdInProps ? id : children;
+function IdFormat(props) {
+  const { localId, shortLocalId } = useLocalId(props);
 
   return (
-    <Value value={idToCompare}>
-      {idToCompare ? getShortId(idToCompare) : null}
+    <Value value={localId} defaultValue={null}>
+      {shortLocalId}
     </Value>
   );
 }
 
-IdFormat.propTypes = {
-  id: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
-};
+export { IdFormat };
