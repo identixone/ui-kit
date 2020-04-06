@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "@identixone/ui-kit/src/style";
+import { colors } from "../../style";
 
 const ListStickyHeaderFixedBackground = styled.div`
   position: fixed;

@@ -69,14 +69,6 @@ export function formatDate(date, format = "DD MMM YYYY, HH:mm:ss") {
   return dayjs(date).format(format);
 }
 
-/**
- *
- * проверить и поменять название при использовании данного хелпера
- */
-// export function formatDate(date) {
-//   return date.toISOString();
-// }
-
 export function dateToIso(date) {
   return date.toISOString();
 }
