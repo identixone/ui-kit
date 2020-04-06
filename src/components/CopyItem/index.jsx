@@ -48,4 +48,4 @@ CopyItem.defaultProps = {
   "data-testid": "copy-item",
 };
 
-export { CopyItem };
+export { CopyItem, StyledCopyItem };
