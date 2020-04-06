@@ -26,6 +26,14 @@ function useFetchParams(initialFetchParams = {}) {
 }
 
 export function useListFetch({
+  /**
+   * При использовании хука
+   * во избежание множественнго пересоздания debouncedFetchList
+   * следует всегда передавать ссылку на одну и ту же fetchList
+   * обновить fetchList следует только тогда, когда нужно
+   * обновить ее замыкание
+   * */
+
   fetchList,
   pagination: defaultPagination = { limit: 10, offset: 0 },
   searchQuery: initialSearchQuery = "",
