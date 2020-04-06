@@ -12,13 +12,13 @@ function animation(props) {
 `;
 }
 
-const Slidee = styled.ul`
+const SliderInner = styled.ul`
   animation: ${props => animation(props)} 0.3s ease-in-out;
   height: 6500px;
   margin: 0;
   padding: 0;
   width: 100%;
-  list-style: none;
+  list-style-type: none;
 `;
 
-export default Slidee;
+export { SliderInner };

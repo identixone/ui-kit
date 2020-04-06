@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Slidee from "./Slidee";
-import StyledFrame from "./StyledFrame";
+
+import { StyledSlider } from "./StyledSlider";
+import { SliderInner } from "./SliderInner";
 
 export class Slider extends Component {
   static propTypes = {
     height: PropTypes.number,
     totalItemHeight: PropTypes.number,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
-    onUpdateSliderRef: PropTypes.func,
-    visibility: PropTypes.bool,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]).isRequired,
   };
 
   static defaultProps = {
     height: 516,
     totalItemHeight: 129,
-    visibility: false,
   };
 
   state = {
@@ -95,10 +93,11 @@ export class Slider extends Component {
 
   render() {
     const { translateFrom, translateTo, activeItemIndex } = this.state;
-    const { visibility, children } = this.props;
+    const { children } = this.props;
     if (!children) {
-      return "";
+      return null;
     }
+
     const cloneChildren = React.Children.map(children, (child, index) => {
       const childKey = child.key || index;
 
@@ -110,12 +109,9 @@ export class Slider extends Component {
       });
     });
 
-    return visibility ? (
-      <StyledFrame height={this.props.height}>
-        <Slidee
-          ref={node => {
-            node && this.props.onUpdateSliderRef(node);
-          }}
+    return (
+      <StyledSlider height={this.props.height}>
+        <SliderInner
           translateFrom={translateFrom}
           translateTo={translateTo || 0}
           style={{
@@ -123,9 +119,9 @@ export class Slider extends Component {
           }}
         >
           {cloneChildren}
-        </Slidee>
-      </StyledFrame>
-    ) : null;
+        </SliderInner>
+      </StyledSlider>
+    );
   }
 }
 
