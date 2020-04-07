@@ -40,9 +40,10 @@ function ListStickyHeader({
       {isSticky && headerElRef.current && (
         <ListStickyHeaderFixedBackground
           style={{
-            height: isHeaderShort
-              ? listHeaderHeightShort
-              : headerElRef.current.offsetHeight,
+            height:
+              isHeaderShort && listHeaderHeightShort
+                ? listHeaderHeightShort
+                : headerElRef.current.offsetHeight,
             transform: `translateY(${isHeaderFull ? headerHeight : 0}px)`,
           }}
         />
@@ -64,7 +65,7 @@ ListStickyHeader.propTypes = {
   listHeaderHeightShort: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
-  ]).isRequired,
+  ]),
   className: PropTypes.string,
 };
 

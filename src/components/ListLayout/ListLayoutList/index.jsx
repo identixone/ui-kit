@@ -57,10 +57,10 @@ function ListLayoutList({
 ListLayoutList.propTypes = {
   listRef: PropTypes.object,
   items: PropTypes.array.isRequired,
-  renderItem: PropTypes.func,
+  renderItem: PropTypes.func.isRequired,
   noItemsText: PropTypes.string,
   hasNext: PropTypes.bool.isRequired,
-  pagination: PropTypes.object.isRequired,
+  pagination: PropTypes.object,
   columns: PropTypes.oneOf([1, 2]),
   className: PropTypes.string,
   isLoading: PropTypes.bool,

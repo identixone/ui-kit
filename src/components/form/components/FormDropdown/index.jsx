@@ -370,7 +370,14 @@ const optionShape = PropTypes.shape({
 
 FormDropdown.propTypes = {
   name: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.arrayOf(optionShape), optionShape]),
+  value: PropTypes.oneOfType([
+    optionShape,
+    PropTypes.arrayOf(optionShape),
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
   withSearch: PropTypes.bool,
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,

@@ -47,7 +47,7 @@ ListLayoutListItem.propTypes = {
   badges: PropTypes.element,
   to: PropTypes.string,
   "data-testid": PropTypes.string,
-  "data-id": PropTypes.string,
+  "data-id": PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export { ListLayoutListItem, StyledListLayoutListItem };

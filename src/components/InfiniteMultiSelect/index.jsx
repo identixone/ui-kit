@@ -50,7 +50,7 @@ InfiniteMultiSelect.Option = FormMultiSelect.Option;
 InfiniteMultiSelect.Menu = FormMultiSelect.Menu;
 
 InfiniteMultiSelect.propTypes = {
-  value: PropTypes.object.isRequired,
+  value: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   fetchOptions: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
