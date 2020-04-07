@@ -16,6 +16,7 @@ function getStyles({ isImageLoaded }) {
       `;
 }
 
-export const StyledLazyImage = styled.div`
+export const StyledLazyImage = styled.span`
+  display: block;
   ${getStyles}
 `;

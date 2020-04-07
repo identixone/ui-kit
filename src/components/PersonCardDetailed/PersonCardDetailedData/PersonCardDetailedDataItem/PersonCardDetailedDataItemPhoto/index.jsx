@@ -20,5 +20,5 @@ export function PersonCardDetailedDataItemPhoto({ src, facesize }) {
 
 PersonCardDetailedDataItemPhoto.propTypes = {
   src: PropTypes.string,
-  facesize: PropTypes.number,
+  facesize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

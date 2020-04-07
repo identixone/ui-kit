@@ -39,7 +39,7 @@ function ListLayoutListItem({
 
 ListLayoutListItem.propTypes = {
   selectable: PropTypes.bool,
-  item: PropTypes.string,
+  item: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   selected: PropTypes.bool,
