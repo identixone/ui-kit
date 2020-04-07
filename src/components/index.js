@@ -44,6 +44,7 @@ export * from "./Text";
 export * from "./Tooltip";
 export * from "./Tabs";
 export * from "./Stepper";
+export * from "./SegmentedTabs";
 export * from "./Value";
 export * from "./ValueSpan";
 export * from "./FaceSize";
