@@ -7,6 +7,7 @@ import { I18nextProvider } from "react-i18next";
 function I18nProvider({ children, i18n }) {
   i18n.init({
     resources: {},
+    lng: "en",
     fallbackLng: "en",
     defaultNS: "translation",
     interpolation: {

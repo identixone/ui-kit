@@ -65,7 +65,6 @@ InfiniteMultiSelect.propTypes = {
 
 InfiniteMultiSelect.defaultProps = {
   limit: 10,
-  "data-testid": "infinite-multi-select",
 };
 
 export { InfiniteMultiSelect };

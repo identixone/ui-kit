@@ -83,7 +83,6 @@ InfiniteDropdown.propTypes = {
 InfiniteDropdown.defaultProps = {
   multiple: false,
   limit: 10,
-  "data-testid": "infinite-dropdown",
 };
 
 export { InfiniteDropdown };
