@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSpinnerContainer = styled.div`
+const StyledSpinner = styled.div`
   width: ${({ width }) => (width ? width + "px" : "100%")};
   display: flex;
   min-height: 40px;
@@ -8,4 +8,4 @@ const StyledSpinnerContainer = styled.div`
   align-content: center;
 `;
 
-export default StyledSpinnerContainer;
+export { StyledSpinner };

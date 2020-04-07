@@ -7,4 +7,4 @@ const SpinnerIcon = styled(Asterisk)`
   color: #3b4b5a;
 `;
 
-export default SpinnerIcon;
+export { SpinnerIcon };
