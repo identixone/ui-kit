@@ -30,4 +30,12 @@ FormInput.defaultProps = {
   type: "text",
 };
 
+FormInput.Password = function(props) {
+  return <FormInput {...props} type="password" />;
+};
+
+FormInput.Number = function(props) {
+  return <FormInput {...props} type="number" />;
+};
+
 export { FormInput, StyledFormInput };
