@@ -6,10 +6,16 @@ import { EntriesDateTimeFilterContext } from "../index";
 import { EntriesDateTimeFilterRelativePicker } from "./EntriesDateTimeFilterRelativePicker";
 
 function EntriesDateTimeFilterRelative() {
-  const { value, onChange } = useContext(EntriesDateTimeFilterContext);
+  const { value, onChange, initialDateTo } = useContext(
+    EntriesDateTimeFilterContext
+  );
 
   return (
-    <EntriesDateTimeFilterRelativePicker value={value} onChange={onChange} />
+    <EntriesDateTimeFilterRelativePicker
+      value={value}
+      onChange={onChange}
+      currentDate={initialDateTo}
+    />
   );
 }
 
