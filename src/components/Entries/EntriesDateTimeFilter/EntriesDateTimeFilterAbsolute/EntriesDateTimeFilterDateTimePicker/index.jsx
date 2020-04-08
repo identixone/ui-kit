@@ -8,7 +8,6 @@ import { EntriesDateTimeFilterDateTimeInputs } from "../EntriesDateTimeFilterDat
 import { EntriesDateTimeFilterDateTimeInput } from "../EntriesDateTimeFilterDateTimeInput";
 import { EntriesDateTimeFilterContext } from "../../index";
 
-import { isSameDate } from "../../../../../utils/helpers";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import { registerLocale } from "react-datepicker";
@@ -132,7 +131,7 @@ function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
       <EntriesDateTimeFilterDateTimeInputs>
         <EntriesDateTimeFilterDateTimeInput
           label="From"
-          value={isSameDate(value[0], initialDateFrom) ? null : value[0]}
+          value={value[0]}
           onChange={date => {
             onChange([date, value[1]]);
           }}
