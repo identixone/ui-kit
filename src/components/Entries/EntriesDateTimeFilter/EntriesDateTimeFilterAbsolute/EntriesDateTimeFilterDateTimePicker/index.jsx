@@ -1,178 +1,168 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useState, useRef, useMemo } from "react";
-import { useUpdateEffect } from "react-use";
-import { usePositionPopup } from "../../../hooks";
+import { useState, useEffect, useContext } from "react";
 
-import { EntriesDateTimeFilterPopup } from "./EntriesDateTimeFilterPopup";
-import { EntriesDateTimeFilterTabs } from "./EntriesDateTimeFilterTabs";
-import { EntriesDateTimeFilterBottom } from "./EntriesDateTimeFilterBottom";
-import { EntriesDateTimeFilterControl } from "./EntriesDateTimeFilterControl";
-import { EntriesDateTimeFilterError } from "./EntriesDateTimeFilterError";
-import { EntriesDateTimeFilterTotalTime } from "./EntriesDateTimeFilterTotalTime";
-import { EntriesDateTimeFilterResetButton } from "./EntriesDateTimeFilterResetButton";
-import { Times } from "../../icons";
+import DatePicker from "react-datepicker";
+import { EntriesDateTimeFilterDateTimeInputs } from "../EntriesDateTimeFilterDateTimeInputs";
+import { EntriesDateTimeFilterDateTimeInput } from "../EntriesDateTimeFilterDateTimeInput";
+import { EntriesDateTimeFilterContext } from "../../index";
 
-import { identity } from "lodash-es";
 import dayjs from "dayjs";
-import { isSameDate } from "../../../utils/helpers";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import { registerLocale } from "react-datepicker";
+import enGb from "date-fns/locale/en-GB";
+import "./styles.css";
 
-const EntriesDateTimeFilterContext = React.createContext({
-  value: [],
-  onChange: identity,
-  error: null,
-  setError: identity,
-  initialDateFrom: null,
-  initialDateTo: null,
-});
+registerLocale("en-GB", enGb);
+dayjs.extend(isSameOrAfter);
 
-export function formatDateTime(value) {
-  return dayjs(value).format("YYYY/MM/DD (HH:mm:ss)");
-}
-
-function EntriesDateTimeFilter({
-  value,
-  onChange,
-  valuesOnReset,
-  onReset,
-  onStateChange,
-  initialDateFrom,
-  initialDateTo,
-}) {
-  const [error, setError] = useState(null);
-  const popupTrigger = useRef(null);
-  const {
-    Portal,
-    bind,
-    coords,
-    popupInner,
-    togglePortal,
-    closePortal,
-    isOpen,
-    targetParams,
-  } = usePositionPopup({
-    pupupTrigger: popupTrigger,
-    position: "bottom",
-  });
-
-  function getPopupLeftCoord() {
-    if (popupInner.current) {
-      if (targetParams.width > popupInner.current.offsetWidth) {
-        return (
-          coords.left + targetParams.width - popupInner.current.offsetWidth
-        );
-      }
-
-      return coords.left;
-    }
-  }
-
-  useUpdateEffect(() => {
-    if (!isOpen) {
-      if (!value[0] && value[1]) {
-        const dayBefore = dayjs(value[1])
-          .subtract(1, "day")
-          .toDate();
-
-        onChange([dayBefore, value[1]]);
-      }
-
-      if (value[0] && !value[1]) {
-        const dayAfter = dayjs(value[0])
-          .add(1, "day")
-          .toDate();
-
-        onChange([value[0], dayAfter]);
-      }
-    }
-
-    onStateChange({ isOpen });
-  }, [isOpen]);
-
-  function getValueRender(value) {
-    if (!value[0] && !value[1]) return "All dates";
-    if (value[0] && !value[1]) return `From ${formatDateTime(value[0])}`;
-    if (!value[0] && value[1]) return `To ${formatDateTime(value[1])}`;
-
-    if (isSameDate(value[0], initialDateFrom)) {
-      return `All to ${formatDateTime(value[1])}`;
-    }
-
-    return formatDateTime(value[0]) + " - " + formatDateTime(value[1]);
-  }
-
-  const store = useMemo(
-    () => ({
-      value,
-      onChange,
-      error,
-      setError,
-      initialDateFrom,
-      initialDateTo,
-    }),
-    [value, error, initialDateFrom, initialDateTo]
+function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
+  const [selectionComplete, toggleSelectionComplete] = useState(
+    value[0] && value[1]
   );
+  const { setError, initialDateFrom, initialDateTo } = useContext(
+    EntriesDateTimeFilterContext
+  );
+
+  useEffect(() => {
+    const currentDate = new Date().toISOString();
+
+    if (selectionComplete) {
+      if (dayjs(value[0]).isAfter(value[1])) {
+        onChange([value[1], value[0]]);
+        return;
+      }
+    }
+
+    if (
+      value[0] &&
+      initialDateFrom &&
+      dayjs(value[0]).isBefore(initialDateFrom)
+    ) {
+      onChange([dayjs(initialDateFrom).toDate(), value[1]]);
+
+      setError(
+        `Dates before ${dayjs(initialDateFrom).year()} are not supported.`
+      );
+
+      return;
+    }
+
+    if (value[1] && dayjs(value[1]).isAfter()) {
+      onChange([value[0], dayjs(currentDate).toDate()]);
+
+      setError("Dates after today are not supported.");
+
+      return;
+    }
+  }, [value, onChange, selectionComplete]);
+
+  useEffect(() => {
+    if (value[0] && value[1] && !selectionComplete) {
+      toggleSelectionComplete(true);
+    }
+    if (!value[0] || (!value[1] && selectionComplete)) {
+      toggleSelectionComplete(false);
+    }
+  }, [value, selectionComplete]);
+
+  const handleDateChange = date => {
+    setError(null);
+
+    if (!selectionComplete && !value[0]) {
+      date.setHours(0, 0, 0, 0);
+
+      onChange([date, value[1]]);
+      return;
+    }
+
+    if (!selectionComplete && value[0] && !value[1]) {
+      onChange([value[0], date]);
+      return;
+    }
+
+    if (selectionComplete && value[0] && value[1]) {
+      date.setHours(0, 0, 0, 0);
+
+      onChange([date, undefined]);
+      toggleSelectionComplete(false);
+      return;
+    }
+  };
+
+  const handleSelect = date => {
+    if (
+      !selectionComplete &&
+      value[0] &&
+      !value[1] &&
+      sameDay(date, value[0])
+    ) {
+      date.setHours(23, 59, 59, 999);
+
+      handleDateChange(date);
+    }
+  };
+
+  const sameDay = (d1, d2) => {
+    return (
+      d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate()
+    );
+  };
 
   return (
-    <EntriesDateTimeFilterContext.Provider value={store}>
-      <EntriesDateTimeFilterControl
-        {...bind}
-        data-testid="entries-date-time-picker-control"
-        data-current-date={initialDateTo}
-        ref={popupTrigger}
-        onClick={togglePortal}
-      >
-        {getValueRender(value)}
-        {(value[0] || value[1]) && (
-          <EntriesDateTimeFilterResetButton
-            data-testid="entries-date-time-picker-reset"
-            onClick={e => {
-              e.stopPropagation();
-              onChange(valuesOnReset);
-              if (onReset) {
-                onReset();
-              }
-              closePortal();
-            }}
-          >
-            <Times size="12" />
-          </EntriesDateTimeFilterResetButton>
-        )}
-      </EntriesDateTimeFilterControl>
-      <Portal>
-        <EntriesDateTimeFilterPopup
-          style={{
-            left: getPopupLeftCoord(),
-            top: coords.top,
+    <>
+      <DatePicker
+        selected={value[0] || value[1]}
+        onChange={handleDateChange}
+        onSelect={handleSelect}
+        startDate={value[0] || value[1]}
+        endDate={value[1] || value[0]}
+        selectsStart={!selectionComplete}
+        selectsEnd={!selectionComplete}
+        locale="en-GB"
+        inline={true}
+        openToDate={value[1]}
+        minDate={initialDateFrom ? new Date(initialDateFrom) : undefined}
+        maxDate={initialDateTo ? new Date(initialDateTo) : undefined}
+      />
+      <EntriesDateTimeFilterDateTimeInputs>
+        <EntriesDateTimeFilterDateTimeInput
+          label="From"
+          value={value[0]}
+          onChange={date => {
+            onChange([date, value[1]]);
           }}
-          isOpen={isOpen}
-          ref={popupInner}
-        >
-          {/* Сбрасываем все локальные состояния по открытию/закрытию */}
-          <EntriesDateTimeFilterTabs key={isOpen} />
-          <EntriesDateTimeFilterBottom>
-            <EntriesDateTimeFilterError />
-            <EntriesDateTimeFilterTotalTime />
-          </EntriesDateTimeFilterBottom>
-        </EntriesDateTimeFilterPopup>
-      </Portal>
-    </EntriesDateTimeFilterContext.Provider>
+          onFocus={() => {
+            setError(null);
+          }}
+          data-testid="entries-date-time-from"
+        />
+        <EntriesDateTimeFilterDateTimeInput
+          label="To"
+          value={value[1]}
+          onChange={date => {
+            onChange([value[0], date]);
+          }}
+          onFocus={() => {
+            setError(null);
+          }}
+          data-testid="entries-date-time-to"
+        />
+      </EntriesDateTimeFilterDateTimeInputs>
+    </>
   );
 }
 
-EntriesDateTimeFilter.propTypes = {
+EntriesDateTimeFilterDateTimePicker.defaultProps = {
+  value: [],
+};
+
+EntriesDateTimeFilterDateTimePicker.propTypes = {
   value: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  onStateChange: PropTypes.func.isRequired,
-  initialDateFrom: PropTypes.string.isRequired,
-  initialDateTo: PropTypes.string.isRequired,
-  valuesOnReset: PropTypes.array.isRequired,
-  onReset: PropTypes.func,
 };
 
-EntriesDateTimeFilter.defaultProps = {
-  valuesOnReset: [null, null],
-};
-
-export { EntriesDateTimeFilter, EntriesDateTimeFilterContext };
+export { EntriesDateTimeFilterDateTimePicker };

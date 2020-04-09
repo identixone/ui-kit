@@ -34,6 +34,8 @@ export function formatDateTime(value) {
 function EntriesDateTimeFilter({
   value,
   onChange,
+  valuesOnReset,
+  onReset,
   onStateChange,
   initialDateFrom,
   initialDateTo,
@@ -127,7 +129,10 @@ function EntriesDateTimeFilter({
             data-testid="entries-date-time-picker-reset"
             onClick={e => {
               e.stopPropagation();
-              onChange([null, null]);
+              onChange(valuesOnReset);
+              if (onReset) {
+                onReset();
+              }
               closePortal();
             }}
           >
@@ -162,6 +167,12 @@ EntriesDateTimeFilter.propTypes = {
   onStateChange: PropTypes.func.isRequired,
   initialDateFrom: PropTypes.string.isRequired,
   initialDateTo: PropTypes.string.isRequired,
+  valuesOnReset: PropTypes.array.isRequired,
+  onReset: PropTypes.func,
+};
+
+EntriesDateTimeFilter.defaultProps = {
+  valuesOnReset: [null, null],
 };
 
 export { EntriesDateTimeFilter, EntriesDateTimeFilterContext };
