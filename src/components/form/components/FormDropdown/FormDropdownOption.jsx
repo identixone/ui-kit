@@ -11,7 +11,7 @@ const FormDropdownOption = styled.li`
   font-size: 16px;
   line-height: 1.63;
   transition: background-color 120ms ease-in-out;
-  padding: 12px 22px 12px 36px;
+  padding: 12px 36px;
 
   &:first-child {
     padding-top: 16px;
