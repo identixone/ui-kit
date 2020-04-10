@@ -20,7 +20,6 @@ export {
   InfoCircle,
   Clone,
   CalendarAlt,
-  Qrcode,
   Ban,
   Trash,
 } from "@styled-icons/fa-solid";
@@ -53,3 +52,4 @@ export { default as Sync } from "./Sync";
 export { default as Asterisk } from "./Asterisk";
 export { default as Search } from "./Search";
 export { default as Gear } from "./Gear";
+export { default as QRcode } from "./QRcode";
