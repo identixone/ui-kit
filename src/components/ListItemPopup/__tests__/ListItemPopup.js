@@ -3,7 +3,6 @@ import { fireEvent } from "@testing-library/react";
 
 import { render } from "../../../../test/utils";
 import { ListItemPopup } from "../index.jsx";
-import { Qrcode as QRCodeIcon } from "../../icons";
 
 describe("ListItemPopup tests", () => {
   const onChangeMock = jest.fn();
@@ -19,24 +18,16 @@ describe("ListItemPopup tests", () => {
     return render(
       <ListItemPopup
         trigger={({ ref, openPortal }) => (
-          <QRCodeIcon
-            data-testid="qr-code-icon"
-            ref={ref}
-            cursor="pointer"
-            width="19"
-            height="19"
-            onClick={openPortal}
-          />
+          <button data-testid="button-open" ref={ref} onClick={openPortal}>
+            open
+          </button>
         )}
       >
         {({ closePortal }) => (
           <React.Fragment>
-            <QRCodeIcon
-              data-testid="qr-code-icon-inside"
-              width="19"
-              height="19"
-              onClick={closePortal}
-            />
+            <button data-testid="button-close" onClick={closePortal}>
+              close
+            </button>
             <span data-testid="list-item-popup-content">
               Popup content example
             </span>
@@ -52,9 +43,11 @@ describe("ListItemPopup tests", () => {
 
   test("ListItemPopup trigger open and close popup", () => {
     const { getByTestId } = renderListItemPopup();
-    fireEvent.click(getByTestId("qr-code-icon"));
+
+    fireEvent.click(getByTestId("button-open"));
     expect(getByTestId("list-item-popup-content")).toBeVisible();
-    fireEvent.click(getByTestId("qr-code-icon-inside"));
+
+    fireEvent.click(getByTestId("button-close"));
     expect(getByTestId("list-item-popup-content")).not.toBeVisible();
   });
 });

@@ -26,7 +26,7 @@ function ListItemPopup({
   });
 
   const triggerProps = { ref, openPortal, togglePortal, closePortal };
-  const childrenProps = { closePortal };
+  const childrenProps = { closePortal, isOpen };
 
   return (
     <React.Fragment>

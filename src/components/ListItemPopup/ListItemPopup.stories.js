@@ -4,8 +4,6 @@ import { text } from "@storybook/addon-knobs";
 
 import { ListItemPopup } from "./index.jsx";
 
-import { Qrcode as QRCodeIcon } from "../icons";
-
 import styled from "styled-components";
 
 const StyledContentExample = styled.div`
@@ -23,24 +21,14 @@ storiesOf("ListItemPopup", module).add("default", () => {
   return (
     <ListItemPopup
       trigger={({ ref, openPortal }) => (
-        <QRCodeIcon
-          data-testid="qr-code-icon"
-          ref={ref}
-          cursor="pointer"
-          width="19"
-          height="19"
-          onClick={openPortal}
-        />
+        <button ref={ref} onClick={openPortal}>
+          open
+        </button>
       )}
     >
       {({ closePortal }) => (
         <React.Fragment>
-          <QRCodeIcon
-            data-testid="qr-code-icon-inside"
-            width="19"
-            height="19"
-            onClick={closePortal}
-          />
+          <button onClick={closePortal}>close</button>
           <StyledContentExample>{contentExample}</StyledContentExample>
         </React.Fragment>
       )}
