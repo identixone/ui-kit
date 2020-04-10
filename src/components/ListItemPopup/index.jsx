@@ -63,4 +63,4 @@ ListItemPopup.defaultProps = {
   "data-testid": "list-item-popup",
 };
 
-export { ListItemPopup, StyledListItemPopup };
+export { ListItemPopup, StyledListItemPopup, ListItemPopupInner };
