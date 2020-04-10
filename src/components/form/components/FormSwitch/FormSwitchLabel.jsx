@@ -4,11 +4,11 @@ import { colors } from "../../../../style";
 import { widths } from "./StyledFormSwitch";
 
 const circleSizes = {
-  m: 16,
+  m: 12,
 };
 
 const barHeights = {
-  m: 24,
+  m: 20,
 };
 
 const calcOffset = ({ checked, size }) => {

@@ -55,4 +55,4 @@ FormSwitch.defaultProps = {
   size: "m",
 };
 
-export { FormSwitch, StyledFormSwitch };
+export { FormSwitch, StyledFormSwitch, FormSwitchLabel };

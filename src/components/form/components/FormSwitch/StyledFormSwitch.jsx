@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const widths = {
-  m: 44,
+  m: 36,
 };
 
 const StyledFormSwitch = styled.label`
