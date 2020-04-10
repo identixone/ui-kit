@@ -15,7 +15,6 @@ function getHoverStyles({ isDisabled }) {
 
 const DeleteSureButton = styled(Button).attrs(() => ({ buttonTheme: "reset" }))`
   background-color: ${props => props.color};
-  min-width: 105px;
 
   ${({ isSure, deleteColor }) =>
     isSure && `background-color: ${deleteColor}; color: ${colors.whiteSimple};`}
