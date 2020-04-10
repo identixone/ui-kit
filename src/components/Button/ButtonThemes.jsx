@@ -84,7 +84,7 @@ const darkTheme = css`
 
 const blueTheme = css`
   color: #fff;
-  background-color: #167097;
+  background-color: #1a5d7b;
 
   ${getPseudoForShadow}
 
@@ -96,7 +96,7 @@ const blueTheme = css`
     !disabled &&
     css`
       &:hover {
-        background-color: #167097;
+        background-color: #1a5d7b;
       }
     `}
 `;

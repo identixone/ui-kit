@@ -3,20 +3,22 @@ import PropTypes from "prop-types";
 
 import StyledButton from "./StyledButton";
 
-function Button({
-  onClick,
-  onMouseLeave,
-  children,
-  isDisabled,
-  type,
-  size,
-  buttonTheme,
-  fit,
-  className,
-  isRounded,
-  isFullWidth,
-  ...restProps
-}) {
+const Button = React.forwardRef((props, ref) => {
+  const {
+    onClick,
+    onMouseLeave,
+    children,
+    isDisabled,
+    type,
+    size,
+    buttonTheme,
+    fit,
+    className,
+    isRounded,
+    isFullWidth,
+    ...restProps
+  } = props;
+
   return (
     <StyledButton
       onClick={onClick}
@@ -29,12 +31,13 @@ function Button({
       isRounded={isRounded}
       className={className}
       isFullWidth={isFullWidth}
+      ref={ref}
       {...restProps}
     >
       {children}
     </StyledButton>
   );
-}
+});
 
 Button.propTypes = {
   className: PropTypes.string,
