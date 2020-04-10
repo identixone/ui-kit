@@ -10,12 +10,14 @@ import { EntriesDateTimeFilterContext } from "../../index";
 
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isToday from "dayjs/plugin/isToday";
 import { registerLocale } from "react-datepicker";
 import enGb from "date-fns/locale/en-GB";
 import "./styles.css";
 
 registerLocale("en-GB", enGb);
 dayjs.extend(isSameOrAfter);
+dayjs.extend(isToday);
 
 function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
   const [selectionComplete, toggleSelectionComplete] = useState(
@@ -98,9 +100,12 @@ function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
       !value[1] &&
       sameDay(date, value[0])
     ) {
-      date.setHours(23, 59, 59, 999);
-
-      handleDateChange(date);
+      if (dayjs(date).isToday()) {
+        handleDateChange(new Date());
+      } else {
+        date.setHours(23, 59, 59, 999);
+        handleDateChange(date);
+      }
     }
   };
 
