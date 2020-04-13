@@ -8,7 +8,7 @@ const ListLayoutTop = styled(ListStickyHeader)`
   padding-bottom: 24px;
   padding-top: 24px;
   /** хак, чтобы скрыть отступ страницы (RouteSectionHider) */
-  margin-top: -24px;
+  /* margin-top: -24px; */
   background-color: ${colors.whiteSimple};
 `;
 

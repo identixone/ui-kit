@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+import { colors } from "../../../style";
+
 export const ListLayoutActionsText = styled.span`
-  width: 186px;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+  color: ${colors.darkBlack};
 `;

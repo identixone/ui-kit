@@ -4,9 +4,9 @@ import { storiesOf } from "@storybook/react";
 import { number, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import { useListFetch } from "../../hooks";
+import { useListFetch, useSelectableList } from "../../hooks";
 
-import { ListLayout, ListLayoutList } from "./index.jsx";
+import { ListLayout, ListLayoutList, ListLayoutActions } from "./index.jsx";
 
 import {
   PersonsGroupListPerson,
@@ -17,7 +17,6 @@ import {
 
 import { Search } from "../Search";
 import { Button } from "../Button";
-import { SelectableList } from "../SelectableList";
 import { UIBadge } from "../UIBadge";
 
 import { Sync } from "../icons";
@@ -132,6 +131,14 @@ storiesOf("List Layout", module)
       } = useListFetch({
         fetchList: action("Fetch list"),
       });
+      const {
+        selected,
+        onCheckboxChange,
+        selectAll,
+        deselectAll,
+        isAllSelected,
+        isAllDeselected,
+      } = useSelectableList({ options });
 
       const [searchType, setSearchType] = useState(personsGroupsSearchTypes[0]);
 
@@ -163,53 +170,60 @@ storiesOf("List Layout", module)
               placeholder="Enter search query..."
             />
           }
+          actions={
+            <ListLayoutActions
+              selectAll={deselectAll}
+              deselectAll={selectAll}
+              isAllSelected={isAllSelected}
+              additional={
+                <Button
+                  buttonTheme="dark"
+                  isDisabled={isAllDeselected}
+                  onClick={deselectAll}
+                >
+                  Remove selected
+                </Button>
+              }
+            >
+              {selected.length !== 0 && `${selected.length} items selected`}
+            </ListLayoutActions>
+          }
           content={
             <React.Fragment>
-              <SelectableList options={options}>
-                {({
-                  selected,
-                  handleCheckboxChange,
-                  options,
-                  selectAll,
-                  deselectAll,
-                  isAllSelected,
-                }) => (
-                  <ListLayoutList
-                    items={options}
-                    noItemsText="No items found"
-                    pagination={
-                      <ListLayoutList.Pagination
-                        pagination={pagination}
-                        setPagination={setPagination}
-                        totalCount={optionsCount}
-                      />
-                    }
-                    isLoading={isLoading}
-                    actions={
-                      <ListLayoutList.Actions
-                        onSelect={selectAll}
-                        onDeselect={deselectAll}
-                        isSelectAvailable={!isAllSelected}
-                        isDeselectAvailable={selected.length !== 0}
-                      >
-                        {selected.length !== 0 &&
-                          `Items selected: ${selected.length}`}
-                      </ListLayoutList.Actions>
-                    }
-                    renderItem={item => (
-                      <ListLayoutList.Item
-                        selectable={true}
-                        item={item}
-                        onChange={handleCheckboxChange}
-                        selected={selected.includes(item)}
-                        badges={<UIBadge>included</UIBadge>}
-                      >
-                        {item}
-                      </ListLayoutList.Item>
-                    )}
+              <ListLayoutList
+                items={options}
+                noItemsText="No items found"
+                pagination={
+                  <ListLayoutList.Pagination
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    totalCount={optionsCount}
                   />
+                }
+                isLoading={isLoading}
+                actions={
+                  <ListLayoutActions
+                    onSelect={selectAll}
+                    onDeselect={deselectAll}
+                    isSelectAvailable={!isAllSelected}
+                    isDeselectAvailable={selected.length !== 0}
+                  >
+                    {selected.length !== 0 &&
+                      `Items selected: ${selected.length}`}
+                  </ListLayoutActions>
+                }
+                renderItem={item => (
+                  <ListLayoutList.Item
+                    selectable={true}
+                    item={item}
+                    onChange={onCheckboxChange}
+                    selected={selected.includes(item)}
+                    badges={<UIBadge>included</UIBadge>}
+                  >
+                    {item}
+                  </ListLayoutList.Item>
                 )}
-              </SelectableList>
+              />
 
               <PersonsGroupListPerson
                 person={personMock}
@@ -241,6 +255,14 @@ storiesOf("List Layout", module)
       } = useListFetch({
         fetchList: action("Fetch list"),
       });
+      const {
+        selected,
+        onCheckboxChange,
+        selectAll,
+        deselectAll,
+        isAllSelected,
+        isAllDeselected,
+      } = useSelectableList({ options });
 
       const [searchType, setSearchType] = useState(personsGroupsSearchTypes[0]);
 
@@ -272,53 +294,68 @@ storiesOf("List Layout", module)
               placeholder="Enter search query..."
             />
           }
+          actions={
+            <ListLayoutActions
+              selectAll={deselectAll}
+              deselectAll={selectAll}
+              isAllSelected={isAllSelected}
+              additional={
+                <Button
+                  buttonTheme="dark"
+                  isDisabled={isAllDeselected}
+                  onClick={deselectAll}
+                >
+                  Remove selected
+                </Button>
+              }
+            >
+              {selected.length !== 0 && `${selected.length} items selected`}
+            </ListLayoutActions>
+          }
           content={
             <React.Fragment>
-              <SelectableList options={options}>
-                {({
-                  selected,
-                  handleCheckboxChange,
-                  options,
-                  selectAll,
-                  deselectAll,
-                  isAllSelected,
-                }) => (
-                  <ListLayoutList
-                    items={options}
-                    noItemsText="No items found"
-                    pagination={
-                      <ListLayoutList.Pagination
-                        pagination={pagination}
-                        setPagination={setPagination}
-                        totalCount={optionsCount}
-                      />
-                    }
-                    columns={2}
-                    actions={
-                      <ListLayoutList.Actions
-                        onSelect={selectAll}
-                        onDeselect={deselectAll}
-                        isSelectAvailable={!isAllSelected}
-                        isDeselectAvailable={selected.length !== 0}
-                      >
-                        {selected.length !== 0 &&
-                          `Items selected: ${selected.length}`}
-                      </ListLayoutList.Actions>
-                    }
-                    renderItem={item => (
-                      <ListLayoutList.Item
-                        selectable={true}
-                        item={item}
-                        onChange={handleCheckboxChange}
-                        selected={selected.includes(item)}
-                        badges={<UIBadge>included</UIBadge>}
-                      >
-                        {item}
-                      </ListLayoutList.Item>
-                    )}
+              <ListLayoutList
+                items={options}
+                noItemsText="No items found"
+                pagination={
+                  <ListLayoutList.Pagination
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    totalCount={optionsCount}
                   />
+                }
+                columns={2}
+                actions={
+                  <ListLayoutActions
+                    selectAll={deselectAll}
+                    deselectAll={selectAll}
+                    isAllSelected={isAllSelected}
+                    additional={
+                      <Button
+                        buttonTheme="dark"
+                        isDisabled={isAllDeselected}
+                        onClick={deselectAll}
+                      >
+                        Remove selected
+                      </Button>
+                    }
+                  >
+                    {selected.length !== 0 &&
+                      `${selected.length} items selected`}
+                  </ListLayoutActions>
+                }
+                renderItem={item => (
+                  <ListLayoutList.Item
+                    selectable={true}
+                    item={item}
+                    onChange={onCheckboxChange}
+                    selected={selected.includes(item)}
+                    badges={<UIBadge>included</UIBadge>}
+                  >
+                    {item}
+                  </ListLayoutList.Item>
                 )}
-              </SelectableList>
+              />
 
               <PersonsGroupListPerson
                 person={personMock}
@@ -353,6 +390,14 @@ storiesOf("List Layout", module)
       } = useListFetch({
         fetchList: action("Fetch list"),
       });
+      const {
+        selected,
+        onCheckboxChange,
+        selectAll,
+        deselectAll,
+        isAllDeselected,
+        isAllSelected,
+      } = useSelectableList({ options: persons.map(prop("idxid")) });
 
       const [detailed, setDetailed] = useState(null);
 
@@ -361,75 +406,62 @@ storiesOf("List Layout", module)
       }
 
       return (
-        <SelectableList options={persons.map(prop("idxid"))}>
-          {({
-            selected,
-            handleCheckboxChange,
-            selectAll,
-            deselectAll,
-            isAllSelected,
-            isAllDeselected,
-          }) => (
-            <ListLayout
-              search={
-                <Search
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  placeholder="Enter search query..."
-                />
-              }
-              actions={
-                <ListLayoutList.Actions
-                  onSelect={selectAll}
-                  onDeselect={deselectAll}
-                  isSelectAvailable={!isAllSelected}
-                  isDeselectAvailable={!isAllDeselected}
-                  additional={
-                    <Button
-                      buttonTheme="outline-accent"
-                      isDisabled={isAllDeselected}
-                    >
-                      Remove selected
-                    </Button>
-                  }
-                >
-                  {selected.length !== 0
-                    ? `${selected.length} persons selected`
-                    : "No person selected"}
-                </ListLayoutList.Actions>
-              }
-              content={
-                <React.Fragment>
-                  <ListLayoutList
-                    items={persons}
-                    noItemsText="No items found"
-                    pagination={
-                      <ListLayoutList.Pagination
-                        pagination={pagination}
-                        setPagination={setPagination}
-                        totalCount={optionsCount}
-                      />
-                    }
-                    columns={2}
-                    renderItem={person => (
-                      <PersonsGroupPerson
-                        key={person.idxid}
-                        onChange={handleCheckboxChange}
-                        onClick={setDetailed}
-                        isSelected={selected.includes(person.idxid)}
-                        person={person}
-                      />
-                    )}
-                  />
-
-                  <PersonsGroupPersonDetail
-                    person={persons.find(person => person.idxid === detailed)}
-                  />
-                </React.Fragment>
-              }
+        <ListLayout
+          search={
+            <Search
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Enter search query..."
             />
-          )}
-        </SelectableList>
+          }
+          actions={
+            <ListLayoutActions
+              selectAll={deselectAll}
+              deselectAll={selectAll}
+              isAllSelected={isAllSelected}
+              additional={
+                <Button
+                  buttonTheme="dark"
+                  isDisabled={isAllDeselected}
+                  onClick={deselectAll}
+                >
+                  Remove selected
+                </Button>
+              }
+            >
+              {selected.length !== 0 && `${selected.length} items selected`}
+            </ListLayoutActions>
+          }
+          content={
+            <React.Fragment>
+              <ListLayoutList
+                items={persons}
+                noItemsText="No items found"
+                pagination={
+                  <ListLayoutList.Pagination
+                    pagination={pagination}
+                    setPagination={setPagination}
+                    totalCount={optionsCount}
+                  />
+                }
+                columns={2}
+                renderItem={person => (
+                  <PersonsGroupPerson
+                    key={person.idxid}
+                    onChange={onCheckboxChange}
+                    onClick={setDetailed}
+                    isSelected={selected.includes(person.idxid)}
+                    person={person}
+                  />
+                )}
+              />
+
+              <PersonsGroupPersonDetail
+                person={persons.find(person => person.idxid === detailed)}
+              />
+            </React.Fragment>
+          }
+        />
       );
     }
 
