@@ -36,7 +36,6 @@ export * from "./PopupConfirm";
 export * from "./RouteSection";
 export * from "./Search";
 export * from "./Segment";
-export * from "./SelectableList";
 export * from "./ShownControl";
 export * from "./Slider";
 export * from "./Spinner";
