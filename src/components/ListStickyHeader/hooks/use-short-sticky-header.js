@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useScrollDirection } from "../../../hooks";
 
-function useShortStickyHeader({ headerHeight, headerStickyOffset }) {
+function useShortStickyHeader({ headerElRef }) {
   const { directionY, y } = useScrollDirection();
   const isHeaderFull = directionY === "top" && y > 600;
-  const isHeaderShort =
-    directionY === "bottom" && y > headerHeight + headerStickyOffset;
-  const isSticky = y > headerHeight;
+
+  const isSticky = headerElRef.current && y > headerElRef.current.naturalTop;
 
   useEffect(() => {
     const appHeader = document.getElementById("sticky-header");
@@ -14,15 +13,15 @@ function useShortStickyHeader({ headerHeight, headerStickyOffset }) {
       return;
     }
 
-    const newTranlateY = isHeaderFull ? 0 : "-100%";
-    appHeader.style.transform = `translateY(${newTranlateY})`;
+    const newTranslateY = isHeaderFull ? 0 : "-100%";
+    appHeader.style.transform = `translateY(${newTranslateY})`;
 
     return () => {
       appHeader.style.transform = null;
     };
   }, [directionY]);
 
-  return { isHeaderFull, isHeaderShort, isSticky };
+  return { isHeaderFull, isSticky };
 }
 
 export { useShortStickyHeader };

@@ -11,14 +11,13 @@ import { ListStickyHeaderFixedBackground } from "./ListStickyHeaderFixedBackgrou
 function ListStickyHeader({
   children,
   headerHeight,
-  headerStickyOffset,
   listHeaderHeightShort,
   className,
 }) {
   const headerElRef = useRef(null);
-  const { isHeaderFull, isSticky, isHeaderShort } = useShortStickyHeader({
-    headerHeight,
-    headerStickyOffset,
+  const headerInnerRef = useRef(null);
+  const { isHeaderFull, isSticky } = useShortStickyHeader({
+    headerElRef,
   });
 
   return (
@@ -29,10 +28,11 @@ function ListStickyHeader({
           transform: `translateY(${isHeaderFull ? headerHeight : 0}px)`,
         }}
         className={className}
+        ref={headerElRef}
       >
-        <ListStickyHeaderInner ref={headerElRef}>
+        <ListStickyHeaderInner ref={headerInnerRef}>
           {typeof children === "function"
-            ? children({ isHeaderShort, isHeaderFull, isSticky })
+            ? children({ isHeaderFull, isSticky })
             : children}
         </ListStickyHeaderInner>
       </StyledListStickyHeader>
@@ -41,9 +41,9 @@ function ListStickyHeader({
         <ListStickyHeaderFixedBackground
           style={{
             height:
-              isHeaderShort && listHeaderHeightShort
+              !isHeaderFull && listHeaderHeightShort
                 ? listHeaderHeightShort
-                : headerElRef.current.offsetHeight,
+                : headerElRef.current.node.offsetHeight,
             transform: `translateY(${isHeaderFull ? headerHeight : 0}px)`,
           }}
         />
@@ -59,8 +59,6 @@ ListStickyHeader.propTypes = {
     PropTypes.array,
   ]).isRequired,
   headerHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-    .isRequired,
-  headerStickyOffset: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     .isRequired,
   listHeaderHeightShort: PropTypes.oneOfType([
     PropTypes.number,
