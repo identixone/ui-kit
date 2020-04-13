@@ -1,39 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { SelectableList } from "../../../SelectableList";
 import { StyledFormCheckboxGroup } from "./StyledFormCheckboxGroup";
 import { FormCheckboxGroupItem } from "./FormCheckboxGroupItem";
+import { useSelectableList } from "../../../../hooks/index";
 
 function FormCheckboxGroup({ value, onChange, groupName, render, options }) {
+  const { ...selectedListOptions } = useSelectableList({
+    options,
+    value,
+    onChange,
+  });
+
   return (
     <StyledFormCheckboxGroup>
-      <SelectableList
-        options={options}
-        value={value}
-        onChange={onChange}
-        render={selectedListProps => {
-          return render({
-            ...selectedListProps,
-            checkboxes: () => {
-              const { selected, handleCheckboxChange } = selectedListProps;
+      {render({
+        ...selectedListOptions,
+        checkboxes: () => {
+          const { selected, onCheckboxChange } = selectedListOptions;
+          return options.map(({ label, value: optionValue }) => {
+            const strOption = String(optionValue);
 
-              return options.map(({ label, value: optionValue }) => {
-                return (
-                  <FormCheckboxGroupItem
-                    key={optionValue}
-                    label={label}
-                    name={String(optionValue)}
-                    checked={selected.includes(String(optionValue))}
-                    onChange={handleCheckboxChange}
-                    groupName={groupName}
-                  />
-                );
-              });
-            },
+            return (
+              <FormCheckboxGroupItem
+                key={optionValue}
+                label={label}
+                name={strOption}
+                checked={selected.includes(strOption)}
+                onChange={onCheckboxChange}
+                groupName={groupName}
+              />
+            );
           });
-        }}
-      />
+        },
+      })}
     </StyledFormCheckboxGroup>
   );
 }
