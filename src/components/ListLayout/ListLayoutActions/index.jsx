@@ -23,6 +23,7 @@ export function ListLayoutActions({
         onChange={() => {
           !isAllSelected ? selectAll() : deselectAll();
         }}
+        data-testid="list-layout-toggle-select-all"
       />
       {/* ListLayoutActionsText нужен для того, чтобы отображение не прыгало
         при исчезновении children
