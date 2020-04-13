@@ -35,8 +35,8 @@ const resetTheme = css`
 `;
 
 const disabledTheme = css`
-  color: #aaa;
-  background-color: #f3f3f3;
+  color: #fff;
+  background-color: #aaaaaa;
 `;
 
 const lightTheme = css`
@@ -80,6 +80,17 @@ const darkTheme = css`
   &:after {
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
   }
+
+  ${({ disabled }) => {
+    return disabled
+      ? disabledTheme
+      : css`
+          &:hover {
+            color: #fff;
+            background-color: #3b4b5a;
+          }
+        `;
+  }}
 `;
 
 const blueTheme = css`
