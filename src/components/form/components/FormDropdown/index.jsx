@@ -345,7 +345,7 @@ function FormDropdown({
                             "data-testid": `${testId}-option-${item.value}`,
                           })}
                         >
-                          {selected && (
+                          {multiple && selected && (
                             <FormDropdownOptionSelectedIcon size="10" />
                           )}
                           {renderItem(item)}
