@@ -21,7 +21,7 @@ export function ListLayoutActions({
         disabled={isSelectionDisabled}
         checked={isAllSelected}
         onChange={() => {
-          isAllSelected ? selectAll() : deselectAll();
+          !isAllSelected ? selectAll() : deselectAll();
         }}
       />
       {/* ListLayoutActionsText нужен для того, чтобы отображение не прыгало
