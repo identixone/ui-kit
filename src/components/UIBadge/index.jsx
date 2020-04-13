@@ -8,7 +8,7 @@ export const UIBadge = styled.span`
   border-radius: 22.5px;
   text-align: center;
   font-size: 13px;
-  line-height: 1.08;
+  line-height: 18px;
   font-weight: normal;
   padding: 0 8px;
   ${({ badgeTheme }) => BadgeThemes[badgeTheme]};
