@@ -7,4 +7,5 @@ export * from "./use-position-popup";
 export * from "./use-infinite-menu";
 export * from "./use-redirect-on-error";
 export * from "./use-scroll-direction";
+export * from "./use-selectable-list";
 export { useTranslation, withTranslation } from "react-i18next";
