@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 
 import { StyledListLayoutDetailed } from "./StyledListLayoutDetailed";
+import { ListLayoutDetailedInner } from "./ListLayoutDetailedInner";
 import { ListLayoutContext } from "../index";
 
 function ListLayoutDetailed({
@@ -22,7 +23,9 @@ function ListLayoutDetailed({
       }}
       className={className}
     >
-      <div data-testid={testId}>{children}</div>
+      <ListLayoutDetailedInner data-testid={testId}>
+        {children}
+      </ListLayoutDetailedInner>
     </StyledListLayoutDetailed>
   );
 }
