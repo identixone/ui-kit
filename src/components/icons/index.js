@@ -52,4 +52,5 @@ export { default as Sync } from "./Sync";
 export { default as Asterisk } from "./Asterisk";
 export { default as Search } from "./Search";
 export { default as Gear } from "./Gear";
+export { default as GearOutline } from "./GearOutline";
 export { default as QRcode } from "./QRcode";
