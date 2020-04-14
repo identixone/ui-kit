@@ -9,12 +9,19 @@ import { ListLayoutSearch } from "./ListLayoutSearch";
 import { ListLayoutContent } from "./ListLayoutContent";
 import { ListLayoutTop } from "./ListLayoutTop";
 
-export function ListLayout({ title, buttons, search, actions, content }) {
+export function ListLayout({
+  title,
+  buttons,
+  search,
+  actions,
+  content,
+  className,
+}) {
   const hasHeader = title || buttons;
   const hasTop = hasHeader || search;
 
   return (
-    <StyledListLayout>
+    <StyledListLayout className={className}>
       {hasTop && (
         <ListLayoutTop headerHeight={80}>
           {hasHeader && (
@@ -39,6 +46,7 @@ ListLayout.propTypes = {
   search: PropTypes.element,
   actions: PropTypes.element,
   content: PropTypes.element,
+  className: PropTypes.string,
 };
 
 export * from "./ListLayoutList";
