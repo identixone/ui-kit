@@ -6,7 +6,12 @@ import { useContext } from "react";
 import { StyledListLayoutDetailed } from "./StyledListLayoutDetailed";
 import { ListLayoutContext } from "../index";
 
-function ListLayoutDetailed({ offsetTop, children }) {
+function ListLayoutDetailed({
+  offsetTop,
+  children,
+  "data-testid": testId,
+  className,
+}) {
   const { appHeaderOffset } = useContext(ListLayoutContext);
 
   return (
@@ -15,8 +20,9 @@ function ListLayoutDetailed({ offsetTop, children }) {
       style={{
         transform: `translateY(${appHeaderOffset}px)`,
       }}
+      className={className}
     >
-      {children}
+      <div data-testid={testId}>{children}</div>
     </StyledListLayoutDetailed>
   );
 }
@@ -24,6 +30,8 @@ function ListLayoutDetailed({ offsetTop, children }) {
 ListLayoutDetailed.propTypes = {
   offsetTop: PropTypes.number.isRequired,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  "data-testid": PropTypes.string,
+  className: PropTypes.string,
 };
 
 ListLayoutDetailed.defaultProps = {

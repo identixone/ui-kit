@@ -34,7 +34,7 @@ export function PersonsGroupListPerson({
   }, [personIdxid]);
 
   return (
-    <StyledPersonsGroupListPerson>
+    <StyledPersonsGroupListPerson offsetTop={200}>
       {(isPersonFetching || !person) && !error ? (
         <PersonsGroupListPersonSpinner />
       ) : error ? (
