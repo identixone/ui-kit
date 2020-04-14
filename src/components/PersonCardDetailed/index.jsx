@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+
+import { useEffect } from "react";
 
 import { StyledPersonCardDetailed } from "./StyledPersonCardDetailed";
 import { PersonCardDetailedSpinner } from "./PersonCardDetailedSpinner";
@@ -20,6 +22,7 @@ function PersonCardDetailed({
   children,
   className,
   "data-testid": testId,
+  offsetTop,
 }) {
   useEffect(() => {
     if (personIdxid) {
@@ -28,7 +31,11 @@ function PersonCardDetailed({
   }, [personIdxid]);
 
   return (
-    <StyledPersonCardDetailed data-testid={testId} className={className}>
+    <StyledPersonCardDetailed
+      data-testid={testId}
+      className={className}
+      offsetTop={offsetTop}
+    >
       {isLoading ? (
         <PersonCardDetailedSpinner />
       ) : person && !isPersonNotExists ? (
@@ -57,10 +64,12 @@ PersonCardDetailed.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]).isRequired,
   className: PropTypes.string.isRequired,
   "data-testid": PropTypes.string,
+  offsetTop: PropTypes.number.isRequired,
 };
 
 PersonCardDetailed.defaultProps = {
   "data-testid": "person-card-detailed",
+  offsetTop: 120,
 };
 
 export * from "./PersonCardDetailedData";

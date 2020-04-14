@@ -1,13 +1,33 @@
-import styled from "styled-components";
+import React from "react";
+import PropTypes from "prop-types";
 
-export const ListLayoutDetailed = styled.div`
-  position: relative;
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: rgba(162, 182, 189, 0.2) 0px 0px 80px 0px;
-  flex: 334px 0 0;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  min-height: 220px;
-`;
+import { useContext } from "react";
+
+import { StyledListLayoutDetailed } from "./StyledListLayoutDetailed";
+import { ListLayoutContext } from "../index";
+
+function ListLayoutDetailed({ offsetTop, children }) {
+  const { appHeaderOffset } = useContext(ListLayoutContext);
+
+  return (
+    <StyledListLayoutDetailed
+      offsetTop={offsetTop}
+      style={{
+        transform: `translateY(${appHeaderOffset}px)`,
+      }}
+    >
+      {children}
+    </StyledListLayoutDetailed>
+  );
+}
+
+ListLayoutDetailed.propTypes = {
+  offsetTop: PropTypes.number.isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+};
+
+ListLayoutDetailed.defaultProps = {
+  offsetTop: 120,
+};
+
+export { ListLayoutDetailed };

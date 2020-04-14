@@ -3,7 +3,7 @@ import StickyBox from "react-sticky-box";
 
 const StyledListStickyHeader = styled(StickyBox)`
   z-index: 10;
-  transition: transform 200ms ease-in;
+  transition: transform 120ms ease-in;
 `;
 
 export { StyledListStickyHeader };

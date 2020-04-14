@@ -1,22 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import { useShortStickyHeader } from "./hooks";
+import { ListLayoutContext } from "../ListLayout";
 
 import { StyledListStickyHeader } from "./StyledListStickyHeader";
 import { ListStickyHeaderInner } from "./ListStickyHeaderInner";
 import { ListStickyHeaderFixedBackground } from "./ListStickyHeaderFixedBackground";
 
-function ListStickyHeader({
-  children,
-  headerHeight,
-  listHeaderHeightShort,
-  className,
-}) {
+function ListStickyHeader({ children, listHeaderHeightShort, className }) {
   const headerElRef = useRef(null);
   const headerInnerRef = useRef(null);
-  const { isHeaderFull, isSticky } = useShortStickyHeader({
+  const { isHeaderFull, appHeaderOffset } = useContext(ListLayoutContext);
+  const { isSticky } = useShortStickyHeader({
     headerElRef,
   });
 
@@ -24,8 +21,7 @@ function ListStickyHeader({
     <>
       <StyledListStickyHeader
         style={{
-          // При показе полного хедера нужно сдвинуть фильтры
-          transform: `translateY(${isHeaderFull ? headerHeight : 0}px)`,
+          transform: `translateY(${appHeaderOffset}px)`,
         }}
         className={className}
         ref={headerElRef}
@@ -36,7 +32,7 @@ function ListStickyHeader({
             : children}
         </ListStickyHeaderInner>
       </StyledListStickyHeader>
-      {/* Элемент для того, чтобы перекрывать подложу новых энтрисов */}
+      {/* Элемент для того, чтобы перекрывать элементы по бокам (вне основного контейнера) */}
       {isSticky && headerElRef.current && (
         <ListStickyHeaderFixedBackground
           style={{
@@ -44,7 +40,7 @@ function ListStickyHeader({
               !isHeaderFull && listHeaderHeightShort
                 ? listHeaderHeightShort
                 : headerElRef.current.node.offsetHeight,
-            transform: `translateY(${isHeaderFull ? headerHeight : 0}px)`,
+            transform: `translateY(${appHeaderOffset}px)`,
           }}
         />
       )}
@@ -58,8 +54,6 @@ ListStickyHeader.propTypes = {
     PropTypes.node,
     PropTypes.array,
   ]).isRequired,
-  headerHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-    .isRequired,
   listHeaderHeightShort: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,

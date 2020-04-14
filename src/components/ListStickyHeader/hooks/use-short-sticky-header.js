@@ -1,9 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useScrollDirection } from "../../../hooks";
+import { ListLayoutContext } from "../../ListLayout";
 
 function useShortStickyHeader({ headerElRef }) {
   const { directionY, y } = useScrollDirection();
-  const isHeaderFull = directionY === "top" && y > 600;
+  const { isHeaderFull, setIsHeaderFull } = useContext(ListLayoutContext);
+  useEffect(() => {
+    setIsHeaderFull(directionY === "top" && y > 600);
+  }, [directionY, y]);
 
   const isSticky = headerElRef.current && y > headerElRef.current.naturalTop;
 
@@ -19,9 +23,9 @@ function useShortStickyHeader({ headerElRef }) {
     return () => {
       appHeader.style.transform = null;
     };
-  }, [directionY]);
+  }, [isHeaderFull]);
 
-  return { isHeaderFull, isSticky };
+  return { isSticky };
 }
 
 export { useShortStickyHeader };
