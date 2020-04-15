@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { StyledFormInput } from "./StyledFormInput";
+import { FormInputUneditable } from "./FormInputUneditable";
 
 import { getTestId } from "../../utils";
 
@@ -38,4 +39,16 @@ FormInput.Number = function(props) {
   return <FormInput {...props} type="number" />;
 };
 
-export { FormInput, StyledFormInput };
+FormInput.Uneditable = function(props) {
+  // eslint-disable-next-line react/prop-types
+  return <FormInputUneditable {...props}>{props.value}</FormInputUneditable>;
+};
+
+const StyledFormInputUneditable = FormInputUneditable;
+
+export {
+  FormInput,
+  StyledFormInput,
+  FormInputUneditable,
+  StyledFormInputUneditable,
+};
