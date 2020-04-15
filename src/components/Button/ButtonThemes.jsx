@@ -54,7 +54,7 @@ const lightTheme = css`
       ? disabledTheme
       : css`
           &:hover {
-            background-color: #3b4b5a;
+            background-color: ${colors.slate};
             color: #fff;
           }
         `;
@@ -62,18 +62,18 @@ const lightTheme = css`
 `;
 
 const lighterTheme = css`
-  color: #3b4b5a;
+  color: ${colors.slate};
   background-color: #f3f3f3;
 `;
 
 const lighterGrayTheme = css`
-  color: #3b4b5a;
+  color: ${colors.slate};
   background-color: #9fa7ae;
 `;
 
 const darkTheme = css`
   color: #fff;
-  background-color: #3b4b5a;
+  background-color: ${colors.slate};
 
   ${getPseudoForShadow}
 
@@ -87,7 +87,7 @@ const darkTheme = css`
       : css`
           &:hover {
             color: #fff;
-            background-color: #3b4b5a;
+            background-color: ${colors.slate};
           }
         `;
   }}
@@ -118,12 +118,12 @@ const ghostTheme = css`
 `;
 
 const ghostDarkTheme = css`
-  color: #3b4b5a;
+  color: ${colors.slate};
   background-color: #f3f3f3;
 `;
 
 const activeTheme = css`
-  background-color: #3b4b5a;
+  background-color: ${colors.slate};
   color: #fff;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
 `;
@@ -150,7 +150,7 @@ const outlineTheme = css`
       ? css`
           &:hover {
             color: #fff;
-            background-color: #3b4b5a;
+            background-color: ${colors.slate};
           }
         `
       : css`
