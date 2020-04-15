@@ -15,7 +15,6 @@ import { colors } from "../../../style";
 import { noimageid } from "../../../assets/images";
 
 function PersonsGroupPerson({
-  title,
   person,
   onClick,
   onPersonDelete,
@@ -67,13 +66,12 @@ function PersonsGroupPerson({
       )}
 
       <CardSmall.Data idxid={person.idxid}>
-        {title && <CardSmall.Title>{title}</CardSmall.Title>}
-        <CardSmall.DataItem>
+        <CardSmall.Title>
           ID{" "}
           <PersonsGroupPersonId isActive={isActive}>
             <IdFormat>{person.idxid}</IdFormat>
           </PersonsGroupPersonId>
-        </CardSmall.DataItem>
+        </CardSmall.Title>
         <CardSmall.DataItem>
           Place of first entry:
           <br />{" "}
@@ -127,7 +125,6 @@ PersonsGroupPerson.propTypes = {
   isPersonsDeletingFromGroup: PropTypes.bool,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
-  title: PropTypes.string,
 };
 
 PersonsGroupPerson.defaultProps = {

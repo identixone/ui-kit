@@ -7,7 +7,6 @@ function getStyles({ isActive }) {
     isActive &&
     css`
       background-color: ${colors.orangeDark};
-      color: ${colors.black};
     `
   );
 }
@@ -15,7 +14,10 @@ function getStyles({ isActive }) {
 const PersonsGroupPersonId = styled.span`
   padding-left: 2px;
   padding-right: 2px;
-
+  font-size: 12px;
+  line-height: 11px;
+  color: ${colors.darkBlack};
+  margin-bottom: 12px;
   ${getStyles}
 `;
 

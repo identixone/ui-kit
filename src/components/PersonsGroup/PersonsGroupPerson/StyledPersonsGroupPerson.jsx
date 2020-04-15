@@ -7,18 +7,10 @@ function getStyles({ isActive }) {
     ? css`
         color: ${colors.whiteSimple};
         background-color: ${colors.slate};
-
-        b {
-          color: ${colors.whiteSimple};
-        }
       `
     : css`
-        color: ${colors.grayWhite};
-        background-color: ${colors.iceBlue};
-
-        b {
-          color: ${colors.black};
-        }
+        color: ${colors.darkBlack};
+        background-color: ${colors.whiteGrayLight};
       `;
 }
 
