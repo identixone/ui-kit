@@ -5,8 +5,8 @@ const ListLayoutDetailedInner = styled.div`
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
-  padding: 20px;
   min-height: 220px;
+  flex: 100%;
 `;
 
 export { ListLayoutDetailedInner };
