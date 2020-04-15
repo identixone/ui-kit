@@ -8,7 +8,7 @@ const PersonCardDetailedActions = styled.div`
     text-align: center;
 
     &:not(:last-child) {
-      margin-bottom: 11px;
+      margin-bottom: 12px;
     }
   }
 `;

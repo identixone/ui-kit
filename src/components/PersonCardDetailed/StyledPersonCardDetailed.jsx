@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
+import { StyledButton } from "../Button";
 import { ListLayoutDetailed } from "../ListLayout/ListLayoutDetailed";
+import { colors } from "../../style";
 
 const StyledPersonCardDetailed = styled(ListLayoutDetailed)`
-  display: flex;
-  flex-direction: column;
+  ${StyledButton}:not(:hover) {
+    color: ${colors.slate};
+  }
 `;
 
 export { StyledPersonCardDetailed };

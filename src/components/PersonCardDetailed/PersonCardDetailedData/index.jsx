@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PersonCardDetailedData = styled.div`
   &:not(:last-child) {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
 `;
 
