@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
 const CardSmallDataItem = styled.p`
-  font-size: 13px;
   margin-top: 0;
   margin-bottom: 0;
   white-space: nowrap; /* Запрещаем перенос строк */
   overflow: hidden; /* Обрезаем все, что не помещается в область */
   text-overflow: ellipsis; /* Добавляем многоточие */
-  line-height: 1.38;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
 
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   b {
-    font-size: 14px;
     font-weight: 600;
   }
 `;
