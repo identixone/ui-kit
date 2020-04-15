@@ -59,7 +59,6 @@
     "jump.js": "^1.0.2",
     "lodash-es": "^4.17.15",
     "match-sorter": "^4.1.0",
-    "moment": "^2.24.0",
     "nouislider": "^14.2.0",
     "nouislider-react": "^3.3.7",
     "rc-notification": "^4.0.0",

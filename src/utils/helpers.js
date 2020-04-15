@@ -1,19 +1,9 @@
 import dayjs from "dayjs";
 import matchSorter from "match-sorter";
 import { isEqual } from "lodash-es";
+import jump from "jump.js";
 
-const DATE_TIME_FORMAT_SLASHES = "DD/MM/YY HH:mm";
 const DATE_TIME_FORMAT_SIMPLE = "D MMM YYYY, HH:mm:ss";
-
-const defaultConfValues = {
-  new: false,
-  reinit: false,
-  exact: false,
-  ha: false,
-  junk: false,
-  nm: false,
-  det: false,
-};
 
 export function createUUID() {
   // http://www.ietf.org/rfc/rfc4122.txt
@@ -30,37 +20,14 @@ export function createUUID() {
   return uuid;
 }
 
-export function dataURItoBlob(dataURI) {
-  // convert base64/URLEncoded data component to raw binary data held in a string
-  var byteString;
-  if (dataURI.split(",")[0].indexOf("base64") >= 0)
-    byteString = atob(dataURI.split(",")[1]);
-  else byteString = unescape(dataURI.split(",")[1]);
-  // separate out the mime component
-  var mimeString = dataURI
-    .split(",")[0]
-    .split(":")[1]
-    .split(";")[0];
-  // write the bytes of the string to a typed array
-  var ia = new Uint8Array(byteString.length);
-  for (var i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
-  }
-  return new Blob([ia], { type: mimeString });
-}
-
-export function timeFormatSlashes(time) {
-  return timeFormater(time, DATE_TIME_FORMAT_SLASHES);
-}
-
-export function timeFormat(time) {
-  return timeFormater(time, DATE_TIME_FORMAT_SIMPLE);
-}
-
+// DATA FORMATTERS
 function timeFormater(time, fromat) {
   const formatedTime =
     time && dayjs(time).isValid() && dayjs(time).format(fromat);
   return formatedTime || "—";
+}
+export function timeFormat(time) {
+  return timeFormater(time, DATE_TIME_FORMAT_SIMPLE);
 }
 
 export function formatDate(date, format = "DD MMM YYYY, HH:mm:ss") {
@@ -82,6 +49,15 @@ export function formatSex(sex) {
   );
 }
 
+export function formatFaceSize(facesize) {
+  if (facesize !== 0 && !facesize) return null;
+
+  let fs = Math.floor(facesize / 1000);
+
+  return fs >= 100 ? (fs = "99k+") : fs + "k";
+}
+
+// ARRAY
 export function toggleInArray(arr = [], item) {
   return arr.includes(item)
     ? arr.filter(disabled => item !== disabled)
@@ -104,40 +80,6 @@ export function searchInList(list, query, keys) {
     : list;
 }
 
-export function formatFaceSize(facesize) {
-  if (facesize !== 0 && !facesize) return null;
-
-  let fs = Math.floor(facesize / 1000);
-
-  return fs >= 100 ? (fs = "99k+") : fs + "k";
-}
-
-export function filtersToString(filters) {
-  return Object.keys(filters).join();
-}
-
-export function parseFilters(filters) {
-  if (filters && filters.conf) {
-    const confArray = filters.conf.split(",");
-    const confObj = confArray.reduce((obj, value) => {
-      obj[value] = true;
-      return obj;
-    }, {});
-
-    const mappedFilters = {
-      offset: Number(filters.offset || 0),
-      limit: Number(filters.limit),
-    };
-
-    return {
-      ...filters,
-      ...mappedFilters,
-      conf: { ...defaultConfValues, ...confObj },
-    };
-  }
-  return {};
-}
-
 export function isNotEmpty(value, isZeroEmpty) {
   return (
     typeof value !== "undefined" &&
@@ -147,26 +89,8 @@ export function isNotEmpty(value, isZeroEmpty) {
   );
 }
 
-export function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-}
-
 export function findOptionByValue(options, value) {
   return options.find(option => isEqual(option.value, value));
-}
-
-export function transformFilters(filters) {
-  const confString =
-    filters.conf &&
-    Object.keys(filters.conf)
-      .filter(prop => filters.conf[prop] === true)
-      .join();
-  return { ...filters, conf: confString };
 }
 
 export function mapDataToGetParams(data) {
@@ -177,12 +101,6 @@ export function mapDataToGetParams(data) {
       .map(key => `${key}=${data[key]}`)
       .join("&")
   );
-}
-
-export function mapFiltersToGetParams(filters) {
-  const transformedFilters = transformFilters(filters);
-
-  return mapDataToGetParams(transformedFilters);
 }
 
 export function getStringShort(
@@ -204,6 +122,22 @@ export function getStringShort(
   )}...${string.slice(-(lastPartCount || defaultPartCount), stringLength)}`;
 }
 
+export function getFilenameShort(filename, maxLength = 10) {
+  if (filename.length < maxLength) {
+    return filename;
+  }
+
+  const extention = filename.split(".").pop();
+
+  const firstPart = filename.slice(0, 4);
+  const lastPart = filename.slice(
+    -extention.length - 4,
+    filename.length - extention.length - 1
+  );
+
+  return `${firstPart}...${lastPart}.${extention}`;
+}
+
 export function capitalize(s) {
   if (typeof s !== "string") return "";
 
@@ -214,6 +148,7 @@ export function hasProperty(obj, property) {
   return Object.prototype.hasOwnProperty.call(obj, property);
 }
 
+// DATE/TIME
 export function isSameDate(d1, d2) {
   if (!d1 || !d2) return false;
 
@@ -232,4 +167,38 @@ export function isValidDate(date, format) {
   }
 
   return dayjs(date).isValid();
+}
+
+export function getFromMapByIds(map, ids) {
+  return ids.map(id => map[id]).filter(Boolean);
+}
+
+export function removeKeyFromMap(map, key) {
+  // eslint-disable-next-line no-unused-vars
+  const { [key]: removed, ...restMap } = map;
+
+  return restMap;
+}
+
+export function scrollToTop(options = {}) {
+  document.querySelector("#app-container").scrollIntoView({
+    behavior: "smooth",
+    ...options,
+  });
+}
+
+export function scrollToItem(selector, itemHeight, onScroll, options = {}) {
+  const node = document.querySelector(selector);
+
+  if (node) {
+    // 200 секунд - тайминг анимация фэйда при переходе между страницами
+    setTimeout(() => {
+      jump(node, {
+        offset: -(window.innerHeight / 2) + itemHeight,
+        duration: 500,
+        callback: onScroll,
+        ...options,
+      });
+    }, 200);
+  }
 }
