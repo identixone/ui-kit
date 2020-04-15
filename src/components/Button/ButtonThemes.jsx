@@ -40,7 +40,7 @@ const disabledTheme = css`
 `;
 
 const lightTheme = css`
-  color: ${colors.slate};
+  color: ${colors.darkBlack};
   background-color: #e4e9eb;
 
   ${getPseudoForShadow}
