@@ -52,7 +52,6 @@ export function PersonsGroupListPerson({
           {searchType.value.includes("excludes") && (
             <PersonsGroupListPersonButton
               isFullWidth={true}
-              size="large"
               onClick={onAdd}
               buttonTheme="dark"
               isDisabled={!isAddAvailable}
@@ -64,7 +63,6 @@ export function PersonsGroupListPerson({
           {searchType.value.includes("includes") && (
             <PersonsGroupListPersonButton
               isFullWidth={true}
-              size="large"
               onClick={onRemove}
               isDisabled={!isRemoveAvailable}
               data-testid="delete-selected"
