@@ -5,6 +5,6 @@ export const StyledPersonsGroupListPersonInfo = styled.div`
   align-items: center;
 
   &:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 `;

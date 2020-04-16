@@ -11,7 +11,7 @@ const StyledListLayoutDetailed = styled(StickyBox)`
   transition: transform 120ms ease-in;
   padding: 20px;
   box-sizing: border-box;
-  min-height: 220px;
+  min-height: 214px;
 `;
 
 export { StyledListLayoutDetailed };
