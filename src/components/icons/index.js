@@ -13,7 +13,6 @@ export {
   Exclamation,
   Play,
   ArrowUp,
-  ArrowRight,
   AngleRight,
   ArrowDown,
   ArrowLeft,
@@ -43,6 +42,7 @@ export {
   PlaylistAddCheck,
 } from "@styled-icons/material";
 
+export { default as ArrowRight } from "./ArrowRight";
 export { default as InfoCircleColor } from "./InfoCircleColor";
 export { default as Pencil } from "./Pencil";
 export { default as TimesDelete } from "./TimesDelete";
