@@ -1,5 +1,6 @@
 export * from "./Badge";
 export * from "./UIBadge";
+export * from "./Breadcrumbs";
 export * from "./Button";
 export * from "./ButtonLink";
 export * from "./CardSmall";
