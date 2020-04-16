@@ -7,7 +7,7 @@ import { TabsContext } from "../../Tabs";
 import { StyledSegmentedTabsTabbar } from "./StyledSegmentedTabsTabbar";
 import { Button } from "../../Button";
 
-function SegmentedTabsTabbar({ options, "data-testid": testId }) {
+function SegmentedTabsTabbar({ options, "data-testid": testId, className }) {
   const { openTab, activeTab } = useContext(TabsContext);
 
   function renderTabBarItem(option) {
@@ -31,7 +31,7 @@ function SegmentedTabsTabbar({ options, "data-testid": testId }) {
   }
 
   return (
-    <StyledSegmentedTabsTabbar>
+    <StyledSegmentedTabsTabbar className={className}>
       {options.map(renderTabBarItem)}
     </StyledSegmentedTabsTabbar>
   );
@@ -40,6 +40,7 @@ function SegmentedTabsTabbar({ options, "data-testid": testId }) {
 SegmentedTabsTabbar.propTypes = {
   options: PropTypes.array.isRequired,
   "data-testid": PropTypes.string,
+  className: PropTypes.string,
 };
 
-export { SegmentedTabsTabbar };
+export { SegmentedTabsTabbar, StyledSegmentedTabsTabbar };

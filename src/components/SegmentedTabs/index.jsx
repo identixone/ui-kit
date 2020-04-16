@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { SegmentedTabsTabbar } from "./SegmentedTabsTabbar";
-import { SegmentedTabsPane } from "./SegmentedTabsPane";
 import { SegmentedTabsSpinner } from "./SegmentedTabsSpinner";
 import { Tabs } from "../Tabs";
 const { TabPanes, TabPane } = Tabs;
@@ -12,6 +11,7 @@ function SegmentedTabs({
   defaultActiveTab,
   onChange,
   "data-testid": testId,
+  className,
 }) {
   function renderTabPane(option) {
     const { value, Component } = option;
@@ -26,10 +26,15 @@ function SegmentedTabs({
   }
 
   return (
-    <Tabs defaultActiveTab={defaultActiveTab} onChange={onChange}>
-      <SegmentedTabsTabbar options={options} data-testid={`${testId}-tabbar`} />
-      <TabPanes>{options.map(renderTabPane)}</TabPanes>
-    </Tabs>
+    <div className={className}>
+      <Tabs defaultActiveTab={defaultActiveTab} onChange={onChange}>
+        <SegmentedTabsTabbar
+          options={options}
+          data-testid={`${testId}-tabbar`}
+        />
+        <TabPanes>{options.map(renderTabPane)}</TabPanes>
+      </Tabs>
+    </div>
   );
 }
 
@@ -38,11 +43,7 @@ SegmentedTabs.propTypes = {
   defaultActiveTab: PropTypes.string,
   onChange: PropTypes.func,
   "data-testid": PropTypes.string,
+  className: PropTypes.string,
 };
 
-export {
-  SegmentedTabs,
-  SegmentedTabsTabbar,
-  SegmentedTabsPane,
-  SegmentedTabsSpinner,
-};
+export { SegmentedTabs, SegmentedTabsTabbar, SegmentedTabsSpinner };
