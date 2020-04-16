@@ -75,14 +75,16 @@ function useSelectableList({ options, value, onChange }) {
     }
   }
 
+  const hasOptions = options && options.length > 0;
+
   return {
     selected,
     selectAll,
     deselectAll,
     toggleSelected,
     onCheckboxChange,
-    isAllSelected: selected.length === options.length,
-    isAllDeselected: selected.length === 0,
+    isAllSelected: hasOptions && selected.length === options.length,
+    isAllDeselected: hasOptions && selected.length === 0,
     hasOptions: options.length !== 0,
     hasSelected: selected.length !== 0,
   };
