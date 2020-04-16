@@ -5,6 +5,10 @@ import { StyledButton } from "../../Button";
 const StyledSegmentedTabsTabbar = styled.div`
   display: flex;
 
+  &:not(:last-child) {
+    margin-bottom: 28px;
+  }
+
   ${StyledButton} {
     &:first-child {
       border-bottom-right-radius: 0;
@@ -20,8 +24,6 @@ const StyledSegmentedTabsTabbar = styled.div`
       border-radius: 0;
     }
   }
-
-  margin-bottom: 20px;
 `;
 
 export { StyledSegmentedTabsTabbar };
