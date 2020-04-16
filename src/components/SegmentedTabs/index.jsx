@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { StyledSegmentedTabs } from "./StyledSegmentedTabs";
 import { SegmentedTabsTabbar } from "./SegmentedTabsTabbar";
 import { SegmentedTabsSpinner } from "./SegmentedTabsSpinner";
 import { Tabs } from "../Tabs";
@@ -26,7 +27,7 @@ function SegmentedTabs({
   }
 
   return (
-    <div className={className}>
+    <StyledSegmentedTabs className={className}>
       <Tabs defaultActiveTab={defaultActiveTab} onChange={onChange}>
         <SegmentedTabsTabbar
           options={options}
@@ -34,7 +35,7 @@ function SegmentedTabs({
         />
         <TabPanes>{options.map(renderTabPane)}</TabPanes>
       </Tabs>
-    </div>
+    </StyledSegmentedTabs>
   );
 }
 
