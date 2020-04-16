@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import StickyBox from "react-sticky-box";
+import { StyledButton } from "../../Button";
 
 const StyledListLayoutDetailed = styled(StickyBox)`
   display: flex;
@@ -12,6 +13,10 @@ const StyledListLayoutDetailed = styled(StickyBox)`
   padding: 20px;
   box-sizing: border-box;
   min-height: 220px;
+
+  ${StyledButton} {
+    height: 30px;
+  }
 `;
 
 export { StyledListLayoutDetailed };
