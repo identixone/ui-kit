@@ -5,6 +5,7 @@ import { useState, useRef, useMemo } from "react";
 import { useUpdateEffect } from "react-use";
 import { usePositionPopup } from "../../../hooks";
 
+import { StyledEntriesDateTimeFilter } from "./StyledEntriesDateTimeFilter";
 import { EntriesDateTimeFilterPopup } from "./EntriesDateTimeFilterPopup";
 import { EntriesDateTimeFilterTabs } from "./EntriesDateTimeFilterTabs";
 import { EntriesDateTimeFilterBottom } from "./EntriesDateTimeFilterBottom";
@@ -14,7 +15,7 @@ import { EntriesDateTimeFilterTotalTime } from "./EntriesDateTimeFilterTotalTime
 import { EntriesDateTimeFilterResetButton } from "./EntriesDateTimeFilterResetButton";
 import { Times } from "../../icons";
 
-import { identity } from "lodash-es";
+import { identity, isEqual } from "lodash-es";
 import dayjs from "dayjs";
 import { isSameDate } from "../../../utils/helpers";
 
@@ -42,31 +43,33 @@ function EntriesDateTimeFilter({
 }) {
   const [error, setError] = useState(null);
   const popupTrigger = useRef(null);
+  const filterWrapper = useRef(null);
   const {
     Portal,
     bind,
-    coords,
+    // coords,
     popupInner,
     togglePortal,
     closePortal,
     isOpen,
-    targetParams,
+    // targetParams,
   } = usePositionPopup({
     pupupTrigger: popupTrigger,
     position: "bottom",
+    bindTo: filterWrapper.current,
   });
 
-  function getPopupLeftCoord() {
-    if (popupInner.current) {
-      if (targetParams.width > popupInner.current.offsetWidth) {
-        return (
-          coords.left + targetParams.width - popupInner.current.offsetWidth
-        );
-      }
+  // function getPopupLeftCoord() {
+  //   if (popupInner.current) {
+  //     if (targetParams.width > popupInner.current.offsetWidth) {
+  //       return (
+  //         coords.left + targetParams.width - popupInner.current.offsetWidth
+  //       );
+  //     }
 
-      return coords.left;
-    }
-  }
+  //     return coords.left;
+  //   }
+  // }
 
   useUpdateEffect(() => {
     if (!isOpen) {
@@ -116,47 +119,46 @@ function EntriesDateTimeFilter({
 
   return (
     <EntriesDateTimeFilterContext.Provider value={store}>
-      <EntriesDateTimeFilterControl
-        {...bind}
-        data-testid="entries-date-time-picker-control"
-        data-current-date={initialDateTo}
-        ref={popupTrigger}
-        onClick={togglePortal}
-      >
-        {getValueRender(value)}
-        {(value[0] || value[1]) && (
-          <EntriesDateTimeFilterResetButton
-            data-testid="entries-date-time-picker-reset"
-            onClick={e => {
-              e.stopPropagation();
-              onChange(valuesOnReset);
-              if (onReset) {
-                onReset();
-              }
-              closePortal();
-            }}
-          >
-            <Times size="12" />
-          </EntriesDateTimeFilterResetButton>
-        )}
-      </EntriesDateTimeFilterControl>
-      <Portal>
-        <EntriesDateTimeFilterPopup
-          style={{
-            left: getPopupLeftCoord(),
-            top: coords.top,
-          }}
-          isOpen={isOpen}
-          ref={popupInner}
+      <StyledEntriesDateTimeFilter ref={filterWrapper}>
+        <EntriesDateTimeFilterControl
+          {...bind}
+          data-testid="entries-date-time-picker-control"
+          data-current-date={initialDateTo}
+          ref={popupTrigger}
+          onClick={togglePortal}
         >
-          {/* Сбрасываем все локальные состояния по открытию/закрытию */}
-          <EntriesDateTimeFilterTabs key={isOpen} />
-          <EntriesDateTimeFilterBottom>
-            <EntriesDateTimeFilterError />
-            <EntriesDateTimeFilterTotalTime />
-          </EntriesDateTimeFilterBottom>
-        </EntriesDateTimeFilterPopup>
-      </Portal>
+          {getValueRender(value)}
+          {(value[0] || value[1]) && (
+            <EntriesDateTimeFilterResetButton
+              data-testid="entries-date-time-picker-reset"
+              onClick={e => {
+                e.stopPropagation();
+                if (!isEqual(value, valuesOnReset)) {
+                  onChange(valuesOnReset);
+                }
+
+                if (onReset) {
+                  onReset(value, valuesOnReset);
+                }
+
+                closePortal();
+              }}
+            >
+              <Times size="12" />
+            </EntriesDateTimeFilterResetButton>
+          )}
+        </EntriesDateTimeFilterControl>
+        <Portal>
+          <EntriesDateTimeFilterPopup isOpen={isOpen} ref={popupInner}>
+            {/* Сбрасываем все локальные состояния по открытию/закрытию */}
+            <EntriesDateTimeFilterTabs key={isOpen} />
+            <EntriesDateTimeFilterBottom>
+              <EntriesDateTimeFilterError />
+              <EntriesDateTimeFilterTotalTime />
+            </EntriesDateTimeFilterBottom>
+          </EntriesDateTimeFilterPopup>
+        </Portal>
+      </StyledEntriesDateTimeFilter>
     </EntriesDateTimeFilterContext.Provider>
   );
 }

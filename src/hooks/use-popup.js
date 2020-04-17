@@ -24,7 +24,8 @@ function usePopup(params) {
         params.onOpen(targetEl);
       }
     },
-    bindTo: document && document.getElementById("app-container"),
+    bindTo:
+      params.bindTo || (document && document.getElementById("app-container")),
   });
 
   const [targetParams, setTargetParams] = useState({
