@@ -22,7 +22,7 @@ function ListStickyHeader({ children, listHeaderHeightShort, className }) {
       <StyledListStickyHeader
         style={{
           transform: `translateY(${appHeaderOffset}px)`,
-          zIndex: isSticky ? 10 : 0,
+          zIndex: isSticky ? 10 : 1,
         }}
         className={className}
         ref={headerElRef}
