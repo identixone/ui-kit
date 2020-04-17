@@ -4,8 +4,8 @@ import { EntryCardPhotoBadge } from "./EntryCardPhotoBadge";
 
 import { colors } from "../../../../../style";
 
-const EntryCardPhotoFaceSize = styled(EntryCardPhotoBadge)`
-  background-color: ${colors.bluish};
+const EntryCardPhotoReinit = styled(EntryCardPhotoBadge)`
+  background-color: ${colors.slate};
 `;
 
-export { EntryCardPhotoFaceSize };
+export { EntryCardPhotoReinit };

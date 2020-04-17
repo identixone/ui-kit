@@ -12,7 +12,6 @@ import { IdCopy } from "../../IdCopy";
 
 import { get } from "lodash-es";
 import { timeFormat, formatFaceSize, formatSex } from "../../../utils/helpers";
-import { PersonEntriesCardReinit } from "./PersonEntriesCardReinit";
 
 function PersonEntriesCard({
   person,
@@ -20,8 +19,6 @@ function PersonEntriesCard({
   className,
   "data-testid": testId,
 }) {
-  const hasReinit = person.reinit > 0;
-
   return (
     <StyledPersonEntriesCard
       className={className}
@@ -31,13 +28,8 @@ function PersonEntriesCard({
       <PersonEntriesCardPhoto
         facesize={formatFaceSize(person.initial_facesize)}
         src={person.initial_photo}
+        hasReinit={person.reinit > 0}
       />
-
-      {hasReinit && (
-        <PersonEntriesCardReinit data-testid="person-entries-card-re">
-          RE
-        </PersonEntriesCardReinit>
-      )}
 
       <EntryCardInfo>
         <EntryCardInfoColumn>

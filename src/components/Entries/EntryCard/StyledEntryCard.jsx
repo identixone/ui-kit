@@ -6,9 +6,9 @@ import {
   StyledEntryCardPhoto,
   EntryCardInfoColumn,
   EntryCardInfoItemLabel,
-  EntryCardPhotoFaceSize,
   StyledEntryCardLiveness,
 } from "../components";
+import { EntryCardPhotoBadges } from "../components/EntryCardPhotos/EntryCardPhoto/EntryCardPhotoBadges";
 
 const StyledEntryCard = styled(EntryCardContainer)`
   height: 114px;
@@ -44,7 +44,7 @@ const StyledEntryCard = styled(EntryCardContainer)`
     }
   }
 
-  ${EntryCardPhotoFaceSize} {
+  ${EntryCardPhotoBadges} {
     top: -4px;
   }
 

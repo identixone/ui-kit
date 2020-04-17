@@ -46,7 +46,6 @@ export * from "./Stepper";
 export * from "./SegmentedTabs";
 export * from "./Value";
 export * from "./ValueSpan";
-export * from "./FaceSize";
 export * from "./PopupContainer";
 export * from "./GlobalStyles";
 export * from "./I18nProvider";
