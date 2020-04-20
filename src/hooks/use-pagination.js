@@ -5,7 +5,7 @@ const calculateSelectedPage = (offset, limit) => {
   return offset / limit + 1 || 1;
 };
 
-export const usePagination = props => {
+export const usePagination = (props) => {
   const { limit, offset, totalCount } = props;
 
   const fullPaginationNumbersLength = Math.ceil(totalCount / limit || 0);

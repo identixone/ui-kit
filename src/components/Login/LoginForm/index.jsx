@@ -100,7 +100,7 @@ function LoginFormComponent({
           <FormField
             name="username"
             showError={false}
-            render={props => (
+            render={(props) => (
               <LoginFormInput
                 {...props}
                 placeholder="USERNAME"
@@ -111,7 +111,7 @@ function LoginFormComponent({
           <FormField
             name="password"
             showError={false}
-            render={props => (
+            render={(props) => (
               <LoginFormInput
                 {...props}
                 placeholder="PASSWORD"
@@ -150,7 +150,7 @@ LoginFormComponent.defaultProps = {
 };
 
 const LoginForm = withFormik({
-  mapPropsToValues: function() {
+  mapPropsToValues: function () {
     return { username: "", password: "" };
   },
   validateOnBlur: false,
@@ -159,7 +159,7 @@ const LoginForm = withFormik({
     username: string().required(),
     password: string().required(),
   }),
-  handleSubmit: function(values, { props }) {
+  handleSubmit: function (values, { props }) {
     props.login(values);
   },
 })(LoginFormComponent);

@@ -31,15 +31,15 @@ FormInput.defaultProps = {
   type: "text",
 };
 
-FormInput.Password = function(props) {
+FormInput.Password = function (props) {
   return <FormInput {...props} type="password" />;
 };
 
-FormInput.Number = function(props) {
+FormInput.Number = function (props) {
   return <FormInput {...props} type="number" />;
 };
 
-FormInput.Uneditable = function(props) {
+FormInput.Uneditable = function (props) {
   // eslint-disable-next-line react/prop-types
   return <FormInputUneditable {...props}>{props.value}</FormInputUneditable>;
 };

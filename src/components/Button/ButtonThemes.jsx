@@ -21,11 +21,11 @@ function getPseudoForShadow({ isRounded, fit, disabled }) {
 
     &:hover:after {
       ${!disabled &&
-        css`
-           {
-            opacity: 1;
-          }
-        `}
+      css`
+         {
+          opacity: 1;
+        }
+      `}
     }
   `;
 }

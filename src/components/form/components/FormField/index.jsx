@@ -34,7 +34,7 @@ function FormField(props) {
 
   const hasError = Boolean(touched && error);
 
-  const onChange = ev => {
+  const onChange = (ev) => {
     if (ev.type) {
       field.onChange(ev);
     } else {

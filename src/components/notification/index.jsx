@@ -26,7 +26,7 @@ Notification.newInstance(
       </NotificationCloseButton>
     ),
   },
-  n => (notification = n)
+  (n) => (notification = n)
 );
 
 export function open({ message, description, type, duration }) {

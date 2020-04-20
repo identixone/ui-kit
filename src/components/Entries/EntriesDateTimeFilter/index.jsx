@@ -74,17 +74,13 @@ function EntriesDateTimeFilter({
   useUpdateEffect(() => {
     if (!isOpen) {
       if (!value[0] && value[1]) {
-        const dayBefore = dayjs(value[1])
-          .subtract(1, "day")
-          .toDate();
+        const dayBefore = dayjs(value[1]).subtract(1, "day").toDate();
 
         onChange([dayBefore, value[1]]);
       }
 
       if (value[0] && !value[1]) {
-        const dayAfter = dayjs(value[0])
-          .add(1, "day")
-          .toDate();
+        const dayAfter = dayjs(value[0]).add(1, "day").toDate();
 
         onChange([value[0], dayAfter]);
       }
@@ -131,7 +127,7 @@ function EntriesDateTimeFilter({
           {(value[0] || value[1]) && (
             <EntriesDateTimeFilterResetButton
               data-testid="entries-date-time-picker-reset"
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 if (!isEqual(value, valuesOnReset)) {
                   onChange(valuesOnReset);

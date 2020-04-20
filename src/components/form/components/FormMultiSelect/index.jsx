@@ -50,7 +50,7 @@ function FormMultiSelect(props) {
     function handleKeyDown(ev) {
       if (ev.keyCode === BACKSPACE_KEY_CODE && ev.target.value === "") {
         // Удаляем последний элемент
-        setSelected(selected => selected.slice(0, selected.length - 1));
+        setSelected((selected) => selected.slice(0, selected.length - 1));
         setIsOpen(false);
       }
     }
@@ -106,11 +106,11 @@ function FormMultiSelect(props) {
   }
 
   function addItem(item) {
-    setSelected(selected => [...selected, item]);
+    setSelected((selected) => [...selected, item]);
   }
 
   function removeItem(item) {
-    setSelected(selected => selected.filter(i => i !== item));
+    setSelected((selected) => selected.filter((i) => i !== item));
   }
 
   function handleChange(option) {
@@ -131,13 +131,13 @@ function FormMultiSelect(props) {
     }
 
     inputRef.current.focus();
-    setIsOpen(isOpen => !isOpen);
+    setIsOpen((isOpen) => !isOpen);
   }
 
   return (
     <Downshift
       onChange={handleChange}
-      itemToString={item => (item && item.label ? item.label : "")}
+      itemToString={(item) => (item && item.label ? item.label : "")}
       stateReducer={stateReducer}
       defaultHighlightedIndex={0}
       inputValue={inputValue}
@@ -167,7 +167,7 @@ function FormMultiSelect(props) {
               onClick={handleTagsClick}
               data-testid={`${testId}-tags`}
             >
-              {selected.map(selected => {
+              {selected.map((selected) => {
                 const tagName = selected.label || selected;
                 const tagValue = selected.value || selected;
 
@@ -211,7 +211,7 @@ function FormMultiSelect(props) {
                       inputValue,
                       options[0] && options[0].label && ["label"]
                     )
-                      .filter(option => {
+                      .filter((option) => {
                         /** Проверка наличия объекта или примитива в массиве
                          * TODO: Возможно стоит вынести в отдельную функцию
                          */

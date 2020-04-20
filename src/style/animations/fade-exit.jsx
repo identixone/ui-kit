@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const fadeExit = timing => css`
+export const fadeExit = (timing) => css`
   &-exit {
     opacity: 1;
   }

@@ -14,7 +14,7 @@ const RouteSectionSpinner = styled(Spinner).attrs(() => ({ height: 40 }))`
   justify-content: center;
   background-color: #fff;
   z-index: 1000;
-  pointer-events: ${props => (props.transparentForEvents ? "none" : "auto")};
+  pointer-events: ${(props) => (props.transparentForEvents ? "none" : "auto")};
 
   svg {
     margin-top: -34px;

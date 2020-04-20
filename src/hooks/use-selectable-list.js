@@ -34,9 +34,9 @@ function useSelectableList({ options, value, onChange }) {
   function toggleSelected(option) {
     const optionPresentation = getOptionPresentation(option);
 
-    setSelected(selected =>
+    setSelected((selected) =>
       selected.includes(optionPresentation)
-        ? selected.filter(sel => optionPresentation !== sel)
+        ? selected.filter((sel) => optionPresentation !== sel)
         : selected.concat(optionPresentation)
     );
   }
@@ -56,10 +56,10 @@ function useSelectableList({ options, value, onChange }) {
       )
       .concat([checkFrom, checkTo]);
 
-    setSelected(selected =>
+    setSelected((selected) =>
       isCheck
         ? uniq(selected.concat(hasToCheck))
-        : selected.filter(option => !hasToCheck.includes(option))
+        : selected.filter((option) => !hasToCheck.includes(option))
     );
   }
 

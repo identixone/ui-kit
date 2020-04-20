@@ -5,7 +5,7 @@ function useInfiniteMenu({ limit, hasNext, fetchOptions }) {
   const [isListEnds, setIsListEnds] = useState(!hasNext);
 
   const { pagination, setPagination, setFetchParams } = useListFetch({
-    fetchList: params => {
+    fetchList: (params) => {
       fetchOptions({ ...params, meta: { clearList: params.offset === 0 } });
     },
     pagination: { limit, offset: 0 },

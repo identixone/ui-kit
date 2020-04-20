@@ -21,7 +21,7 @@ function SegmentedTabs({
       <TabPane
         id={value}
         // eslint-disable-next-line react/prop-types
-        render={props => props.isActive && <Component {...props} />}
+        render={(props) => props.isActive && <Component {...props} />}
       />
     );
   }

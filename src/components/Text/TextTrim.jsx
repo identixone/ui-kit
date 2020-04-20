@@ -5,7 +5,7 @@ import { css } from "styled-components";
   настраивать отображаемое кол-во строк
 */
 function textTrimStyles() {
-  return function() {
+  return function () {
     return css`
       text-overflow: ellipsis;
       white-space: nowrap;

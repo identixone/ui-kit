@@ -95,7 +95,7 @@ function PersonsGroupPerson({
           {({ togglePopup }) => (
             <CardSmall.Button
               data-testid="persons-group-remove-person"
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 togglePopup(e);
               }}

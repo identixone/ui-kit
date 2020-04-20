@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { Header, HeaderTopMenu, HeaderAppMenu } from "./index.jsx";
 import { HeaderTopMenuLinks, HeaderTopMenuUser } from "./HeaderTopMenu";
 
-storiesOf("Header", module).add("default", () => {
+storiesOf("Navigation|Header", module).add("default", () => {
   const username = text("Username", "Arunoda Susiripala");
 
   const topLinks = object("Top links", [

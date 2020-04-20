@@ -13,7 +13,7 @@ function animation(props) {
 }
 
 const SliderInner = styled.ul`
-  animation: ${props => animation(props)} 0.3s ease-in-out;
+  animation: ${(props) => animation(props)} 0.3s ease-in-out;
   height: 6500px;
   margin: 0;
   padding: 0;

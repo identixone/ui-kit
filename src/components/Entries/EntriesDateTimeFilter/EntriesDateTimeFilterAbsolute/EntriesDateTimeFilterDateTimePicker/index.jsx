@@ -69,7 +69,7 @@ function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
     }
   }, [value, selectionComplete]);
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     setError(null);
 
     if (!selectionComplete && !value[0]) {
@@ -93,7 +93,7 @@ function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
     }
   };
 
-  const handleSelect = date => {
+  const handleSelect = (date) => {
     if (
       !selectionComplete &&
       value[0] &&
@@ -137,7 +137,7 @@ function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
         <EntriesDateTimeFilterDateTimeInput
           label="From"
           value={value[0]}
-          onChange={date => {
+          onChange={(date) => {
             onChange([date, value[1]]);
           }}
           onFocus={() => {
@@ -148,7 +148,7 @@ function EntriesDateTimeFilterDateTimePicker({ value, onChange }) {
         <EntriesDateTimeFilterDateTimeInput
           label="To"
           value={value[1]}
-          onChange={date => {
+          onChange={(date) => {
             onChange([value[0], date]);
           }}
           onFocus={() => {

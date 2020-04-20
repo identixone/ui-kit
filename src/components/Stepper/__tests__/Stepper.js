@@ -32,7 +32,7 @@ describe("Stepper tests", () => {
         onReset={handleStepperResetMock}
         onStepChanges={onStepChangesMock}
       >
-        {stepperProps => (
+        {(stepperProps) => (
           <React.Fragment>
             <div data-testid="stepper-index">
               {stepperProps.activeStepIndex}

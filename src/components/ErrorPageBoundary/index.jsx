@@ -27,7 +27,7 @@ RedirectToError.propTypes = {
   error: PropTypes.object.isRequired,
 };
 
-export const withErrorPageBoundary = Component => {
+export const withErrorPageBoundary = (Component) => {
   const WithErrorPageBoundary = ({ onError, ...restProps }) => {
     return (
       <ErrorBoundary ErrorComponent={RedirectToError} onError={onError}>

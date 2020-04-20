@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
 function getSize(height, paddnig) {
-  return function({ fit }) {
+  return function ({ fit }) {
     if (fit === "square" || fit === "circle") {
       return css`
         width: ${height}px;

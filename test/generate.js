@@ -18,7 +18,7 @@ function getRandomInt(min, max) {
 }
 
 function getRandomName() {
-  return sequence(x => fake(f => f.hacker.verb() + `_${x}`));
+  return sequence((x) => fake((f) => f.hacker.verb() + `_${x}`));
 }
 
 const licenseTypes = ["basic", "standard", "standard+", "advanced"];
@@ -52,7 +52,7 @@ const sourceBuilder = build("Source")
     manual_create_liveness_only: bool(),
     manual_check_liveness: bool(),
   })
-  .map(source => ({
+  .map((source) => ({
     ...source,
     store_images_for_confs: uniq(source.store_images_for_confs),
   }));
@@ -78,8 +78,8 @@ const sourceStatsBuilder = build("Source Stats").fields({
 });
 
 const userBuilder = build("User").fields({
-  username: fake(f => f.internet.userName()),
-  password: fake(f => f.internet.password()),
+  username: fake((f) => f.internet.userName()),
+  password: fake((f) => f.internet.password()),
 });
 
 function generateSources(count) {

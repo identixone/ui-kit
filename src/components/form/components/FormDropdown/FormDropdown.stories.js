@@ -205,7 +205,7 @@ storiesOf("Form Components/FormDropdown", module)
           width={number("width", 200)}
           withSearch={boolean("with search", false)}
           disabled={boolean("disabled", false)}
-          renderItem={item => (
+          renderItem={(item) => (
             <span>{`${isEven(item.value) ? "🍎" : "🍌"} ${item.label}`}</span>
           )}
         />

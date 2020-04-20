@@ -60,7 +60,7 @@ export function formatFaceSize(facesize) {
 // ARRAY
 export function toggleInArray(arr = [], item) {
   return arr.includes(item)
-    ? arr.filter(disabled => item !== disabled)
+    ? arr.filter((disabled) => item !== disabled)
     : arr.concat(item);
 }
 
@@ -90,15 +90,15 @@ export function isNotEmpty(value, isZeroEmpty) {
 }
 
 export function findOptionByValue(options, value) {
-  return options.find(option => isEqual(option.value, value));
+  return options.find((option) => isEqual(option.value, value));
 }
 
 export function mapDataToGetParams(data) {
   return (
     "?" +
     Object.keys(data)
-      .filter(key => data[key] !== null)
-      .map(key => `${key}=${data[key]}`)
+      .filter((key) => data[key] !== null)
+      .map((key) => `${key}=${data[key]}`)
       .join("&")
   );
 }
@@ -170,7 +170,7 @@ export function isValidDate(date, format) {
 }
 
 export function getFromMapByIds(map, ids) {
-  return ids.map(id => map[id]).filter(Boolean);
+  return ids.map((id) => map[id]).filter(Boolean);
 }
 
 export function removeKeyFromMap(map, key) {

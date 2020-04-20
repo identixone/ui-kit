@@ -103,7 +103,7 @@ function EntriesDateTimeFilterRelativePicker({ value, onChange, currentDate }) {
   }, [selected]);
 
   function handleSelectChange(type) {
-    return function(value) {
+    return function (value) {
       setSelected({
         type,
         value,

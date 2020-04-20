@@ -80,7 +80,7 @@ function FormDropdown({
   function getHighlighted(selected) {
     const selectedOptionIndex = selected
       ? searchInList(options, inputValue, ["label"]).findIndex(
-          item => item.value === selected.value
+          (item) => item.value === selected.value
         )
       : 0;
 
@@ -197,13 +197,13 @@ function FormDropdown({
 
     if (multiple) {
       const selectedInOptions = selected.find(
-        item => item.value === option.value
+        (item) => item.value === option.value
       );
 
       if (selectedInOptions) {
         const changes = selected
-          .filter(option => !isSingle(option))
-          .filter(option => !isEqual(option, selectedInOptions));
+          .filter((option) => !isSingle(option))
+          .filter((option) => !isEqual(option, selectedInOptions));
 
         if (hasDefault && changes.length === 0) {
           onChange(defaultOptions);
@@ -211,7 +211,7 @@ function FormDropdown({
           onChange(changes);
         }
       } else {
-        onChange(selected.filter(option => !isSingle(option)).concat(option));
+        onChange(selected.filter((option) => !isSingle(option)).concat(option));
       }
     } else {
       onChange(option);
@@ -243,7 +243,7 @@ function FormDropdown({
   function getIsOptionSelected(option, selectedItem) {
     if (multiple) {
       return (
-        selectedItem.find(item => item.value === option.value) !== undefined
+        selectedItem.find((item) => item.value === option.value) !== undefined
       );
     } else {
       return isEqual(selectedItem, option);
@@ -255,7 +255,7 @@ function FormDropdown({
       initialSelectedItem={value}
       selectedItem={selected}
       inputValue={inputValue}
-      itemToString={item => (item ? item.label : "")}
+      itemToString={(item) => (item ? item.label : "")}
       stateReducer={stateReducer}
       onChange={handleChange}
       onStateChange={handleStateChange}
@@ -299,7 +299,7 @@ function FormDropdown({
                   options.filter(isDefault).length) ? (
                 <FormDropdownResetButton
                   data-testid={`${testId}-reset`}
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     clearSelection();
                     closeMenu();

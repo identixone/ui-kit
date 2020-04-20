@@ -18,7 +18,7 @@ storiesOf("Form Components| FormCheckbox", module).add("default", () => {
         name="checkbox"
         checked={checked}
         onChange={() => {
-          setChecked(checked => !checked);
+          setChecked((checked) => !checked);
         }}
         disabled={isCheckboxDisabled}
       />

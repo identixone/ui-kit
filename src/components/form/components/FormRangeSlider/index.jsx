@@ -9,10 +9,10 @@ import { getTestId } from "../../utils";
 
 function formatter(decimals) {
   return {
-    from: function(value) {
+    from: function (value) {
       return `${round(value, decimals)}`;
     },
-    to: function(value) {
+    to: function (value) {
       return `${round(value, decimals)}`;
     },
   };
@@ -36,7 +36,7 @@ function FormRangeSlider(props) {
           min: minFrom,
           max: maxTo,
         }}
-        onChange={value => {
+        onChange={(value) => {
           onChange(!value ? value : value.map(Number));
         }}
         data-testid={`${testId}-slider`}

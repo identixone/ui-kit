@@ -27,7 +27,7 @@ function renderFormRangeSlider(props) {
           data-testid={componentName}
           from={value[0]}
           to={value[1]}
-          onChange={ev => {
+          onChange={(ev) => {
             setValue(ev);
             onChangeMock(ev);
           }}

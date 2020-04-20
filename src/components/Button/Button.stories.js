@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { text, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
-import Button from "./index.jsx";
+import { Button } from "./index.jsx";
 
 storiesOf("Button", module).add("default", () => {
   const buttonText = text("Button text", "Arunoda");

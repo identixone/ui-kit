@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const fadeEnter = timing => css`
+export const fadeEnter = (timing) => css`
   &-appear {
     opacity: 0;
   }

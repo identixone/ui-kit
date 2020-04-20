@@ -22,7 +22,7 @@ function EntriesDateTimeFilterRelativePickerSelect({
           {label}
         </EntriesDateTimeFilterRelativePickerSelectLabel>
       )}
-      {range.map(option => (
+      {range.map((option) => (
         <EntriesDateTimeFilterRelativePickerSelectOption
           key={option}
           isSelected={option === value}

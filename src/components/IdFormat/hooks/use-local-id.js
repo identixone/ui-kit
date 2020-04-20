@@ -1,6 +1,6 @@
 import { hasProperty } from "../../../utils/helpers";
 
-const getShortId = id => id.split("-")[4];
+const getShortId = (id) => id.split("-")[4];
 
 function useLocalId(props) {
   const { id, children } = props;

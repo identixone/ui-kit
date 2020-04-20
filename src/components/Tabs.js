@@ -11,10 +11,10 @@ const TabsContext = React.createContext({
   toggleDisabled: () => {},
 });
 
-const withTabsContext = WrappedComponent => {
-  const WithTabsContext = props => (
+const withTabsContext = (WrappedComponent) => {
+  const WithTabsContext = (props) => (
     <TabsContext.Consumer>
-      {context => <WrappedComponent {...props} {...context} />}
+      {(context) => <WrappedComponent {...props} {...context} />}
     </TabsContext.Consumer>
   );
 
@@ -91,20 +91,20 @@ class Tabs extends Component {
     }
   }
 
-  openTab = tabName => {
+  openTab = (tabName) => {
     this.setState(({ disabledTabs }) => ({
       activeTab: tabName,
-      disabledTabs: disabledTabs.filter(tab => tab !== tabName),
+      disabledTabs: disabledTabs.filter((tab) => tab !== tabName),
     }));
   };
 
-  toggleDisabled = tabName => {
+  toggleDisabled = (tabName) => {
     this.setState(({ disabledTabs }) => ({
       disabledTabs: toggleInArray(disabledTabs, tabName),
     }));
   };
 
-  disableTab = tabName => {
+  disableTab = (tabName) => {
     this.setState(({ disabledTabs }) => ({
       disabledTabs: disabledTabs.concat(tabName),
     }));

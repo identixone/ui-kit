@@ -9,7 +9,7 @@ function CardSmallCheckbox({ name, onChange, checked, isHidden }) {
   return (
     <StyledCardSmallCheckbox
       htmlFor={name}
-      onClick={e => {
+      onClick={(e) => {
         e.stopPropagation();
       }}
       isHidden={isHidden}

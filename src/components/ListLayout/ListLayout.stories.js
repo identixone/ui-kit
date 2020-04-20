@@ -212,7 +212,7 @@ storiesOf("List Layout", module)
                       `Items selected: ${selected.length}`}
                   </ListLayoutActions>
                 }
-                renderItem={item => (
+                renderItem={(item) => (
                   <ListLayoutList.Item
                     selectable={true}
                     item={item}
@@ -344,7 +344,7 @@ storiesOf("List Layout", module)
                       `${selected.length} items selected`}
                   </ListLayoutActions>
                 }
-                renderItem={item => (
+                renderItem={(item) => (
                   <ListLayoutList.Item
                     selectable={true}
                     item={item}
@@ -371,7 +371,7 @@ storiesOf("List Layout", module)
     return <ListLayoutConsumer />;
   })
   .add("list of persons", () => {
-    const persons = (count =>
+    const persons = ((count) =>
       [...new Array(count)].map((_, id) => ({
         ...personMock,
         idxid: "732e7919-508d-4cc2-b5a5-3e1b863c7d33" + id,
@@ -445,7 +445,7 @@ storiesOf("List Layout", module)
                   />
                 }
                 columns={2}
-                renderItem={person => (
+                renderItem={(person) => (
                   <PersonsGroupPerson
                     key={person.idxid}
                     onChange={onCheckboxChange}
@@ -457,7 +457,7 @@ storiesOf("List Layout", module)
               />
 
               <PersonsGroupPersonDetail
-                person={persons.find(person => person.idxid === detailed)}
+                person={persons.find((person) => person.idxid === detailed)}
               />
             </React.Fragment>
           }

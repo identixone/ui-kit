@@ -7,7 +7,7 @@ export class DeleteSure extends React.Component {
     children: PropTypes.func.isRequired,
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     e.stopPropagation();
 
     if (this.state.isSure) {

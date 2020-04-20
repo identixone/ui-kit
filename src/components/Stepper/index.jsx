@@ -9,11 +9,11 @@ const StepperContext = React.createContext({
   reset: noop,
 });
 
-const withStepperContext = WrappedComponent => {
-  const WithStepperContext = props => {
+const withStepperContext = (WrappedComponent) => {
+  const WithStepperContext = (props) => {
     return (
       <StepperContext.Consumer>
-        {context => <WrappedComponent {...context} {...props} />}
+        {(context) => <WrappedComponent {...context} {...props} />}
       </StepperContext.Consumer>
     );
   };

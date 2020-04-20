@@ -18,14 +18,14 @@ function EntriesDateTimeFilterTabs() {
           <TabPanes>
             <TabPane
               id="absolute"
-              render={props =>
+              render={(props) =>
                 // eslint-disable-next-line react/prop-types
                 props.isActive && <EntriesDateTimeFilterAbsolute {...props} />
               }
             />
             <TabPane
               id="relative"
-              render={props =>
+              render={(props) =>
                 // eslint-disable-next-line react/prop-types
                 props.isActive && <EntriesDateTimeFilterRelative {...props} />
               }

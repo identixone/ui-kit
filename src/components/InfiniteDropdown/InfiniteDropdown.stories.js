@@ -14,7 +14,7 @@ function isEven(n) {
 
 storiesOf("Basic UI|InfiniteDropdown", module)
   .add("default", () => {
-    const options = generateSourcesStats(10).map(option => ({
+    const options = generateSourcesStats(10).map((option) => ({
       label: option.name,
       value: option.id,
     }));
@@ -32,7 +32,7 @@ storiesOf("Basic UI|InfiniteDropdown", module)
     );
   })
   .add("with custom item render", () => {
-    const options = generateSourcesStats(10).map(option => ({
+    const options = generateSourcesStats(10).map((option) => ({
       label: option.name,
       value: option.id,
     }));
@@ -46,7 +46,7 @@ storiesOf("Basic UI|InfiniteDropdown", module)
         placeholder={isFetching ? "Loading..." : "Select value..."}
         width={240}
         withSearch={boolean("with search", false)}
-        renderItem={item => (
+        renderItem={(item) => (
           <span>{`${isEven(item.value) ? "🍎" : "🍌"} ${item.label}`}</span>
         )}
       />
