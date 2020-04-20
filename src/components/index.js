@@ -5,7 +5,6 @@ export * from "./Button";
 export * from "./ButtonLink";
 export * from "./CardSmall";
 export * from "./CopyItem";
-export * from "./DeleteSure";
 export * from "./DeleteSureButton";
 export * from "./Entries";
 export * from "./ErrorBoundary";
