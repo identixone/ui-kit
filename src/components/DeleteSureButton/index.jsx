@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "../../hooks";
+import usePortal from "react-useportal";
 
 import { StyledDeleteSureButton } from "./StyledDeleteSureButton";
 import { DeleteSurePseudoButton } from "./DeleteSurePseudoButton";
@@ -23,6 +24,7 @@ function DeleteSureButton({
   "data-testid": testId,
 }) {
   const [isSure, setIsSure] = useState(false);
+  const { Portal } = usePortal();
 
   const { t, i18n } = useTranslation();
   i18n.addResourceBundle("en", "DeleteSureButton", resources.en);
@@ -49,7 +51,8 @@ function DeleteSureButton({
         className={className}
         deleteColor={deleteColor}
         isSure={isSure}
-        onClick={() => {
+        onClick={(ev) => {
+          ev.stopPropagation();
           if (isSure) {
             onDelete();
           }
@@ -66,13 +69,15 @@ function DeleteSureButton({
       >
         {isSure ? textSure : textDelete}
       </StyledDeleteSureButton>
-      <DeleteSurePseudoButton
-        className={className}
-        ref={pseudoButtonRef}
-        size={size}
-      >
-        {textDelete}
-      </DeleteSurePseudoButton>
+      <Portal>
+        <DeleteSurePseudoButton
+          className={className}
+          ref={pseudoButtonRef}
+          size={size}
+        >
+          {textDelete}
+        </DeleteSurePseudoButton>
+      </Portal>
     </>
   );
 }
