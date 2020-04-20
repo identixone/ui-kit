@@ -8,7 +8,13 @@ import { useFlash } from "../Flash";
 import { StyledCopyItem } from "./StyledCopyItem";
 import { CopyItemIcon } from "./CopyItemIcon";
 
-function CopyItem({ children, value, className, "data-testid": testId }) {
+function CopyItem({
+  children,
+  value,
+  onCopy,
+  className,
+  "data-testid": testId,
+}) {
   const { flash, isFlashing } = useFlash();
   const [{ isCopyAvailable, isCopied }, copyToClipboard] = useCopyToClipboard();
 
@@ -21,6 +27,9 @@ function CopyItem({ children, value, className, "data-testid": testId }) {
   useEffect(() => {
     if (isCopied) {
       flash();
+      if (onCopy) {
+        onCopy();
+      }
     }
   }, [isCopied]);
 
@@ -40,6 +49,7 @@ function CopyItem({ children, value, className, "data-testid": testId }) {
 CopyItem.propTypes = {
   children: PropTypes.string.isRequired,
   value: PropTypes.string,
+  onCopy: PropTypes.func,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Clone } from "../icons";
+
 import { colors } from "../../style";
 
 const CopyItemIcon = styled(Clone)`
