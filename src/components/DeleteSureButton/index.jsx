@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useRef } from "react";
+import { useDeleteSure } from "./hooks";
 import { useTranslation } from "../../hooks";
 
 import StyledDeleteSureButton from "./StyledDeleteSureButton";
 import { colors } from "../../style";
-
-import { DeleteSure } from "../DeleteSure";
 
 import { resources } from "./DeleteSureButton.resources.js";
 import { isUndefined } from "lodash-es";
@@ -22,6 +22,13 @@ function DeleteSureButton({
   color,
 }) {
   const { t, i18n } = useTranslation();
+  const { isSure, setIsSure } = useDeleteSure(onDelete);
+  const buttonRef = useRef(null);
+  const buttonWidth = useRef(null);
+
+  if (buttonWidth.current === null && buttonRef.current) {
+    buttonWidth.current = buttonRef.current.getBoundingClientRect().width;
+  }
 
   i18n.addResourceBundle("en", "DeleteSureButton", resources.en);
   i18n.addResourceBundle("ru", "DeleteSureButton", resources.ru);
@@ -34,23 +41,27 @@ function DeleteSureButton({
     : deleteText;
 
   return (
-    <DeleteSure onDelete={onDelete}>
-      {({ isSure, handleClick, handleMouseLeave }) => (
-        <StyledDeleteSureButton
-          color={color}
-          className={className}
-          deleteColor={deleteColor}
-          isSure={isSure}
-          onClick={handleClick}
-          onMouseLeave={handleMouseLeave}
-          size={size}
-          isDisabled={isDisabled}
-          data-testid="delete-button"
-        >
-          {isSure ? textSure : textDelete}
-        </StyledDeleteSureButton>
-      )}
-    </DeleteSure>
+    <StyledDeleteSureButton
+      ref={buttonRef}
+      color={color}
+      className={className}
+      deleteColor={deleteColor}
+      isSure={isSure}
+      onClick={() => {
+        setIsSure(true);
+      }}
+      onMouseLeave={() => {
+        setIsSure(false);
+      }}
+      size={size}
+      isDisabled={isDisabled}
+      data-testid="delete-button"
+      style={
+        buttonWidth.current !== null ? { width: buttonWidth.current } : null
+      }
+    >
+      {isSure ? textSure : textDelete}
+    </StyledDeleteSureButton>
   );
 }
 
