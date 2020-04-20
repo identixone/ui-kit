@@ -8,7 +8,7 @@
 
 An Identixone UI design language and React implementation.
 
-> **Note**: UI kit is build on ES6 modules, so your app have to support this as well
+> **Note**: Identixone UI kit is build on ES6 modules, so your app have to support it as well
 
 ## 📦 Install
 

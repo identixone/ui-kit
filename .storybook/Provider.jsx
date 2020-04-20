@@ -13,7 +13,7 @@ const ProviderWrapper = ({ children }) => (
   </I18nProvider>
 );
 
-export const withProvider = story => (
+export const withProvider = (story) => (
   <ProviderWrapper>{story()}</ProviderWrapper>
 );
 

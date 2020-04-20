@@ -28,12 +28,6 @@ module.exports = {
     },
   },
   rules: {
-    "prettier/prettier": [
-      "error",
-      {
-        trailingComma: "es5",
-      },
-    ],
     "react/no-unused-prop-types": 2,
     "no-console": "off",
     "react/display-name": 0,
