@@ -78,7 +78,7 @@ import { SomeIcon } from "icons";
 import { brandColor } from "colors";
 import { brandImage } from "images";
 import { isEqual } from "lodash-es";
-import { resources } from "./AwesomeComponent.resources.js"
+import { resources } from "./AwesomeComponent.resources.js";
 
 /** деструктуризация пропсов
  * в API компонента обязательно должен быть `data-testid` и `className` пропсы
@@ -94,7 +94,7 @@ function AwesomeComponent({
   // подключение переводов для компонента ns - `AwesomeComponent`
   i18n.addResourceBundle("en", "AwesomeComponent", resources.en);
   i18n.addResourceBundle("ru", "AwesomeComponent", resources.ru);
- 
+
   // использование hooks
   const [some, setSome] = useState(false);
   const prevSome = usePrevious(some);
