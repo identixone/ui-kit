@@ -15,7 +15,7 @@ describe("DatePicker tests", () => {
   const onStateChangeMock = jest.fn();
 
   beforeAll(() => {
-    MockDate.set("2001-09-04", 0);
+    MockDate.set("2001-09-04");
   });
   afterEach(() => {
     onChangeMock.mockClear();
@@ -80,7 +80,8 @@ describe("DatePicker tests", () => {
        * хак нужен из-за того, что react-datepicker не позволяет выставить utcOffset
        * (игнорирует проп)
        */
-      return new Date(new Date(date) - 240 * 60000);
+      const utcOffset = new Date().getTimezoneOffset();
+      return new Date(new Date(date).getTime() + utcOffset * 60000);
     }
 
     test("DatePicker should call onChange correctly if last date is after first date", () => {
