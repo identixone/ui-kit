@@ -5,4 +5,4 @@ const FooterInner = styled.div`
   margin: 0 auto;
 `;
 
-export default FooterInner;
+export { FooterInner };

@@ -12,4 +12,4 @@ const StyledFooter = styled.footer`
   box-sizing: border-box;
 `;
 
-export default StyledFooter;
+export { StyledFooter };

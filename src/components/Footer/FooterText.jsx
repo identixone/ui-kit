@@ -6,4 +6,4 @@ const FooterText = styled.div`
   align-items: flex-start;
 `;
 
-export default FooterText;
+export { FooterText };
