@@ -21,6 +21,7 @@ const Button = React.forwardRef((props, ref) => {
     fit,
     isFullWidth,
     isHardOutline,
+    style,
     className,
     "data-testid": testId,
   } = props;
@@ -29,6 +30,7 @@ const Button = React.forwardRef((props, ref) => {
     <StyledButton
       ref={ref}
       className={className}
+      style={style}
       data-testid={testId}
       onClick={onClick}
       onMouseLeave={onMouseLeave}
@@ -73,6 +75,7 @@ Button.propTypes = {
   // Проперти добавлено для того, чтобы в FF не показывать аутлайн (работает только через !important)
   // Но при желании его можно поставить в false, чтобы установать свой аутлайн
   isHardOutline: PropTypes.bool,
+  style: PropTypes.object,
 };
 
 Button.defaultProps = {
