@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import Button from "../Button";
+import { Button } from "../Button";
 
 import { colors } from "../../style";
 
@@ -24,9 +24,7 @@ function getSureStyles({ isSure, deleteColor }) {
   );
 }
 
-const StyledDeleteSureButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const StyledDeleteSureButton = styled(Button)`
   background-color: ${(props) => props.color};
   color: ${colors.slate};
   ${getSureStyles}

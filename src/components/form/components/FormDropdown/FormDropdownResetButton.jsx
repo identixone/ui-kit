@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import Button from "../../../Button";
 
-const FormDropdownResetButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+import { Button } from "../../../Button";
+
+const FormDropdownResetButton = styled(Button)`
   position: absolute;
   top: 0;
   bottom: 0;

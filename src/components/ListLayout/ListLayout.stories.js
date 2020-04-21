@@ -155,7 +155,7 @@ storiesOf("List Layout", module)
           title="Some title"
           buttons={
             <React.Fragment>
-              <Button buttonTheme="dark" size="large">
+              <Button theme="dark" size="large">
                 Add list
               </Button>
               <Button fit="square" size="large" onClick={handleUpdateClick}>
@@ -177,7 +177,7 @@ storiesOf("List Layout", module)
               isAllSelected={isAllSelected}
               additional={
                 <Button
-                  buttonTheme="dark"
+                  theme="dark"
                   isDisabled={isAllDeselected}
                   onClick={deselectAll}
                 >
@@ -279,7 +279,7 @@ storiesOf("List Layout", module)
           title="Some title"
           buttons={
             <React.Fragment>
-              <Button buttonTheme="dark" size="large">
+              <Button theme="dark" size="large">
                 Add list
               </Button>
               <Button fit="square" size="large" onClick={handleUpdateClick}>
@@ -301,7 +301,7 @@ storiesOf("List Layout", module)
               isAllSelected={isAllSelected}
               additional={
                 <Button
-                  buttonTheme="dark"
+                  theme="dark"
                   isDisabled={isAllDeselected}
                   onClick={deselectAll}
                 >
@@ -332,7 +332,7 @@ storiesOf("List Layout", module)
                     isAllSelected={isAllSelected}
                     additional={
                       <Button
-                        buttonTheme="dark"
+                        theme="dark"
                         isDisabled={isAllDeselected}
                         onClick={deselectAll}
                       >
@@ -421,7 +421,7 @@ storiesOf("List Layout", module)
               isAllSelected={isAllSelected}
               additional={
                 <Button
-                  buttonTheme="dark"
+                  theme="dark"
                   isDisabled={isAllDeselected}
                   onClick={deselectAll}
                 >

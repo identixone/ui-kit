@@ -11,9 +11,7 @@ function getActiveStyles() {
   `;
 }
 
-const PaginationButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const PaginationButton = styled(Button)`
   &:hover {
     ${getActiveStyles}
   }

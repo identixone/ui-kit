@@ -53,7 +53,7 @@ export function PersonsGroupListPerson({
             <PersonsGroupListPersonButton
               isFullWidth={true}
               onClick={onAdd}
-              buttonTheme="dark"
+              theme="dark"
               isDisabled={!isAddAvailable}
               data-testid="add-selected"
             >

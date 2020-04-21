@@ -4,9 +4,7 @@ import { Button } from "../Button";
 
 import { colors } from "../../style";
 
-const SearchClearButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const SearchClearButton = styled(Button)`
   position: absolute;
   right: 16px;
   padding: 0;

@@ -22,7 +22,9 @@ describe("ShownControl tests", () => {
         offset={0}
         totalCount={100}
         onChange={handleChangePaginationMock}
-      />
+      >
+        some text
+      </ShownControl>
     );
   }
 

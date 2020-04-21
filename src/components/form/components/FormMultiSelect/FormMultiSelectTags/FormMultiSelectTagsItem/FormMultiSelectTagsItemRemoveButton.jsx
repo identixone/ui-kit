@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 import { Button } from "../../../../../Button";
 
-const FormMultiSelectTagsItemRemoveButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const FormMultiSelectTagsItemRemoveButton = styled(Button)`
   padding: 0;
 `;
 

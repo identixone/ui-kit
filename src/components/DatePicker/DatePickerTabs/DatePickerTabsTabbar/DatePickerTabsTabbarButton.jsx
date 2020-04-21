@@ -3,9 +3,7 @@ import styled, { css } from "styled-components";
 import { Button } from "../../../Button";
 import { colors } from "../../../../style";
 
-const DatePickerTabsTabbarButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const DatePickerTabsTabbarButton = styled(Button)`
   padding: 0;
   font-size: 13px;
   font-weight: bold;

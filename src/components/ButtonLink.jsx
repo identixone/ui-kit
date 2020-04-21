@@ -3,21 +3,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import StyledButton from "./Button/StyledButton";
+import { StyledButton } from "./Button";
 import { Link } from "react-router-dom";
 
-const LinkWithOmittedProps = ({
-  isRounded,
-  size,
-  buttonTheme,
-  fit,
-  ...restProps
-}) => <Link {...restProps} />;
+const LinkWithOmittedProps = ({ size, theme, fit, ...restProps }) => (
+  <Link {...restProps} />
+);
 
 LinkWithOmittedProps.propTypes = {
-  isRounded: PropTypes.bool,
   size: PropTypes.string,
-  buttonTheme: PropTypes.string,
+  theme: PropTypes.string,
   fit: PropTypes.string,
 };
 
@@ -29,8 +24,7 @@ export const ButtonLink = styled(StyledButton).attrs(() => ({
 `;
 
 ButtonLink.defaultProps = {
-  isRounded: true,
   size: "medium",
-  buttonTheme: "light",
+  theme: "light",
   fit: "rect",
 };

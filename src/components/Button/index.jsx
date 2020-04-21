@@ -1,38 +1,50 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledButton from "./StyledButton";
+import { StyledButton } from "./StyledButton";
 
 const Button = React.forwardRef((props, ref) => {
   const {
     onClick,
+    onMouseEnter,
     onMouseLeave,
+    onKeyPress,
+    onKeyUp,
+    onKeyDown,
+    onFocus,
+    onBlur,
     children,
     isDisabled,
     type,
     size,
-    buttonTheme,
+    theme,
     fit,
-    className,
-    isRounded,
     isFullWidth,
-    ...restProps
+    isHardOutline,
+    className,
+    "data-testid": testId,
   } = props;
 
   return (
     <StyledButton
+      ref={ref}
+      className={className}
+      data-testid={testId}
       onClick={onClick}
       onMouseLeave={onMouseLeave}
+      onKeyPress={onKeyPress}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
+      onMouseEnter={onMouseEnter}
+      onFocus={onFocus}
+      onBlur={onBlur}
       disabled={isDisabled}
       type={type}
       size={size}
-      buttonTheme={buttonTheme}
+      theme={theme}
       fit={fit}
-      isRounded={isRounded}
-      className={className}
       isFullWidth={isFullWidth}
-      ref={ref}
-      {...restProps}
+      isHardOutline={isHardOutline}
     >
       {children}
     </StyledButton>
@@ -41,51 +53,37 @@ const Button = React.forwardRef((props, ref) => {
 
 Button.propTypes = {
   className: PropTypes.string,
-  // Кнопка может выполнять функцию submit, и этот обработчик не нужен
+  "data-testid": PropTypes.string,
   onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  onKeyPress: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]).isRequired,
   isDisabled: PropTypes.bool,
-  isRounded: PropTypes.bool,
   isFullWidth: PropTypes.bool,
   type: PropTypes.oneOf(["button", "submit"]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  fit: PropTypes.oneOf(["rect", "square", "circle"]),
-  // Названо так, потому что конфликтует с props.theme из styled-theming
-  buttonTheme: PropTypes.oneOf([
-    "light",
-    "light-gray",
-    "dark",
-    "blue",
-    "warning",
-    "ghost",
-    "ghost-dark",
-    "active",
-    "warning",
-    "reset",
-    "lighter",
-    "disabled",
-    "outline",
-    "outline-accent",
-    "green",
-  ]),
-
+  size: PropTypes.oneOf(["medium", "large"]).isRequired,
+  fit: PropTypes.oneOf(["rect", "square", "circle"]).isRequired,
+  theme: PropTypes.oneOf(["light", "dark", "reset", "outline", "green", "blue"])
+    .isRequired,
   // Проперти добавлено для того, чтобы в FF не показывать аутлайн (работает только через !important)
   // Но при желании его можно поставить в false, чтобы установать свой аутлайн
   isHardOutline: PropTypes.bool,
 };
 
 Button.defaultProps = {
-  isDisabled: false,
-  isRounded: true,
-  isFullWidth: false,
   type: "button",
   size: "medium",
-  buttonTheme: "light",
+  theme: "reset",
   fit: "rect",
+  isDisabled: false,
+  isFullWidth: false,
   isHardOutline: true,
+  "data-testid": "button",
 };
 
 export { Button, StyledButton };
-
-export default Button;

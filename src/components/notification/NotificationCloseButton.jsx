@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-import Button from "../Button";
+import { Button } from "../Button";
 
-const NotificationCloseButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const NotificationCloseButton = styled(Button)`
   position: absolute;
   top: 0px;
   right: 15px;

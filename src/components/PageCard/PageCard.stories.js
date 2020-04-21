@@ -17,10 +17,10 @@ storiesOf("Page card", module).add("default", () => {
     <StyledPageCard
       buttons={
         <>
-          <Button fit="square" size="large" buttonTheme="dark">
+          <Button fit="square" size="large" theme="dark">
             <ArrowLeft size="16" />
           </Button>
-          <Button fit="square" size="large" buttonTheme="light">
+          <Button fit="square" size="large" theme="light">
             <Check size="14" />
           </Button>
         </>

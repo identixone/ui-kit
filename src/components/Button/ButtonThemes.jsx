@@ -2,7 +2,7 @@ import { css } from "styled-components";
 
 import { colors } from "../../style";
 
-function getPseudoForShadow({ isRounded, fit, disabled }) {
+function getPseudoForShadow() {
   return css`
     position: relative;
 
@@ -14,18 +14,13 @@ function getPseudoForShadow({ isRounded, fit, disabled }) {
       z-index: -1;
       width: 100%;
       height: 100%;
-      border-radius: ${fit === "circle" ? "50%" : isRounded ? "3px" : "0px"};
       opacity: 0;
       transition: opacity 0.3s ease-in-out;
+      box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
     }
 
     &:hover:after {
-      ${!disabled &&
-      css`
-         {
-          opacity: 1;
-        }
-      `}
+      opacity: 1;
     }
   `;
 }
@@ -35,102 +30,31 @@ const resetTheme = css`
 `;
 
 const disabledTheme = css`
-  color: #fff;
-  background-color: #aaaaaa;
+  color: ${colors.whiteSimple};
+  background-color: ${colors.grayWhite};
 `;
 
 const lightTheme = css`
   color: ${colors.darkBlack};
-  background-color: #e4e9eb;
-
-  ${getPseudoForShadow}
-
-  &:after {
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  background-color: ${colors.blueWhite};
+  &:hover {
+    background-color: ${colors.slate};
+    color: ${colors.whiteSimple};
   }
 
-  ${({ disabled }) => {
-    return disabled
-      ? disabledTheme
-      : css`
-          &:hover {
-            background-color: ${colors.slate};
-            color: #fff;
-          }
-        `;
-  }}
-`;
-
-const lighterTheme = css`
-  color: ${colors.slate};
-  background-color: #f3f3f3;
-`;
-
-const lighterGrayTheme = css`
-  color: ${colors.slate};
-  background-color: #9fa7ae;
+  ${getPseudoForShadow}
 `;
 
 const darkTheme = css`
-  color: #fff;
+  color: ${colors.whiteSimple};
   background-color: ${colors.slate};
-
   ${getPseudoForShadow}
-
-  &:after {
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
-  }
-
-  ${({ disabled }) => {
-    return disabled
-      ? disabledTheme
-      : css`
-          &:hover {
-            color: #fff;
-            background-color: ${colors.slate};
-          }
-        `;
-  }}
 `;
 
 const blueTheme = css`
-  color: #fff;
+  color: ${colors.whiteSimple};
   background-color: #1a5d7b;
-
   ${getPseudoForShadow}
-
-  &:after {
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
-  }
-
-  ${({ disabled }) =>
-    !disabled &&
-    css`
-      &:hover {
-        background-color: #1a5d7b;
-      }
-    `}
-`;
-
-const ghostTheme = css`
-  color: #fff;
-  background-color: #ccc;
-`;
-
-const ghostDarkTheme = css`
-  color: ${colors.slate};
-  background-color: #f3f3f3;
-`;
-
-const activeTheme = css`
-  background-color: ${colors.slate};
-  color: #fff;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
-`;
-
-const warningTheme = css`
-  color: #fff;
-  background-color: #ac3d03;
 `;
 
 const greenTheme = css`
@@ -142,64 +66,23 @@ const greenTheme = css`
 const outlineTheme = css`
   color: ${colors.slate};
   border: 1px solid ${colors.slate};
-
-  ${getPseudoForShadow}
-
-  ${({ disabled }) =>
-    !disabled
-      ? css`
-          &:hover {
-            color: #fff;
-            background-color: ${colors.slate};
-          }
-        `
-      : css`
-          opacity: 0.4;
-        `} 
-    
-
-  &:after {
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
+  &:hover {
+    color: ${colors.whiteSimple};
+    background-color: ${colors.slate};
   }
-`;
-
-const outlineAccentTheme = css`
-  color: ${colors.bloodOrange};
-  border: 1px solid ${colors.bloodOrange};
 
   ${getPseudoForShadow}
-
-  ${({ disabled }) =>
-    !disabled
-      ? css`
-          &:hover {
-            color: #fff;
-            background-color: ${colors.bloodOrange};
-          }
-        `
-      : css`
-          opacity: 0.4;
-        `} 
-    
-
   &:after {
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);
   }
 `;
 
 export default {
+  reset: resetTheme,
+  disabled: disabledTheme,
   light: lightTheme,
   dark: darkTheme,
-  blue: blueTheme,
-  ghost: ghostTheme,
-  "ghost-dark": ghostDarkTheme,
-  active: activeTheme,
-  warning: warningTheme,
-  reset: resetTheme,
-  lighter: lighterTheme,
-  disabled: disabledTheme,
-  "light-gray": lighterGrayTheme,
   outline: outlineTheme,
-  "outline-accent": outlineAccentTheme,
   green: greenTheme,
+  blue: blueTheme,
 };

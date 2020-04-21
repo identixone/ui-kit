@@ -3,9 +3,7 @@ import styled, { css } from "styled-components";
 import { Button } from "../../../../Button";
 import { colors } from "../../../../../style";
 
-const DatePickerRelativePickerSelectOption = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const DatePickerRelativePickerSelectOption = styled(Button)`
   font-size: 12px;
   font-weight: 600;
   height: 32px;

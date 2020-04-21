@@ -6,21 +6,18 @@ import ButtonFits from "./ButtonFits";
 
 const StyledButton = styled.button`
   display: inline-block;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
   outline: ${({ isHardOutline }) =>
     isHardOutline ? "none !important" : "none"};
-  border: none;
-  padding: 0;
-  box-sizing: border-box;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  font-weight: 600;
   transition: background-color 100ms, border-color 100ms, box-shadow 100ms,
     color 100ms, opacity 100ms;
-
-  border-radius: ${({ isRounded }) => (isRounded ? "3px" : "0px")};
-
-  ${({ buttonTheme }) => ButtonThemes[buttonTheme]};
+  ${({ theme, disabled }) => ButtonThemes[disabled ? "disabled" : theme]};
   ${({ size }) => ButtonSizes[size]};
   ${({ fit }) => ButtonFits[fit]};
-
   ${({ isFullWidth }) =>
     isFullWidth &&
     css`
@@ -28,4 +25,4 @@ const StyledButton = styled.button`
     `}
 `;
 
-export default StyledButton;
+export { StyledButton };

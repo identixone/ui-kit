@@ -18,7 +18,7 @@ storiesOf("Entries|PersonEntriesCard", module).add("default", () => {
       actions={
         <React.Fragment>
           <EntryCardActionsButton to="/some-url">close</EntryCardActionsButton>
-          <EntryCardActionsButton to="/some-url" buttonTheme="light">
+          <EntryCardActionsButton to="/some-url" theme="light">
             lists
           </EntryCardActionsButton>
           <EntryCardButtonDelete

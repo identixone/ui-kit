@@ -14,6 +14,7 @@ import { BoxRightArrow, BoxLeftArrow } from "../icons";
 const DOTS = "...";
 const END_LIMIT_PADDINGNUM = 3;
 
+// Deprecated
 function Pagination({
   visibleRange,
   nearStartBorderNum,

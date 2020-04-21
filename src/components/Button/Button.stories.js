@@ -5,40 +5,25 @@ import { action } from "@storybook/addon-actions";
 
 import { Button } from "./index.jsx";
 
-storiesOf("Button", module).add("default", () => {
+storiesOf("Controls|Button", module).add("default", () => {
   const buttonText = text("Button text", "Arunoda");
-  const buttonTheme = select(
+  const theme = select(
     "Button theme",
-    [
-      "light",
-      "light-gray",
-      "dark",
-      "blue",
-      "warning",
-      "ghost",
-      "ghost-dark",
-      "active",
-      "warning",
-      "reset",
-      "lighter",
-      "disabled",
-    ],
+    ["light", "dark", "green", "blue"],
     "light"
   );
   const buttonSize = select("Button size", ["medium", "large"], "medium");
   const buttonFit = select("Button fit", ["rect", "square", "circle"], "rect");
 
   const isButtonDisabled = boolean("Is disabled", false);
-  const isButtonRounded = boolean("Is rounded", true);
 
   return (
     <Button
       onClick={action("On click")}
-      buttonTheme={buttonTheme}
+      theme={theme}
       size={buttonSize}
       fit={buttonFit}
       isDisabled={isButtonDisabled}
-      isRounded={isButtonRounded}
     >
       {buttonText}
     </Button>

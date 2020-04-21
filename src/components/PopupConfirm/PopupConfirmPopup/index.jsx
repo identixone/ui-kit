@@ -11,15 +11,11 @@ function PopupConfirmPopup({ title, okText, cancelText, onConfirm, onCancel }) {
     <StyledPopupConfirmPopup>
       <PopupConfirmPopupTitle>{title}</PopupConfirmPopupTitle>
       <PopupConfirmPopupButtons>
-        <PopupConfirmPopupButton
-          buttonTheme="dark"
-          size="large"
-          onClick={onConfirm}
-        >
+        <PopupConfirmPopupButton theme="dark" size="large" onClick={onConfirm}>
           {okText}
         </PopupConfirmPopupButton>
         <PopupConfirmPopupButton
-          buttonTheme="outline"
+          theme="outline"
           size="large"
           onClick={onCancel}
         >
