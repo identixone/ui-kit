@@ -20,7 +20,7 @@ const DatePickerRelativePickerSelectOption = styled(Button)`
       : css`
           background-color: ${colors.whiteGrayLight};
           color: #a8b3be;
-        `};
+        `}
 
   &:not(:last-child) {
     margin-right: 12px;

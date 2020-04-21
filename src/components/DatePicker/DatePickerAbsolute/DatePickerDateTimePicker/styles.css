@@ -2,7 +2,7 @@
   width: 100%;
   height: 260px;
   position: relative;
-  font-family: "Open Sans";
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   padding-bottom: 10px;
   border-bottom: solid 1px rgba(34, 34, 34, 0.12);
 }
@@ -27,7 +27,6 @@
   cursor: pointer;
   position: absolute;
   top: 4px;
-  width: 0;
   padding: 0;
   border: 5px solid transparent;
   z-index: 1;
@@ -69,6 +68,7 @@
 }
 
 .react-datepicker__day {
+  position: relative;
   cursor: pointer;
   outline: none;
   height: 32px;
@@ -136,9 +136,6 @@
   border-radius: 0px;
 }
 
-.react-datepicker__day--in-range:first-child:hover {
-}
-
 /* День - начало подтвержденного выбора (по клику) */
 .react-datepicker__day--range-start {
   border-top-left-radius: 4px;
@@ -150,9 +147,6 @@
   border-bottom-right-radius: 4px;
 }
 
-.react-datepicker__day {
-  position: relative;
-}
 .react-datepicker__day:not(.react-datepicker__day--in-range):not(.react-datepicker__day--in-selecting-range) {
   background-color: #ffffff;
   z-index: 3;

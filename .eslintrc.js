@@ -20,7 +20,7 @@ module.exports = {
       modules: true,
     },
   },
-  plugins: ["react", "prettier", "react-hooks"],
+  plugins: ["react", "react-hooks"],
   settings: {
     "import/parser": "babel-eslint",
     "import/resolve": {

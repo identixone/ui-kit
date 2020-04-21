@@ -14,7 +14,7 @@ const CardSmallButton = styled(Button)`
   justify-content: center;
 
   opacity: ${({ isHidden }) => {
-    return isHidden ? 0 : 1;
+    return isHidden ? "0" : "1";
   }};
 `;
 

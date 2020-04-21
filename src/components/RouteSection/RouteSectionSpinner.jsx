@@ -10,7 +10,6 @@ const RouteSectionSpinner = styled(Spinner).attrs(() => ({ height: 40 }))`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
   justify-content: center;
   background-color: #fff;
   z-index: 1000;

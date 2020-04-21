@@ -8,7 +8,7 @@ const StyledCardSmallCheckbox = styled.label`
   z-index: 1;
 
   opacity: ${({ isHidden }) => {
-    return isHidden ? 0 : 1;
+    return isHidden ? "0" : "1";
   }};
 `;
 

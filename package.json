@@ -16,7 +16,8 @@
     "test:coverage": "better-npm-run test:coverage",
     "lint": "eslint src",
     "prettier": "prettier \"**/*.+(js|jsx|json)\"",
-    "format": "npm run prettier -- --write",
+    "stylelint": "stylelint \"src/**/*.+(js|jsx|css)\"",
+    "format": "npm run prettier -- --write && npm run stylelint -- --fix",
     "validate": "npm run lint && npm run test && npm run prettier -- --list-different",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook -c .storybook -o docs"
@@ -113,6 +114,8 @@
     "react-router-dom": "^5.1.2",
     "storybook-react-router": "^1.0.8",
     "styled-components": "^5.1.0",
+    "stylelint": "^13.3.3",
+    "stylelint-config-recommended": "^3.0.0",
     "test-data-bot": "^0.8.0"
   }
 }

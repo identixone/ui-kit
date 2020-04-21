@@ -11,7 +11,7 @@ export const UIBadge = styled.span`
   line-height: 18px;
   font-weight: normal;
   padding: 0 8px;
-  ${({ badgeTheme }) => BadgeThemes[badgeTheme]};
+  ${({ badgeTheme }) => BadgeThemes[badgeTheme]}
 
   ${({ color }) =>
     color
@@ -19,7 +19,7 @@ export const UIBadge = styled.span`
           background-color: ${color};
           color: ${colors.whiteSimple};
         `
-      : null};
+      : null}
 `;
 
 UIBadge.defaultProps = {

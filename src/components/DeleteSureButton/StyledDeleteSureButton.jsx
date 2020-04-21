@@ -30,7 +30,7 @@ const StyledDeleteSureButton = styled(Button)`
   ${getSureStyles}
 
   &:hover {
-    ${getHoverStyles};
+    ${getHoverStyles}
   }
 `;
 

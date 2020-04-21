@@ -15,9 +15,9 @@ const StyledButton = styled.button`
   font-weight: 600;
   transition: background-color 100ms, border-color 100ms, box-shadow 100ms,
     color 100ms, opacity 100ms;
-  ${({ theme, disabled }) => ButtonThemes[disabled ? "disabled" : theme]};
-  ${({ size }) => ButtonSizes[size]};
-  ${({ fit }) => ButtonFits[fit]};
+  ${({ theme, disabled }) => ButtonThemes[disabled ? "disabled" : theme]}
+  ${({ size }) => ButtonSizes[size]}
+  ${({ fit }) => ButtonFits[fit]}
   ${({ isFullWidth }) =>
     isFullWidth &&
     css`
