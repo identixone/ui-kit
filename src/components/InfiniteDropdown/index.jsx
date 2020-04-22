@@ -51,6 +51,7 @@ function InfiniteDropdown({
           multiple={multiple}
           onStateChange={onStateChange}
           renderSelected={renderSelected}
+          isFetching={isFetching}
         />
       )}
     </InfiniteScroll>

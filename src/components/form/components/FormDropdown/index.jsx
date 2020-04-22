@@ -45,6 +45,7 @@ function FormDropdown({
   "data-testid": testId,
   multiple,
   renderSelected,
+  isFetching,
 }) {
   if (name) {
     testId = name;
@@ -283,6 +284,7 @@ function FormDropdown({
               disabled,
               className,
               "data-testid": testId,
+              isFetching,
             })}
           >
             <FormDropdownControl
