@@ -32,12 +32,16 @@ function ListLayoutList({
     >
       {!isLoading || !hasPagePagination ? (
         isListEmpty ? (
-          <ListLayoutNotice
-            icon={<Ban size="48" />}
-            data-testid="empty-list-notice"
-          >
-            {noItemsText}
-          </ListLayoutNotice>
+          isLoading ? (
+            <ListLayoutListSpinner />
+          ) : (
+            <ListLayoutNotice
+              icon={<Ban size="48" />}
+              data-testid="empty-list-notice"
+            >
+              {noItemsText}
+            </ListLayoutNotice>
+          )
         ) : (
           <React.Fragment>
             <StyledListLayoutList columns={columns}>
