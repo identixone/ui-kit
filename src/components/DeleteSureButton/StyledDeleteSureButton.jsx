@@ -29,6 +29,10 @@ const StyledDeleteSureButton = styled(Button)`
   color: ${colors.slate};
   ${getSureStyles}
 
+  width: ${({ width }) => {
+    return width && `${width}px`;
+  }};
+
   &:hover {
     ${getHoverStyles}
   }

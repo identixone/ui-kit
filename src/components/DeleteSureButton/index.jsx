@@ -65,7 +65,7 @@ function DeleteSureButton({
         size={size}
         isDisabled={isDisabled}
         data-testid={testId}
-        style={buttonWidth !== null ? { width: buttonWidth } : null}
+        width={buttonWidth}
       >
         {isSure ? textSure : textDelete}
       </StyledDeleteSureButton>
