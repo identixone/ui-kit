@@ -23,6 +23,7 @@ const Button = React.forwardRef((props, ref) => {
     isHardOutline,
     style,
     className,
+    disabled,
     "data-testid": testId,
   } = props;
 
@@ -40,7 +41,7 @@ const Button = React.forwardRef((props, ref) => {
       onMouseEnter={onMouseEnter}
       onFocus={onFocus}
       onBlur={onBlur}
-      disabled={isDisabled}
+      disabled={isDisabled || disabled}
       type={type}
       size={size}
       theme={theme}
@@ -65,7 +66,9 @@ Button.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]).isRequired,
+  /* TODO: избавиться от isDisabled */
   isDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
   isFullWidth: PropTypes.bool,
   type: PropTypes.oneOf(["button", "submit"]),
   size: PropTypes.oneOf(["medium", "large"]).isRequired,

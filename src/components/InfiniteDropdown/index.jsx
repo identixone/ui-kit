@@ -12,6 +12,7 @@ function InfiniteDropdown({
   options,
   fetchOptions,
   isFetching,
+  disabled,
   hasNext,
   limit,
   placeholder,
@@ -52,6 +53,7 @@ function InfiniteDropdown({
           onStateChange={onStateChange}
           renderSelected={renderSelected}
           isFetching={isFetching}
+          disabled={disabled}
         />
       )}
     </InfiniteScroll>
@@ -67,6 +69,7 @@ InfiniteDropdown.propTypes = {
   fetchOptions: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   hasNext: PropTypes.bool.isRequired,
   limit: PropTypes.number.isRequired,
