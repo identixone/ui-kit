@@ -8,6 +8,7 @@ import { colors } from "../../style";
 const StyledPersonCardDetailed = styled(ListLayoutDetailed)`
   ${StyledButton}:not(:hover) {
     color: ${colors.slate};
+    width: 100%;
   }
 `;
 
