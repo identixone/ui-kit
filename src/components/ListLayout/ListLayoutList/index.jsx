@@ -25,7 +25,11 @@ function ListLayoutList({
   const hasPagePagination = Boolean(pagination);
 
   return (
-    <ListLayoutListWrapper data-testid={testId}>
+    <ListLayoutListWrapper
+      data-testid={testId}
+      ref={listRef}
+      className={className}
+    >
       {!isLoading || !hasPagePagination ? (
         isListEmpty ? (
           <ListLayoutNotice
@@ -36,11 +40,7 @@ function ListLayoutList({
           </ListLayoutNotice>
         ) : (
           <React.Fragment>
-            <StyledListLayoutList
-              ref={listRef}
-              columns={columns}
-              className={className}
-            >
+            <StyledListLayoutList columns={columns}>
               {items.map(renderItem)}
             </StyledListLayoutList>
 
