@@ -26,7 +26,7 @@ function PersonCardDetailed({
 }) {
   useEffect(() => {
     if (personIdxid) {
-      fetchPerson({ idxid: personIdxid });
+      fetchPerson(personIdxid);
     }
   }, [personIdxid]);
 

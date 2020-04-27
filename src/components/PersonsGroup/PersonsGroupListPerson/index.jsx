@@ -29,7 +29,7 @@ export function PersonsGroupListPerson({
 }) {
   useEffect(() => {
     if (personIdxid) {
-      fetchPerson({ idxid: personIdxid });
+      fetchPerson(personIdxid);
     }
   }, [personIdxid]);
 
