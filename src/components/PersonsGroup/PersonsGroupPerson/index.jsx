@@ -4,11 +4,10 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 
 import { PersonsGroupPersonId } from "./PersonsGroupPersonId";
-import { PopupConfirm } from "../../PopupConfirm";
 import { CardSmall, StyledCardSmall } from "../../CardSmall";
 import { IdFormat } from "../../IdFormat";
 import { Value } from "../../Value";
-import { PlaylistAdd, Trash } from "../../icons";
+import { PlaylistAdd } from "../../icons";
 
 import { get } from "lodash-es";
 import { colors } from "../../../style";
@@ -17,14 +16,12 @@ import { noimageid } from "../../../assets/images";
 function PersonsGroupPerson({
   person,
   onClick,
-  onPersonDelete,
   onPersonAdd,
   isSelected,
   isActive,
   mode,
   onChange,
   isPersonsAddingToGroup,
-  isPersonsDeletingFromGroup,
   className,
   "data-testid": testId,
 }) {
@@ -32,10 +29,6 @@ function PersonsGroupPerson({
 
   function handleListItemClick() {
     onClick(person);
-  }
-
-  function handleDeleteButtonClick() {
-    onPersonDelete(person);
   }
 
   function handleAddButtonClick(e) {
@@ -81,7 +74,7 @@ function PersonsGroupPerson({
         </CardSmall.DataItem>
       </CardSmall.Data>
 
-      {isAddingMode ? (
+      {isAddingMode && (
         <CardSmall.Button
           data-testid="persons-group-add-person"
           onClick={handleAddButtonClick}
@@ -90,23 +83,6 @@ function PersonsGroupPerson({
         >
           <PlaylistAdd size="24" color={colors.greenish} />
         </CardSmall.Button>
-      ) : (
-        <PopupConfirm onConfirm={handleDeleteButtonClick}>
-          {({ togglePopup }) => (
-            <CardSmall.Button
-              data-testid="persons-group-remove-person"
-              onClick={(e) => {
-                e.stopPropagation();
-                togglePopup(e);
-              }}
-              isHidden={!isMouseOver}
-              isDisabled={isPersonsDeletingFromGroup}
-              mode={mode}
-            >
-              <Trash size="16" color={colors.bloodOrange} />
-            </CardSmall.Button>
-          )}
-        </PopupConfirm>
       )}
     </CardSmall>
   );
@@ -115,14 +91,12 @@ function PersonsGroupPerson({
 PersonsGroupPerson.propTypes = {
   person: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  onPersonDelete: PropTypes.func.isRequired,
   onPersonAdd: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isActive: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   mode: PropTypes.string,
   isPersonsAddingToGroup: PropTypes.bool,
-  isPersonsDeletingFromGroup: PropTypes.bool,
   className: PropTypes.string,
   "data-testid": PropTypes.string,
 };
