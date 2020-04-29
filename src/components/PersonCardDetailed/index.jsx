@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { useEffect } from "react";
+import { useTranslation } from "../../hooks";
 
 import { StyledPersonCardDetailed } from "./StyledPersonCardDetailed";
 import { PersonCardDetailedSpinner } from "./PersonCardDetailedSpinner";
@@ -12,6 +13,8 @@ import {
 import { NoticeHero } from "../NoticeHero";
 
 import { Ban, PlaylistAddCheck } from "../icons";
+
+import { resources } from "./PersonCardDetailed.resources";
 
 function PersonCardDetailed({
   person,
@@ -24,6 +27,10 @@ function PersonCardDetailed({
   "data-testid": testId,
   offsetTop,
 }) {
+  const { t, i18n } = useTranslation("PersonCardDetailed");
+  i18n.addResourceBundle("en", "PersonCardDetailed", resources.en);
+  i18n.addResourceBundle("ru", "PersonCardDetailed", resources.ru);
+
   useEffect(() => {
     if (personIdxid) {
       fetchPerson(personIdxid);
@@ -41,11 +48,11 @@ function PersonCardDetailed({
       ) : person && !isPersonNotExists ? (
         children
       ) : isPersonNotExists ? (
-        <NoticeHero icon={<Ban size="48" />} title="Person not found" />
+        <NoticeHero icon={<Ban size="48" />} title={t("Person not found")} />
       ) : (
         <NoticeHero
           icon={<PlaylistAddCheck size="48" />}
-          title="Select person to view details"
+          title={t("Select person to view details")}
         />
       )}
     </StyledPersonCardDetailed>
