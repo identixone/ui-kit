@@ -19,6 +19,7 @@ export * from "./InfiniteScroll";
 export * from "./InfiniteDropdown";
 export * from "./InfiniteMultiSelect";
 export * from "./InfinitePageList";
+export * from "./InfoCard";
 export * from "./ImageCentered";
 export * from "./LazyImage";
 export * from "./ListItemPopup";
