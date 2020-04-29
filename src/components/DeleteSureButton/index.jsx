@@ -26,15 +26,11 @@ function DeleteSureButton({
   const [isSure, setIsSure] = useState(false);
   const { Portal } = usePortal();
 
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("DeleteSureButton");
   i18n.addResourceBundle("en", "DeleteSureButton", resources.en);
   i18n.addResourceBundle("ru", "DeleteSureButton", resources.ru);
-  const textSure = isUndefined(sureText)
-    ? t("DeleteSureButton:Sure")
-    : sureText;
-  const textDelete = isUndefined(deleteText)
-    ? t("DeleteSureButton:Delete")
-    : deleteText;
+  const textSure = isUndefined(sureText) ? t("Sure") : sureText;
+  const textDelete = isUndefined(deleteText) ? t("Delete") : deleteText;
 
   const pseudoButtonRef = useRef(null);
   const [buttonWidth, setButtonWidth] = useState(null);
