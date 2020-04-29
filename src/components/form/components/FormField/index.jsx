@@ -14,6 +14,7 @@ import FormFieldError from "./FormFieldError";
 function FormField(props) {
   const {
     label,
+    labelType,
     render,
     name,
     type,
@@ -92,11 +93,13 @@ function FormField(props) {
           <FormLabel
             htmlFor={name ? name : undefined}
             direction={direction}
+            labelType={labelType}
             disabled={disabled}
             height={height}
           >
             <FormLabelTitle>
               {label}
+              {labelType === "bold" && ":"}
               {getFormFieldTip()}
               {getFormFieldTag()}
             </FormLabelTitle>
@@ -119,6 +122,7 @@ function FormField(props) {
 FormField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  labelType: PropTypes.oneOf(["bold", "normal"]),
   tip: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   tag: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   direction: PropTypes.oneOf(["row", "column"]),
@@ -145,6 +149,7 @@ FormField.propTypes = {
 
 FormField.defaultProps = {
   direction: "row",
+  labelType: "normal",
   showError: true,
 };
 
