@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import matchSorter from "match-sorter";
-import { isEqual } from "lodash-es";
+import { isEqual, get } from "lodash-es";
 import jump from "jump.js";
 
 const DATE_TIME_FORMAT_SIMPLE = "D MMM YYYY, HH:mm:ss";
@@ -201,4 +201,18 @@ export function scrollToItem(selector, itemHeight, onScroll, options = {}) {
       });
     }, 200);
   }
+}
+
+export function processFormValues(values) {
+  return Object.entries(values).reduce((values, [key, value]) => {
+    if (value && value.value !== undefined) {
+      return { ...values, [key]: value.value };
+    } else if (value instanceof Array) {
+      const mapValue = value.map((value) => get(value, "value", value));
+
+      return { ...values, [key]: mapValue };
+    } else {
+      return { ...values, [key]: value };
+    }
+  }, {});
 }
