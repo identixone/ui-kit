@@ -216,3 +216,7 @@ export function processFormValues(values) {
     }
   }, {});
 }
+
+export function isNumeric(x) {
+  return (typeof x === "number" || typeof x === "string") && !isNaN(Number(x));
+}
