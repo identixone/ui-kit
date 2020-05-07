@@ -41,4 +41,8 @@ const FormLabel = styled.label`
 
 const StyledFormLabel = FormLabel;
 
+FormLabel.defaultProps = {
+  direction: "row",
+};
+
 export { FormLabel, StyledFormLabel, FormLabelTitle };
