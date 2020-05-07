@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
+import { StyledFormMultiSelectTagsItem } from "./FormMultiSelectTagsItem/StyledFormMultiSelectTagsItem";
+
 const FormMultiSelectTags = styled.ul`
-  box-sizing: border-box;
   list-style-type: none;
-  padding: 8px;
   margin: 0;
-  border-radius: 6px;
-  cursor: text;
-  font-size: 16px;
-  font-weight: 600;
-  color: #555;
-  background: #f3f3f3;
-  line-height: 26px;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  padding-left: 8px;
-  padding-bottom: 0;
+  cursor: text;
+  margin-bottom: -6px;
+  margin-right: -6px;
+
+  ${StyledFormMultiSelectTagsItem} {
+    margin-bottom: 6px;
+    margin-right: 6px;
+  }
 `;
 
-export default FormMultiSelectTags;
+export { FormMultiSelectTags };

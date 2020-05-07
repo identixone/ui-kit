@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import { Button } from "../Button";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 function getActiveStyles() {
   return css`
@@ -11,9 +11,7 @@ function getActiveStyles() {
   `;
 }
 
-const PaginationButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const PaginationButton = styled(Button)`
   &:hover {
     ${getActiveStyles}
   }

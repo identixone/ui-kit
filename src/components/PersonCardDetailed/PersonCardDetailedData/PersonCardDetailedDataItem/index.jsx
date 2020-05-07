@@ -6,7 +6,7 @@ const PersonCardDetailedDataItem = styled.p`
   display: flex;
 
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 `;
 

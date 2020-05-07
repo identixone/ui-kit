@@ -8,4 +8,4 @@ const FooterCredits = styled.div`
   margin-left: auto;
 `;
 
-export default FooterCredits;
+export { FooterCredits };

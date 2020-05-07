@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { NoticeHero } from "../../../NoticeHero";
 
-import { Ban } from "../../../../assets/icons";
+import { Ban } from "../../../icons";
 
 export const PersonsGroupListPersonNotFoundNotice = styled(
   NoticeHero

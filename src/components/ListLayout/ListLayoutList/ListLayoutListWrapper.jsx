@@ -6,6 +6,6 @@ export const ListLayoutListWrapper = styled.div`
   min-height: 220px;
 
   &:not(:only-child) {
-    margin-right: 30px;
+    margin-right: 28px;
   }
 `;

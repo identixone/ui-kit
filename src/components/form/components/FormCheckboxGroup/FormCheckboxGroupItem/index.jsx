@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { FormCheckbox } from "../../FormCheckbox";
-import { FormLabel, FormLabelTitle } from "../../FormLabel";
+import { FormLabel } from "../../FormLabel";
 
 import { StyledFormCheckboxGroupItem } from "./StyledFormCheckboxGroupItem";
+import { FormCheckboxGroupItemTitle } from "./FormCheckboxGroupItemTitle";
 
 function FormCheckboxGroupItem({
   label,
@@ -18,7 +19,9 @@ function FormCheckboxGroupItem({
   return (
     <StyledFormCheckboxGroupItem className={className}>
       <FormLabel htmlFor={name ? name : undefined}>
-        <FormLabelTitle>{label}</FormLabelTitle>
+        <FormCheckboxGroupItemTitle checked={checked}>
+          {label}
+        </FormCheckboxGroupItemTitle>
         <FormCheckbox
           name={name}
           checked={checked}

@@ -26,11 +26,21 @@ function useFetchParams(initialFetchParams = {}) {
 }
 
 export function useListFetch({
+  /**
+   * При использовании хука
+   * во избежание множественнго пересоздания debouncedFetchList
+   * следует всегда передавать ссылку на одну и ту же fetchList
+   * обновить fetchList следует только тогда, когда нужно
+   * обновить ее замыкание
+   * */
+
   fetchList,
   pagination: defaultPagination = { limit: 10, offset: 0 },
   searchQuery: initialSearchQuery = "",
   clearList = true,
   searchQueryHook = useSearchQuery,
+  fetchOnInitial = true,
+  onFetchParamsChange,
 }) {
   if (!(fetchList instanceof Function)) {
     console.warn("You did not specify fetchList function");
@@ -48,7 +58,7 @@ export function useListFetch({
 
   const prevFetchParams = usePrevious(fetchParams);
 
-  const debouncedFetchList = useCallback(debounce(fetchList, 500), []);
+  const debouncedFetchList = useCallback(debounce(fetchList, 500), [fetchList]);
 
   function fetchListWithParams(hasDebounce) {
     const params = { ...fetchParams, meta: { clearList, hasDebounce } };
@@ -69,6 +79,14 @@ export function useListFetch({
   }
 
   useDeepCompareEffect(() => {
+    if (onFetchParamsChange) {
+      onFetchParamsChange(prevFetchParams, fetchParams);
+    }
+
+    if (prevFetchParams === undefined && !fetchOnInitial) {
+      return;
+    }
+
     const hasDebounce = prevFetchParams && prevFetchParams.q !== fetchParams.q;
 
     if (fetchParams.q !== searchQuery) {
@@ -92,6 +110,10 @@ export function useListFetch({
     setFetchParams({ limit: pagination.limit, offset: pagination.offset });
   }, [pagination]);
 
+  function changeOffset(offset) {
+    setPagination({ ...pagination, offset });
+  }
+
   return {
     pagination,
     setPagination,
@@ -104,5 +126,8 @@ export function useListFetch({
     setSearchQuery,
 
     fetchListWithParams,
+
+    offset: pagination.offset,
+    changeOffset,
   };
 }

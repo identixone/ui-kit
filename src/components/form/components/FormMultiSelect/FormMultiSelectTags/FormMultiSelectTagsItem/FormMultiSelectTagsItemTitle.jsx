@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
+import { textTrimStyles } from "../../../../../Text/TextTrim";
+import { colors } from "../../../../../../style";
+
 const FormMultiSelectTagsItemTitle = styled.span`
-  margin-right: 4px;
-  vertical-align: middle;
-  display: inline-block;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 12px;
+  line-height: 20px;
+  color: ${colors.darkBlack};
+  ${textTrimStyles}
+
+  &:not(:last-child) {
+    margin-right: 4px;
+  }
 `;
 
-export default FormMultiSelectTagsItemTitle;
+export { FormMultiSelectTagsItemTitle };

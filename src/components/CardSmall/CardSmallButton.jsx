@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 import { Button } from "../Button";
 
-const CardSmallButton = styled(Button).attrs(() => ({
-  buttonTheme: "reset",
-}))`
+const CardSmallButton = styled(Button)`
   width: 24px;
   height: 24px;
   position: absolute;
@@ -16,7 +14,7 @@ const CardSmallButton = styled(Button).attrs(() => ({
   justify-content: center;
 
   opacity: ${({ isHidden }) => {
-    return isHidden ? 0 : 1;
+    return isHidden ? "0" : "1";
   }};
 `;
 

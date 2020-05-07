@@ -1,6 +1,5 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { select } from "@storybook/addon-knobs";
 
 import { useState } from "react";
 
@@ -15,8 +14,6 @@ storiesOf("Form Components| FormSwitch", module).add("default", () => {
         name="form-switch"
         checked={value}
         onChange={({ target: { checked } }) => setValue(checked)}
-        size={select("Size", ["m", "l"], "m")}
-        theme={select("Theme", ["blue", "dark-gray"], "blue")}
       />
     );
   }

@@ -10,7 +10,7 @@ const StyledWrapper = styled.div`
   width: 500px;
 `;
 
-storiesOf("Structures| Pagination", module).add("default", () => {
+storiesOf("Navigation|Pagination", module).add("default", () => {
   const totalCount = number("total count", 1000);
   const limit = number("limit", 20);
 

@@ -26,7 +26,7 @@ function ListItemPopup({
   });
 
   const triggerProps = { ref, openPortal, togglePortal, closePortal };
-  const childrenProps = { closePortal };
+  const childrenProps = { closePortal, isOpen };
 
   return (
     <React.Fragment>
@@ -63,4 +63,4 @@ ListItemPopup.defaultProps = {
   "data-testid": "list-item-popup",
 };
 
-export { ListItemPopup, StyledListItemPopup };
+export { ListItemPopup, StyledListItemPopup, ListItemPopupInner };

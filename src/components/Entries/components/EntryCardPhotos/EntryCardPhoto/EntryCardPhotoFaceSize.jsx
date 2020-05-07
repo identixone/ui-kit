@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import { FaceSize } from "../../../../FaceSize";
+import { EntryCardPhotoBadge } from "./EntryCardPhotoBadge";
 
-import { colors } from "../../../../../themes/index";
+import { colors } from "../../../../../style";
 
-const EntryCardPhotoFaceSize = styled(FaceSize)`
+const EntryCardPhotoFaceSize = styled(EntryCardPhotoBadge)`
   background-color: ${colors.bluish};
 `;
 

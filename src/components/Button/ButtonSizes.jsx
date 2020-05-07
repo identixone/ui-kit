@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
 function getSize(height, paddnig) {
-  return function({ fit }) {
+  return function ({ fit }) {
     if (fit === "square" || fit === "circle") {
       return css`
         width: ${height}px;
@@ -18,17 +18,11 @@ function getSize(height, paddnig) {
 
 const mediumSize = css`
   font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.013px;
-
   ${getSize(30, 12)}
 `;
 
 const largeSize = css`
   font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.013px;
-
   ${getSize(40, 30)}
 `;
 

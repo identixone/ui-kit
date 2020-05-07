@@ -18,7 +18,7 @@ Spinner.propTypes = {
 };
 
 export const withTransition = (RouteComponent, spinnerHeight) => {
-  const WithTransition = props => (
+  const WithTransition = (props) => (
     <CSSTransition
       in={props.match != null}
       appear={true}

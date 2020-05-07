@@ -13,7 +13,7 @@ import { FormDropdownInputWrapper } from "./FormDropdownInputWrapper";
 import { FormDropdownInput } from "./FormDropdownInput";
 import { FormDropdownResetButton } from "./FormDropdownResetButton";
 import { FormDropdownOptionSelectedIcon } from "./FormDropdownOptionSelectedIcon";
-import { Times } from "../../../../assets/icons";
+import { Times } from "../../../icons";
 
 import { searchInList, capitalize } from "../../../../utils/helpers";
 import { identity, property as prop, isEqual, get } from "lodash-es";
@@ -45,6 +45,7 @@ function FormDropdown({
   "data-testid": testId,
   multiple,
   renderSelected,
+  isFetching,
 }) {
   if (name) {
     testId = name;
@@ -80,7 +81,7 @@ function FormDropdown({
   function getHighlighted(selected) {
     const selectedOptionIndex = selected
       ? searchInList(options, inputValue, ["label"]).findIndex(
-          item => item.value === selected.value
+          (item) => item.value === selected.value
         )
       : 0;
 
@@ -197,13 +198,13 @@ function FormDropdown({
 
     if (multiple) {
       const selectedInOptions = selected.find(
-        item => item.value === option.value
+        (item) => item.value === option.value
       );
 
       if (selectedInOptions) {
         const changes = selected
-          .filter(option => !isSingle(option))
-          .filter(option => !isEqual(option, selectedInOptions));
+          .filter((option) => !isSingle(option))
+          .filter((option) => !isEqual(option, selectedInOptions));
 
         if (hasDefault && changes.length === 0) {
           onChange(defaultOptions);
@@ -211,7 +212,7 @@ function FormDropdown({
           onChange(changes);
         }
       } else {
-        onChange(selected.filter(option => !isSingle(option)).concat(option));
+        onChange(selected.filter((option) => !isSingle(option)).concat(option));
       }
     } else {
       onChange(option);
@@ -243,7 +244,7 @@ function FormDropdown({
   function getIsOptionSelected(option, selectedItem) {
     if (multiple) {
       return (
-        selectedItem.find(item => item.value === option.value) !== undefined
+        selectedItem.find((item) => item.value === option.value) !== undefined
       );
     } else {
       return isEqual(selectedItem, option);
@@ -255,7 +256,7 @@ function FormDropdown({
       initialSelectedItem={value}
       selectedItem={selected}
       inputValue={inputValue}
-      itemToString={item => (item ? item.label : "")}
+      itemToString={(item) => (item ? item.label : "")}
       stateReducer={stateReducer}
       onChange={handleChange}
       onStateChange={handleStateChange}
@@ -283,6 +284,7 @@ function FormDropdown({
               disabled,
               className,
               "data-testid": testId,
+              isFetching,
             })}
           >
             <FormDropdownControl
@@ -299,7 +301,7 @@ function FormDropdown({
                   options.filter(isDefault).length) ? (
                 <FormDropdownResetButton
                   data-testid={`${testId}-reset`}
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     clearSelection();
                     closeMenu();
@@ -311,10 +313,9 @@ function FormDropdown({
             </FormDropdownControl>
             <FormDropdownMenu
               {...getMenuProps(
-                { isOpen, "data-testid": testId + "-menu" },
+                { isOpen, "data-testid": testId + "-menu", ref: listRef },
                 { suppressRefError: true }
               )}
-              ref={listRef}
             >
               {isOpen && (
                 <React.Fragment>
@@ -323,8 +324,8 @@ function FormDropdown({
                       <FormDropdownInput
                         {...getInputProps({
                           "data-testid": testId + "-search",
+                          ref: inputRef,
                         })}
-                        ref={inputRef}
                       />
                     </FormDropdownInputWrapper>
                   )}
@@ -346,7 +347,7 @@ function FormDropdown({
                             "data-testid": `${testId}-option-${item.value}`,
                           })}
                         >
-                          {selected && (
+                          {multiple && selected && (
                             <FormDropdownOptionSelectedIcon size="10" />
                           )}
                           {renderItem(item)}
@@ -366,12 +367,19 @@ function FormDropdown({
 
 const optionShape = PropTypes.shape({
   label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 });
 
 FormDropdown.propTypes = {
   name: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.arrayOf(optionShape), optionShape]),
+  value: PropTypes.oneOfType([
+    optionShape,
+    PropTypes.arrayOf(optionShape),
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
   withSearch: PropTypes.bool,
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,

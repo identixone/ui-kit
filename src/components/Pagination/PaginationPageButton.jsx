@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { PaginationButton, getActiveStyles } from "./PaginationButton";
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 const PaginationPageButton = styled(PaginationButton)`
   border-radius: 2px;

@@ -53,8 +53,8 @@ export class PageLoaderComponent extends Component {
   };
 
   // Добавляет страницу в загруженные
-  setFirstLoad = name => {
-    this.setState(state => ({
+  setFirstLoad = (name) => {
+    this.setState((state) => ({
       ...state,
       loadedPages: {
         ...state.loadedPages,

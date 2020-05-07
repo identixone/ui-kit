@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
+import { colors } from "../../../../style";
+
 const StyledFormMultiSelect = styled.div`
   position: relative;
-  width: ${({ width }) => (width ? `${width}px` : "100%")};
+  background-color: ${colors.whiteGrayLight};
+  padding: 12px;
+  border-radius: 4px;
 
   &:after {
     content: "";
@@ -18,4 +22,4 @@ const StyledFormMultiSelect = styled.div`
   }
 `;
 
-export default StyledFormMultiSelect;
+export { StyledFormMultiSelect };

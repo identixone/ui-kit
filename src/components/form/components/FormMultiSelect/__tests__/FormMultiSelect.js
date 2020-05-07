@@ -32,7 +32,7 @@ function renderFormMultiSelect(props) {
           name={componentName}
           value={value}
           options={options}
-          onChange={ev => {
+          onChange={(ev) => {
             setValue(ev);
             onChangeMock(ev);
           }}
@@ -81,11 +81,11 @@ describe("FormMultiSelect tests", () => {
 
     fireEvent.click(getByTestId(`${componentName}-input`));
 
-    optionsToSelect.forEach(option => {
+    optionsToSelect.forEach((option) => {
       fireEvent.click(getByTestId(`${componentName}-option-${option.value}`));
     });
 
-    optionsToSelect.forEach(option => {
+    optionsToSelect.forEach((option) => {
       expect(getByTestId(`${componentName}-tag-${option.value}`));
     });
     expect(
@@ -104,11 +104,11 @@ describe("FormMultiSelect tests", () => {
 
     fireEvent.click(getByTestId(`${componentName}-input`));
 
-    optionsToSelect.forEach(option => {
+    optionsToSelect.forEach((option) => {
       fireEvent.click(getByTestId(`${componentName}-option-${option.value}`));
     });
 
-    optionsToSelect.forEach(option => {
+    optionsToSelect.forEach((option) => {
       expect(getByTestId(`${componentName}-tag-${option.value}`));
     });
 

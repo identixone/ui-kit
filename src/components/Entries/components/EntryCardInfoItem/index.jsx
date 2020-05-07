@@ -12,7 +12,7 @@ const StyledEntryCardInfoItem = styled.div`
   ${textTrimStyles}
 `;
 
-function EntryCardInfoItem({ children, label, isZeroEmpty, className }) {
+function EntryCardInfoItem({ children, label, value, isZeroEmpty, className }) {
   return (
     <StyledEntryCardInfoItem className={className}>
       {!label ? (
@@ -20,9 +20,15 @@ function EntryCardInfoItem({ children, label, isZeroEmpty, className }) {
       ) : (
         <React.Fragment>
           <EntryCardInfoItemLabel>{label}:</EntryCardInfoItemLabel>
-          <EntryCardInfoItemValue isZeroEmpty={isZeroEmpty}>
-            {children}
-          </EntryCardInfoItemValue>
+          {value !== undefined ? (
+            <EntryCardInfoItemValue isZeroEmpty={isZeroEmpty} value={value}>
+              {children}
+            </EntryCardInfoItemValue>
+          ) : (
+            <EntryCardInfoItemValue isZeroEmpty={isZeroEmpty}>
+              {children}
+            </EntryCardInfoItemValue>
+          )}
         </React.Fragment>
       )}
     </StyledEntryCardInfoItem>
@@ -31,6 +37,7 @@ function EntryCardInfoItem({ children, label, isZeroEmpty, className }) {
 
 EntryCardInfoItem.propTypes = {
   label: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   isZeroEmpty: PropTypes.bool,
   className: PropTypes.string,

@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { text, boolean, number } from "@storybook/addon-knobs";
+import { text, boolean } from "@storybook/addon-knobs";
 
 import { generateOptions } from "../../../../../test/generate";
 
@@ -24,7 +24,6 @@ storiesOf("Form Components| FormMultiSelect", module)
           value={multiSelectValue}
           onChange={setMultiSelectValue}
           isLoading={boolean("isLoading", false)}
-          width={number("width", 600)}
         />
       );
     }
@@ -42,7 +41,6 @@ storiesOf("Form Components| FormMultiSelect", module)
           value={multiSelectValue}
           onChange={setMultiSelectValue}
           isLoading={boolean("isLoading", false)}
-          width={number("width", 600)}
         />
       );
     }

@@ -29,6 +29,6 @@ export function PersonsGroupListPersonTypeSelect({ onChange, type }) {
 }
 
 PersonsGroupListPersonTypeSelect.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
 };

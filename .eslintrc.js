@@ -20,7 +20,7 @@ module.exports = {
       modules: true,
     },
   },
-  plugins: ["react", "prettier", "react-hooks"],
+  plugins: ["react", "react-hooks"],
   settings: {
     "import/parser": "babel-eslint",
     "import/resolve": {
@@ -28,12 +28,6 @@ module.exports = {
     },
   },
   rules: {
-    "prettier/prettier": [
-      "error",
-      {
-        trailingComma: "es5",
-      },
-    ],
     "react/no-unused-prop-types": 2,
     "no-console": "off",
     "react/display-name": 0,

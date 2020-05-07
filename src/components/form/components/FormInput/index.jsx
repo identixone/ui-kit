@@ -1,49 +1,54 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+
+import { StyledFormInput } from "./StyledFormInput";
+import { FormInputUneditable } from "./FormInputUneditable";
 
 import { getTestId } from "../../utils";
 
-const StyledFormInput = styled.input`
-  box-sizing: border-box;
-  border: 1px solid #9aa7b3;
-  border-radius: 3px;
-  padding: 2px 10px;
-
-  &:focus {
-    outline: none;
-  }
-
-  &[type="number"]::-webkit-inner-spin-button,
-  &[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`;
-
-function FormInput(props) {
-  const testId = getTestId(props.name, props["data-testid"]);
-
+const FormInput = React.forwardRef((props, ref) => {
   return (
-    <StyledFormInput {...props} data-testid={testId} ref={props.innerRef} />
+    <StyledFormInput
+      {...props}
+      data-testid={getTestId(props.name, props["data-testid"])}
+      ref={ref}
+    />
   );
-}
+});
 
 FormInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "password", "email", "number"]),
   disabled: PropTypes.bool,
   "data-testid": PropTypes.string,
   className: PropTypes.string,
-  innerRef: PropTypes.object,
 };
 
 FormInput.defaultProps = {
   type: "text",
 };
 
-export { FormInput, StyledFormInput };
+FormInput.Password = function (props) {
+  return <FormInput {...props} type="password" />;
+};
+
+FormInput.Number = function (props) {
+  return <FormInput {...props} type="number" />;
+};
+
+FormInput.Uneditable = function (props) {
+  // eslint-disable-next-line react/prop-types
+  return <FormInputUneditable {...props}>{props.value}</FormInputUneditable>;
+};
+
+const StyledFormInputUneditable = FormInputUneditable;
+
+export {
+  FormInput,
+  StyledFormInput,
+  FormInputUneditable,
+  StyledFormInputUneditable,
+};

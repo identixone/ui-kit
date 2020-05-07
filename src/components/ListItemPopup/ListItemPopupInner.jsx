@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
+import { colors } from "../../style";
+
 const ListItemPopupInner = styled.div`
-  height: 100%;
-  width: 573px;
-  padding: 5px 5px;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px 0px rgba(162, 182, 189, 0.3);
-  border-radius: 3px;
+  padding: 2px;
+  background-color: ${colors.whiteSimple};
+  box-shadow: 0px 0px 80px rgba(162, 182, 189, 0.2);
+  border-radius: 4px;
   position: relative;
 `;
 

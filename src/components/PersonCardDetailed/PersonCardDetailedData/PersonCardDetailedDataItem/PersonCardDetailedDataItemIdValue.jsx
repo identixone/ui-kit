@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { PersonCardDetailedDataItemValue } from "./PersonCardDetailedDataItemValue";
 
-import { colors } from "../../../../themes/colors";
+import { colors } from "../../../../style";
 
 const PersonCardDetailedDataItemIdValue = styled(
   PersonCardDetailedDataItemValue

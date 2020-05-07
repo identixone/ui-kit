@@ -6,7 +6,7 @@ const isCopyAvailable =
 function useCopyToClipboard() {
   const [isCopied, setIsCopied] = useState(false);
 
-  const copyToClipboard = text => {
+  const copyToClipboard = (text) => {
     setIsCopied(false);
 
     if (typeof text == "string" || typeof text == "number") {

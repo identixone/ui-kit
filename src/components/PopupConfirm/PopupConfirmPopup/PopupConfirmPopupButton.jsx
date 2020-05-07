@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Button from "../../Button";
+import { Button } from "../../Button";
 
 export const PopupConfirmPopupButton = styled(Button)`
   width: 105px;

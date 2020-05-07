@@ -29,12 +29,12 @@ export function PersonsGroupListPerson({
 }) {
   useEffect(() => {
     if (personIdxid) {
-      fetchPerson({ idxid: personIdxid });
+      fetchPerson(personIdxid);
     }
   }, [personIdxid]);
 
   return (
-    <StyledPersonsGroupListPerson>
+    <StyledPersonsGroupListPerson offsetTop={200}>
       {(isPersonFetching || !person) && !error ? (
         <PersonsGroupListPersonSpinner />
       ) : error ? (
@@ -52,9 +52,8 @@ export function PersonsGroupListPerson({
           {searchType.value.includes("excludes") && (
             <PersonsGroupListPersonButton
               isFullWidth={true}
-              size="large"
               onClick={onAdd}
-              buttonTheme="dark"
+              theme="dark"
               isDisabled={!isAddAvailable}
               data-testid="add-selected"
             >
@@ -64,7 +63,6 @@ export function PersonsGroupListPerson({
           {searchType.value.includes("includes") && (
             <PersonsGroupListPersonButton
               isFullWidth={true}
-              size="large"
               onClick={onRemove}
               isDisabled={!isRemoveAvailable}
               data-testid="delete-selected"
@@ -83,8 +81,8 @@ PersonsGroupListPerson.propTypes = {
   personIdxid: PropTypes.string.isRequired,
   fetchPerson: PropTypes.func.isRequired,
   isPersonFetching: PropTypes.bool.isRequired,
-  error: PropTypes.object.isRequired,
-  searchType: PropTypes.string,
+  error: PropTypes.object,
+  searchType: PropTypes.object,
   onSearchTypeChange: PropTypes.func,
   onRemove: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,

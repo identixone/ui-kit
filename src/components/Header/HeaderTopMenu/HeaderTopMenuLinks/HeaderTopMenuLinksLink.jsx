@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
+import { colors } from "../../../../style/color";
+
 export const HeaderTopMenuLinksLink = styled.a.attrs(() => ({
   target: "_blank",
 }))`
-  color: #000;
+  color: ${colors.darkBlack};
   text-decoration: none;
   font-size: 13px;
   line-height: 18px;
@@ -13,7 +15,7 @@ export const HeaderTopMenuLinksLink = styled.a.attrs(() => ({
   text-transform: lowercase;
 
   &:not(:last-child) {
-    margin-right: 50px;
+    margin-right: 32px;
   }
 
   &:hover {

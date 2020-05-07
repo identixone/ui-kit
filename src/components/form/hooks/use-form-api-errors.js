@@ -2,6 +2,8 @@ import { useEffect } from "react";
 
 export function useFormApiErrors(apiErrors, setErrors) {
   useEffect(() => {
-    setErrors(apiErrors);
+    if (setErrors) {
+      setErrors(apiErrors);
+    }
   }, [apiErrors]);
 }

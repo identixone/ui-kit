@@ -7,15 +7,14 @@ import StyledFormField from "./StyledFormField";
 import { FormLabel, FormLabelTitle } from "../FormLabel";
 
 import { Tooltip } from "../../../Tooltip";
-import FormFieldIcon from "./FormFieldIcon";
+import { FormFieldIcon } from "./FormFieldIcon";
 import FormFieldTag from "./FormFieldTag";
 import FormFieldError from "./FormFieldError";
-
-import { InfoCircle } from "../../../../assets/icons";
 
 function FormField(props) {
   const {
     label,
+    labelType,
     render,
     name,
     type,
@@ -36,7 +35,7 @@ function FormField(props) {
 
   const hasError = Boolean(touched && error);
 
-  const onChange = ev => {
+  const onChange = (ev) => {
     if (ev.type) {
       field.onChange(ev);
     } else {
@@ -69,9 +68,7 @@ function FormField(props) {
     return (
       tip && (
         <Tooltip title={tip}>
-          <FormFieldIcon>
-            <InfoCircle size="16" />
-          </FormFieldIcon>
+          <FormFieldIcon size={14} />
         </Tooltip>
       )
     );
@@ -96,11 +93,13 @@ function FormField(props) {
           <FormLabel
             htmlFor={name ? name : undefined}
             direction={direction}
+            labelType={labelType}
             disabled={disabled}
             height={height}
           >
             <FormLabelTitle>
               {label}
+              {labelType === "bold" && ":"}
               {getFormFieldTip()}
               {getFormFieldTag()}
             </FormLabelTitle>
@@ -123,6 +122,7 @@ function FormField(props) {
 FormField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  labelType: PropTypes.oneOf(["bold", "normal"]),
   tip: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   tag: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   direction: PropTypes.oneOf(["row", "column"]),
@@ -149,6 +149,7 @@ FormField.propTypes = {
 
 FormField.defaultProps = {
   direction: "row",
+  labelType: "normal",
   showError: true,
 };
 

@@ -6,10 +6,8 @@ import { StyledListLayoutList } from "./StyledListLayoutList";
 import { ListLayoutNotice } from "../ListLayoutNotice";
 import { ListLayoutListItem } from "./ListLayoutListItem";
 import { ListLayoutListPagination } from "./ListLayoutListPagination";
-import { ListLayoutListActions } from "./ListLayoutListActions";
 import { ListLayoutListSpinner } from "./ListLayoutListSpinner";
-
-import { Ban } from "../../../assets/icons";
+import { Ban } from "../../icons";
 
 function ListLayoutList({
   listRef,
@@ -17,41 +15,40 @@ function ListLayoutList({
   isLoading,
   renderItem,
   noItemsText,
-  totalCount,
-  actions,
   pagination,
-  setPagination,
   columns,
   className,
-  ...restProps
+  "data-testid": testId,
+  hasNext,
 }) {
+  const isListEmpty = hasNext === false && items.length === 0;
+  const hasPagePagination = Boolean(pagination);
+
   return (
-    <ListLayoutListWrapper data-testid={restProps["data-testid"]}>
-      {!isLoading ? (
-        totalCount === 0 ? (
-          <ListLayoutNotice
-            icon={<Ban size="48" />}
-            data-testid="empty-list-notice"
-          >
-            {noItemsText}
-          </ListLayoutNotice>
+    <ListLayoutListWrapper
+      data-testid={testId}
+      ref={listRef}
+      className={className}
+    >
+      {!isLoading || !hasPagePagination ? (
+        isListEmpty ? (
+          isLoading ? (
+            <ListLayoutListSpinner />
+          ) : (
+            <ListLayoutNotice
+              icon={<Ban size="48" />}
+              data-testid="empty-list-notice"
+            >
+              {noItemsText}
+            </ListLayoutNotice>
+          )
         ) : (
           <React.Fragment>
-            {actions && actions}
-            <StyledListLayoutList
-              ref={listRef}
-              columns={columns}
-              className={className}
-            >
+            <StyledListLayoutList columns={columns}>
               {items.map(renderItem)}
             </StyledListLayoutList>
-            {pagination && (
-              <ListLayoutListPagination
-                totalCount={totalCount}
-                pagination={pagination}
-                setPagination={setPagination}
-              />
-            )}
+
+            {pagination}
           </React.Fragment>
         )
       ) : (
@@ -64,20 +61,19 @@ function ListLayoutList({
 ListLayoutList.propTypes = {
   listRef: PropTypes.object,
   items: PropTypes.array.isRequired,
-  renderItem: PropTypes.func,
+  renderItem: PropTypes.func.isRequired,
   noItemsText: PropTypes.string,
-  totalCount: PropTypes.number,
-  actions: PropTypes.element,
-  pagination: PropTypes.object.isRequired,
-  setPagination: PropTypes.func.isRequired,
+  hasNext: PropTypes.bool.isRequired,
+  pagination: PropTypes.object,
   columns: PropTypes.oneOf([1, 2]),
   className: PropTypes.string,
   isLoading: PropTypes.bool,
+  "data-testid": PropTypes.string,
 };
 
 ListLayoutList.defaultProps = {
   items: [],
-  renderItem: item => (
+  renderItem: (item) => (
     <ListLayoutListItem key={item}>{item}</ListLayoutListItem>
   ),
   noItemsText: "No items",
@@ -85,6 +81,11 @@ ListLayoutList.defaultProps = {
 };
 
 ListLayoutList.Item = ListLayoutListItem;
-ListLayoutList.Actions = ListLayoutListActions;
+ListLayoutList.Pagination = ListLayoutListPagination;
 
-export { ListLayoutList, StyledListLayoutList, ListLayoutListItem };
+export {
+  ListLayoutList,
+  StyledListLayoutList,
+  ListLayoutListItem,
+  ListLayoutListPagination,
+};

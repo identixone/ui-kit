@@ -1,18 +1,20 @@
 import styled from "styled-components";
 
+import { colors } from "../../../../style";
+
 const FormMultiSelectInput = styled.input`
-  background-color: transparent;
+  display: inline-block;
   width: 350px;
   border: none;
   outline: none;
-  display: inline-block;
-  font-weight: 600;
-  line-height: 30px;
-  color: #444;
+  color: ${colors.darkBlack};
+  font-size: 16px;
+  line-height: 18px;
+  background-color: transparent;
+
   ::placeholder {
-    color: #444;
+    color: ${colors.darkBlack};
   }
-  padding-left: 3px;
 `;
 
-export default FormMultiSelectInput;
+export { FormMultiSelectInput };

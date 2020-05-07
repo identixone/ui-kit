@@ -3,41 +3,29 @@ import PropTypes from "prop-types";
 
 import { StyledFormRangeSlider } from "./StyledFormRangeSlider";
 import { FormRangeSliderInner } from "./FormRangeSliderInner";
-import { FormRangeSliderResetButton } from "./FormRangeSliderResetButton";
-import { TimesCircle } from "../../../../assets/icons";
 
 import { round } from "lodash";
 import { getTestId } from "../../utils";
 
 function formatter(decimals) {
   return {
-    from: function(value) {
+    from: function (value) {
       return `${round(value, decimals)}`;
     },
-    to: function(value) {
+    to: function (value) {
       return `${round(value, decimals)}`;
     },
   };
 }
 
-function FormRangeSlider({
-  from,
-  to,
-  minFrom,
-  maxTo,
-  width,
-  onChange,
-  withClear,
-  className,
-  "data-testid": testId,
-}) {
-  testId = getTestId(name, testId);
-
-  const isClearButtonHidden = Boolean(minFrom === from && maxTo === to);
+function FormRangeSlider(props) {
+  const { from, to, minFrom, maxTo, width, onChange, className } = props;
+  const testId = getTestId(props.name, props["data-testid"]);
 
   return (
     <StyledFormRangeSlider className={className} data-testid={testId}>
       <FormRangeSliderInner
+        name={name}
         width={width}
         start={[from, to]}
         step={1}
@@ -48,22 +36,11 @@ function FormRangeSlider({
           min: minFrom,
           max: maxTo,
         }}
-        onChange={value => {
+        onChange={(value) => {
           onChange(!value ? value : value.map(Number));
         }}
         data-testid={`${testId}-slider`}
       />
-      {withClear && (
-        <FormRangeSliderResetButton
-          onClick={() => {
-            onChange([minFrom, maxTo]);
-          }}
-          isHidden={isClearButtonHidden}
-          data-testid={`${testId}-clear`}
-        >
-          <TimesCircle size="22" />
-        </FormRangeSliderResetButton>
-      )}
     </StyledFormRangeSlider>
   );
 }
@@ -75,8 +52,8 @@ FormRangeSlider.propTypes = {
   maxTo: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func.isRequired,
-  withClear: PropTypes.bool,
   className: PropTypes.string,
+  name: PropTypes.string,
   "data-testid": PropTypes.string,
 };
 
@@ -85,7 +62,6 @@ FormRangeSlider.defaultProps = {
   maxTo: 99,
   from: 0,
   to: 99,
-  withClear: false,
 };
 
 export { FormRangeSlider, StyledFormRangeSlider };

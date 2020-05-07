@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { StyledHeaderTopMenuUser } from "./StyledHeaderTopMenuUser";
 import { HeaderTopMenuUserUsername } from "./HeaderTopMenuUserUsername";
 import { HeaderTopMenuUserUsernameLogout } from "./HeaderTopMenuUserUsernameLogout";
-import { ArrowAltCircleRight } from "../../../../assets/icons";
+import { ArrowAltCircleRight } from "../../../icons";
 
 function HeaderTopMenuUser({ username, onLogout }) {
   return (

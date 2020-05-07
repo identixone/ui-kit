@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 import { CardSmallData } from "./index";
 
 const themes = {
   light: {
-    backgroundColor: colors.iceBlue,
-    textColor: colors.brownGray,
+    backgroundColor: colors.whiteGrayLight,
+    textColor: colors.darkBlack,
   },
   dark: {
     backgroundColor: colors.slate,

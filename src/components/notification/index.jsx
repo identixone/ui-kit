@@ -4,7 +4,7 @@ import React from "react";
 import NotificationContent from "./NotificationContent";
 import NotificationCloseButton from "./NotificationCloseButton";
 
-import { Times } from "../../assets/icons";
+import { Times } from "../icons";
 
 import "./style.css";
 
@@ -26,7 +26,7 @@ Notification.newInstance(
       </NotificationCloseButton>
     ),
   },
-  n => (notification = n)
+  (n) => (notification = n)
 );
 
 export function open({ message, description, type, duration }) {

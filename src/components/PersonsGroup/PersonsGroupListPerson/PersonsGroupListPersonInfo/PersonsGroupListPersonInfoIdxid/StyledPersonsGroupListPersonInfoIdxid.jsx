@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-import { colors } from "../../../../../themes/colors";
+import { colors } from "../../../../../style";
 
 export const StyledPersonsGroupListPersonInfoIdxid = styled.span`
   font-size: 13px;
   line-height: 1.38;
-  color: ${colors.brownGray};
+  color: ${colors.grayWhite};
 
   span {
     color: ${colors.black};

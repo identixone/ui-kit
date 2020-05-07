@@ -66,7 +66,7 @@ export class InfiniteScroll extends React.Component {
     leading: false,
   });
 
-  componentDidMount = () => {
+  componentDidMount() {
     if (!this.scrollerRef.current) {
       console.warn("You dont specify scrollerRef node");
       return;
@@ -76,7 +76,16 @@ export class InfiniteScroll extends React.Component {
       "scroll",
       this.throttledMenuScrollHandler
     );
-  };
+  }
+
+  componentWillUnmount() {
+    if (this.scrollerRef.current) {
+      this.scrollerRef.current.removeEventListener(
+        "scroll",
+        this.throttledMenuScrollHandler
+      );
+    }
+  }
 
   render() {
     const { children } = this.props;

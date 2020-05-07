@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { StyledHeaderTopMenuUserUsername } from "./StyledHeaderTopMenuUserUsername";
 import { HeaderTopMenuUserUsernameIcon } from "./HeaderTopMenuUserUsernameIcon";
-import { User } from "../../../../../assets/icons";
+import { User } from "../../../../icons";
 
 function HeaderTopMenuUserUsername({ username }) {
   return (

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import StyledNotificationContent from "./StyledNotificationContent";
 
-import { Bolt } from "../../assets/icons";
+import { Bolt } from "../icons";
 
 NotificationContent.propTypes = {
   message: PropTypes.string.isRequired,

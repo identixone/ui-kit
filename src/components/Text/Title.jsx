@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { colors } from "../../themes/colors";
+import { colors } from "../../style";
 
 function getStyles({ level }) {
   return {
     1: css`
       font-size: 44px;
-      line-height: 60px;
-      font-weight: 300;
+      line-height: 44px;
       letter-spacing: -0.5px;
+      font-weight: normal;
     `,
     2: css`
       font-size: 20px;
@@ -18,8 +18,8 @@ function getStyles({ level }) {
     3: css`
       font-size: 18px;
       line-height: 24px;
-      font-weight: normal;
       letter-spacing: -0.36px;
+      font-weight: normal;
     `,
   }[level];
 }

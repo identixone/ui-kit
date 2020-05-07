@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import colors from "../../../themes/colors";
+import { colors } from "../../../style";
 
 export const LoginMenuItem = styled.a`
   text-decoration: none;

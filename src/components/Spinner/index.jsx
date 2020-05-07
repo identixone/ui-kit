@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledSpinnerContainer from "./StyledSpinnerContainer";
-import SpinnerIcon from "./SpinnerIcon";
+import { StyledSpinner } from "./StyledSpinner";
+import { SpinnerIcon } from "./SpinnerIcon";
 
-export function Spinner({ width, className }) {
+function Spinner({ width, className }) {
   return (
-    <StyledSpinnerContainer width={width} className={className}>
+    <StyledSpinner width={width} className={className}>
       <SpinnerIcon isSpin={true} width="40" />
-    </StyledSpinnerContainer>
+    </StyledSpinner>
   );
 }
 
@@ -16,3 +16,5 @@ Spinner.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
 };
+
+export { Spinner, StyledSpinner };

@@ -42,7 +42,7 @@ function renderFormDropdown(props = {}) {
           name={componentName}
           options={options}
           value={value}
-          onChange={ev => {
+          onChange={(ev) => {
             setValue(ev);
             onChangeMock(ev);
           }}

@@ -6,11 +6,14 @@ import { EntryCardPhotoImgContainer } from "./EntryCardPhotoImgContainer";
 import { EntryCardPhotoImg } from "./EntryCardPhotoImg";
 import { EntryCardPhotoTitle } from "./EntryCardPhotoTitle";
 import { EntryCardPhotoFaceSize } from "./EntryCardPhotoFaceSize";
+import { EntryCardPhotoReinit } from "./EntryCardPhotoReinit";
+import { EntryCardPhotoBadges } from "./EntryCardPhotoBadges";
 
 import noimage from "../../../../../assets/images/noimage.png";
 
 function EntryCardPhoto({
   facesize,
+  hasReinit,
   src,
   title,
   className,
@@ -31,11 +34,16 @@ function EntryCardPhoto({
 
       <EntryCardPhotoImgContainer>
         <EntryCardPhotoImg src={photoToRender} />
-        {facesize && (
-          <EntryCardPhotoFaceSize title="face area in pixels">
-            {facesize}
-          </EntryCardPhotoFaceSize>
-        )}
+        <EntryCardPhotoBadges>
+          {facesize && (
+            <EntryCardPhotoFaceSize>{facesize}</EntryCardPhotoFaceSize>
+          )}
+          {hasReinit && (
+            <EntryCardPhotoReinit data-testid="person-entries-card-re">
+              RE
+            </EntryCardPhotoReinit>
+          )}
+        </EntryCardPhotoBadges>
       </EntryCardPhotoImgContainer>
     </StyledEntryCardPhoto>
   );
@@ -43,6 +51,7 @@ function EntryCardPhoto({
 
 EntryCardPhoto.propTypes = {
   facesize: PropTypes.string,
+  hasReinit: PropTypes.bool,
   title: PropTypes.string,
   src: PropTypes.string,
   hidden: PropTypes.bool,

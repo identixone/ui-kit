@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import colors from "../../themes/colors";
+import { colors } from "../../style";
 
 function getStyles({ isImageLoaded }) {
   return !isImageLoaded
@@ -16,6 +16,7 @@ function getStyles({ isImageLoaded }) {
       `;
 }
 
-export const StyledLazyImage = styled.div`
+export const StyledLazyImage = styled.span`
+  display: block;
   ${getStyles}
 `;

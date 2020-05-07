@@ -5,6 +5,7 @@ import { boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import { InfiniteDropdown } from "./index.jsx";
+
 import { generateSourcesStats } from "../../../test/generate";
 
 function isEven(n) {
@@ -12,9 +13,9 @@ function isEven(n) {
   return n === 0 || !!(n && !(n % 2));
 }
 
-storiesOf("Basic UI|InfiniteDropdown", module)
+storiesOf("Controls|InfiniteDropdown", module)
   .add("default", () => {
-    const options = generateSourcesStats(10).map(option => ({
+    const options = generateSourcesStats(10).map((option) => ({
       label: option.name,
       value: option.id,
     }));
@@ -32,7 +33,7 @@ storiesOf("Basic UI|InfiniteDropdown", module)
     );
   })
   .add("with custom item render", () => {
-    const options = generateSourcesStats(10).map(option => ({
+    const options = generateSourcesStats(10).map((option) => ({
       label: option.name,
       value: option.id,
     }));
@@ -46,7 +47,7 @@ storiesOf("Basic UI|InfiniteDropdown", module)
         placeholder={isFetching ? "Loading..." : "Select value..."}
         width={240}
         withSearch={boolean("with search", false)}
-        renderItem={item => (
+        renderItem={(item) => (
           <span>{`${isEven(item.value) ? "🍎" : "🍌"} ${item.label}`}</span>
         )}
       />

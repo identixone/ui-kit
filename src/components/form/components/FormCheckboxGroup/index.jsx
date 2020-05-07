@@ -1,38 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { StyledFormCheckboxGroup } from "./StyledFormCheckboxGroup";
 import { FormCheckboxGroupItem } from "./FormCheckboxGroupItem";
-
-import { SelectableList } from "../../../SelectableList";
+import { useSelectableList } from "../../../../hooks/index";
 
 function FormCheckboxGroup({ value, onChange, groupName, render, options }) {
-  return (
-    <SelectableList
-      options={options}
-      value={value}
-      onChange={onChange}
-      render={selectedListProps => {
-        return render({
-          ...selectedListProps,
-          checkboxes: () => {
-            const { selected, handleCheckboxChange } = selectedListProps;
+  const { ...selectedListOptions } = useSelectableList({
+    options,
+    value,
+    onChange,
+  });
 
-            return options.map(({ label, value: optionValue }) => {
-              return (
-                <FormCheckboxGroupItem
-                  key={optionValue}
-                  label={label}
-                  name={String(optionValue)}
-                  checked={selected.includes(String(optionValue))}
-                  onChange={handleCheckboxChange}
-                  groupName={groupName}
-                />
-              );
-            });
-          },
-        });
-      }}
-    />
+  return (
+    <StyledFormCheckboxGroup>
+      {render({
+        ...selectedListOptions,
+        checkboxes: () => {
+          const { selected, onCheckboxChange } = selectedListOptions;
+          return options.map(({ label, value: optionValue }) => {
+            const strOption = String(optionValue);
+
+            return (
+              <FormCheckboxGroupItem
+                key={optionValue}
+                label={label}
+                name={strOption}
+                checked={selected.includes(strOption)}
+                onChange={onCheckboxChange}
+                groupName={groupName}
+              />
+            );
+          });
+        },
+      })}
+    </StyledFormCheckboxGroup>
   );
 }
 

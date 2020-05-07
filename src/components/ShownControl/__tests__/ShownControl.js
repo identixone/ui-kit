@@ -22,7 +22,9 @@ describe("ShownControl tests", () => {
         offset={0}
         totalCount={100}
         onChange={handleChangePaginationMock}
-      />
+      >
+        some text
+      </ShownControl>
     );
   }
 
@@ -41,7 +43,9 @@ describe("ShownControl tests", () => {
         offset={80}
         totalCount={100}
         onChange={handleChangePaginationMock}
-      />
+      >
+        some text
+      </ShownControl>
     );
     expect(getByTestId("shownControl-button-prev")).not.toBeDisabled();
     expect(getByTestId("shownControl-button-next")).toBeDisabled();
@@ -56,7 +60,9 @@ describe("ShownControl tests", () => {
         offset={0}
         totalCount={10}
         onChange={handleChangePaginationMock}
-      />
+      >
+        some text
+      </ShownControl>
     );
     expect(getByTestId("shownControl-button-prev")).toBeDisabled();
     expect(getByTestId("shownControl-button-next")).toBeDisabled();
@@ -78,7 +84,9 @@ describe("ShownControl tests", () => {
         offset={20}
         totalCount={100}
         onChange={handleChangePaginationMock}
-      />
+      >
+        some text
+      </ShownControl>
     );
     fireEvent.click(getByTestId("shownControl-button-prev"));
     expect(handleChangePaginationMock).toHaveBeenCalledWith({ offset: 0 });

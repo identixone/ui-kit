@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Disclaimer = styled.div`
+const FooterDisclaimer = styled.div`
   font-size: 13px;
   line-height: 18px;
   font-weight: 300;
@@ -17,4 +17,4 @@ const Disclaimer = styled.div`
   }
 `;
 
-export default Disclaimer;
+export { FooterDisclaimer };

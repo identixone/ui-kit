@@ -4,15 +4,13 @@ import StyledShownControl from "./StyledShownControl.jsx";
 import StyledShownControlArrowRightContainer from "./StyledShownControlArrowRightContainer.jsx";
 
 import StyledShownControlButtonArrow from "./StyledShownControlButtonArrow.jsx";
-import {
-  KeyboardArrowRight,
-  KeyboardArrowLeft,
-} from "../../assets/icons/index.js";
+import { KeyboardArrowRight, KeyboardArrowLeft } from "../icons/index.js";
 
 import StyledShownControlInfoContainer from "./StyledShownControlInfoContainer.jsx";
 import StyledShownControlInfoContainerInner from "./StyledShownControlInfoContainerInner.jsx";
 import { usePagination } from "../../hooks";
 
+// Deprecated
 export function ShownControl(props) {
   const {
     paginationState,
@@ -46,9 +44,9 @@ export function ShownControl(props) {
       <StyledShownControl className={className}>
         <StyledShownControlButtonArrow
           width="36"
-          disabled={!isPrevButtonEnabled}
+          isDisabled={!isPrevButtonEnabled}
           onClick={handlePaginationPrev}
-          buttonTheme={isPrevButtonEnabled ? "active" : "light-gray"}
+          theme={isPrevButtonEnabled ? "dark" : "light"}
           data-testid="shownControl-button-prev"
         >
           <KeyboardArrowLeft width="27" height="23" />
@@ -65,8 +63,8 @@ export function ShownControl(props) {
         </StyledShownControlInfoContainer>
         <StyledShownControlButtonArrow
           width="36"
-          disabled={!isNextButtonEnabled}
-          buttonTheme={isNextButtonEnabled ? "active" : "light-gray"}
+          isDisabled={!isNextButtonEnabled}
+          theme={isNextButtonEnabled ? "dark" : "light"}
           onClick={handlePaginationNext}
           data-testid="shownControl-button-next"
         >

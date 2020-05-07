@@ -8,7 +8,6 @@
   line-height: 1.5;
   list-style: none;
   font-feature-settings: "tnum";
-  position: fixed;
   z-index: 1010;
   width: 384px;
   max-width: calc(100vw - 32px);
@@ -30,7 +29,6 @@
 }
 
 .ui-notification-fade-leave {
-  animation-duration: 0.24s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
 
