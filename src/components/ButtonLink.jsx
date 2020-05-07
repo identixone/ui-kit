@@ -25,6 +25,6 @@ export const ButtonLink = styled(StyledButton).attrs(() => ({
 
 ButtonLink.defaultProps = {
   size: "medium",
-  theme: "light",
+  theme: "reset",
   fit: "rect",
 };
