@@ -65,7 +65,7 @@
     "downshift": "^5.0.3",
     "i18next": "^19.3.2",
     "jump.js": "^1.0.2",
-    "lodash-es": "^4.17.15",
+    "lodash-es": "^4.17.21",
     "match-sorter": "^4.0.2",
     "moment": "^2.24.0",
     "nouislider": "^14.1.1",
